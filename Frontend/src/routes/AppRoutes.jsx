@@ -17,13 +17,14 @@ const AppRoutes = createBrowserRouter([
     children: [
       { path: "dashboard", element: <Pages.Dashboard /> },
       {
-        path: "employee",
+        path: "staff",
         children: [
-          { path: "list", element: <Pages.EmployeeList /> },
-          { path: "form/:uuid?", element: <Pages.EmployeeForm /> },
-          { path: "view/:uuid?", element: <Pages.EmployeeView /> },
+          { path: "list", element: <Pages.StaffList /> },
+          { path: "form/:uuid?", element: <Pages.StaffForm /> },
+          { path: "view/:uuid?", element: <Pages.StaffView /> },
         ],
       },
+      { path: "report", element: <Pages.Report /> },
     ],
   },
 ]);

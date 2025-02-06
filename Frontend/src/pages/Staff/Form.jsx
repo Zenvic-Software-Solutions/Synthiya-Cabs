@@ -65,22 +65,22 @@ export default function index() {
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/rolesandpermissions/list"
+      redirectUrl="/staff/list"
       apiFunction={{
         getForm: "",
         postForm: "",
         patchForm: "",
       }}
       breadcrumbData={{
-        title: "Employee Form",
-        activeID: 2,
+        title: "Staff Form",
+        sidebarActiveId: 2,
         list: [
           {
-            label: "Employee list",
-            path: "/employee/list",
+            label: "Staff list",
+            path: "/staff/list",
           },
           {
-            label: "Employee Form",
+            label: "Staff Form",
           },
         ],
       }}

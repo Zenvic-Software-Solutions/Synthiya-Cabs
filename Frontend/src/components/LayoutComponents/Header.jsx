@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "@api/urls";
 import Swal from "sweetalert2";
 
@@ -53,13 +53,13 @@ export default function Header() {
       id="layout-navbar"
     >
       <div className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 ">
-        <a
+        <Link
           className="nav-item nav-link px-0 me-xl-4"
-          href="javascript:void(0);"
+          to="#"
           onClick={handleSideBar}
         >
           <i className="ti ti-menu-2 ti-md" />
-        </a>
+        </Link>
       </div>
       <div
         className="navbar-nav-right d-flex align-items-center"

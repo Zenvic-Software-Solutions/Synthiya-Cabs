@@ -23,17 +23,11 @@ export const getPagination = (url) => makeGetRequest(url);
 export const getDashboardData = () =>
   makeGetRequest(EndPoints.dashboardDataURL);
 
-// Employee API
-export const employeeTableMeta = () => makeGetRequest(EndPoints.employeeListURL + "table-meta/");
-export const employeeTableData = (data) => makeGetRequest(EndPoints.employeeListURL, data);
-export const getEmployeeCud = (uuid) => makeGetRequest(EndPoints.employeeCudURL + uuid + "/meta/");
-export const postEmployeeCud = (data) => makePostRequest(EndPoints.employeeCudURL, data);
-export const patchEmployeeCud = (uuid, data) => makePatchRequest(EndPoints.employeeCudURL + uuid + "/", data);
-export const getEmployeeAttendanceMeta = (uuid) => makeGetRequest(EndPoints.employeeAttendanceURL + uuid + "/table-meta/");
-export const getEmployeeAttendanceData = (uuid, data) => makeGetRequest(EndPoints.employeeAttendanceURL + uuid + "/", data);
-
-// Attendance API
-export const attendanceTableMeta = () =>
-  makeGetRequest(EndPoints.attendanceListURL + "table-meta/");
-export const attendanceTableData = (params) =>
-  makeGetRequest(EndPoints.attendanceListURL, params);
+// Staff API
+export const staffTableMeta = () => makeGetRequest(EndPoints.staffListURL + "table-meta/");
+export const staffTableData = (data) => makeGetRequest(EndPoints.staffListURL, data);
+export const getstaffCud = (uuid) => makeGetRequest(EndPoints.staffCudURL + uuid + "/meta/");
+export const poststaffCud = (data) => makePostRequest(EndPoints.staffCudURL, data);
+export const patchstaffCud = (uuid, data) => makePatchRequest(EndPoints.staffCudURL + uuid + "/", data);
+export const getstaffAttendanceMeta = (uuid) => makeGetRequest(EndPoints.staffAttendanceURL + uuid + "/table-meta/");
+export const getstaffAttendanceData = (uuid, data) => makeGetRequest(EndPoints.staffAttendanceURL + uuid + "/", data);

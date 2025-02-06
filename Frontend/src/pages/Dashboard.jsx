@@ -14,7 +14,7 @@ const Dashboard = () => {
   useEffect(() => {
     setBreadcrumbs({
       title: "Dashboard",
-      activeID: 1,
+      sidebarActiveId: 1,
     });
   }, [setBreadcrumbs]);
 

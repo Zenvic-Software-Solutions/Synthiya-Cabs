@@ -1,12 +1,10 @@
 import React from "react";
-import "./style.scss";
+import "./style.css";
 
-const index = () => {
+export default function index() {
   return (
     <div className="loader-praent">
       <span className="custome-loader"></span>
     </div>
   );
-};
-
-export default index;
+}

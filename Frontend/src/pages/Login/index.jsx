@@ -1,6 +1,6 @@
 import { useState } from "react";
 import APP_CONSTANTS from "@config/AppConstants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "@api/urls";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -25,10 +25,8 @@ export default function Login() {
   };
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
-    console.log("values", values);
     try {
       const response = await login(values);
-      console.log("response", response);
       localStorage.setItem("accessToken", response.access);
       localStorage.setItem("refreshToken", response.refresh);
       navigate("/dashboard");
@@ -50,7 +48,7 @@ export default function Login() {
           <div className="card">
             <div className="card-body">
               <div className="app-brand justify-content-center mb-6">
-                <a href="javascript:void(0);" className="app-brand-link">
+                <Link to="#" className="app-brand-link">
                   <span className="app-brand-text demo text-heading fw-bold">
                     <img
                       src={APP_CONSTANTS.App_Logo}
@@ -58,7 +56,7 @@ export default function Login() {
                       alt="App Logo"
                     />
                   </span>
-                </a>
+                </Link>
               </div>
               <h4 className="mb-1">Welcome to {APP_CONSTANTS.App_Name} 👋</h4>
               <p className="mb-6">

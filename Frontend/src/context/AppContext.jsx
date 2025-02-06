@@ -5,7 +5,7 @@ const AppContext = createContext();
 function AppContextProvider({ children }) {
   const [breadcrumbs, setBreadcrumbs] = useState({
     title: "Dashboard",
-    activeID: 1,
+    sidebarActiveId: 1,
     list: [
       {
         label: "Dashboard",

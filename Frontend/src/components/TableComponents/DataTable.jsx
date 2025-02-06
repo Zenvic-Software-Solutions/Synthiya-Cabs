@@ -2,8 +2,7 @@ import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
 import "datatables.net-responsive-bs5";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import APP_CONSTANTS from "@config/AppConstants.js";
+import { useEffect } from "react";
 import { formatDate } from "@utils/dateFormator";
 
 DataTable.use(DT);
@@ -35,35 +34,6 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
     return `<span class="badge ${statusClass} text-capitalized"> ${status} </span>`;
   };
 
-  const imgTag = (image) =>
-    `<div class="d-flex justify-content-start align-items-center user-name">
-      <div class="avatar-wrapper">
-        <div class="avatar avatar-sm me-4">
-          <img
-            src="${image === "-" ? APP_CONSTANTS.profile_img : image}"
-            alt="Avatar"
-            width="40"
-            class="rounded-circle"
-          />
-        </div>
-      </div>
-    </div>`;
-
-  const videoTag = (video) => {
-    if (video === "-") {
-      return `<div class="d-flex align-items-center">
-      <button class="btn btn-icon btn-text-secondary waves-effect waves-light rounded-pill">
-          <i class="ti ti-video-off ti-md btn-text-danger" style="font-size: 2.1rem !important"></i>
-      </button>
-  </div>`;
-    } else {
-      return `<div class="d-flex align-items-center">
-      <button class="btn btn-icon btn-text-secondary waves-effect waves-light rounded-pill">
-          <i class="ti ti-video ti-md btn-text-success" style="font-size: 2.1rem !important"></i>
-      </button>
-  </div>`;
-    }
-  };
   const columns = Object.keys(tableMeta).map((field) => ({
     title: tableMeta[field],
     data: field,
@@ -96,6 +66,14 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
               <i class="ti ti-eye ti-md"></i>
             </button>
           `;
+        }
+
+        if (actionLink.deleteLink) {
+          resultData += `
+          <button class="btn btn-icon btn-text-secondary waves-effect waves-light rounded-pill delete-btn" data-uuid="${row.uuid}">
+            <i class="ti ti-trash ti-md"></i>
+          </button>
+        `;
         }
 
         return `
@@ -146,7 +124,7 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
       );
     });
 
-    document.querySelectorAll(".edit-popup-btn").forEach((btn) => {
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
       const uuid = btn.getAttribute("data-uuid");
       btn.addEventListener("click", () => {
         console.log("uuid tble", uuid);

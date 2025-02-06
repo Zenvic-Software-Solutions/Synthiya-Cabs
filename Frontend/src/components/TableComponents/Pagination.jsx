@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getPagination } from "@api/urls";
+import { Link } from "react-router-dom";
 
 export default function index({ paginationData, dataFunction }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [tempPage, setTempPage] = useState(1);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    console.log("Current Page:", currentPage);
-  }, [currentPage]);
 
   const handlePrevious = async (event) => {
     event.preventDefault();
@@ -54,8 +51,8 @@ export default function index({ paginationData, dataFunction }) {
           className="paginate_button page-item previous disabled"
           id="DataTables_Table_0_previous"
         >
-          <a
-            href="javascript:void(0);"
+          <Link
+            to="#"
             onClick={handlePrevious}
             style={{
               pointerEvents:
@@ -70,12 +67,12 @@ export default function index({ paginationData, dataFunction }) {
             className="page-link"
           >
             <i className="ti ti-chevron-left ti-sm" />
-          </a>
+          </Link>
         </li>
         {paginationData.previous && (
           <li className="paginate_button page-item " onClick={handlePrevious}>
-            <a
-              href="javascript:void(0);"
+            <Link
+              to="#"
               role="link"
               aria-current="page"
               data-dt-idx={0}
@@ -83,32 +80,32 @@ export default function index({ paginationData, dataFunction }) {
               className="page-link"
             >
               {loading ? "..." : currentPage - 1}
-            </a>
+            </Link>
           </li>
         )}
 
         <li className="paginate_button page-item active">
-          <a
-            href="javascript:void(0);"
+          <Link
+            to="#"
             role="link"
             data-dt-idx={1}
             tabIndex={0}
             className="page-link"
           >
             {loading ? "..." : currentPage}
-          </a>
+          </Link>
         </li>
         {paginationData.next && (
           <li className="paginate_button page-item " onClick={handleNext}>
-            <a
-              href="javascript:void(0);"
+            <Link
+              to="#"
               role="link"
               data-dt-idx={2}
               tabIndex={0}
               className="page-link"
             >
               {loading ? "..." : currentPage + 1}
-            </a>
+            </Link>
           </li>
         )}
 
@@ -116,8 +113,8 @@ export default function index({ paginationData, dataFunction }) {
           className="paginate_button page-item next"
           id="DataTables_Table_0_next"
         >
-          <a
-            href="javascript:void(0);"
+          <Link
+            to="#"
             onClick={handleNext}
             style={{
               pointerEvents: paginationData.next && !loading ? "auto" : "none",
@@ -130,7 +127,7 @@ export default function index({ paginationData, dataFunction }) {
             className="page-link"
           >
             <i className="ti ti-chevron-right ti-sm" />
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

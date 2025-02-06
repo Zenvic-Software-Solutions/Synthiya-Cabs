@@ -7,7 +7,6 @@ export default function Index() {
   const { breadcrumbs } = useAppContext();
 
   if (!breadcrumbs) return;
-  console.log(breadcrumbs);
 
   // const params = new URLSearchParams(selectedFilters).toString();
   const filelink = `${process.env.BACKEND_URL}${breadcrumbs?.reportLink}`;
