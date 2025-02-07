@@ -1,6 +1,6 @@
-from apps.CMS.serializers import OtherCabListSerializer, OtherCabWriteSerializer
+from apps.CMS.serializers import OtherCabListSerializer, OtherCabWriteSerializer, OtherDriverReadserializer, OtherDriverWriteSerializer, OtherVechileReadserializer, OtherVechileWriteSerializer
 from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
-from apps.CMS.models import OtherCab
+from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 
 class OtherCabsListViewSet(AppListAPIViewSet):
     search_fields = []
@@ -29,3 +29,56 @@ class OtherCabsListViewSet(AppListAPIViewSet):
 class OtherCabsCUDViewSet(AppCUDAPIViewSet):
     queryset = OtherCab.objects.all()
     serializer_class = OtherCabListSerializer
+
+class OtherDriverListViewSet(AppListAPIViewSet):
+    search_fields = []
+    filterset_fields = []
+    queryset = OtherDriver.objects.all().order_by("-created_by")
+    serializer_class = OtherDriverReadserializer
+    column_details = {
+        "identity":"Cab Name",
+        "other_cab_name_details.owner_name":"Owner Name",
+        "other_cab_name_details.phone_number":"Phone Number",
+        "phone_number":"Phone Number",
+    }
+    filter_details = {}
+
+    def get_table_meta(self):
+        data = {
+            "columns" : self.get_table_columns_details(),
+            "filters" : self.get_table_filter_details(),
+            "filter_data": {}
+        }
+        return data
+
+
+class OtherDriverCUDViewSet(AppCUDAPIViewSet):
+    queryset = OtherDriver.objects.all()
+    serializer_class = OtherDriverWriteSerializer
+
+class OtherVechileList(AppListAPIViewSet):
+    search_fields = []
+    filterset_fields = []
+    queryset = OtherVehicle.objects.all().order_by("-created_by")
+    serializer_class = OtherVechileReadserializer
+    column_details = {
+        # "identity":"Driver Name",
+        "other_cab_name_details.owner_name":"Cab Owner Name",
+        "other_cab_name_details.phone_number":"Cab Phone Number",
+        "vehicle_type":"Vechile Type",
+        "vehicle_no":"Vechile No",
+        "is_ac_available":"AC Availability",
+    }
+    filter_details = {}
+
+    def get_table_meta(self):
+        data = {
+            "columns" : self.get_table_columns_details(),
+            "filters" : self.get_table_filter_details(),
+            "filter_data": {}
+        }
+        return data
+
+class OtherVechileList(AppCUDAPIViewSet):
+    queryset = OtherVehicle.objects.all()
+    serializer_class = OtherVechileWriteSerializer
