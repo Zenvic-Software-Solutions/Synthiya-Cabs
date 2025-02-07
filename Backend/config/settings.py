@@ -41,7 +41,7 @@ CUSTOM_APPS = [
     "apps.ACCESS",
     "apps.BASE",
     "apps.CMS",
-    "apps.WEBSITE",
+    # "apps.WEBSITE",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + OTHER_APPS + CUSTOM_APPS
