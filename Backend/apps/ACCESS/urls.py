@@ -1,28 +1,16 @@
 from django.urls import path
-from apps.ACCESS.views import (
-    RegisterView,
-    LoginView,
-    UserDetailView,
-    ShopDetailView,
-    CustomerDetailView,
-    LogoutAPIView,
-)
-from rest_framework_simplejwt.views import TokenRefreshView
+from apps.ACCESS.views import LoginView, LogoutView,RegisterView, GetAuthUserDetails
+from rest_framework.routers import DefaultRouter, SimpleRouter
 
+app_name = "access"
+API_URL_PREFIX = "api/"
+
+
+router = SimpleRouter()
 
 urlpatterns = [
-    # User Registration
-    path("register/", RegisterView.as_view(), name="register"),
-    # New Access Token
-    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    # User Login
     path("login/", LoginView.as_view(), name="login"),
-    # User Logout
-    path("logout/", LogoutAPIView.as_view(), name="logout"),
-    # User Detail
-    path("user-detail/", UserDetailView.as_view(), name="user-detail"),
-    # Shop Detail
-    path("shop-detail/", ShopDetailView.as_view(), name="shop-detail"),
-    # Customer Detail
-    path("customer-detail/", CustomerDetailView.as_view(), name="customer-detail"),
-]
+    path("register/", RegisterView.as_view(), name="register"),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path("user/details/", GetAuthUserDetails.as_view(), name="login"),
+] + router.urls

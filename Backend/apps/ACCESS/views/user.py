@@ -1,73 +1,46 @@
-from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from django.contrib.auth import authenticate, logout as django_logout
+from apps.BASE.views import AppAPIView
+from apps.ACCESS.models import User
+from apps.ACCESS.serializers import UserSerializer,RegisterSerializer
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.models import Token
-from apps.ACCESS.models import User, Shop, Customer
-from apps.ACCESS.serializers import (
-    RegisterSerializer,
-    LoginSerializer,
-    UserSerializer,
-    ShopSerializer,
-    CustomerSerializer,
-)
-from apps.BASE.views import AppAPIView
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
 
 
 class RegisterView(AppAPIView):
     permission_classes = []
-    authentication_classes = []
+    authentication_classes =[]
 
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            token = Token.objects.get(user=user)
-            return self.send_response(
-                data={
-                    "data": UserSerializer(user).data,
-                    "token": token.key,
-                }
-            )
-        return self.send_error_response()
-
-
-from rest_framework_simplejwt.tokens import RefreshToken
-
-
-class LoginView(AppAPIView):
-    permission_classes = []
-    authentication_classes = []
-
-    def get_jwt_token(self, user):
-        """Generate JWT tokens using SimpleJWT."""
+    def get_jwt_token(self,user):
         refresh = RefreshToken.for_user(user)
         return {
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
+            "access":str(refresh.access_token),
+            "refresh":str(refresh),
+
         }
-
-    def post(self, request):
-        serializer = LoginSerializer(data=request.data)
+    def post(self,request):
+        phone_number = request.data.get("phone_number")
+        if User.objects.filter(phone_number=phone_number).exists():
+            return self.send_error_response(
+                data="Phone number alreaady exists"
+            )
+        serializer = RegisterSerializer(data= request.data)
         if serializer.is_valid():
-            phone_number = serializer.validated_data["phone_number"]
-            user = User.objects.get(phone_number=phone_number)
-
-            if not user.is_active:
-                return Response(
-                    {"error": "Account is disabled."}, status=status.HTTP_403_FORBIDDEN
-                )
-
-            if user.is_staff or user.is_shop:
+            user = serializer.save()
+            if user.is_staff or user.is_driver:
                 jwt_tokens = self.get_jwt_token(user)
                 return self.send_response(
                     {
-                        "phone_number": user.phone_number,
-                        "token_type": "JWT",
+                        "phone_number":user.phone_number,
+                        "token_type":"JWT",
                         **jwt_tokens,
-                        "is_staff": user.is_staff,
-                        "is_shop": user.is_shop,
-                        "is_customer": user.is_customer,
+                        "is_staff":user.is_staff,
+                        "is_driver":user.is_driver,
                     },
                     status=status.HTTP_200_OK,
                 )
@@ -83,109 +56,70 @@ class LoginView(AppAPIView):
                         "is_customer": user.is_customer,
                     }
                 )
-
         return self.send_error_response()
 
 
-class UserDetailView(APIView):
+class LoginView(AppAPIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        if not username or not password:
+            return self.send_error_response(data={"error": "Username and password are required."})
+
+        user = authenticate(username=username, password=password)
+        if user:
+            token, _ = Token.objects.get_or_create(user=user)
+            data = {
+                "user": user.username,
+                "token": token.key
+            }
+            return self.send_response(data=data)
+        return self.send_error_response(data={"error": "Invalid credentials"})
+
+
+class LogoutView(AppAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = self.get_authenticated_user()
+        if user:
+            try:
+                token = Token.objects.get(user=user)
+                token.delete()
+                django_logout(request)
+                return self.send_response({"message": "Successfully logged out."})
+            except Token.DoesNotExist:
+                return self.send_error_response({"error": "No active session found."})
+        return self.send_error_response({"error": "User not authenticated."})
+
+
+class GetAuthUserDetails(AppAPIView):
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        serializer = UserSerializer(request.user)
-        data = {"data": serializer.data}
-        return Response(data)
-
-    def put(self, request):
-        serializer = UserSerializer(request.user, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ShopDetailView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        try:
-            shop = Shop.objects.get(user=request.user)
-            serializer = ShopSerializer(shop)
-            return Response(serializer.data)
-        except Shop.DoesNotExist:
-            return Response(
-                {"error": "Shop not found"}, status=status.HTTP_404_NOT_FOUND
-            )
-
-    def put(self, request):
-        try:
-            shop = Shop.objects.get(user=request.user)
-            serializer = ShopSerializer(shop, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except Shop.DoesNotExist:
-            return Response(
-                {"error": "Shop not found"}, status=status.HTTP_404_NOT_FOUND
-            )
+        user = self.get_authenticated_user()
+        if user:
+            data = {
+                "uuid": user.uuid,
+                "name": f"{user.full_name}",
+                "username": user.username,
+            }
+            return self.send_response(data=data)
+        return self.send_error_response(data={"error": "User not authenticated."})
 
 
-class CustomerDetailView(APIView):
-    permission_classes = [IsAuthenticated]
+# class RegisterView(AppAPIView):
+#     permission_classes = [AllowAny]
 
-    def get(self, request):
-        try:
-            customer = Customer.objects.get(user=request.user)
-            serializer = CustomerSerializer(customer)
-            return Response(serializer.data)
-        except Customer.DoesNotExist:
-            return Response(
-                {"error": "Customer not found"}, status=status.HTTP_404_NOT_FOUND
-            )
-
-    def put(self, request):
-        try:
-            customer = Customer.objects.get(user=request.user)
-            serializer = CustomerSerializer(customer, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except Customer.DoesNotExist:
-            return Response(
-                {"error": "Customer not found"}, status=status.HTTP_404_NOT_FOUND
-            )
-
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.authtoken.models import Token
-from django.contrib.auth import logout
-
-
-class LogoutAPIView(AppAPIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
-
-        # refresh_token = request.data.get("refresh")
-        # if refresh_token:
-        #     try:
-        #         token = RefreshToken(refresh_token)
-        #         token.blacklist()
-        #     except Exception as e:
-        #         return self.send_error_response()
-
-        try:
-            token = Token.objects.get(user=user)
-            token.delete()
-        except Token.DoesNotExist:
-            pass
-
-        logout(request)
-
-        return self.send_response(data={"message": "Successfully logged out"})
+#     def post(self, request):
+#         serializer = UserSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = serializer.save()
+#             token, _ = Token.objects.get_or_create(user=user)
+#             return self.send_response(data={"token": token.key, "user": user.username})
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
