@@ -53,7 +53,7 @@ class AppModelSerializer(AppSerializer, ModelSerializer):
 
 
 # Serializer for handling write-only operations
-class WriteOnlySerializer(AppModelSerializer):
+class WriteSerializer(AppModelSerializer):
     class Meta:
         model = None
         fields = []
@@ -186,7 +186,7 @@ class WriteOnlySerializer(AppModelSerializer):
 
 
 # Serializer for read-only operations
-class ReadOnlySerializer(AppModelSerializer):
+class ReadSerializer(AppModelSerializer):
     def create(self, validated_data):
         raise NotImplementedError
 
@@ -208,8 +208,8 @@ def read_serializer(
                 )
             return super().to_representation(instance)
 
-    class _Serializer(ReadOnlySerializer):
-        class Meta(ReadOnlySerializer.Meta):
+    class _Serializer(ReadSerializer):
+        class Meta(ReadSerializer.Meta):
             model = meta_model
             fields = meta_fields
             list_serializer_class = _ListSerializer
