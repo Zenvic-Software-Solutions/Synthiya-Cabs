@@ -1,0 +1,1 @@
+from apps.CMS.serializers import OtherCabListSerializer

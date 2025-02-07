@@ -1,7 +1,7 @@
-from .base import AppAPIView, AppCreateAPIView, AppViewMixin
+from .base import NonAuthenticatedAPIMixin, AppAPIView, AppCreateAPIView, AppViewMixin
 from .generic import (
-    ListAPIViewSet,
-    CUDAPIViewSet,
+    AppListAPIViewSet,
+    AppCUDAPIViewSet,
     get_upload_api_view,
     AbstractLookUpFieldMixin,
 )

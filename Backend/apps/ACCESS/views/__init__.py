@@ -1,8 +1,1 @@
-from .user import (
-    RegisterView,
-    LoginView,
-    UserDetailView,
-    ShopDetailView,
-    CustomerDetailView,
-    LogoutAPIView,
-)
+from .user import LoginView, LogoutView, GetAuthUserDetails,RegisterView

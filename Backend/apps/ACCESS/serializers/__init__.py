@@ -1,7 +1,1 @@
-from .user import (
-    RegisterSerializer,
-    LoginSerializer,
-    UserSerializer,
-    ShopSerializer,
-    CustomerSerializer,
-)
+from .user import UserSerializer,RegisterSerializer,LoginSerializer,StaffSerializer,DriverSerializer

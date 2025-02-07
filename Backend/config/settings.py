@@ -41,7 +41,7 @@ CUSTOM_APPS = [
     "apps.ACCESS",
     "apps.BASE",
     "apps.CMS",
-    "apps.WEBSITE",
+    # "apps.WEBSITE",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + OTHER_APPS + CUSTOM_APPS
@@ -66,6 +66,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "config.urls"
+
+BACKEND_URL = ""
 
 # Templates
 TEMPLATES = [

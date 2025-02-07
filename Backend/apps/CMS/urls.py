@@ -1,7 +1,7 @@
 from rest_framework.routers import SimpleRouter
 from django.urls import path
 from apps.BASE.views.generic import get_upload_api_view
-from apps.CMS.models import ProductImage
+
 
 # Bulk-Upload-Files
 from HELPERS import (
@@ -20,7 +20,6 @@ router = SimpleRouter()
 
 
 urlpatterns = [
-    path("product/images/", get_upload_api_view(ProductImage).as_view()),
     # bulk upload images
     path(
         "property/files/bulk-upload/",

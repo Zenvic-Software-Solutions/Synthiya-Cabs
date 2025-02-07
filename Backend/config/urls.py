@@ -9,7 +9,7 @@ urlpatterns = [
     path("common/", include("apps.BASE.urls")),
     path("access/", include("apps.ACCESS.urls")),
     path("cms/", include("apps.CMS.urls")),
-    path("web/", include("apps.WEBSITE.urls")),
+    # path("web/", include("apps.WEBSITE.urls")),
     # path("", TemplateView.as_view(template_name="index.html")),
 ]
 

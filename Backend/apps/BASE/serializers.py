@@ -1,27 +1,26 @@
 from datetime import datetime
 from rest_framework import serializers
+from rest_framework.fields import SkipField
 from rest_framework.serializers import ModelSerializer, Serializer
-from django.db import models
+from apps.BASE import model_fields
 from apps.BASE.config import CUSTOM_ERRORS_MESSAGES
+from django.db import models
+from django.conf import settings
 
 
-# Mixin to customize error messages for serializer fields
 class CustomErrorMessagesMixin:
     def get_display(self, field_name):
-        """Formats field names for error messages by replacing underscores with spaces."""
         return field_name.replace("_", " ")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Update error messages for each field in the serializer
         for field_name, field in getattr(self, "fields", {}).items():
-            field_type = field.__class__.__name__
-            if field_type == "ManyRelatedField":
+            if field.__class__.__name__ == "ManyRelatedField":
                 field.error_messages.update(CUSTOM_ERRORS_MESSAGES["ManyRelatedField"])
                 field.child_relation.error_messages.update(
                     CUSTOM_ERRORS_MESSAGES["PrimaryKeyRelatedField"]
                 )
-            elif field_type == "PrimaryKeyRelatedField":
+            elif field.__class__.__name__ == "PrimaryKeyRelatedField":
                 field.error_messages.update(
                     CUSTOM_ERRORS_MESSAGES["PrimaryKeyRelatedField"]
                 )
@@ -34,64 +33,95 @@ class CustomErrorMessagesMixin:
                 )
 
 
-# Base serializer with additional utility methods
 class AppSerializer(CustomErrorMessagesMixin, Serializer):
-    def get_request(self):
-        """Retrieve the request object from the serializer context."""
-        return self.context.get("request")
+    def get_initial_data(self, key, expected_type):
+        _data = self.initial_data.get(key)
+
+        if type(_data) != expected_type:
+            raise SkipField()
+
+        return _data
 
     def get_user(self):
-        """Retrieve the user object from the request, if authenticated."""
-        request = self.get_request()
-        return request.user if request else None
+        return self.get_request().user
+
+    def get_request(self):
+        return self.context.get("request", None)
 
 
-# Model serializer with extended functionality
 class AppModelSerializer(AppSerializer, ModelSerializer):
     class Meta:
         pass
 
 
-# Serializer for handling write-only operations
+backend_url = settings.BACKEND_URL
+
 class WriteOnlySerializer(AppModelSerializer):
-    class Meta:
-        model = None
-        fields = []
-        extra_kwargs = {}
-
-    def __init__(self, *args, **kwargs):
-        meta = getattr(self, "Meta", None)
-        if meta:
-            extra_kwargs = getattr(meta, "extra_kwargs", {})
-            for field in meta.fields:
-                extra_kwargs.setdefault(field, {"required": True})
-            meta.extra_kwargs = extra_kwargs
-        super().__init__(*args, **kwargs)
-
     def create(self, validated_data):
-        """Automatically set the `created_by` field to the authenticated user during creation."""
-        instance = super().create(validated_data)
+        instance = super().create(validated_data=validated_data)
+
         if hasattr(instance, "created_by") and not instance.created_by:
             user = self.get_user()
             instance.created_by = user if user and user.is_authenticated else None
             instance.save()
+
+
         return instance
 
     def get_validated_data(self, key=None):
-        """Retrieve validated data for a specific key or the entire data."""
-        return self.validated_data if not key else self.validated_data.get(key)
+        if not key:
+            return self.validated_data
+        return self.validated_data[key]
+
+    def __init__(self, *args, **kwargs):
+        for field in self.Meta.fields:
+            self.Meta.extra_kwargs.setdefault(field, {})
+            self.Meta.extra_kwargs[field]["required"] = True
+
+        super().__init__(*args, **kwargs)
+
+    class Meta(AppModelSerializer.Meta):
+        model = None
+        fields = []
+        extra_kwargs = {}
 
     def to_internal_value(self, data):
-        """Normalize empty values to None, except for falsy values like False, 0, or empty lists."""
-        data = super().to_internal_value(data)
-        return {
-            k: (None if not v and v not in [False, 0, []] else v)
-            for k, v in data.items()
-        }
+        data = super().to_internal_value(data=data)
+        for k, v in data.items():
+            if not v and v not in [False, 0, []]:
+                data[k] = None
+
+        return data
 
     def to_representation(self, instance):
-        """Override representation to include meta information."""
         return self.get_meta_initial()
+
+    def serialize_choices(self, choices: list):
+        from apps.BASE.helpers import get_display_name_for_slug
+
+        return [{"id": _, "uuid": _, "identity": get_display_name_for_slug(_)} for _ in choices]
+
+    def serialize_for_meta(self, queryset, fields=None):
+        if not fields:
+            fields = ["id", "uuid", "identity"]
+
+        return simple_queryset_serializer(fields=fields, queryset=queryset)
+
+    def get_meta(self) -> dict:
+        return {}
+
+    def get_meta_for_create(self):
+        return {
+            "meta": self.get_meta(),
+            "initial": {},
+        }
+
+    def get_meta_for_update(self):
+        return {
+            "meta": self.get_meta(),
+            "initial": self.get_meta_initial(),
+            "urls": self.get_meta_urls(),  # file & images
+        }
 
     def get_meta_urls(self) -> dict:
         from apps.BASE.models import FileOnlyModel
@@ -118,75 +148,38 @@ class WriteOnlySerializer(AppModelSerializer):
                     and hasattr(related_instance, "file")
                     and related_instance.file
                 ):
-                    server_url = "https://gold-staging.roririsoft.com/"
                     urls.append(
                         {
-                            field_name: f"{server_url}{related_instance.file.url}",
+                            field_name: backend_url+related_instance.file.url,
                             "id": related_instance.id,
                         }
                     )
 
-        return urls
-
-    def get_meta_urls(self):
-        """Generate a list of URLs for related file fields in the instance."""
-        if not self.instance:
-            return []
-
-        urls = []
-        for field_name in self.fields:
-            model_field = self.Meta.model.get_model_field(field_name)
-            if model_field and model_field.related_model:
-                related_instance = getattr(self.instance, field_name, None)
-                if isinstance(related_instance, (models.Manager, models.QuerySet)):
-                    urls.extend(
-                        {"id": item.id, field_name: item.file.url}
-                        for item in related_instance.all()
-                        if hasattr(item, "file") and item.file
-                    )
-                elif related_instance and hasattr(related_instance, "file"):
-                    urls.append(
-                        {
-                            "id": related_instance.id,
-                            field_name: related_instance.file.url,
-                        }
-                    )
         return urls
 
     def get_meta_initial(self):
-        """Retrieve initial values for fields in the instance."""
-        if not self.instance:
-            return {}
-        initial_data = {}
-        for field in self.Meta.fields:
-            value = getattr(self.instance, field, None)
-            if hasattr(value, "all"):
-                initial_data[field] = list(value.values_list("id", flat=True))
-            elif hasattr(value, "id"):
-                initial_data[field] = value.id
-            else:
-                initial_data[field] = value
-        return initial_data
-
-    def get_meta_for_create(self):
-        """Meta information for object creation."""
-        return {"meta": self.get_meta(), "initial": {}}
-
-    def get_meta_for_update(self):
-        """Meta information for object update."""
-        return {
-            "meta": self.get_meta(),
-            "initial": self.get_meta_initial(),
-            "urls": self.get_meta_urls(),
+        instance = self.instance
+        initial = {
+            field_name: getattr(instance, field_name, None)
+            for field_name in ["id", "uuid", *self.fields.keys()]
         }
 
-    def get_meta(self):
-        """Retrieve general meta information."""
-        return {}
+        for k, v in initial.items():
+            if hasattr(initial[k], "pk"):
+                initial[k] = v.pk
+
+            if not instance.__class__.get_model_field(k, None):
+                continue
+
+            if instance.__class__.get_model_field(k).many_to_many:
+                initial[k] = getattr(instance, k).values_list("pk", flat=True)
+        return initial
 
 
-# Serializer for read-only operations
 class ReadOnlySerializer(AppModelSerializer):
+    class Meta(AppModelSerializer.Meta):
+        pass
+
     def create(self, validated_data):
         raise NotImplementedError
 
@@ -194,28 +187,21 @@ class ReadOnlySerializer(AppModelSerializer):
         raise NotImplementedError
 
 
-# Factory function to create a read-only serializer dynamically
+# get_app_read_only_serializer
 def read_serializer(
-    meta_model, meta_fields=None, init_fields_config=None, first_only=False
+    meta_model, meta_fields=None, init_fields_config=None, queryset=None
 ):
-    meta_fields = meta_fields or ["id", "uuid", "identity"]
-
-    class _ListSerializer(serializers.ListSerializer):
-        def to_representation(self, instance):
-            if first_only:
-                instance = (
-                    instance.all()[:1] if hasattr(instance, "all") else [instance]
-                )
-            return super().to_representation(instance)
+    if meta_fields is None:
+        meta_fields = ["id", "uuid", "identity"]
 
     class _Serializer(ReadOnlySerializer):
         class Meta(ReadOnlySerializer.Meta):
             model = meta_model
             fields = meta_fields
-            list_serializer_class = _ListSerializer
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
+
             if init_fields_config:
                 for field, value in init_fields_config.items():
                     self.fields[field] = value
@@ -223,38 +209,52 @@ def read_serializer(
     return _Serializer
 
 
-# Simplified serialization of querysets
-def simple_serialize_queryset(fields, queryset):
-    return (
-        [
-            {**item, "id": str(item["id"])}
-            for item in queryset.only(*fields).values(*fields)
+def simple_queryset_serializer(fields, queryset):
+    if "id" in fields:
+        return [
+            {**_, "id": str(_["id"])} for _ in queryset.only(*fields).values(*fields)
         ]
-        if "id" in fields
-        else queryset.only(*fields).values(*fields)
-    )
+
+    return queryset.only(*fields).values(*fields)
 
 
-# Simplified serialization of a single instance
-def simple_serialize_instance(instance, keys, parent_data=None, display=None):
-    parent_data = parent_data or {}
-    display = display or {}
+# def simple_serialize_instance(
+#     instance, keys: list, parent_data: dict = None, display=None
+# ) -> dict:
 
-    for key in keys:
-        value = getattr(instance, key.split(".")[0], None)
-        for sub_key in key.split(".")[1:]:
-            value = getattr(value, sub_key, None) if value else None
-        parent_data[display.get(key, key)] = (
-            value if isinstance(value, (int, float)) else str(value) if value else value
-        )
+#     def _serialize_value(_v):
+#         if type(_v) in [int, float]:
+#             return _v
 
-    return parent_data
+#         return str(_v) if _v else _v
+
+#     if not parent_data:
+#         parent_data = {}
+
+#     if not display:
+#         display = {}
+
+#     for key in keys:
+#         if "." in key:
+
+#             _keys, _inter_value = key.split("."), None
+#             for _k in _keys:
+#                 if not _inter_value:
+#                     _inter_value = getattr(instance, _k, None)
+#                 else:
+#                     _inter_value = getattr(_inter_value, _k, None)
+#             parent_data[key] = _serialize_value(_inter_value)
+#         else:
+#             parent_data[key] = _serialize_value(getattr(instance, key, None))
+#     for k, d in display.items():
+#         parent_data[d] = parent_data.pop(k)
+
+#     return parent_data
 
 
-# Custom field for serializing file models to URLs
-class FileModelToURLField(serializers.Field):
-    def to_internal_value(self, data):
-        raise NotImplementedError
+# class FileModelToURLField(serializers.Field):
+#     def to_internal_value(self, data):
+#         raise NotImplementedError
 
-    def to_representation(self, value):
-        return value.file.url if value and hasattr(value, "file") else None
+#     def to_representation(self, value):
+#         return value.file.url

@@ -1,25 +1,25 @@
+PAGINATION_CONFIG = {
+    "allowed_sizes": [15, 50, 75, 100],
+    "change_query_param": "page-size",
+}
+
 API_RESPONSE_ACTION_CODES = {"display_error_1": "DISPLAY_ERROR_MESSAGES"}
 
 _COMMON_MESSAGES = {
-    "null_blank": "This field cannot be empty. Please provide a value.",
-    "invalid": "The provided value is invalid. Please check your input.",
+    "null_blank": "Please fill this field. This field cannot be left empty."
 }
 
 CUSTOM_ERRORS_MESSAGES = {
     "Others": {
         "blank": _COMMON_MESSAGES["null_blank"],
         "null": _COMMON_MESSAGES["null_blank"],
-        "invalid_choice": "The selected choice is invalid. Please select a valid option.",
     },
     "ManyRelatedField": {
-        "empty": "Please select at least one option.",
+        "empty": "Please select one or more options. At least one is required.",
     },
     "PrimaryKeyRelatedField": {
-        "does_not_exist": (
-            "The selected value does not exist. Please choose a valid option from the available choices."
-        ),
-        "incorrect_type": (
-            "Invalid data type. Ensure your input matches the expected format."
-        ),
+        "does_not_exist": "Please select a valid option. The selected option is invalid or does not exist.",
+        "incorrect_type": "The given name/value is invalid or the expected data "
+        "does not belong to the corresponding filtering hierarchy.",
     },
 }
