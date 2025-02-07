@@ -31,3 +31,10 @@ export const poststaffCud = (data) => makePostRequest(EndPoints.staffCudURL, dat
 export const patchstaffCud = (uuid, data) => makePatchRequest(EndPoints.staffCudURL + uuid + "/", data);
 export const getstaffAttendanceMeta = (uuid) => makeGetRequest(EndPoints.staffAttendanceURL + uuid + "/table-meta/");
 export const getstaffAttendanceData = (uuid, data) => makeGetRequest(EndPoints.staffAttendanceURL + uuid + "/", data);
+
+// Staff API
+export const vehicleTableMeta = () => makeGetRequest(EndPoints.vehicleListURL + "table-meta/");
+export const vehicleTableData = (data) => makeGetRequest(EndPoints.vehicleListURL, data);
+export const getVehicleCud = (uuid) => makeGetRequest(EndPoints.vehicleCudURL + uuid + "/meta/");
+export const postVehicleCud = (data) => makePostRequest(EndPoints.vehicleCudURL, data);
+export const patchVehicleCud = (uuid, data) => makePatchRequest(EndPoints.vehicleCudURL + uuid + "/", data);

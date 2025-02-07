@@ -14,45 +14,37 @@ export default function index({
   const { setBreadcrumbs } = useAppContext();
   const { trigger } = useDataContext();
   const [tableMeta, setTableMeta] = useState({
-    count: 36,
     columns: {
-      "image_details.file": "Images",
-      full_name: "Name",
-      email: "Email",
-      phone_number: "Phone",
-      "role_details.identity": "Role",
-      is_working_profession: "Working Profession",
-      status: "Status",
+      vehicle_name: "Vehicle Name",
+      vehicle_type: "Vehicle Type",
+      vehicle_no: "Vehicle No",
+      is_ac_available: "AC Availability",
+      last_km: "Last KM",
     },
     filters: {
-      role: "Role",
-      education: "Education",
-      is_working_profession: "Working Profession",
+      vehicle_type: "Vehicle Type",
+      is_ac_available: "AC Availability",
     },
     filter_data: {
-      education: [
+      vehicle_type: [
         {
-          id: "Secondary School",
-          identity: "Secondary School",
+          id: "Car",
+          identity: "Car",
         },
         {
-          id: "Higher Secondary",
-          identity: "Higher Secondary",
+          id: "Bike",
+          identity: "Bike",
         },
         {
-          id: "Diplomo",
-          identity: "Diplomo",
+          id: "Truck",
+          identity: "Truck",
         },
         {
-          id: "Bachelors",
-          identity: "Bachelors",
-        },
-        {
-          id: "Masters",
-          identity: "Masters",
+          id: "Bus",
+          identity: "Bus",
         },
       ],
-      is_working_profession: [
+      is_ac_available: [
         {
           id: true,
           identity: "Yes",
@@ -62,44 +54,30 @@ export default function index({
           identity: "No",
         },
       ],
-      role: [
-        {
-          id: "1",
-          identity: "Admin",
-        },
-      ],
     },
   });
   const [tableData, setTableData] = useState({
     count: 36,
-    next: "https://backendlive.nexemy.com/cms/user/list/?page=2",
+    next: "https://example.com/cms/vehicle/list/?page=2",
     previous: null,
     results: [
       {
         id: 36,
         uuid: "17d19e62-a7cc-4f75-8f5c-81cc524c500e",
-        full_name: "uma",
-        email: "umasigmaconstellation@gmail.com",
-        phone_number: null,
-        role_details: null,
-        image_details: null,
-        is_working_profession: "No",
-        education: null,
-        current_profession: null,
-        status: "Active",
+        vehicle_name: "Toyota Corolla",
+        vehicle_type: "Car",
+        vehicle_no: "TN01AB1234",
+        is_ac_available: "Yes",
+        last_km: "25000",
       },
       {
         id: 35,
         uuid: "dc22bf52-1ceb-409e-911a-2c958db74406",
-        full_name: "Jesper",
-        email: "jesper@gmail.com",
-        phone_number: null,
-        role_details: null,
-        image_details: null,
-        is_working_profession: "No",
-        education: null,
-        current_profession: null,
-        status: "Active",
+        vehicle_name: "Honda Civic",
+        vehicle_type: "Car",
+        vehicle_no: "KA05XY9876",
+        is_ac_available: "No",
+        last_km: "18000",
       },
     ],
   });

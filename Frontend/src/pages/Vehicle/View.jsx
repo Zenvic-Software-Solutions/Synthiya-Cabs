@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function View() {
-  return <div>View</div>;
+  return <div>Vehicle View page</div>;
 }

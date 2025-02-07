@@ -1,29 +1,29 @@
 import React from "react";
 import { DynamicTable } from "@components";
-import { staffTableData, staffTableMeta } from "@api/urls";
+import { vehicleTableData, vehicleTableMeta } from "@api/urls";
 
 export default function CategoryList() {
   return (
     <DynamicTable
-      tableMetaApi={staffTableMeta}
-      tableDataApi={staffTableData}
+      tableMetaApi={vehicleTableMeta}
+      tableDataApi={vehicleTableData}
       actionLink={{
-        viewLink: "/staff/view",
-        editLink: "/staff/form",
+        viewLink: "#",
+        editLink: "/vehicle/form",
         deleteLink: "#",
       }}
       breadcrumbData={{
-        title: "Staff list",
-        sidebarActiveId: 3,
+        title: "Vehicle list",
+        sidebarActiveId: 7,
         list: [
           {
-            label: "Staff list",
+            label: "Vehicle list",
           },
         ],
         reportLink: "#",
         addButtonData: {
-          name: "Add Staff",
-          link: "/staff/form",
+          name: "Add Vehicle",
+          link: "/vehicle/form",
         },
       }}
     />
