@@ -29,7 +29,8 @@ class OtherVehicle(BaseModel):
     vehicle_type =AppSingleChoiceField(VEHICLE_TYPE,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     vehicle_no = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     ac =models.BooleanField(default=False)
-    last_km = models.DecimalField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    # last_km = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
+
 
 
     def __str__(self):
