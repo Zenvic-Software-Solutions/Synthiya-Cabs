@@ -1,1 +1,1 @@
-from .other_cabs import OtherCabListSerializer
+from .other_cabs import OtherCabListSerializer, OtherCabWriteSerializer
