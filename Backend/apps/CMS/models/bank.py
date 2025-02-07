@@ -15,8 +15,8 @@ class Bank(BaseModel):
     
 class BankBalance(BaseModel):
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name="balances")
-    date = models.DateField(auto_now_add=True)
+    # date = models.DateField(auto_now_add=True)
     balance = models.DecimalField(max_digits=15, decimal_places=2)
 
     def __str__(self):
-        return f"{self.bank.identity} - {self.date} : ₹{self.balance}"
+        return f"{self.bank.identity} - {self.created_at} : ₹{self.balance}"

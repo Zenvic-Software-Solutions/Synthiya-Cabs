@@ -20,7 +20,7 @@ class BaseModel(models.Model):
 
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
-    created = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     created_by = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
@@ -29,7 +29,7 @@ class BaseModel(models.Model):
         **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG,
     )
 
-    modified = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     modified_by = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,

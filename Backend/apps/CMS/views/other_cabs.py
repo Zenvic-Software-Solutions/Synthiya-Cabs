@@ -56,7 +56,7 @@ class OtherDriverCUDViewSet(AppCUDAPIViewSet):
     queryset = OtherDriver.objects.all()
     serializer_class = OtherDriverWriteSerializer
 
-class OtherVechileList(AppListAPIViewSet):
+class OtherVechileListViewSet(AppListAPIViewSet):
     search_fields = []
     filterset_fields = []
     queryset = OtherVehicle.objects.all().order_by("-created_by")
@@ -79,6 +79,6 @@ class OtherVechileList(AppListAPIViewSet):
         }
         return data
 
-class OtherVechileList(AppCUDAPIViewSet):
+class OtherVechileCUDViewSet(AppCUDAPIViewSet):
     queryset = OtherVehicle.objects.all()
     serializer_class = OtherVechileWriteSerializer
