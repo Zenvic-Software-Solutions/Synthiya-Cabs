@@ -14,6 +14,9 @@ const EndPoints = {
   staffCudURL: "/access/user/cud/",
   staffAttendanceURL: "/cms/check/attendance/",
 
+  vehicleListURL: "/access/user/list/",
+  vehicleCudURL: "/access/user/cud/",
+
 };
 
 export default EndPoints;

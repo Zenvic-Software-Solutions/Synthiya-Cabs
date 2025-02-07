@@ -6,9 +6,10 @@ import { useAppContext } from "@context/AppContext";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({
-    employee_count: 100,
-    present_count: 20,
-    absent_count: 5,
+    total_vehicles: 100,
+    available_vehicles: 80,
+    under_maintenance: 10,
+    in_use: 10,
   });
   const { setBreadcrumbs } = useAppContext();
   useEffect(() => {
@@ -38,24 +39,24 @@ const Dashboard = () => {
       ) : (
         <>
           <div className="row g-6 mb-6">
-            {/* Total Users */}
+            {/* Total Vehicles */}
             <div className="col-sm-6 col-xl-3">
               <div className="card card-border-shadow-primary">
                 <div className="card-body">
                   <div className="d-flex align-items-start justify-content-between">
                     <div className="content-left">
-                      <span className="text-heading">Total Employee</span>
+                      <span className="text-heading">Total Vehicles</span>
                       <div className="d-flex align-items-center my-1">
                         <h4 className="mb-0 me-2">
-                          {dashboardData.employee_count || 0}
+                          {dashboardData.total_vehicles || 0}
                         </h4>
                       </div>
-                      <small className="mb-0">Total number of employees</small>
+                      <small className="mb-0">Total number of vehicles</small>
                     </div>
                     <div className="avatar">
-                      <Link to="/user">
+                      <Link to="/vehicles">
                         <span className="avatar-initial rounded bg-label-primary">
-                          <i className="ti ti-users ti-26px" />
+                          <i className="ti ti-car ti-26px" />
                         </span>
                       </Link>
                     </div>
@@ -64,25 +65,24 @@ const Dashboard = () => {
               </div>
             </div>
 
+            {/* Available Vehicles */}
             <div className="col-sm-6 col-xl-3">
               <div className="card card-border-shadow-success">
                 <div className="card-body">
                   <div className="d-flex align-items-start justify-content-between">
                     <div className="content-left">
-                      <span className="text-heading">Today Present</span>
+                      <span className="text-heading">Available Vehicles</span>
                       <div className="d-flex align-items-center my-1">
                         <h4 className="mb-0 me-2">
-                          {dashboardData.present_count || 0}
+                          {dashboardData.available_vehicles || 0}
                         </h4>
                       </div>
-                      <small className="mb-0">
-                        Number of employees present today
-                      </small>
+                      <small className="mb-0">Vehicles available for use</small>
                     </div>
                     <div className="avatar">
-                      <Link to="/bundle">
+                      <Link to="/available-vehicles">
                         <span className="avatar-initial rounded bg-label-success">
-                          <i className="ti ti-package ti-26px" />
+                          <i className="ti ti-check ti-26px" />
                         </span>
                       </Link>
                     </div>
@@ -90,25 +90,55 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
+
+            {/* Vehicles Under Maintenance */}
+            <div className="col-sm-6 col-xl-3">
+              <div className="card card-border-shadow-warning">
+                <div className="card-body">
+                  <div className="d-flex align-items-start justify-content-between">
+                    <div className="content-left">
+                      <span className="text-heading">Under Maintenance</span>
+                      <div className="d-flex align-items-center my-1">
+                        <h4 className="mb-0 me-2">
+                          {dashboardData.under_maintenance || 0}
+                        </h4>
+                      </div>
+                      <small className="mb-0">
+                        Vehicles currently under maintenance
+                      </small>
+                    </div>
+                    <div className="avatar">
+                      <Link to="/maintenance">
+                        <span className="avatar-initial rounded bg-label-warning">
+                          <i className="ti ti-tools ti-26px" />
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Vehicles in Use */}
             <div className="col-sm-6 col-xl-3">
               <div className="card card-border-shadow-danger">
                 <div className="card-body">
                   <div className="d-flex align-items-start justify-content-between">
                     <div className="content-left">
-                      <span className="text-heading">Today Absent</span>
+                      <span className="text-heading">Vehicles in Use</span>
                       <div className="d-flex align-items-center my-1">
                         <h4 className="mb-0 me-2">
-                          {dashboardData.absent_count || 0}
+                          {dashboardData.in_use || 0}
                         </h4>
                       </div>
                       <small className="mb-0">
-                        Number of employees absent today
+                        Vehicles currently being used
                       </small>
                     </div>
                     <div className="avatar">
-                      <Link to="/course">
+                      <Link to="/in-use">
                         <span className="avatar-initial rounded bg-label-danger">
-                          <i className="ti ti-book ti-26px" />
+                          <i className="ti ti-road ti-26px" />
                         </span>
                       </Link>
                     </div>
