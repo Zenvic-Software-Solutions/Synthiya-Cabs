@@ -56,7 +56,7 @@ class AppModelSerializer(AppSerializer, ModelSerializer):
 
 backend_url = settings.BACKEND_URL
 
-class WriteOnlySerializer(AppModelSerializer):
+class WriteSerializer(AppModelSerializer):
     def create(self, validated_data):
         instance = super().create(validated_data=validated_data)
 
@@ -176,7 +176,7 @@ class WriteOnlySerializer(AppModelSerializer):
         return initial
 
 
-class ReadOnlySerializer(AppModelSerializer):
+class ReadSerializer(AppModelSerializer):
     class Meta(AppModelSerializer.Meta):
         pass
 
@@ -194,8 +194,8 @@ def read_serializer(
     if meta_fields is None:
         meta_fields = ["id", "uuid", "identity"]
 
-    class _Serializer(ReadOnlySerializer):
-        class Meta(ReadOnlySerializer.Meta):
+    class _Serializer(ReadSerializer):
+        class Meta(ReadSerializer.Meta):
             model = meta_model
             fields = meta_fields
 
