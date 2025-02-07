@@ -15,3 +15,12 @@ VEHICLE_TYPE = {
     ]
 }
 
+RENT_TYPE_CHOICES = {
+  
+  "options":[
+        "Day Rent",
+        "Day Rent + KM",
+        "Fixed Rent",
+        "Other"
+    ]
+ }
