@@ -51,7 +51,7 @@ class Staff(BaseModel):
     date_of_joining = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     user =  models.OneToOneField(
         User,on_delete=models.CASCADE,
-        related_name="customer_user",
+        related_name="staff_user",
         limit_choices_to ={"is_staff":True},
         null=True,
         blank=True
@@ -69,7 +69,7 @@ class Driver(BaseModel):
     license_no = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     user =  models.OneToOneField(
         User,on_delete=models.CASCADE,
-        related_name="customer_user",
+        related_name="driver_user",
         limit_choices_to ={"is_driver":True},
         null=True,
         blank=True
