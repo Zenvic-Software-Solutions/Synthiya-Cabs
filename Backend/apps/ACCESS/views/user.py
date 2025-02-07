@@ -144,3 +144,8 @@ class StaffDetailView(APIView):
                 serializer.errors
             },status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+    def put(self,request):
+        pass
+
+

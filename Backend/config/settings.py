@@ -67,6 +67,8 @@ CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "config.urls"
 
+BACKEND_URL = ""
+
 # Templates
 TEMPLATES = [
     {

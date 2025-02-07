@@ -1,4 +1,4 @@
-from apps.BASE.model_fields import SingleChoiceField
+from apps.BASE.model_fields import AppSingleChoiceField
 from apps.BASE.models import DEFAULT_BLANK_NULLABLE_FIELD_CONFIG, MAX_CHAR_FIELD_LENGTH, BaseModel
 from django.db import models
 from HELPERS.choices import VEHICLE_TYPE
@@ -26,7 +26,7 @@ class OtherDriver(BaseModel):
 
 class OtherVehicle(BaseModel):
     identity = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    vehicle_type =SingleChoiceField(VEHICLE_TYPE,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    vehicle_type =AppSingleChoiceField(VEHICLE_TYPE,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     vehicle_no = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     ac =models.BooleanField(default=False)
     last_km = models.DecimalField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)

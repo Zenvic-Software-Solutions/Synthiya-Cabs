@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,Group,
 from django.db import models
 from HELPERS.choices import ROLE
 from apps.BASE.managers import UserManager
-from apps.BASE.model_fields import SingleChoiceField
+from apps.BASE.model_fields import AppSingleChoiceField
 from apps.BASE.models import (
     BaseModel,
     MAX_CHAR_FIELD_LENGTH,
@@ -17,7 +17,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
     
-    role = SingleChoiceField(ROLE,)
+    role = AppSingleChoiceField(ROLE,)
     is_staff = models.BooleanField(default=False)
     is_driver = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=False)
