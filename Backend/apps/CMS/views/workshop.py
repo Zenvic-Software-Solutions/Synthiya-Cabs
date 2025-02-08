@@ -43,11 +43,13 @@ class MaintenanceListViewSet(AppListAPIViewSet):
     serializer_class = MaintenanceReadSerializer
 
     column_details = {
-        # "identity":"Workshop Name",
-        # "owner_name":"Owner Name",
-        # "phone_number":"Phone Number",
-        # "address":"Address",
-        # "balance":"Balance",
+        "workshop_details.identity":"Workshop Name",
+        "vechile_details.identiy":"vechile Name",
+        "driver_details.user.phone_number":"Phone Number",
+        "start_date":"Start Date",
+        "end_date":"End Date",
+        "start_km":"Start KM",
+        "end_km":"End KM",
     }
     filter_details = {}
 
