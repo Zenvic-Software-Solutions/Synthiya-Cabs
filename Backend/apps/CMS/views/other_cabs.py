@@ -28,7 +28,7 @@ class OtherCabsListViewSet(AppListAPIViewSet):
 
 class OtherCabsCUDViewSet(AppCUDAPIViewSet):
     queryset = OtherCab.objects.all()
-    serializer_class = OtherCabListSerializer
+    serializer_class = OtherCabWriteSerializer
 
 class OtherDriverListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
@@ -62,7 +62,7 @@ class OtherVechileListViewSet(AppListAPIViewSet):
     queryset = OtherVehicle.objects.all().order_by("-created_by")
     serializer_class = OtherVechileReadserializer
     column_details = {
-        # "identity":"Driver Name",
+        "identity":"Vechile Name",
         "other_cab_name_details.owner_name":"Cab Owner Name",
         "other_cab_name_details.phone_number":"Cab Phone Number",
         "vehicle_type":"Vechile Type",

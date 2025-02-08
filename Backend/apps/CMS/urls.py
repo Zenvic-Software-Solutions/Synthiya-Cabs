@@ -36,30 +36,30 @@ router = SimpleRouter()
 
 
 # Other Cabs
-router.register(r'other-cabs', OtherCabsListViewSet, basename='other-cabs-list')
-router.register(r'other-cabs-cud', OtherCabsCUDViewSet, basename='other-cabs-cud')
+router.register(r'othercab/list', OtherCabsListViewSet, basename='other-cabs-list')
+router.register(r'othercab/cud', OtherCabsCUDViewSet, basename='other-cabs-cud')
 
 # Other Drivers
-router.register(r'other-drivers', OtherDriverListViewSet, basename='other-drivers-list')
-router.register(r'other-drivers-cud', OtherDriverCUDViewSet, basename='other-drivers-cud')
+router.register(r'otherdriver/list', OtherDriverListViewSet, basename='other-drivers-list')
+router.register(r'otherdriver/cud', OtherDriverCUDViewSet, basename='other-drivers-cud')
 
 # Other Vehicles
-router.register(r'other-vechiles', OtherVechileListViewSet, basename='other-vechiles-list')
-router.register(r'other-vechiles-cud', OtherVechileCUDViewSet, basename='other-vechiles-cud')
+router.register(r'othervechile/list', OtherVechileListViewSet, basename='other-vechiles-list')
+router.register(r'othervechile/cud', OtherVechileCUDViewSet, basename='other-vechiles-cud')
 
 # Vehicle
-router.register(r'vechiles', VechileListViewSet, basename='vechiles-list')
-router.register(r'vechiles-cud', VechileCUDViewSet, basename='vechiles-cud')
+router.register(r'vechiles/list', VechileListViewSet, basename='vechiles-list')
+router.register(r'vechiles/cud', VechileCUDViewSet, basename='vechiles-cud')
 
 # Bank
-router.register(r'banks', BankListViewSet, basename='banks-list')
-router.register(r'banks', BankCUDViewSet, basename='banks-list')
-router.register(r'bank-balance', BankBalanceListViewSet, basename='bank-balance-list')
-router.register(r'bank-balance-cud', BankBalanceCUDViewSet, basename='bank-balance-cud')
+router.register(r'bank/list', BankListViewSet, basename='banks-list')
+router.register(r'bank/cud', BankCUDViewSet, basename='banks-list')
+router.register(r'bankbalance/list', BankBalanceListViewSet, basename='bank-balance-list')
+router.register(r'bankbalance/cud', BankBalanceCUDViewSet, basename='bank-balance-cud')
 
 # Workshop
-router.register(r'workshops', WorkshopListViewSet, basename='workshops-list')
-router.register(r'workshops-cud', WorkshopCUDViewSet, basename='workshops-cud')
+router.register(r'workshoplsit', WorkshopListViewSet, basename='workshops-list')
+router.register(r'workshop/cud', WorkshopCUDViewSet, basename='workshops-cud')
 
 
 
