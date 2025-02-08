@@ -26,16 +26,15 @@ export default function Login() {
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     try {
-      // const response = await login(values);
-      // localStorage.setItem("accessToken", response.access);
-      // localStorage.setItem("refreshToken", response.refresh);
+      const response = await login(values);
+      localStorage.setItem("accessToken", response.access);
+      localStorage.setItem("refreshToken", response.refresh);
       navigate("/dashboard");
       // setSubmitting(false);
     } catch (err) {
       setStatus({
         errorMsg:
-          err.response?.data?.data?.detail ||
-          "An unexpected error occurred. Please try again.",
+          err.response?.data?.data?.detail || "Login failed. Please try again.",
       });
       setSubmitting(false);
     }

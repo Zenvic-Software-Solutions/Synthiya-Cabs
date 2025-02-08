@@ -21,7 +21,12 @@ const Sidebar = () => {
       icon: "ti ti-database",
       subItems: [
         { id: 3, label: "Staff", icon: "ti ti-user", path: "/staff/list" },
-        { id: 4, label: "Driver", icon: "ti ti-steering-wheel", path: "#" },
+        {
+          id: 4,
+          label: "Driver",
+          icon: "ti ti-steering-wheel",
+          path: "/driver/list",
+        },
         { id: 5, label: "Other Cabs", icon: "ti ti-car", path: "#" },
         { id: 6, label: "Customer", icon: "ti ti-user-check", path: "#" },
         { id: 7, label: "Vehicle", icon: "ti ti-truck", path: "/vehicle/list" },
