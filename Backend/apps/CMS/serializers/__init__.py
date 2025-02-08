@@ -1,3 +1,4 @@
 from .other_cabs import OtherCabListSerializer, OtherCabWriteSerializer, OtherDriverReadserializer, OtherDriverWriteSerializer, OtherVechileReadserializer,OtherVechileWriteSerializer
 from .vechile import VechileReadSerializer, VechileWriteSerializer
 from .bank import BankReadSerializer, BankWriteSerializer, BankBalanceReadSerializer, BankBalanceWriteSerializer
+from .workshop import WorkshopReadSerializer, WorkshopWriteSerializer
