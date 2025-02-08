@@ -43,3 +43,24 @@ export const driverTableData = (data) => makeGetRequest(EndPoints.driverListURL,
 export const getDriverCud = (uuid) => makeGetRequest(EndPoints.driverCudURL + uuid + "/meta/");
 export const postDriverCud = (data) => makePostRequest(EndPoints.driverCudURL, data);
 export const patchDriverCud = (uuid, data) => makePatchRequest(EndPoints.driverCudURL + uuid + "/", data);
+
+// OtherCabs API
+export const otherCabsTableMeta = () => makeGetRequest(EndPoints.otherCabsListURL + "table-meta/");
+export const otherCabsTableData = (data) => makeGetRequest(EndPoints.otherCabsListURL, data);
+export const getOtherCabsCud = (uuid) => makeGetRequest(EndPoints.otherCabsCudURL + uuid + "/meta/");
+export const postOtherCabsCud = (data) => makePostRequest(EndPoints.otherCabsCudURL, data);
+export const patchOtherCabsCud = (uuid, data) => makePatchRequest(EndPoints.otherCabsCudURL + uuid + "/", data);
+
+// OtherCabs Vehicle API
+export const otherCabsVehicleTableMeta = () => makeGetRequest(EndPoints.otherCabsVehicleListURL + "table-meta/");
+export const otherCabsVehicleTableData = (data) => makeGetRequest(EndPoints.otherCabsVehicleListURL, data);
+export const getOtherCabsVehicleCud = (uuid) => makeGetRequest(EndPoints.otherCabsVehicleCudURL + uuid + "/meta/");
+export const postOtherCabsVehicleCud = (data) => makePostRequest(EndPoints.otherCabsVehicleCudURL, data);
+export const patchOtherCabsVehicleCud = (uuid, data) => makePatchRequest(EndPoints.otherCabsVehicleCudURL + uuid + "/", data);
+
+// OtherCabs Driver API
+export const otherCabsDriverTableMeta = () => makeGetRequest(EndPoints.otherCabsDriverListURL + "table-meta/");
+export const otherCabsDriverTableData = (data) => makeGetRequest(EndPoints.otherCabsDriverListURL, data);
+export const getOtherCabsDriverCud = (uuid) => makeGetRequest(EndPoints.otherCabsDriverCudURL + uuid + "/meta/");
+export const postOtherCabsDriverCud = (data) => makePostRequest(EndPoints.otherCabsDriverCudURL, data);
+export const patchOtherCabsDriverCud = (uuid, data) => makePatchRequest(EndPoints.otherCabsDriverCudURL + uuid + "/", data);

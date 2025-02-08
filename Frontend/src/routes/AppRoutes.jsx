@@ -40,6 +40,14 @@ const AppRoutes = createBrowserRouter([
           { path: "view/:uuid?", element: <Pages.DriverView /> },
         ],
       },
+      {
+        path: "othercabs",
+        children: [
+          { path: "list", element: <Pages.OtherCabsList /> },
+          { path: "form/:uuid?", element: <Pages.OtherCabsForm /> },
+          { path: "view/:uuid?", element: <Pages.OtherCabsView /> },
+        ],
+      },
       { path: "report", element: <Pages.Report /> },
     ],
   },

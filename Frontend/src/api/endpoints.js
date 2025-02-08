@@ -21,6 +21,18 @@ const EndPoints = {
   driverListURL: "/access/driver/list/",
   driverCudURL: "/access/driver/cud/",
 
+  // OtherCabes Cabs API
+  otherCabsListURL: "/cms/othercab/list/",
+  otherCabsCudURL: "/cms/othercab/cud/",
+
+  // OtherCabes Vehicle API
+  otherCabsVehicleListURL: "/cms/otherdriver/list/",
+  otherCabsVehicleCudURL: "/cms/othervechile/cud/",
+
+  // OtherCabes Driver API
+  otherCabsDriverListURL: "/cms/otherdriver/list/",
+  otherCabsDriverCudURL: "/cms/otherdriver/cud/",
+
 };
 
 export default EndPoints;
