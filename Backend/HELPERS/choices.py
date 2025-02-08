@@ -35,3 +35,14 @@ STATUS_CHOICES = {
     ]
  }
 
+PAYMENT_TYPE_CHOICES = {
+  
+  "options":[
+        "Bank",
+        "Cash",
+        "GPay",
+        "PhonePe"
+    ]
+ }
+
+
