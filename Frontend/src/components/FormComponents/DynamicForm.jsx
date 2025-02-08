@@ -7,10 +7,15 @@ import { Loader } from "@components";
 import {} from "@api/urls";
 
 export function SubmitButton() {
+  const { uuid } = useParams();
   const { isSubmitting } = useFormikContext();
+
+  const buttonLabel = uuid ? "Update" : "Submit";
+  const loadingLabel = uuid ? "Updating..." : "Submitting...";
+
   return (
     <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
-      {isSubmitting ? "Submitting..." : "Submit"}
+      {isSubmitting ? loadingLabel : buttonLabel}
     </button>
   );
 }

@@ -26,9 +26,9 @@ export const getDashboardData = () =>
 // Staff API
 export const staffTableMeta = () => makeGetRequest(EndPoints.staffListURL + "table-meta/");
 export const staffTableData = (data) => makeGetRequest(EndPoints.staffListURL, data);
-export const getstaffCud = (uuid) => makeGetRequest(EndPoints.staffCudURL + uuid + "/meta/");
-export const poststaffCud = (data) => makePostRequest(EndPoints.staffCudURL, data);
-export const patchstaffCud = (uuid, data) => makePatchRequest(EndPoints.staffCudURL + uuid + "/", data);
+export const getStaffCud = (uuid) => makeGetRequest(EndPoints.staffCudURL + uuid + "/meta/");
+export const postStaffCud = (data) => makePostRequest(EndPoints.staffCudURL, data);
+export const patchStaffCud = (uuid, data) => makePatchRequest(EndPoints.staffCudURL + uuid + "/", data);
 
 // Vehicle API
 export const vehicleTableMeta = () => makeGetRequest(EndPoints.vehicleListURL + "table-meta/");

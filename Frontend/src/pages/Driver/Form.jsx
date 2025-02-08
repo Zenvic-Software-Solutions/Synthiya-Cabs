@@ -1,12 +1,12 @@
 import React from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import { getstaffCud, poststaffCud, patchstaffCud } from "@api/urls";
+import { getDriverCud, postDriverCud, patchDriverCud } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
   identity: Yup.string().trim().required("Name is required"),
 
-  staff_id: Yup.string().trim().required("Staff ID is required"),
+  driver_id: Yup.string().trim().required("Driver ID is required"),
 
   phone_number: Yup.string()
     .trim()
@@ -30,11 +30,11 @@ export default function index() {
       label: "Name",
       placeholder: "Enter Name",
     },
-    staff_id: {
+    driver_id: {
       type: "text",
       defaultValue: "",
-      label: "Staff ID",
-      placeholder: "Enter Staff ID",
+      label: "Driver ID",
+      placeholder: "Enter Driver ID",
     },
     phone_number: {
       type: "text",
@@ -59,22 +59,22 @@ export default function index() {
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/staff/list"
+      redirectUrl="/driver/list"
       apiFunction={{
-        getForm: getstaffCud,
-        postForm: poststaffCud,
-        patchForm: patchstaffCud,
+        getForm: getDriverCud,
+        postForm: postDriverCud,
+        patchForm: patchDriverCud,
       }}
       breadcrumbData={{
-        title: "Staff Form",
-        sidebarActiveId: 3,
+        title: "Driver Form",
+        sidebarActiveId: 4,
         list: [
           {
-            label: "Staff list",
-            path: "/staff/list",
+            label: "Driver list",
+            path: "/driver/list",
           },
           {
-            label: "Staff Form",
+            label: "Driver Form",
           },
         ],
       }}

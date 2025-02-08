@@ -1,7 +1,7 @@
 import React from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import { getstaffCud, poststaffCud, patchstaffCud } from "@api/urls";
+import { getStaffCud, postStaffCud, patchStaffCud } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
   identity: Yup.string().trim().required("Name is required"),
@@ -61,9 +61,9 @@ export default function index() {
       validationSchema={validationSchema}
       redirectUrl="/staff/list"
       apiFunction={{
-        getForm: getstaffCud,
-        postForm: poststaffCud,
-        patchForm: patchstaffCud,
+        getForm: getStaffCud,
+        postForm: postStaffCud,
+        patchForm: patchStaffCud,
       }}
       breadcrumbData={{
         title: "Staff Form",
