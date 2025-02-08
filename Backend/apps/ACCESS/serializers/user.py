@@ -79,7 +79,7 @@ class DriverSerializer(serializers.ModelSerializer):
         fields =[
             "id",
             "uuid",
-             "identity",
+            "identity",
             "email",
             "address",
             "dob",

@@ -29,14 +29,14 @@ class BaseModel(models.Model):
         **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG,
     )
 
-    modified_at = models.DateTimeField(auto_now=True)
+    # modified_at = models.DateTimeField(auto_now=True)
 
-    modified_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
-        related_name="modified_%(class)s",
-        on_delete=models.SET_DEFAULT,
-        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG,
-    )
+    # modified_by = models.ForeignKey(
+    #     to=settings.AUTH_USER_MODEL,
+    #     related_name="modified_%(class)s",
+    #     on_delete=models.SET_DEFAULT,
+    #     **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG,
+    # )
 
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
