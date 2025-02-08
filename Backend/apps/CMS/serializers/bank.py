@@ -37,7 +37,7 @@ class BankBalanceReadSerializer(ReadSerializer):
         ]
 
 class BankBalanceWriteSerializer(WriteSerializer):
-    class Meta(WriteSerializer.meta):
+    class Meta(WriteSerializer.Meta):
         model = BankBalance
         fields =[
             "bank",
