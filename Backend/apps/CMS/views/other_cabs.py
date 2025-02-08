@@ -3,7 +3,7 @@ from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
 from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 
 class OtherCabsListViewSet(AppListAPIViewSet):
-    search_fields = []
+    search_fields = ["identity"]
     filterset_fields = []
 
     queryset = OtherCab.objects.all().order_by("-created_by")
@@ -31,7 +31,7 @@ class OtherCabsCUDViewSet(AppCUDAPIViewSet):
     serializer_class = OtherCabListSerializer
 
 class OtherDriverListViewSet(AppListAPIViewSet):
-    search_fields = []
+    search_fields = ["identity"]
     filterset_fields = []
     queryset = OtherDriver.objects.all().order_by("-created_by")
     serializer_class = OtherDriverReadserializer
@@ -57,7 +57,7 @@ class OtherDriverCUDViewSet(AppCUDAPIViewSet):
     serializer_class = OtherDriverWriteSerializer
 
 class OtherVechileListViewSet(AppListAPIViewSet):
-    search_fields = []
+    search_fields = ["identity"]
     filterset_fields = []
     queryset = OtherVehicle.objects.all().order_by("-created_by")
     serializer_class = OtherVechileReadserializer

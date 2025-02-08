@@ -24,3 +24,14 @@ RENT_TYPE_CHOICES = {
         "Other"
     ]
  }
+
+STATUS_CHOICES = {
+  
+  "options":[
+        "Scheduled",
+        "In Progress",
+        "Completed",
+        "Other"
+    ]
+ }
+
