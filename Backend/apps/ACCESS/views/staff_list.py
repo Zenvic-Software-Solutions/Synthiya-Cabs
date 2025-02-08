@@ -1,8 +1,8 @@
 from HELPERS.choices import ROLE
-from apps.BASE.views import AppListAPIViewSet,AppCUDAPIViewSet
+from apps.BASE.views import AppListAPIViewSet,AppCUDAPIViewSet,AppAPIView
 from apps.ACCESS.models import Staff,User,Driver
 from apps.ACCESS.serializers import StaffReadSerializer,DriverReadSerializer,UserReadSerializer,StaffWriteSerializer
-
+from rest_framework.permissions import AllowAny
 
 class StaffListAPIView(AppListAPIViewSet):
     search_fields = ["user__phone_number","staff_id","identity","email"]
@@ -39,9 +39,101 @@ class StaffListAPIView(AppListAPIViewSet):
         return data
     
 
-class StaffCUDAPIView(AppCUDAPIViewSet):
-    queryset = Staff.objects.all()
-    serializer_class = StaffWriteSerializer
+# class StaffCUDAPIView(AppCUDAPIViewSet):
+#     queryset = Staff.objects.all()
+#     serializer_class = StaffWriteSerializer
+#     def create(self, request, *args, **kwargs):
+#         user_id = request.data.get("user")
+
+#         if not user_id:
+#             return self.send_error_response({"error": "User ID is required"})
+
+        
+#         try:
+#             user = User.objects.get(id=user_id)
+#         except User.DoesNotExist:
+#             return self.send_error_response({"error": "User not found"})
+#         if Staff.objects.filter(user=user).exists():
+#             return self.send_error_response({"error": "Staff  already exists "})
+
+#         return super().create(request, *args, **kwargs)
+
+
+class StaffCUDAPIView(AppAPIView):
+    permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        identity = request.data.get("identity")
+        email = request.data.get("email")
+        phone_number = request.data.get("phone_number")
+        password = request.data.get("password")
+        staff_id = request.data.get("staff_id")
+        address = request.data.get("address")
+        dob = request.data.get("dob")
+        date_of_joining = request.data.get("date_of_joining")
+       
+
+        user, created = User.objects.get_or_create(phone_number=phone_number)
+
+        if created:
+            user.set_password(password)
+            user.save()
+        if Staff.objects.filter(user=user).exists():
+            return self.send_error_response({"error": "Staff record already exists for this user"})
+
+        
+        Staff.objects.create(
+            identity=identity,
+            staff_id=staff_id,
+            email=email,
+            address=address,
+            dob=dob,
+            date_of_joining=date_of_joining,
+            user=user
+        )
+
+        return self.send_response({"message": "Staff created successfully"})
+    
+
+
+class DriverCUDPAPIView(AppAPIView):
+    def post(self,request,*args,**kwargs):
+        identity = request.data.get("identity")
+        driver_id = request.data.get("driver_id")
+        email = request.data.get("email")
+        address = request.data.get("address")
+        license_no =request.data.get("license_no")
+        phone_number = request.data.get("phone_number")
+        password = request.data.get("password")
+        dob = request.data.get("dob")
+        date_of_joining = request.data.get("date_of_joining")
+
+
+
+        user,created = User.objects.get_or_create(phone_number=phone_number)
+        if created:
+            user.set_password(password)
+            user.save()
+        if Driver.objects.filter(user=user).exists():
+            return self.send_error_response({"error":"User not found"})
+        
+        Driver.objects.create(
+            identity =identity,
+            email= email,
+            address =address,
+            license_no = license_no,
+            driver_id =driver_id,
+            dob=dob,
+            date_of_joining=date_of_joining,
+            user=user
+            
+        )
+        return self.send_response({"message":"Driver Created Successfully"})
+
+
+        
+        
+
     
 
 class DriverListAPIView(AppListAPIViewSet):
