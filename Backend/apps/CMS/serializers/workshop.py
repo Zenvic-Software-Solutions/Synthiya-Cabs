@@ -1,5 +1,5 @@
 from apps.BASE.serializers import ReadSerializer, WriteSerializer
-from apps.CMS.models import Workshop
+from apps.CMS.models import Workshop, Maintenance
 
 class WorkshopReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
@@ -27,4 +27,37 @@ class WorkshopWriteSerializer(WriteSerializer):
             "description",
             "specialist",
             "balance",
+        ]
+
+
+class MaintenanceReadSerializer(ReadSerializer):
+    class Meta(ReadSerializer.Meta):
+        model = Maintenance
+        fields = [
+            "id",
+            "uuid",
+            "workshop",
+            "vechile",
+            "driver",
+            "status",
+            "description",
+            "start_date",
+            "end_km",
+            "start_date",
+            "end_date",
+        ]
+
+class MaintenanceWriteSerializer(WriteSerializer):
+    class Meta(WriteSerializer.Meta):
+        model = Maintenance
+        fields = [
+            "workshop",
+            "vechile",
+            "driver",
+            "status",
+            "description",
+            "start_date",
+            "end_km",
+            "start_date",
+            "end_date",
         ]
