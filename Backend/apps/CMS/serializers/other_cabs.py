@@ -12,7 +12,7 @@ class OtherCabListSerializer(ReadSerializer):
             "owner_name",
             "phone_number",
             "address",
-            "balace",
+            "balance",
         ]
 
 class OtherCabWriteSerializer(WriteSerializer):
@@ -23,7 +23,7 @@ class OtherCabWriteSerializer(WriteSerializer):
             "owner_name",
             "phone_number",
             "address",
-            "balace",
+            "balance",
         ]
 
 
@@ -36,16 +36,16 @@ class OtherDriverReadserializer(ReadSerializer):
             "id",
             "uuid",
             "identity",
-            "other_cab_name_details"
-            "phone_number"
+            "other_cab_name_details",
+            "phone_number",
         ]
 class OtherDriverWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = OtherDriver
         fields= [
             "identity",
-            "other_cab_name"
-            "phone_number"
+            "other_cab_name",
+            "phone_number",
         ]
 class OtherVechileReadserializer(ReadSerializer):
     other_cab_name_details = read_serializer(meta_model=OtherCab, meta_fields=["id", "uuid", "identity", "owner_name", "phone_number"])(source="other_cab_name")
@@ -56,8 +56,8 @@ class OtherVechileReadserializer(ReadSerializer):
             "uuid",
             "identity",
             "other_cab_name_details",
-            "vehicle_type",
-            "vehicle_no",
+            "vechile_type",
+            "vechile_no",
             "is_ac_available",
         ]
 class OtherVechileWriteSerializer(WriteSerializer):
@@ -65,8 +65,8 @@ class OtherVechileWriteSerializer(WriteSerializer):
         model = OtherVehicle
         fields= [
             "identity",
-            "other_cab_name"
-            "vehicle_type",
-            "vehicle_no",
+            "other_cab_name",
+            "vechile_type",
+            "vechile_no",
             "is_ac_available",
         ]

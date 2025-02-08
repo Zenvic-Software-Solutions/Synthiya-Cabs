@@ -58,7 +58,7 @@ export default function index({
   });
   const [tableData, setTableData] = useState({
     count: 36,
-    next: "https://example.com/cms/vehicle/list/?page=2",
+    next: "https://example.com/cms/vechile/list/?page=2",
     previous: null,
     results: [
       {
