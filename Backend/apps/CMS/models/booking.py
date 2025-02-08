@@ -1,6 +1,6 @@
 from apps.BASE.models import DEFAULT_BLANK_NULLABLE_FIELD_CONFIG, MAX_CHAR_FIELD_LENGTH, BaseModel
 from django.db import models
-from apps.CMS.models import vehicle
+from apps.CMS.models import vechile
 from apps.CMS.models import OtherCab
 from apps.CMS.models import OtherDriver
 from apps.ACCESS.models import Customer
@@ -10,7 +10,7 @@ from HELPERS.choices import RENT_TYPE_CHOICES
 
 class Booking(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings")
-    vehicle = models.ForeignKey(vehicle, on_delete=models.CASCADE, related_name="bookings")
+    vechile = models.ForeignKey(vechile, on_delete=models.CASCADE, related_name="bookings")
     cab = models.ForeignKey(OtherCab, on_delete=models.CASCADE, related_name="bookings", null=True, blank=True)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE, related_name="bookings", null=True, blank=True)
     otherDriver = models.ForeignKey(OtherDriver, on_delete=models.CASCADE, related_name="bookings", null=True, blank=True)

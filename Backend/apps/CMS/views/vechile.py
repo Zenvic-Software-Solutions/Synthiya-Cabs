@@ -1,12 +1,12 @@
 from apps.CMS.serializers import VechileReadSerializer, VechileWriteSerializer
 from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
-from apps.CMS.models import Vehicle
+from apps.CMS.models import Vechile
 
 class VechileListViewSet(AppListAPIViewSet):
     search_fields=[]
     filterset_fields=[]
 
-    queryset = Vehicle.objects.all()
+    queryset = Vechile.objects.all()
     serializer_class = VechileReadSerializer
 
     column_details={
@@ -29,5 +29,5 @@ class VechileListViewSet(AppListAPIViewSet):
     
 class VechileCUDViewSet(AppCUDAPIViewSet):
 
-    queryset = Vehicle.objects.all()
+    queryset = Vechile.objects.all()
     serializer_class = VechileWriteSerializer

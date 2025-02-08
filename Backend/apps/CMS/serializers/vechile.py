@@ -1,9 +1,9 @@
 from apps.BASE.serializers import ReadSerializer, WriteSerializer
-from apps.CMS.models import Vehicle
+from apps.CMS.models import Vechile
 
 class VechileReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
-        models = Vehicle
+        model = Vechile
         fields = [
             "id",
             "uuid",
@@ -16,7 +16,7 @@ class VechileReadSerializer(ReadSerializer):
 
 class VechileWriteSerializer(WriteSerializer):
     class Meta(ReadSerializer.Meta):
-        models = Vehicle
+        model = Vechile
         fields = [
             "identity",
             "vechile_type",

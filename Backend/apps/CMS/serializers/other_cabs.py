@@ -56,8 +56,8 @@ class OtherVechileReadserializer(ReadSerializer):
             "uuid",
             "identity",
             "other_cab_name_details",
-            "vehicle_type",
-            "vehicle_no",
+            "vechile_type",
+            "vechile_no",
             "is_ac_available",
         ]
 class OtherVechileWriteSerializer(WriteSerializer):
@@ -66,7 +66,7 @@ class OtherVechileWriteSerializer(WriteSerializer):
         fields= [
             "identity",
             "other_cab_name",
-            "vehicle_type",
-            "vehicle_no",
+            "vechile_type",
+            "vechile_no",
             "is_ac_available",
         ]

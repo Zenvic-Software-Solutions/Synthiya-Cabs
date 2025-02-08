@@ -1,7 +1,7 @@
 from apps.BASE.models import DEFAULT_BLANK_NULLABLE_FIELD_CONFIG, MAX_CHAR_FIELD_LENGTH, BaseModel
 from django.db import models
 from apps.ACCESS.models import Driver
-from apps.CMS.models import Vehicle
+from apps.CMS.models import Vechile
 from HELPERS.choices import STATUS_CHOICES
 from apps.BASE.model_fields import AppSingleChoiceField
 class Workshop(BaseModel):
@@ -18,7 +18,7 @@ class Workshop(BaseModel):
 
 class Maintenance(BaseModel):
     workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, related_name="maintenances")
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="maintenances")
+    vechile = models.ForeignKey(Vechile, on_delete=models.CASCADE, related_name="maintenances")
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, related_name="maintenances", null=True, blank=True)
 
     description = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
@@ -32,4 +32,4 @@ class Maintenance(BaseModel):
     status= AppSingleChoiceField(STATUS_CHOICES)
 
     def __str__(self):
-        return f"{self.vehicle} - {self.status}"
+        return f"{self.vechile} - {self.status}"

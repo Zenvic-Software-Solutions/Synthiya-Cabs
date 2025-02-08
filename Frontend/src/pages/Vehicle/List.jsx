@@ -9,7 +9,7 @@ export default function CategoryList() {
       tableDataApi={vehicleTableData}
       actionLink={{
         viewLink: "#",
-        editLink: "/vehicle/form",
+        editLink: "/vechile/form",
         deleteLink: "#",
       }}
       breadcrumbData={{
@@ -23,7 +23,7 @@ export default function CategoryList() {
         reportLink: "#",
         addButtonData: {
           name: "Add Vehicle",
-          link: "/vehicle/form",
+          link: "/vechile/form",
         },
       }}
     />

@@ -47,9 +47,9 @@ router.register(r'otherdriver/cud', OtherDriverCUDViewSet, basename='other-drive
 router.register(r'othervechile/list', OtherVechileListViewSet, basename='other-vechiles-list')
 router.register(r'othervechile/cud', OtherVechileCUDViewSet, basename='other-vechiles-cud')
 
-# Vehicle
-router.register(r'vechiles/list', VechileListViewSet, basename='vechiles-list')
-router.register(r'vechiles/cud', VechileCUDViewSet, basename='vechiles-cud')
+# Vechile
+router.register(r'vechile/list', VechileListViewSet, basename='vechiles-list')
+router.register(r'vechile/cud', VechileCUDViewSet, basename='vechiles-cud')
 
 # Bank
 router.register(r'bank/list', BankListViewSet, basename='banks-list')

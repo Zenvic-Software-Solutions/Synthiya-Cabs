@@ -65,8 +65,8 @@ class OtherVechileListViewSet(AppListAPIViewSet):
         "identity":"Vechile Name",
         "other_cab_name_details.owner_name":"Cab Owner Name",
         "other_cab_name_details.phone_number":"Cab Phone Number",
-        "vehicle_type":"Vechile Type",
-        "vehicle_no":"Vechile No",
+        "vechile_type":"Vechile Type",
+        "vechile_no":"Vechile No",
         "is_ac_available":"AC Availability",
     }
     filter_details = {}
