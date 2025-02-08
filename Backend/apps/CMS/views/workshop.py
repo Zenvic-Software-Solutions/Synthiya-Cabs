@@ -50,6 +50,7 @@ class MaintenanceListViewSet(AppListAPIViewSet):
         "end_date":"End Date",
         "start_km":"Start KM",
         "end_km":"End KM",
+        "status":"Status",
     }
     filter_details = {}
 

@@ -27,6 +27,8 @@ from apps.CMS.views import (
     BankBalanceCUDViewSet,
     WorkshopListViewSet,
     WorkshopCUDViewSet,
+    MaintenanceListViewSet,
+    MaintenanceCUDViewSet,
 )
 
 app_name = "cms"
@@ -60,6 +62,8 @@ router.register(r'bankbalance/cud', BankBalanceCUDViewSet, basename='bank-balanc
 # Workshop
 router.register(r'workshop/list', WorkshopListViewSet, basename='workshops-list')
 router.register(r'workshop/cud', WorkshopCUDViewSet, basename='workshops-cud')
+router.register(r'maintenance/list', MaintenanceListViewSet, basename='maintenance-list')
+router.register(r'maintenance/cud', MaintenanceCUDViewSet, basename='maintenance-cud')
 
 
 

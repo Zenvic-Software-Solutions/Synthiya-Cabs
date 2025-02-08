@@ -1,5 +1,6 @@
-from apps.BASE.serializers import ReadSerializer, WriteSerializer
-from apps.CMS.models import Workshop, Maintenance
+from apps.BASE.serializers import ReadSerializer, WriteSerializer, read_serializer
+from apps.CMS.models import Workshop, Maintenance, Vechile
+from apps.ACCESS.models import Driver, User
 
 class WorkshopReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
@@ -31,12 +32,15 @@ class WorkshopWriteSerializer(WriteSerializer):
 
 
 class MaintenanceReadSerializer(ReadSerializer):
+    workshop_details = read_serializer(meta_model=Workshop, meta_fields=["id", "uuid", "identity"])(source="workshop")
+    vechile_details = read_serializer(meta_model=Vechile, meta_fields=["id", "uuid", "identity"])(source="vechile")
+    driver_details = read_serializer(meta_model=Driver, meta_fields=["id", "uuid", "identity"], init_fields_config={"user_details":read_serializer(meta_model=User, meta_fields=["id", "uuid", "phone_number"])(source="user")})(source="driver")
     class Meta(ReadSerializer.Meta):
         model = Maintenance
         fields = [
             "id",
             "uuid",
-            "workshop",
+            "workshop_details",
             "vechile",
             "driver",
             "status",
