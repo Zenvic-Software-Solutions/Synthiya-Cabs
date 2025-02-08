@@ -17,7 +17,7 @@ const AppRoutes = createBrowserRouter([
     children: [
       { path: "dashboard", element: <Pages.Dashboard /> },
       {
-        path: "vehicle",
+        path: "vechile",
         children: [
           { path: "list", element: <Pages.VehicleList /> },
           { path: "form/:uuid?", element: <Pages.VehicleForm /> },
