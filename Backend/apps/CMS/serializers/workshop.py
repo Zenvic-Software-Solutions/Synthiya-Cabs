@@ -18,7 +18,7 @@ class WorkshopReadSerializer(ReadSerializer):
 
 class WorkshopWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
-        mdoel = Workshop
+        model = Workshop
         fields = [
             "identity",
             "owner_name",

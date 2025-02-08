@@ -15,7 +15,7 @@ class VechileReadSerializer(ReadSerializer):
         ]
 
 class VechileWriteSerializer(WriteSerializer):
-    class Meta(ReadSerializer.Meta):
+    class Meta(WriteSerializer.Meta):
         model = Vechile
         fields = [
             "identity",

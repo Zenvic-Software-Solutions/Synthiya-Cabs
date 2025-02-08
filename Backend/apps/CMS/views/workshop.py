@@ -4,13 +4,19 @@ from apps.CMS.serializers import WorkshopReadSerializer, WorkshopWriteSerializer
 
 
 class WorkshopListViewSet(AppListAPIViewSet):
-    search_fields=[]
+    search_fields=["identity", "phone", "address", "owner_name"]
     filterset_fields=[]
 
     queryset = Workshop.objects.all()
-    serializer_class = WorkshopWriteSerializer
+    serializer_class = WorkshopReadSerializer
 
-    column_details = {}
+    column_details = {
+        "identity":"Workshop Name",
+        "owner_name":"Owner Name",
+        "phone_number":"Phone Number",
+        "address":"Address",
+        "balance":"Balance",
+    }
     filter_details = {}
 
     def get_table_meta(self):

@@ -4,10 +4,11 @@ from apps.ACCESS.models import Driver
 from apps.CMS.models import Vechile
 from HELPERS.choices import STATUS_CHOICES
 from apps.BASE.model_fields import AppSingleChoiceField
+
 class Workshop(BaseModel):
     identity = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     owner_name = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    phone = models.CharField(max_length=15, unique=True)
+    phone = models.CharField(max_length=15)
     address = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     balance = models.DecimalField(max_digits=15, decimal_places=2, default=0.00)
     description = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)

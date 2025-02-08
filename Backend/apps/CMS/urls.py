@@ -58,7 +58,7 @@ router.register(r'bankbalance/list', BankBalanceListViewSet, basename='bank-bala
 router.register(r'bankbalance/cud', BankBalanceCUDViewSet, basename='bank-balance-cud')
 
 # Workshop
-router.register(r'workshoplsit', WorkshopListViewSet, basename='workshops-list')
+router.register(r'workshop/list', WorkshopListViewSet, basename='workshops-list')
 router.register(r'workshop/cud', WorkshopCUDViewSet, basename='workshops-cud')
 
 
