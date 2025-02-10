@@ -2,3 +2,5 @@ from .other_cabs import OtherCabListSerializer, OtherCabWriteSerializer, OtherDr
 from .vechile import VechileReadSerializer, VechileWriteSerializer
 from .bank import BankReadSerializer, BankWriteSerializer, BankBalanceReadSerializer, BankBalanceWriteSerializer
 from .workshop import WorkshopReadSerializer, WorkshopWriteSerializer, MaintenanceReadSerializer, MaintenanceWriteSerializer
+from .booking import BookingReadSerializer,BookingWriteSerializer
+from .betta import BettaReadSerializer, BettaWriteSerializer

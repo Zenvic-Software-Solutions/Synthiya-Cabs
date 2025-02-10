@@ -80,7 +80,7 @@ class LoginView(TokenObtainPairView,AppAPIView):
             )
         except Exception as e:
             return self.send_error_response(
-                data={"detail": "Invalid email or password."}
+                data={"detail": "Invalid phonenumber or password."}
             )
 
 

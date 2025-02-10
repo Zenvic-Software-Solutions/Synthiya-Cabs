@@ -13,6 +13,7 @@ from apps.ACCESS.views import (
     ForgetPasswordAPIView,
     ChangePhoneNumberAPIView,
     StaffCUDAPIView,
+    DriverCUDPAPIView
 )
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
@@ -24,7 +25,7 @@ API_URL_PREFIX = "api/"
 router = SimpleRouter()
 router.register("user/list",UserListAPIView)
 router.register("staff/list",StaffListAPIView)
-router.register("staff/cud",StaffCUDAPIView)
+# router.register("staff/cud",StaffCUDAPIView)
 router.register("driver/list",DriverListAPIView)
 
 urlpatterns = [
@@ -37,4 +38,6 @@ urlpatterns = [
     path("user/view/", UserDetailView.as_view(), name="user"),
     path("staff/details/", StaffDetailView.as_view(), name="staff"),
     path("driver/details/", DriverDetailView.as_view(), name="driver"),
+    path("staff/cud/", StaffCUDAPIView.as_view(), name="driver"),
+    path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver"),
 ] + router.urls

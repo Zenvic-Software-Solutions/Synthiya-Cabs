@@ -13,6 +13,7 @@ export default function index({
 }) {
   const { setBreadcrumbs } = useAppContext();
   const { trigger } = useDataContext();
+<<<<<<< HEAD
   const [tableMeta, setTableMeta] = useState({
     columns: {
       vehicle_name: "Vehicle Name",
@@ -81,6 +82,10 @@ export default function index({
       },
     ],
   });
+=======
+  const [tableMeta, setTableMeta] = useState();
+  const [tableData, setTableData] = useState();
+>>>>>>> 07a8958642658e9647b33bda29aa68ad532bb9e6
   const [selectedFilters, setSelectedFilters] = useState({});
 
   const paginationData = {
@@ -97,7 +102,7 @@ export default function index({
       setTableMeta(response);
     };
 
-    // !isStaticTable && FetchData();
+    !isStaticTable && FetchData();
   }, []);
 
   useEffect(() => {
@@ -105,7 +110,7 @@ export default function index({
       const response = await tableDataApi(selectedFilters);
       setTableData(response);
     };
-    // !isStaticTable && FetchData();
+    !isStaticTable && FetchData();
   }, [selectedFilters, trigger]);
 
   if (!(tableData && tableMeta) && !isStaticTable) {

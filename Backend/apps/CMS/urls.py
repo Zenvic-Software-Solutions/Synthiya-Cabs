@@ -8,8 +8,6 @@ from HELPERS import (
     BulkFileUploadView,
     ActiveStatusChange,
     ArchieveStatusChange,
-    GoldRate,
-    LastMonthRates,
 )
 
 from apps.CMS.views import (
@@ -29,6 +27,8 @@ from apps.CMS.views import (
     WorkshopCUDViewSet,
     MaintenanceListViewSet,
     MaintenanceCUDViewSet,
+    BookingListAPIView,
+    BookingCUDAPIView,
 )
 
 app_name = "cms"
@@ -52,6 +52,9 @@ router.register(r'othervechile/cud', OtherVechileCUDViewSet, basename='other-vec
 # Vechile
 router.register(r'vechile/list', VechileListViewSet, basename='vechiles-list')
 router.register(r'vechile/cud', VechileCUDViewSet, basename='vechiles-cud')
+# Booking
+router.register(r'booking/list', BookingListAPIView, basename='booking-list')
+router.register(r'booking/cud', BookingCUDAPIView, basename='booking-cud')
 
 # Bank
 router.register(r'bank/list', BankListViewSet, basename='banks-list')

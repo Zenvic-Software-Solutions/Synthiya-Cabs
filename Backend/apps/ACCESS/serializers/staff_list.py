@@ -29,8 +29,21 @@ class StaffWriteSerializer(WriteSerializer):
             "date_of_joining",
             "user"
         ]
+        def get_meta(self):
+            user_uuid=self.instance.user.uuid
+            if not user_uuid:
+                raise ValueError("User UUID is required in the context to fetch the user.")
 
-        
+            user = User.objects.filter(uuid=user_uuid)
+
+            return {
+                "user_details": self.serialize_for_meta(
+                    queryset=user,
+                    fields=["id", "uuid", "phone_number"],
+                ),
+            }
+
+
 class DriverReadSerializer(ReadSerializer):
     user_details = read_serializer(User,meta_fields=["id","uuid","phone_number"])(source="user")
     class Meta(ReadSerializer.Meta):

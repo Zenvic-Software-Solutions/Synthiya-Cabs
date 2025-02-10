@@ -21,16 +21,16 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_driver = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=False)
-    groups = models.ManyToManyField(
-        Group,
-        related_name="user_set",
-        blank=True,
-    )
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="user_user_permissions",
-        blank=True,
-    )
+    # groups = models.ManyToManyField(
+    #     Group,
+    #     related_name="user_set",
+    #     blank=True,
+    # )
+    # user_permissions = models.ManyToManyField(
+    #     Permission,
+    #     related_name="user_user_permissions",
+    #     blank=True,
+    # )
 
     objects = UserManager()
 
@@ -49,12 +49,9 @@ class Staff(BaseModel):
     email = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     dob = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     date_of_joining = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    user =  models.OneToOneField(
+    user =  models.ForeignKey(
         User,on_delete=models.CASCADE,
-        related_name="staff_user",
-        limit_choices_to ={"is_staff":True},
-        null=True,
-        blank=True
+        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
 
 class Driver(BaseModel):
@@ -67,12 +64,9 @@ class Driver(BaseModel):
     dob = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     date_of_joining = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     license_no = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    user =  models.OneToOneField(
+    user =  models.ForeignKey(
         User,on_delete=models.CASCADE,
-        related_name="driver_user",
-        limit_choices_to ={"is_driver":True},
-        null=True,
-        blank=True
+        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
 
 class Customer(BaseModel):
@@ -81,12 +75,9 @@ class Customer(BaseModel):
     )
     customer_id = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     phone_number = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         User,on_delete=models.CASCADE,
-        related_name="customer_user",
-        limit_choices_to={"is_customer":True},
-        null=True,
-        blank=True
+        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
         )
     
 
