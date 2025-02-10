@@ -54,3 +54,11 @@ BETTA_STATUS_CHOICES = {
         "PhonePe"
     ]
 }
+
+CATEGORY_CHOICES = {
+    "options":[
+        "Income",
+        "Expense"
+    ]
+}
+
