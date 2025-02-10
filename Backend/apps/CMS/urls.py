@@ -29,6 +29,9 @@ from apps.CMS.views import (
     MaintenanceCUDViewSet,
     BookingListAPIView,
     BookingCUDAPIView,
+    TripListAPIView,
+    TripCUDAPIView,
+
 )
 
 app_name = "cms"
@@ -40,6 +43,9 @@ router = SimpleRouter()
 # Other Cabs
 router.register(r'othercab/list', OtherCabsListViewSet, basename='other-cabs-list')
 router.register(r'othercab/cud', OtherCabsCUDViewSet, basename='other-cabs-cud')
+# Other Cabs
+router.register(r'trip/list', TripListAPIView, basename='trip-list')
+router.register(r'trip/cud', TripCUDAPIView, basename='trip-cud')
 
 # Other Drivers
 router.register(r'otherdriver/list', OtherDriverListViewSet, basename='other-drivers-list')
