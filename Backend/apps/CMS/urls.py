@@ -8,8 +8,6 @@ from HELPERS import (
     BulkFileUploadView,
     ActiveStatusChange,
     ArchieveStatusChange,
-    GoldRate,
-    LastMonthRates,
 )
 
 from apps.CMS.views import (
