@@ -1,6 +1,8 @@
 from apps.BASE.models import DEFAULT_BLANK_NULLABLE_FIELD_CONFIG, MAX_CHAR_FIELD_LENGTH, BaseModel
 from django.db import models
 from apps.ACCESS.models import Driver
+from apps.BASE.model_fields import AppSingleChoiceField
+from HELPERS import BETTA_STATUS_CHOICES
 
 class Betta(BaseModel):
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE, related_name="bettas")
@@ -8,11 +10,8 @@ class Betta(BaseModel):
     
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     
-    STATUS_CHOICES = [
-        ("pending", "Pending"),
-        ("paid", "Paid"),
-    ]
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="pending")
+    
+    status = AppSingleChoiceField(BETTA_STATUS_CHOICES)
     
     paid_date = models.DateField(null=True, blank=True)
 

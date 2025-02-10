@@ -46,3 +46,11 @@ PAYMENT_TYPE_CHOICES = {
  }
 
 
+BETTA_STATUS_CHOICES = {
+    "options":[
+        "pending",
+        "paid",
+        "GPay",
+        "PhonePe"
+    ]
+}
