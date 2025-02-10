@@ -13,6 +13,10 @@ const EndPoints = {
   staffListURL: "/access/staff/list/",
   staffCudURL: "/access/staff/cud/",
 
+  // Workshop API
+  workshopListURL: "/cms/workshop/list/",
+  workshopCudURL: "/cms/workshop/cud/",
+
   // Vehicle API
   vehicleListURL: "/access/user/list/",
   vehicleCudURL: "/access/user/cud/",

@@ -1,7 +1,7 @@
 from apps.CMS.serializers import VehicleReadSerializer, VehicleWriteSerializer
 from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
 from apps.CMS.models import Vehicle
-
+from HELPERS import VEHICLE_TYPE
 class VehicleListViewSet(AppListAPIViewSet):
     search_fields=[]
     filterset_fields=[]
@@ -21,8 +21,8 @@ class VehicleListViewSet(AppListAPIViewSet):
         data = {
             "columns": self.get_table_columns_details(),
             "filters": self.get_table_filter_details(),
-            data:{
-
+            "filter_data": {
+                "vehicle_type":self.serialize_choices(VEHICLE_TYPE["options"]),
             }
         }
         return data

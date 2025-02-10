@@ -25,7 +25,6 @@ class OtherCabWriteSerializer(WriteSerializer):
             "phone_number",
             "address",
             "balance",
-            "otherdriver"
         ]
 
 

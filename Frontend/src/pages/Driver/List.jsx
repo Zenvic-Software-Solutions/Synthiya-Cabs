@@ -2,7 +2,7 @@ import React from "react";
 import { DynamicTable } from "@components";
 import { driverTableMeta, driverTableData } from "@api/urls";
 
-export default function CategoryList() {
+export default function index() {
   return (
     <DynamicTable
       tableMetaApi={driverTableMeta}

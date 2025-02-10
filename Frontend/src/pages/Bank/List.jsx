@@ -9,7 +9,7 @@ export default function CategoryList() {
       tableDataApi={bankTableData}
       actionLink={{
         viewLink: "#",
-        editLink: "/bankform",
+        editLink: "/form",
         deleteLink: "#",
       }}
       breadcrumbData={{
