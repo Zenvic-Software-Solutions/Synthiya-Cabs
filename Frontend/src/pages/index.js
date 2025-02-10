@@ -20,5 +20,10 @@ export { default as DriverList } from "./Driver/List";
 export { default as DriverForm } from "./Driver/Form";
 export { default as DriverView } from "./Driver/View";
 
+// Workshop Pages 
+export { default as WorkshopList } from "./Workshop/List";
+export { default as WorkshopForm } from "./Workshop/Form";
+export { default as WorkshopView } from "./Workshop/View";
+
 // Report Pages
 export { default as Report } from "./Report";

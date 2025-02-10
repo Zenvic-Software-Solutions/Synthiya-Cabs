@@ -48,6 +48,14 @@ const AppRoutes = createBrowserRouter([
           { path: "view/:uuid?", element: <Pages.OtherCabsView /> },
         ],
       },
+      {
+        path: "workshop",
+        children: [
+          { path: "list", element: <Pages.WorkshopList /> },
+          { path: "form/:uuid?", element: <Pages.WorkshopForm /> },
+          { path: "view/:uuid?", element: <Pages.WorkshopView /> },
+        ],
+      },
       { path: "report", element: <Pages.Report /> },
     ],
   },

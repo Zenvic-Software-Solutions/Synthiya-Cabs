@@ -30,6 +30,13 @@ export const getStaffCud = (uuid) => makeGetRequest(EndPoints.staffCudURL + uuid
 export const postStaffCud = (data) => makePostRequest(EndPoints.staffCudURL, data);
 export const patchStaffCud = (uuid, data) => makePatchRequest(EndPoints.staffCudURL + uuid + "/", data);
 
+// Workshop API
+export const workshopTableMeta = () => makeGetRequest(EndPoints.workshopListURL + "table-meta/");
+export const workshopTableData = (data) => makeGetRequest(EndPoints.workshopListURL, data);
+export const getWorkshopCud = (uuid) => makeGetRequest(EndPoints.workshopCudURL + uuid + "/meta/");
+export const postWorkshopCud = (data) => makePostRequest(EndPoints.workshopCudURL, data);
+export const patchWorkshopCud = (uuid, data) => makePatchRequest(EndPoints.workshopCudURL + uuid + "/", data);
+
 // Vehicle API
 export const vehicleTableMeta = () => makeGetRequest(EndPoints.vehicleListURL + "table-meta/");
 export const vehicleTableData = (data) => makeGetRequest(EndPoints.vehicleListURL, data);
