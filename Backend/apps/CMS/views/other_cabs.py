@@ -34,8 +34,12 @@ class OtherCabsCUDViewSet(AppCUDAPIViewSet):
 class OtherDriverListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
     filterset_fields = []
-    queryset = OtherDriver.objects.all().order_by("-created_by")
+    
     serializer_class = OtherDriverReadserializer
+    def get_queryset(self):
+        # uuid = 
+        queryset = OtherDriver.objects.filter().order_by("-created_by")
+        return queryset
     column_details = {
         "identity":"Cab Name",
         "other_cab_name_details.owner_name":"Owner Name",

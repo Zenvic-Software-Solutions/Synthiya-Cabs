@@ -13,7 +13,7 @@ class WorkshopListViewSet(AppListAPIViewSet):
     column_details = {
         "identity":"Workshop Name",
         "owner_name":"Owner Name",
-        "phone_number":"Phone Number",
+        "phone":"Phone Number",
         "address":"Address",
         "balance":"Balance",
     }
@@ -22,7 +22,7 @@ class WorkshopListViewSet(AppListAPIViewSet):
     def get_table_meta(self):
 
         data = {
-            "column":self.get_table_columns_details(),  
+            "columns":self.get_table_columns_details(),  
             "filters":self.get_table_filter_details(),
             "filter_data":{}  
         }
@@ -57,7 +57,7 @@ class MaintenanceListViewSet(AppListAPIViewSet):
     def get_table_meta(self):
 
         data = {
-            "column":self.get_table_columns_details(),  
+            "columns":self.get_table_columns_details(),  
             "filters":self.get_table_filter_details(),
             "filter_data":{}  
         }
