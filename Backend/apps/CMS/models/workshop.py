@@ -2,7 +2,7 @@ from apps.BASE.models import DEFAULT_BLANK_NULLABLE_FIELD_CONFIG, MAX_CHAR_FIELD
 from django.db import models
 from apps.ACCESS.models import Driver
 from apps.CMS.models import Vechile
-from HELPERS.choices import STATUS_CHOICES
+from HELPERS.choices import MAINTENANCE_STATUS_CHOICES
 from apps.BASE.model_fields import AppSingleChoiceField
 
 class Workshop(BaseModel):
@@ -30,7 +30,7 @@ class Maintenance(BaseModel):
     end_km = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
    
-    status= AppSingleChoiceField(STATUS_CHOICES)
+    status= AppSingleChoiceField(MAINTENANCE_STATUS_CHOICES)
 
     def __str__(self):
         return f"{self.vechile} - {self.status}"
