@@ -43,7 +43,7 @@ router = SimpleRouter()
 # Other Cabs
 router.register(r'othercab/list', OtherCabsListViewSet, basename='other-cabs-list')
 router.register(r'othercab/cud', OtherCabsCUDViewSet, basename='other-cabs-cud')
-# Other Cabs
+# Trip
 router.register(r'trip/list', TripListAPIView, basename='trip-list')
 router.register(r'trip/cud', TripCUDAPIView, basename='trip-cud')
 
