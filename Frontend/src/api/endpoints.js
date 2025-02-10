@@ -30,8 +30,8 @@ const EndPoints = {
   otherCabsCudURL: "/cms/othercab/cud/",
 
   // OtherCabes Vehicle API
-  otherCabsVehicleListURL: "/cms/otherdriver/list/",
-  otherCabsVehicleCudURL: "/cms/othervechile/cud/",
+  otherCabsVehicleListURL: "/cms/othervehicle/list/",
+  otherCabsVehicleCudURL: "/cms/othervehicle/cud/",
 
   // OtherCabes Driver API
   otherCabsDriverListURL: "/cms/otherdriver/list/",

@@ -2,14 +2,14 @@ import React from "react";
 import { DynamicTable } from "@components";
 import { vehicleTableData, vehicleTableMeta } from "@api/urls";
 
-export default function CategoryList() {
+export default function index() {
   return (
     <DynamicTable
       tableMetaApi={vehicleTableMeta}
       tableDataApi={vehicleTableData}
       actionLink={{
         viewLink: "#",
-        editLink: "/vechile/form",
+        editLink: "/vehicle/form",
         deleteLink: "#",
       }}
       breadcrumbData={{
@@ -23,7 +23,7 @@ export default function CategoryList() {
         reportLink: "#",
         addButtonData: {
           name: "Add Vehicle",
-          link: "/vechile/form",
+          link: "/vehicle/form",
         },
       }}
     />

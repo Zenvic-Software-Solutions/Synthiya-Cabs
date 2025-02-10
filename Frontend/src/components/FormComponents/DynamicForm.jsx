@@ -56,6 +56,37 @@ export function TextField({ name, fieldData }) {
   );
 }
 
+export function PasswordField({ name, fieldData }) {
+  const [passView, setPassView] = useState(false);
+  const { values, setFieldValue } = useFormikContext();
+
+  return (
+    <div className="mb-6 form-password-toggle">
+      <label>Password:</label>
+      <div className="input-group input-group-merge">
+        <Field
+          type={`${passView ? "text" : "password"}`}
+          name={name}
+          id={name}
+          className="form-control"
+          placeholder={fieldData.placeholder}
+          value={values[name] || ""}
+          onChange={(e) => setFieldValue(name, e.target.value)}
+          defaultValue={fieldData["defaultValue"]}
+          autoComplete="new-password"
+        />
+        <span
+          className="input-group-text cursor-pointer"
+          onClick={() => setPassView(!passView)}
+        >
+          <i className={`ti ${passView ? "ti-eye" : "ti-eye-off"}`} />
+        </span>
+      </div>
+      <ErrorMessage name={name} component="div" className="text-danger mt-1" />
+    </div>
+  );
+}
+
 const uploadData = async (files) => {
   const formData = new FormData();
 
@@ -250,6 +281,7 @@ const FieldNames = {
   file: ImageField,
   date: DateField,
   boolean: BooleanSelectField,
+  password: PasswordField,
 };
 
 function FormElements({ formFields }) {

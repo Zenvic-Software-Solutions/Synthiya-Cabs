@@ -1,23 +1,25 @@
 import React from "react";
 import { DynamicTable } from "@components";
 import { otherCabsDriverTableMeta, otherCabsDriverTableData } from "@api/urls";
+import { useParams } from "react-router-dom";
 
-export default function CategoryList() {
+export default function index() {
+  const { uuid } = useParams();
   return (
     <DynamicTable
-      tableMetaApi={otherCabsDriverTableMeta}
-      tableDataApi={otherCabsDriverTableData}
+      tableMetaApi={() => otherCabsDriverTableMeta(uuid)}
+      tableDataApi={(extra) => otherCabsDriverTableData(uuid, extra)}
       actionLink={{
         viewLink: "#",
         editLink: "/othercabs-driver/form",
         deleteLink: "#",
       }}
       breadcrumbData={{
-        title: "OtherCabs Driver list",
-        sidebarActiveId: 4,
+        title: "OtherCabs View",
+        sidebarActiveId: 5,
         list: [
           {
-            label: "OtherCabs Driver list",
+            label: "OtherCabs View",
           },
         ],
         reportLink: "#",

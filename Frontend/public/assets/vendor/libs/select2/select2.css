@@ -148,13 +148,13 @@
 }
 
 .select2-results__option[role=option][aria-selected=true] {
-    background-color: #DB133C;
+    background-color: #7367f0;
     color: #fff
 }
 
 .select2-container--default .select2-results__option--highlighted:not([aria-selected=true]) {
     background-color: rgba(115, 103, 240, .16) !important;
-    color: #DB133C !important
+    color: #7367f0 !important
 }
 
 .select2-hidden-accessible {
