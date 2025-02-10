@@ -8,6 +8,8 @@ export default function Index() {
 
   if (!breadcrumbs) return;
 
+  // const isListPage = useLocation().pathname.split("/").includes("form");
+
   // const params = new URLSearchParams(selectedFilters).toString();
   const filelink = `${process.env.BACKEND_URL}${breadcrumbs?.reportLink}`;
 
@@ -45,6 +47,7 @@ export default function Index() {
               to={breadcrumbs?.addButtonData?.link}
               className="btn btn-primary waves-effect waves-light"
             >
+              <i class="ti ti-plus ti-md"></i>
               {breadcrumbs?.addButtonData?.name}
             </Link>
           )}

@@ -25,7 +25,7 @@ RENT_TYPE_CHOICES = {
     ]
  }
 
-STATUS_CHOICES = {
+MAINTENANCE_STATUS_CHOICES = {
   
   "options":[
         "Scheduled",

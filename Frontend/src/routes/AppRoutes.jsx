@@ -17,11 +17,35 @@ const AppRoutes = createBrowserRouter([
     children: [
       { path: "dashboard", element: <Pages.Dashboard /> },
       {
-        path: "vechile",
+        path: "staff",
+        children: [
+          { path: "list", element: <Pages.StaffList /> },
+          { path: "form/:uuid?", element: <Pages.StaffForm /> },
+          { path: "view/:uuid?", element: <Pages.StaffView /> },
+        ],
+      },
+      {
+        path: "vehicle",
         children: [
           { path: "list", element: <Pages.VehicleList /> },
           { path: "form/:uuid?", element: <Pages.VehicleForm /> },
           { path: "view/:uuid?", element: <Pages.VehicleView /> },
+        ],
+      },
+      {
+        path: "driver",
+        children: [
+          { path: "list", element: <Pages.DriverList /> },
+          { path: "form/:uuid?", element: <Pages.DriverForm /> },
+          { path: "view/:uuid?", element: <Pages.DriverView /> },
+        ],
+      },
+      {
+        path: "othercabs",
+        children: [
+          { path: "list", element: <Pages.OtherCabsList /> },
+          { path: "form/:uuid?", element: <Pages.OtherCabsForm /> },
+          { path: "view/:uuid?", element: <Pages.OtherCabsView /> },
         ],
       },
       { path: "report", element: <Pages.Report /> },

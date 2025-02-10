@@ -21,8 +21,18 @@ const Sidebar = () => {
       icon: "ti ti-database",
       subItems: [
         { id: 3, label: "Staff", icon: "ti ti-user", path: "/staff/list" },
-        { id: 4, label: "Driver", icon: "ti ti-steering-wheel", path: "#" },
-        { id: 5, label: "Other Cabs", icon: "ti ti-car", path: "#" },
+        {
+          id: 4,
+          label: "Driver",
+          icon: "ti ti-steering-wheel",
+          path: "/driver/list",
+        },
+        {
+          id: 5,
+          label: "Other Cabs",
+          icon: "ti ti-car",
+          path: "/othercabs/list",
+        },
         { id: 6, label: "Customer", icon: "ti ti-user-check", path: "#" },
         { id: 7, label: "Vehicle", icon: "ti ti-truck", path: "/vechile/list" },
         { id: 8, label: "Bank", icon: "ti ti-credit-card", path: "#" },
@@ -120,13 +130,16 @@ const Sidebar = () => {
       onMouseEnter={screenWidth > 1199 ? handleMouseEnter : null}
       onMouseLeave={screenWidth > 1199 ? handleMouseLeave : null}
     >
-      <div className="app-brand demo" style={{ paddingTop: "15px" }}>
+      <div
+        className="app-brand demo"
+        style={{ paddingTop: "25px", paddingBottom: "10px" }}
+      >
         <Link to="#" className="app-brand-link">
           <span className="d-none app-mini-logo">
             <img src={APP_CONSTANTS.Favicon} width={34} />
           </span>
           <span className="app-brand-text demo menu-text fw-bold">
-            <img src={APP_CONSTANTS.App_Logo} width={150} />
+            <img src={APP_CONSTANTS.App_Logo} width={150} height={35} />
           </span>
         </Link>
         <Link
