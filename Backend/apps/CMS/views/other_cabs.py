@@ -4,7 +4,7 @@ from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 
 class OtherCabsListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
-    filterset_fields = ["otherdriver__identity"]
+    filterset_fields = []
 
     queryset = OtherCab.objects.all().order_by("-created_by")
     serializer_class = OtherCabListSerializer
@@ -14,7 +14,6 @@ class OtherCabsListViewSet(AppListAPIViewSet):
         "phone_number":"Phone Number",
         "address":"Address",
         "balance":"Balance",
-        "otherdriver_details.identity":"Driver Name"
     }
     filter_details = {}
 
@@ -23,7 +22,6 @@ class OtherCabsListViewSet(AppListAPIViewSet):
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
             "filter_data": {
-                "otherdriver":self.serialize_for_filter(OtherDriver.objects.all())
             }
         }
         return data
@@ -50,7 +48,9 @@ class OtherDriverListViewSet(AppListAPIViewSet):
         data = {
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
-            "filter_data": {}
+            "filter_data": {
+                "other_cab_name":self.serialize_for_filter(OtherCab.objects.all(), fields=["id", "uuid","identity"])
+            }
         }
         return data
 
@@ -78,7 +78,9 @@ class OtherVechileListViewSet(AppListAPIViewSet):
         data = {
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
-            "filter_data": {}
+            "filter_data": {
+                "other_cab_name":self.serialize_for_filter(OtherCab.objects.all(), fields=["id", "uuid","identity"])
+            }
         }
         return data
 
