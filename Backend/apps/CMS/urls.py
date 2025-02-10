@@ -43,16 +43,13 @@ router = SimpleRouter()
 # Other Cabs
 router.register(r'othercab/list', OtherCabsListViewSet, basename='other-cabs-list')
 router.register(r'othercab/cud', OtherCabsCUDViewSet, basename='other-cabs-cud')
-# Trip
-router.register(r'trip/list', TripListAPIView, basename='trip-list')
-router.register(r'trip/cud', TripCUDAPIView, basename='trip-cud')
 
 # Other Drivers
-router.register(r'otherdriver/list', OtherDriverListViewSet, basename='other-drivers-list')
+# router.register(r'otherdriver/list', OtherDriverListViewSet, basename='other-drivers-list')
 router.register(r'otherdriver/cud', OtherDriverCUDViewSet, basename='other-drivers-cud')
 
 # Other Vehicles
-router.register(r'othervechile/list', OtherVechileListViewSet, basename='other-vechiles-list')
+# router.register(r'othervechile/list', OtherVechileListViewSet, basename='other-vechiles-list')
 router.register(r'othervechile/cud', OtherVechileCUDViewSet, basename='other-vechiles-cud')
 
 # Vechile
@@ -74,9 +71,17 @@ router.register(r'workshop/cud', WorkshopCUDViewSet, basename='workshops-cud')
 router.register(r'maintenance/list', MaintenanceListViewSet, basename='maintenance-list')
 router.register(r'maintenance/cud', MaintenanceCUDViewSet, basename='maintenance-cud')
 
-
+# Trip
+router.register(r'trip/list', TripListAPIView, basename='trip-list')
+router.register(r'trip/cud', TripCUDAPIView, basename='trip-cud')
 
 urlpatterns = [
+    path('otherdriver/list/<uuid>', OtherDriverListViewSet.as_view({'get': 'list'}), name='otherdriver-list'),
+    path('otherdriver/list/<uuid>/table-meta/', OtherDriverListViewSet.as_view({'get': 'get_table_meta'}), name='otherdriver-table-meta'),
+    
+    path('othervechile/list/<uuid>/', OtherVechileListViewSet.as_view({'get': 'list'}), name='othervechiles-list'),
+    path('othervechile/list/<uuid>/table-meta/', OtherVechileListViewSet.as_view({'get': 'get_table_meta'}), name='othervechile-table-meta'),
+
     # bulk upload images
     path(
         "property/files/bulk-upload/",
