@@ -4,16 +4,17 @@ from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 
 class OtherCabsListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
-    filterset_fields = []
+    filterset_fields = ["otherdriver__identity"]
 
     queryset = OtherCab.objects.all().order_by("-created_by")
     serializer_class = OtherCabListSerializer
-    column_details = {
+    column_details = {  
         "identity":"Cab Name",
         "owner_name":"Owner Name",
         "phone_number":"Phone Number",
         "address":"Address",
         "balance":"Balance",
+        "otherdriver_details.identity":"Driver Name"
     }
     filter_details = {}
 
@@ -21,7 +22,9 @@ class OtherCabsListViewSet(AppListAPIViewSet):
         data = {
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
-            "filter_data": {}
+            "filter_data": {
+                "otherdriver":self.serialize_for_filter(OtherDriver.objects.all())
+            }
         }
         return data
     

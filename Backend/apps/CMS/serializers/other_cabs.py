@@ -3,6 +3,8 @@ from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 
 
 class OtherCabListSerializer(ReadSerializer):
+    Otherdriver_details=read_serializer(OtherDriver,meta_fields=["id","uuid","identity"])(source="othervechile")
+
     class Meta(ReadSerializer.Meta):
         model = OtherCab
         fields = [
@@ -13,6 +15,7 @@ class OtherCabListSerializer(ReadSerializer):
             "phone_number",
             "address",
             "balance",
+            "otherdriver_details",
         ]
 
 class OtherCabWriteSerializer(WriteSerializer):
@@ -24,19 +27,19 @@ class OtherCabWriteSerializer(WriteSerializer):
             "phone_number",
             "address",
             "balance",
+            "otherdriver"
         ]
 
 
 
 class OtherDriverReadserializer(ReadSerializer):
-    other_cab_name_details = read_serializer(meta_model=OtherCab, meta_fields=["id", "uuid", "identity", "owner_name", "phone_number"])(source="other_cab_name")
+    # other_cab_name_details = read_serializer(meta_model=OtherCab, meta_fields=["id", "uuid", "identity", "owner_name", "phone_number"])(source="other_cab_name")
     class Meta(ReadSerializer.Meta):
         model = OtherDriver
         fields= [
             "id",
             "uuid",
             "identity",
-            "other_cab_name_details",
             "phone_number",
         ]
 class OtherDriverWriteSerializer(WriteSerializer):
