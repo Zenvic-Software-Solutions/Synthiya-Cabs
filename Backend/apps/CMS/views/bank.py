@@ -21,7 +21,7 @@ class BankListViewSet(AppListAPIViewSet):
     def get_table_meta(self):
 
         data = {
-            "column":self.get_table_columns_details(),  
+            "columns":self.get_table_columns_details(),  
             "filters":self.get_table_filter_details(),
             "filter_data":{}  
         }

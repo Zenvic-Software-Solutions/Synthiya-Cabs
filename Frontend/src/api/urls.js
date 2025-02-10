@@ -64,3 +64,11 @@ export const otherCabsDriverTableData = (data) => makeGetRequest(EndPoints.other
 export const getOtherCabsDriverCud = (uuid) => makeGetRequest(EndPoints.otherCabsDriverCudURL + uuid + "/meta/");
 export const postOtherCabsDriverCud = (data) => makePostRequest(EndPoints.otherCabsDriverCudURL, data);
 export const patchOtherCabsDriverCud = (uuid, data) => makePatchRequest(EndPoints.otherCabsDriverCudURL + uuid + "/", data);
+
+//Bank API 
+export const bankTableMeta = () => makeGetRequest(EndPoints.bankListURL + "table-meta/");
+export const bankTableData = (data) => makeGetRequest(EndPoints.bankListURL, data);
+export const getBankCUD = (uuid) => makeGetRequest(EndPoints.bankCudURL + uuid + "/meta/");
+export const postBankCUD = (data) => makePostRequest(EndPoints.bankCudURL, data);
+export const patchBankCUD = (uuid, data) => makePatchRequest(EndPoints.bankCudURL + uuid + "/", data);
+

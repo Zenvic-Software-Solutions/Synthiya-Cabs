@@ -8,7 +8,7 @@ class OtherCabsListViewSet(AppListAPIViewSet):
 
     queryset = OtherCab.objects.all().order_by("-created_by")
     serializer_class = OtherCabListSerializer
-    column_details = {
+    column_details = {  
         "identity":"Cab Name",
         "owner_name":"Owner Name",
         "phone_number":"Phone Number",
@@ -21,7 +21,8 @@ class OtherCabsListViewSet(AppListAPIViewSet):
         data = {
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
-            "filter_data": {}
+            "filter_data": {
+            }
         }
         return data
     
@@ -33,8 +34,12 @@ class OtherCabsCUDViewSet(AppCUDAPIViewSet):
 class OtherDriverListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
     filterset_fields = []
-    queryset = OtherDriver.objects.all().order_by("-created_by")
+    
     serializer_class = OtherDriverReadserializer
+    def get_queryset(self):
+        # uuid = 
+        queryset = OtherDriver.objects.filter().order_by("-created_by")
+        return queryset
     column_details = {
         "identity":"Cab Name",
         "other_cab_name_details.owner_name":"Owner Name",
@@ -47,7 +52,9 @@ class OtherDriverListViewSet(AppListAPIViewSet):
         data = {
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
-            "filter_data": {}
+            "filter_data": {
+                "other_cab_name":self.serialize_for_filter(OtherCab.objects.all(), fields=["id", "uuid","identity"])
+            }
         }
         return data
 
@@ -75,7 +82,9 @@ class OtherVechileListViewSet(AppListAPIViewSet):
         data = {
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
-            "filter_data": {}
+            "filter_data": {
+                "other_cab_name":self.serialize_for_filter(OtherCab.objects.all(), fields=["id", "uuid","identity"])
+            }
         }
         return data
 

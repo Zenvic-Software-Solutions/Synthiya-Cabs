@@ -33,6 +33,9 @@ const EndPoints = {
   otherCabsDriverListURL: "/cms/otherdriver/list/",
   otherCabsDriverCudURL: "/cms/otherdriver/cud/",
 
+  //BankList API
+  bankListURL:"/cms/bank/list/",
+  bankCudURL:"/cms/bank/cud/",
 };
 
 export default EndPoints;

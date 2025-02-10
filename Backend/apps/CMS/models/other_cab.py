@@ -10,11 +10,10 @@ class OtherCab(BaseModel):
     phone_number = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     address = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     balance = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-
+    
     def __str__(self):
         return f"{self.identity} {self.owner_name}"
     
-
 class OtherDriver(BaseModel):
     identity = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     other_cab_name =models.ForeignKey(OtherCab,on_delete=models.CASCADE,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
@@ -23,6 +22,7 @@ class OtherDriver(BaseModel):
     def __str__(self):
         return f"{self.identity} {self.other_cab_name.identity}"
     
+
 
 class OtherVehicle(BaseModel):
     identity = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)

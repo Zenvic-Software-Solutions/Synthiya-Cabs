@@ -3,6 +3,7 @@ from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 
 
 class OtherCabListSerializer(ReadSerializer):
+   
     class Meta(ReadSerializer.Meta):
         model = OtherCab
         fields = [
@@ -24,6 +25,7 @@ class OtherCabWriteSerializer(WriteSerializer):
             "phone_number",
             "address",
             "balance",
+            "otherdriver"
         ]
 
 
@@ -36,8 +38,8 @@ class OtherDriverReadserializer(ReadSerializer):
             "id",
             "uuid",
             "identity",
-            "other_cab_name_details",
             "phone_number",
+            "other_cab_name_details"
         ]
 class OtherDriverWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
