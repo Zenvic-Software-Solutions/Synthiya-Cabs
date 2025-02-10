@@ -1,29 +1,34 @@
 import React from "react";
 import { DynamicTable } from "@components";
-import { vehicleTableData, vehicleTableMeta } from "@api/urls";
+import {
+  otherCabsVehicleTableMeta,
+  otherCabsVehicleTableData,
+} from "@api/urls";
+import { useParams } from "react-router-dom";
 
-export default function CategoryList() {
+export default function index() {
+  const { uuid } = useParams();
   return (
     <DynamicTable
-      tableMetaApi={vehicleTableMeta}
-      tableDataApi={vehicleTableData}
+      tableMetaApi={() => otherCabsVehicleTableMeta(uuid)}
+      tableDataApi={(extra) => otherCabsVehicleTableData(uuid, extra)}
       actionLink={{
         viewLink: "#",
-        editLink: "/vehicle/form",
+        editLink: "/othercabs-vehicle/form",
         deleteLink: "#",
       }}
       breadcrumbData={{
-        title: "Vehicle list",
-        sidebarActiveId: 7,
+        title: "OtherCabs View",
+        sidebarActiveId: 5,
         list: [
           {
-            label: "Vehicle list",
+            label: "OtherCabs View",
           },
         ],
         reportLink: "#",
         addButtonData: {
-          name: "Add Vehicle",
-          link: "/vehicle/form",
+          name: "Add OtherCabs Vehicle",
+          link: "/othercabs-vehicle/form",
         },
       }}
     />
