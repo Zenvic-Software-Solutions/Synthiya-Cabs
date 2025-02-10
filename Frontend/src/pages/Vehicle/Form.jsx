@@ -61,7 +61,7 @@ export default function index() {
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/vechile/list"
+      redirectUrl="/vehicle/list"
       apiFunction={{
         getForm: "",
         postForm: "",
@@ -73,7 +73,7 @@ export default function index() {
         list: [
           {
             label: "Vehicle list",
-            path: "/vechile/list",
+            path: "/vehicle/list",
           },
           {
             label: "Vehicle Form",

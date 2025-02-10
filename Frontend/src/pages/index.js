@@ -14,6 +14,11 @@ export { default as VehicleList } from "./Vehicle/List";
 export { default as VehicleForm } from "./Vehicle/Form";
 export { default as VehicleView } from "./Vehicle/View";
 
+// Bank Pages 
+export { default as BankList } from "./Bank/List";
+export { default as BankForm } from "./Bank/Form";
+export { default as BankView } from "./Bank/View";
+
 
 // Employee Pages 
 export { default as DriverList } from "./Driver/List";

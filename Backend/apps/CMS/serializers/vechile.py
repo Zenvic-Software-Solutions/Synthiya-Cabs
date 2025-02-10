@@ -1,26 +1,26 @@
 from apps.BASE.serializers import ReadSerializer, WriteSerializer
-from apps.CMS.models import Vechile
+from apps.CMS.models import Vehicle
 
-class VechileReadSerializer(ReadSerializer):
+class VehicleReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
-        model = Vechile
+        model = Vehicle
         fields = [
             "id",
             "uuid",
             "identity",
-            "vechile_type",
-            "vechile_no",
+            "vehicle_type",
+            "vehicle_no",
             "is_ac_available",
             "last_km",
         ]
 
-class VechileWriteSerializer(WriteSerializer):
+class VehicleWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
-        model = Vechile
+        model = Vehicle
         fields = [
             "identity",
-            "vechile_type",
-            "vechile_no",
+            "vehicle_type",
+            "vehicle_no",
             "is_ac_available",
             "last_km",
         ]

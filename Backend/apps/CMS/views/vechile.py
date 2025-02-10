@@ -1,18 +1,18 @@
-from apps.CMS.serializers import VechileReadSerializer, VechileWriteSerializer
+from apps.CMS.serializers import VehicleReadSerializer, VehicleWriteSerializer
 from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
-from apps.CMS.models import Vechile
+from apps.CMS.models import Vehicle
 
-class VechileListViewSet(AppListAPIViewSet):
+class VehicleListViewSet(AppListAPIViewSet):
     search_fields=[]
     filterset_fields=[]
 
-    queryset = Vechile.objects.all()
-    serializer_class = VechileReadSerializer
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleReadSerializer
 
     column_details={
-        "identity":"Vechile Name",
-        "vechile_type":"Vechile Type",
-        "vechile_no": "Vechile No",
+        "identity":"Vehicle Name",
+        "vehicle_type":"Vehicle Type",
+        "vehicle_no": "Vehicle No",
         "is_ac_available":"AC Availability",
         "last_km":"last KM",
     }
@@ -27,7 +27,7 @@ class VechileListViewSet(AppListAPIViewSet):
         }
         return data
     
-class VechileCUDViewSet(AppCUDAPIViewSet):
+class VehicleCUDViewSet(AppCUDAPIViewSet):
 
-    queryset = Vechile.objects.all()
-    serializer_class = VechileWriteSerializer
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleWriteSerializer

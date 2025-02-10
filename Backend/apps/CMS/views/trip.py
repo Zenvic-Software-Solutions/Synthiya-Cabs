@@ -1,5 +1,5 @@
 from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
-from apps.CMS.models import Trip,Vechile
+from apps.CMS.models import Trip,Vehicle
 from apps.CMS.serializers import TripReadSerializer,TripWriteSerializer
 from apps.ACCESS.models import Customer
 
@@ -13,8 +13,8 @@ class TripListAPIView(AppListAPIViewSet):
     serializer_class = TripReadSerializer
     column_details = {
         "customer_details.identity":"Customer Name",
-        "vechile_details.identity":"Vehicle Name",
-        "vechile_details.vechile_no":"Vechile No",
+        "vehicle_details.identity":"Vehicle Name",
+        "vehicle_details.vehicle_no":"Vehicle No",
         "start_date":"Start Date",
         "end_date":"End Date",
         "start_km":"Start Km",
@@ -34,7 +34,7 @@ class TripListAPIView(AppListAPIViewSet):
             "filters":self.filter_details,
             "filter_data":{
                 "customer":self.serialize_for_filter(Customer.objects.all()),
-                "vechile":self.serialize_for_filter(Vechile.objects.all())
+                "vehicle":self.serialize_for_filter(Vehicle.objects.all())
             }
         }
 

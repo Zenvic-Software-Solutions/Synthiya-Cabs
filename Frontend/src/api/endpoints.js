@@ -27,7 +27,7 @@ const EndPoints = {
 
   // OtherCabes Vehicle API
   otherCabsVehicleListURL: "/cms/otherdriver/list/",
-  otherCabsVehicleCudURL: "/cms/othervechile/cud/",
+  otherCabsVehicleCudURL: "/cms/othervehicle/cud/",
 
   // OtherCabes Driver API
   otherCabsDriverListURL: "/cms/otherdriver/list/",

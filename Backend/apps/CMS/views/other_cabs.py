@@ -1,7 +1,7 @@
-from apps.CMS.serializers import OtherCabListSerializer, OtherCabWriteSerializer, OtherDriverReadserializer, OtherDriverWriteSerializer, OtherVechileReadserializer, OtherVechileWriteSerializer
+from apps.CMS.serializers import OtherCabListSerializer, OtherCabWriteSerializer, OtherDriverReadserializer, OtherDriverWriteSerializer, OtherVehicleReadserializer, OtherVehicleWriteSerializer
 from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
 from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
-
+from HELPERS import VEHICLE_TYPE
 class OtherCabsListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
     filterset_fields = []
@@ -63,17 +63,17 @@ class OtherDriverCUDViewSet(AppCUDAPIViewSet):
     queryset = OtherDriver.objects.all()
     serializer_class = OtherDriverWriteSerializer
 
-class OtherVechileListViewSet(AppListAPIViewSet):
+class OtherVehicleListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
     filterset_fields = []
     queryset = OtherVehicle.objects.all().order_by("-created_by")
-    serializer_class = OtherVechileReadserializer
+    serializer_class = OtherVehicleReadserializer
     column_details = {
-        "identity":"Vechile Name",
+        "identity":"Vehicle Name",
         "other_cab_name_details.owner_name":"Cab Owner Name",
         "other_cab_name_details.phone_number":"Cab Phone Number",
-        "vechile_type":"Vechile Type",
-        "vechile_no":"Vechile No",
+        "vehicle_type":"Vehicle Type",
+        "vehicle_no":"Vehicle No",
         "is_ac_available":"AC Availability",
     }
     filter_details = {}
@@ -83,11 +83,12 @@ class OtherVechileListViewSet(AppListAPIViewSet):
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
             "filter_data": {
+                "vehicle_type":self.serialize_choices(VEHICLE_TYPE["options"]),
                 "other_cab_name":self.serialize_for_filter(OtherCab.objects.all(), fields=["id", "uuid","identity"])
             }
         }
         return self.send_response(data)
 
-class OtherVechileCUDViewSet(AppCUDAPIViewSet):
+class OtherVehicleCUDViewSet(AppCUDAPIViewSet):
     queryset = OtherVehicle.objects.all()
-    serializer_class = OtherVechileWriteSerializer
+    serializer_class = OtherVehicleWriteSerializer

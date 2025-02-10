@@ -1,5 +1,5 @@
 from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
-from apps.CMS.models import Booking,Vechile,OtherCab,OtherDriver
+from apps.CMS.models import Booking,Vehicle,OtherCab,OtherDriver
 from apps.ACCESS.models import Driver,Customer
 from apps.CMS.serializers import BookingReadSerializer,BookingWriteSerializer
 
@@ -35,7 +35,7 @@ class BookingListAPIView(AppListAPIViewSet):
 
     column_details = {
         "customer_details.identity":"Customer Name",
-        "vechile_details.identity":"Vechile Name",
+        "vehicle_details.identity":"Vehicle Name",
         "cab_details.identity":"Cab Name",
         "driver_details.identity":"Driver Name",
         "otherdriver_details.identity":"Other Driver Name",
@@ -55,7 +55,7 @@ class BookingListAPIView(AppListAPIViewSet):
         "end_date":"End Date",
         "start_place":"Start Place",
         "end_place":"End place",
-        "vechile__identity":"Vechile Name",
+        "vehicle__identity":"Vehicle Name",
         "cab__identity":"Cab Name",
         "otherdriver__identity":"OtherDriver Name",
         "sponsor__identity":"Sponsor Name",
@@ -67,7 +67,7 @@ class BookingListAPIView(AppListAPIViewSet):
             "filters":self.filter_details,
             "filter_data":{
                 "customer":self.serialize_for_filter(Customer.objecys.all()),
-                "vechile":self.serialize_for_filter(Vechile.objects.all()),
+                "vehicle":self.serialize_for_filter(Vehicle.objects.all()),
                 "cab":self.serialize_for_filter(OtherCab.objects.all()),
                 "driver":self.serialize_for_filter(Driver.objects.all()),
                 "sponsor":self.serialize_for_filter(Customer.objects.all()),

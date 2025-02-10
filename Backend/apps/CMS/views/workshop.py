@@ -44,7 +44,7 @@ class MaintenanceListViewSet(AppListAPIViewSet):
 
     column_details = {
         "workshop_details.identity":"Workshop Name",
-        "vechile_details.identiy":"vechile Name",
+        "vehicle_details.identiy":"vehicle Name",
         "driver_details.user.phone_number":"Phone Number",
         "start_date":"Start Date",
         "end_date":"End Date",

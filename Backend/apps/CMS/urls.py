@@ -15,10 +15,10 @@ from apps.CMS.views import (
     OtherCabsCUDViewSet,
     OtherDriverListViewSet,
     OtherDriverCUDViewSet,
-    OtherVechileListViewSet,
-    OtherVechileCUDViewSet,
-    VechileListViewSet,
-    VechileCUDViewSet,
+    OtherVehicleListViewSet,
+    OtherVehicleCUDViewSet,
+    VehicleListViewSet,
+    VehicleCUDViewSet,
     BankListViewSet,
     BankCUDViewSet,
     BankBalanceListViewSet,
@@ -49,12 +49,12 @@ router.register(r'othercab/cud', OtherCabsCUDViewSet, basename='other-cabs-cud')
 router.register(r'otherdriver/cud', OtherDriverCUDViewSet, basename='other-drivers-cud')
 
 # Other Vehicles
-# router.register(r'othervechile/list', OtherVechileListViewSet, basename='other-vechiles-list')
-router.register(r'othervechile/cud', OtherVechileCUDViewSet, basename='other-vechiles-cud')
+# router.register(r'othervehicle/list', OtherVehicleListViewSet, basename='other-vehicles-list')
+router.register(r'othervehicle/cud', OtherVehicleCUDViewSet, basename='other-vehicles-cud')
 
-# Vechile
-router.register(r'vechile/list', VechileListViewSet, basename='vechiles-list')
-router.register(r'vechile/cud', VechileCUDViewSet, basename='vechiles-cud')
+# Vehicle
+router.register(r'vehicle/list', VehicleListViewSet, basename='vehicles-list')
+router.register(r'vehicle/cud', VehicleCUDViewSet, basename='vehicles-cud')
 # Booking
 router.register(r'booking/list', BookingListAPIView, basename='booking-list')
 router.register(r'booking/cud', BookingCUDAPIView, basename='booking-cud')
@@ -79,8 +79,8 @@ urlpatterns = [
     path('otherdriver/list/<uuid>', OtherDriverListViewSet.as_view({'get': 'list'}), name='otherdriver-list'),
     path('otherdriver/list/<uuid>/table-meta/', OtherDriverListViewSet.as_view({'get': 'get_table_meta'}), name='otherdriver-table-meta'),
     
-    path('othervechile/list/<uuid>/', OtherVechileListViewSet.as_view({'get': 'list'}), name='othervechiles-list'),
-    path('othervechile/list/<uuid>/table-meta/', OtherVechileListViewSet.as_view({'get': 'get_table_meta'}), name='othervechile-table-meta'),
+    path('othervehicle/list/<uuid>/', OtherVehicleListViewSet.as_view({'get': 'list'}), name='othervehicles-list'),
+    path('othervehicle/list/<uuid>/table-meta/', OtherVehicleListViewSet.as_view({'get': 'get_table_meta'}), name='othervehicle-table-meta'),
 
     # bulk upload images
     path(

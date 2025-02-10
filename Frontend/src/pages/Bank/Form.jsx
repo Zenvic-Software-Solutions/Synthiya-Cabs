@@ -4,14 +4,14 @@ import * as Yup from "yup";
 import {} from "@api/urls";
 
 const validationSchema = Yup.object().shape({
-  vehicle_name: Yup.string().trim().required("Vehicle Name is required"),
+  bank_name: Yup.string().trim().required("Bank Name is required"),
 
-  vehicle_type: Yup.string().trim().required("Vehicle Type is required"),
+  bank_type: Yup.string().trim().required("Bank Type is required"),
 
-  vehicle_no: Yup.string()
+  bank_no: Yup.string()
     .trim()
-    .matches(/^[A-Za-z0-9\s-]+$/, "Invalid Vehicle Number format")
-    .required("Vehicle Number is required"),
+    .matches(/^[A-Za-z0-9\s-]+$/, "Invalid Bank Number format")
+    .required("Bank Number is required"),
 
   is_ac_available: Yup.boolean().required("AC Availability is required"),
 
@@ -23,23 +23,23 @@ const validationSchema = Yup.object().shape({
 
 export default function index() {
   const FormFields = {
-    vehicle_name: {
+    bank_name: {
       type: "text",
       defaultValue: "",
-      label: "Vehicle Name",
-      placeholder: "Enter Vehicle Name",
+      label: "Bank Name",
+      placeholder: "Enter Bank Name",
     },
-    vehicle_type: {
+    bank_type: {
       type: "text",
       defaultValue: "",
-      label: "Vehicle Type",
-      placeholder: "Enter Vehicle Type",
+      label: "Bank Type",
+      placeholder: "Enter Bank Type",
     },
-    vehicle_no: {
+    bank_no: {
       type: "text",
       defaultValue: "",
-      label: "Vehicle Number",
-      placeholder: "Enter Vehicle Number",
+      label: "Bank Number",
+      placeholder: "Enter Bank Number",
     },
     is_ac_available: {
       type: "boolean",
@@ -61,22 +61,22 @@ export default function index() {
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/vechile/list"
+      redirectUrl="/bank/list"
       apiFunction={{
         getForm: "",
         postForm: "",
         patchForm: "",
       }}
       breadcrumbData={{
-        title: "Vehicle Form",
+        title: "Bank Form",
         sidebarActiveId: 7,
         list: [
           {
-            label: "Vehicle list",
-            path: "/vechile/list",
+            label: "Bank list",
+            path: "/bank/list",
           },
           {
-            label: "Vehicle Form",
+            label: "Bank Form",
           },
         ],
       }}
