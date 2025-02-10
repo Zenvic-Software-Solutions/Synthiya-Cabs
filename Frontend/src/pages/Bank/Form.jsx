@@ -1,60 +1,58 @@
 import React from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import {} from "@api/urls";
+import { getBankCUD, postBankCUD, patchBankCUD} from "@api/urls";                                                 
 
 const validationSchema = Yup.object().shape({
-  bank_name: Yup.string().trim().required("Bank Name is required"),
+  identity: Yup.string().trim().required("Bank Name is required"),
 
-  bank_type: Yup.string().trim().required("Bank Type is required"),
+  branch: Yup.string().trim().required("Bank Type is required"),
 
-  bank_no: Yup.string()
+  account_no: Yup.string()
     .trim()
     .matches(/^[A-Za-z0-9\s-]+$/, "Invalid Bank Number format")
     .required("Bank Number is required"),
 
-  is_ac_available: Yup.boolean().required("AC Availability is required"),
+  account_holder_name: Yup.boolean().required("Account Holder is required"),
 
-  last_km: Yup.number()
-    .typeError("Last KM must be a number")
-    .positive("Last KM must be a positive number")
-    .required("Last KM is required"),
+  ifsc_code: Yup.number()
+    .typeError("IFSC Number must be a number")
+    // .positive("IFSC Number be a positive number")
+    .required("IFSC Number is required"),
 });
 
 export default function index() {
   const FormFields = {
-    bank_name: {
+    identity: {
       type: "text",
       defaultValue: "",
       label: "Bank Name",
       placeholder: "Enter Bank Name",
     },
-    bank_type: {
+    branch: {
       type: "text",
       defaultValue: "",
-      label: "Bank Type",
-      placeholder: "Enter Bank Type",
+      label: "Bank Name",
+      placeholder: "Enter Branch Name",
     },
-    bank_no: {
+    account_no: {
       type: "text",
       defaultValue: "",
       label: "Bank Number",
       placeholder: "Enter Bank Number",
     },
-    is_ac_available: {
-      type: "boolean",
-      label: "AC Availability",
+    account_holder_name: {
+      type: "text",
+      label: "Account Holder Name",
       defaultValue: "",
-      dropdownOptions: [
-        { id: true, identity: "Yes" },
-        { id: false, identity: "No" },
-      ],
+      placeholder:"Enter Account Holder Name"
+
     },
-    last_km: {
+    ifsc_code: {
       type: "text",
       defaultValue: "",
-      label: "Last KM",
-      placeholder: "Enter Last KM",
+      label: "IFSC Code",
+      placeholder: "",
     },
   };
   return (
@@ -63,9 +61,9 @@ export default function index() {
       validationSchema={validationSchema}
       redirectUrl="/bank/list"
       apiFunction={{
-        getForm: "",
-        postForm: "",
-        patchForm: "",
+        getForm: getBankCUD,
+        postForm: postBankCUD,
+        patchForm: patchBankCUD,
       }}
       breadcrumbData={{
         title: "Bank Form",
