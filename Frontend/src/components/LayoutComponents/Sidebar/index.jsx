@@ -130,13 +130,16 @@ const Sidebar = () => {
       onMouseEnter={screenWidth > 1199 ? handleMouseEnter : null}
       onMouseLeave={screenWidth > 1199 ? handleMouseLeave : null}
     >
-      <div className="app-brand demo" style={{ paddingTop: "15px" }}>
+      <div
+        className="app-brand demo"
+        style={{ paddingTop: "25px", paddingBottom: "10px" }}
+      >
         <Link to="#" className="app-brand-link">
           <span className="d-none app-mini-logo">
             <img src={APP_CONSTANTS.Favicon} width={34} />
           </span>
           <span className="app-brand-text demo menu-text fw-bold">
-            <img src={APP_CONSTANTS.App_Logo} width={150} />
+            <img src={APP_CONSTANTS.App_Logo} width={150} height={35} />
           </span>
         </Link>
         <Link
