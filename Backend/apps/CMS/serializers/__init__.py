@@ -4,3 +4,4 @@ from .bank import BankReadSerializer, BankWriteSerializer, BankBalanceReadSerial
 from .workshop import WorkshopReadSerializer, WorkshopWriteSerializer, MaintenanceReadSerializer, MaintenanceWriteSerializer
 from .booking import BookingReadSerializer,BookingWriteSerializer
 from .betta import BettaReadSerializer, BettaWriteSerializer
+from .trip import TripReadSerializer,TripWriteSerializer
