@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import {} from "@api/urls";
+import {
+  vehicleTableMeta,
+  getVehicleCud,
+  postVehicleCud,
+  patchVehicleCud,
+} from "@api/urls";
 
 const validationSchema = Yup.object().shape({
-  vehicle_name: Yup.string().trim().required("Vehicle Name is required"),
+  identity: Yup.string().trim().required("Vehicle Name is required"),
 
   vehicle_type: Yup.string().trim().required("Vehicle Type is required"),
 
@@ -22,18 +27,30 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function index() {
+  const [formFieldMeta, setFormFieldMeta] = useState();
+
+  useEffect(() => {
+    const fetchTableMeta = async () => {
+      const response = await vehicleTableMeta();
+      setFormFieldMeta(response);
+    };
+    fetchTableMeta();
+  }, []);
+
+  if (!formFieldMeta) return;
+
   const FormFields = {
-    vehicle_name: {
+    identity: {
       type: "text",
       defaultValue: "",
       label: "Vehicle Name",
       placeholder: "Enter Vehicle Name",
     },
     vehicle_type: {
-      type: "text",
+      type: "select",
       defaultValue: "",
       label: "Vehicle Type",
-      placeholder: "Enter Vehicle Type",
+      dropdownOptions: formFieldMeta.filter_data.vehicle_type || [],
     },
     vehicle_no: {
       type: "text",
@@ -63,9 +80,9 @@ export default function index() {
       validationSchema={validationSchema}
       redirectUrl="/vehicle/list"
       apiFunction={{
-        getForm: "",
-        postForm: "",
-        patchForm: "",
+        getForm: getVehicleCud,
+        postForm: postVehicleCud,
+        patchForm: patchVehicleCud,
       }}
       breadcrumbData={{
         title: "Vehicle Form",

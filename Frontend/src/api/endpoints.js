@@ -18,8 +18,8 @@ const EndPoints = {
   workshopCudURL: "/cms/workshop/cud/",
 
   // Vehicle API
-  vehicleListURL: "/access/user/list/",
-  vehicleCudURL: "/access/user/cud/",
+  vehicleListURL: "/cms/vehicle/list/",
+  vehicleCudURL: "/cms/vehicle/cud/",
 
   // Driver API
   driverListURL: "/access/driver/list/",
