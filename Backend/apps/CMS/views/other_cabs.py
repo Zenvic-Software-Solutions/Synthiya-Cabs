@@ -48,7 +48,7 @@ class OtherDriverListViewSet(AppListAPIViewSet):
     }
     filter_details = {}
 
-    def get_table_meta(self):
+    def get_table_meta(self, *args, **kwargs):
         data = {
             "columns" : self.get_table_columns_details(),
             "filters" : self.get_table_filter_details(),
@@ -56,7 +56,7 @@ class OtherDriverListViewSet(AppListAPIViewSet):
                 "other_cab_name":self.serialize_for_filter(OtherCab.objects.all(), fields=["id", "uuid","identity"])
             }
         }
-        return data
+        return self.send_response(data)
 
 
 class OtherDriverCUDViewSet(AppCUDAPIViewSet):
