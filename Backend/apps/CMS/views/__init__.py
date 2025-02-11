@@ -12,6 +12,7 @@ from .bank import (
     BankCUDViewSet,
     BankBalanceListViewSet,
     BankBalanceCUDViewSet,
+    BankDetailSerializer,
 )
 from .workshop import (
     WorkshopListViewSet,

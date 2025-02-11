@@ -1,7 +1,17 @@
-from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
+from apps.BASE.views import (
+    AppCUDAPIViewSet,
+    AppListAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
 from apps.CMS.models import Booking, Vehicle, OtherCab, OtherDriver
 from apps.ACCESS.models import Driver, Customer
-from apps.CMS.serializers import BookingReadSerializer, BookingWriteSerializer
+from apps.CMS.serializers import (
+    BookingReadSerializer,
+    BookingWriteSerializer,
+    BookingRDetailSerializer,
+)
+from rest_framework.generics import RetrieveAPIView
 
 
 class BookingListAPIView(AppListAPIViewSet):
@@ -81,3 +91,8 @@ class BookingListAPIView(AppListAPIViewSet):
 class BookingCUDAPIView(AppCUDAPIViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingWriteSerializer
+
+
+class BankDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingRDetailSerializer
