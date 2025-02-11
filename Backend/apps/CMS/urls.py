@@ -2,7 +2,6 @@ from rest_framework.routers import SimpleRouter
 from django.urls import path
 from apps.BASE.views.generic import get_upload_api_view
 
-
 # Bulk-Upload-Files
 from HELPERS import (
     BulkFileUploadView,
