@@ -15,6 +15,7 @@ class OtherCabListSerializer(ReadSerializer):
             "balance",
         ]
 
+
 class OtherCabWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = OtherCab
@@ -27,46 +28,67 @@ class OtherCabWriteSerializer(WriteSerializer):
         ]
 
 
-
-class OtherDriverReadserializer(ReadSerializer):
-    other_cab_name_details = read_serializer(meta_model=OtherCab, meta_fields=["id", "uuid", "identity", "owner_name", "phone_number"])(source="other_cab_name")
+class OtherCabDetailSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
-        model = OtherDriver
-        fields= [
+        model = OtherCab
+        fields = [
             "id",
             "uuid",
             "identity",
-            "other_cab_name_details",
+            "owner_name",
             "phone_number",
+            "address",
+            "balance",
         ]
+
+
+class OtherDriverReadserializer(ReadSerializer):
+    other_cab_name_details = read_serializer(
+        meta_model=OtherCab,
+        meta_fields=["id", "uuid", "identity", "owner_name", "phone_number"],
+    )(source="other_cab_name")
+
+    class Meta(ReadSerializer.Meta):
+        model = OtherDriver
+        fields = ["id", "uuid", "identity", "phone_number", "other_cab_name_details"]
+
+
 class OtherDriverWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = OtherDriver
-        fields= [
+        fields = [
             "identity",
             "other_cab_name",
             "phone_number",
         ]
-class OtherVechileReadserializer(ReadSerializer):
-    other_cab_name_details = read_serializer(meta_model=OtherCab, meta_fields=["id", "uuid", "identity", "owner_name", "phone_number"])(source="other_cab_name")
+
+
+class OtherVehicleReadserializer(ReadSerializer):
+    other_cab_name_details = read_serializer(
+        meta_model=OtherCab,
+        meta_fields=["id", "uuid", "identity", "owner_name", "phone_number"],
+    )(source="other_cab_name")
+
     class Meta(ReadSerializer.Meta):
         model = OtherVehicle
-        fields= [
+        fields = [
             "id",
             "uuid",
             "identity",
             "other_cab_name_details",
-            "vechile_type",
-            "vechile_no",
+            "vehicle_type",
+            "vehicle_no",
             "is_ac_available",
         ]
-class OtherVechileWriteSerializer(WriteSerializer):
+
+
+class OtherVehicleWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = OtherVehicle
-        fields= [
+        fields = [
             "identity",
             "other_cab_name",
-            "vechile_type",
-            "vechile_no",
+            "vehicle_type",
+            "vehicle_no",
             "is_ac_available",
         ]

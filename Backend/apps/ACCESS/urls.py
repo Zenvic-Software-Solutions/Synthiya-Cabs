@@ -2,7 +2,7 @@ from django.urls import path
 from apps.ACCESS.views import (
     LoginView,
     LogoutView,
-    RegisterView, 
+    RegisterView,
     GetAuthUserDetails,
     UserListAPIView,
     StaffListAPIView,
@@ -13,8 +13,10 @@ from apps.ACCESS.views import (
     ForgetPasswordAPIView,
     ChangePhoneNumberAPIView,
     StaffCUDAPIView,
-    DriverCUDPAPIView
+    DriverCUDPAPIView,
 )
+
+from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
 
@@ -23,10 +25,10 @@ API_URL_PREFIX = "api/"
 
 
 router = SimpleRouter()
-router.register("user/list",UserListAPIView)
-router.register("staff/list",StaffListAPIView)
+router.register("user/list", UserListAPIView)
+router.register("staff/list", StaffListAPIView)
 # router.register("staff/cud",StaffCUDAPIView)
-router.register("driver/list",DriverListAPIView)
+router.register("driver/list", DriverListAPIView)
 
 urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
@@ -40,4 +42,5 @@ urlpatterns = [
     path("driver/details/", DriverDetailView.as_view(), name="driver"),
     path("staff/cud/", StaffCUDAPIView.as_view(), name="driver"),
     path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + router.urls

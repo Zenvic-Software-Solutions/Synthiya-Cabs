@@ -35,7 +35,7 @@ const Sidebar = () => {
         },
         { id: 6, label: "Customer", icon: "ti ti-user-check", path: "#" },
         { id: 7, label: "Vehicle", icon: "ti ti-truck", path: "/vehicle/list" },
-        { id: 8, label: "Bank", icon: "ti ti-credit-card", path: "#" },
+        { id: 8, label: "Bank", icon: "ti ti-credit-card", path: "/bank/list" },
         { id: 9, label: "Workshop", icon: "ti ti-tools", path: "/workshop/list" },
         { id: 10, label: "Ledger", icon: "ti ti-book", path: "#" },
       ],

@@ -7,33 +7,25 @@ from django.conf import settings
 
 
 def create_log(data: typing.Any, category: str):
-
     if settings.DEBUG:
         print("Log: ", data, category)  # noqa
 
 
 def get_display_name_for_slug(slug: str):
-
-
     try:
         return slug.replace("_", " ").title()
     except:  # noqa
         return slug
 
 
-
 def random_n_digits(n):
-    
     range_start = 10 ** (n - 1)
     range_end = (10**n) - 1
     return str(random.randint(range_start, range_end))
 
 
 def random_n_token(n=10):
-    
-    allowed_characters = (
-        string.ascii_letters + string.digits
-    )
+    allowed_characters = string.ascii_letters + string.digits
     return "".join(secrets.choice(allowed_characters) for _ in range(n))
 
 
@@ -49,9 +41,8 @@ def make_http_request(
     _output = {
         "data": response_data,
         "status_code": response.status_code,
-        "reason": None if response_data else response.text, 
+        "reason": None if response_data else response.text,
     }
-
 
     log = {
         "request_data": data,
@@ -60,7 +51,6 @@ def make_http_request(
         "method": method,
         "response_data": _output,
     }
-
 
     if settings.DEBUG:
         print(log)  # noqa
@@ -94,7 +84,6 @@ def convert_utc_to_local_timezone(
     input_datetime = input_datetime.replace(tzinfo=from_zone)
 
     return input_datetime.astimezone(to_zone)
-
 
 
 def get_first_of(*args):
@@ -141,4 +130,3 @@ def get_number_of_days_in_month(month, year):
     month = month
     year = year
     return calendar.monthrange(year, month)[1]
-

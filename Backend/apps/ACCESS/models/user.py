@@ -1,4 +1,9 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,Group,Permission
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    PermissionsMixin,
+    Group,
+    Permission,
+)
 from django.db import models
 from HELPERS.choices import ROLE
 from apps.BASE.managers import UserManager
@@ -13,11 +18,12 @@ from apps.BASE.models import (
 # Custom User Model
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(
-        max_length=150, unique=True,
-        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+        max_length=150, unique=True, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
-    
-    role = AppSingleChoiceField(ROLE,)
+
+    role = AppSingleChoiceField(
+        ROLE,
+    )
     is_staff = models.BooleanField(default=False)
     is_driver = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=False)
@@ -34,50 +40,61 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    USERNAME_FIELD = "phone_number" 
+    USERNAME_FIELD = "phone_number"
 
     def __str__(self):
         return f"{self.phone_number} "
-    
+
 
 class Staff(BaseModel):
     identity = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
-    staff_id = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    staff_id = models.CharField(
+        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
     address = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    email = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    email = models.CharField(
+        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
     dob = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     date_of_joining = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    user =  models.ForeignKey(
-        User,on_delete=models.CASCADE,
-        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
+
 
 class Driver(BaseModel):
     identity = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
-    driver_id = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    driver_id = models.CharField(
+        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
     address = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    email = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    email = models.CharField(
+        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
     dob = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     date_of_joining = models.DateField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    license_no = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    user =  models.ForeignKey(
-        User,on_delete=models.CASCADE,
-        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    license_no = models.CharField(
+        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
+
 
 class Customer(BaseModel):
     identity = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
-    customer_id = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    phone_number = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    customer_id = models.CharField(
+        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
+    phone_number = models.CharField(
+        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
     user = models.ForeignKey(
-        User,on_delete=models.CASCADE,
-        **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
-        )
-    
-
+        User, on_delete=models.CASCADE, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )

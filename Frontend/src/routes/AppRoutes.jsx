@@ -33,6 +33,14 @@ const AppRoutes = createBrowserRouter([
         ],
       },
       {
+        path: "bank",
+        children: [
+          { path: "list", element: <Pages.BankList /> },
+          { path: "form/:uuid?", element: <Pages.BankForm /> },
+          { path: "view/:uuid?", element: <Pages.BankView /> },
+        ],
+      },
+      {
         path: "driver",
         children: [
           { path: "list", element: <Pages.DriverList /> },
