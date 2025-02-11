@@ -2,7 +2,7 @@ from django.urls import path
 from apps.ACCESS.views import (
     LoginView,
     LogoutView,
-    RegisterView, 
+    RegisterView,
     GetAuthUserDetails,
     UserListAPIView,
     StaffListAPIView,
@@ -25,10 +25,10 @@ API_URL_PREFIX = "api/"
 
 
 router = SimpleRouter()
-router.register("user/list",UserListAPIView)
-router.register("staff/list",StaffListAPIView)
+router.register("user/list", UserListAPIView)
+router.register("staff/list", StaffListAPIView)
 # router.register("staff/cud",StaffCUDAPIView)
-router.register("driver/list",DriverListAPIView)
+router.register("driver/list", DriverListAPIView)
 
 urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),

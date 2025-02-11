@@ -6,6 +6,7 @@ import uuid
 
 class BaseField:
     """Base class for all custom fields."""
+
     pass
 
 
@@ -69,7 +70,9 @@ class AppSingleChoiceField(BaseField, models.CharField):
             return "list"
         if isinstance(self.options, dict):
             return "dict"
-        raise TypeError("Unsupported type for options. Must be list, list_of_tuples, or dict.")
+        raise TypeError(
+            "Unsupported type for options. Must be list, list_of_tuples, or dict."
+        )
 
     def get_default_option(self):
         """
@@ -87,6 +90,7 @@ class AppSingleChoiceField(BaseField, models.CharField):
         name, path, args, kwargs = super().deconstruct()
         kwargs["choices_config"] = self.choices_config
         return name, path, args, kwargs
+
 
 class AppSingleFileField(BaseField, models.FileField):
     """Custom file upload field with unique filename generation and validation."""

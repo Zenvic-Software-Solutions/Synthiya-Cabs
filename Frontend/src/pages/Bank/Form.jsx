@@ -1,7 +1,7 @@
 import React from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import { getBankCUD, postBankCUD, patchBankCUD} from "@api/urls";                                                 
+import { getBankCUD, postBankCUD, patchBankCUD} from "@api/urls";
 
 const validationSchema = Yup.object().shape({
   identity: Yup.string().trim().required("Bank Name is required"),

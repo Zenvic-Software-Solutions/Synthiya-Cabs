@@ -8,9 +8,7 @@ from rest_framework.views import APIView
 from apps.BASE.config import API_RESPONSE_ACTION_CODES
 
 
-
 class AppViewMixin:
-
     def get_request(self):
         return self.request
 
@@ -31,7 +29,6 @@ class AppViewMixin:
         action_code="DO_NOTHING",
         **other_response_data
     ):
-        
         return Response(
             data={
                 "data": data,
@@ -48,7 +45,6 @@ class AppViewMixin:
         )
 
     def handle_exception(self, exc):
-
         action_code = API_RESPONSE_ACTION_CODES["display_error_1"]
         if exc and hasattr(exc, "status_code") and exc.status_code in [401]:
             action_code = "AUTH_TOKEN_NOT_PROVIDED_OR_INVALID"
@@ -64,7 +60,6 @@ class AppViewMixin:
         raise MethodNotAllowed(method=self.get_request().method)
 
     def retrieve(self, request, *args, **kwargs):
-
         with suppress(AttributeError):
             return self.get_app_response_schema(
                 super().retrieve(request, *args, **kwargs)
@@ -73,7 +68,6 @@ class AppViewMixin:
         raise MethodNotAllowed(method=self.get_request().method)
 
     def create(self, request, *args, **kwargs):
-
         with suppress(AttributeError):
             return self.get_app_response_schema(
                 super().create(request, *args, **kwargs)
@@ -82,16 +76,14 @@ class AppViewMixin:
         raise MethodNotAllowed(method=self.get_request().method)
 
     def update(self, request, *args, **kwargs):
-
         with suppress(AttributeError):
             return self.get_app_response_schema(
                 super().update(request, *args, **kwargs)
             )
-        
+
         raise MethodNotAllowed(method=self.get_request().method)
 
     def destroy(self, request, *args, **kwargs):
-
         with suppress(AttributeError):
             return self.get_app_response_schema(
                 super().destroy(request, *args, **kwargs)
@@ -100,7 +92,6 @@ class AppViewMixin:
         raise MethodNotAllowed(method=self.get_request().method)
 
     def partial_update(self, request, *args, **kwargs):
-
         with suppress(AttributeError):
             return self.get_app_response_schema(
                 super().partial_update(request, *args, **kwargs)
@@ -110,7 +101,6 @@ class AppViewMixin:
 
 
 class AppAPIView(AppViewMixin, APIView):
-
     sync_action_class = None
     get_object_model = None
     serializer_class = None

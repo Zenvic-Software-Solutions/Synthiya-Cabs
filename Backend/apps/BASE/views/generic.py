@@ -18,6 +18,7 @@ DEFAULT_IDENTITY_DISPLAY_FIELDS = (
     "identity",
 )
 
+
 class AppGenericViewSet(GenericViewSet):
     pass
 
@@ -27,7 +28,6 @@ class AppListAPIViewSet(
     ListModelMixin,
     AppGenericViewSet,
 ):
-
     pagination_class = AppPagination  # page-size: 12
     filter_backends = [
         DjangoFilterBackend,
@@ -56,7 +56,7 @@ class AppListAPIViewSet(
 
     def get_table_columns_details(self) -> dict:
         return self.column_details
-    
+
     def get_table_filter_details(self) -> dict:
         return self.filter_details
 
@@ -69,15 +69,13 @@ class AppListAPIViewSet(
     def serialize_choices(self, choices: list):
         from apps.BASE.helpers import get_display_name_for_slug
 
-        return [{"id": _, "uuid":_, "identity": get_display_name_for_slug(_)} for _ in choices]
-
-
-
-
+        return [
+            {"id": _, "uuid": _, "identity": get_display_name_for_slug(_)}
+            for _ in choices
+        ]
 
 
 class AbstractLookUpFieldMixin:
-
     lookup_url_kwarg = "uuid"
     lookup_field = "uuid"
 
@@ -90,14 +88,12 @@ class AppCUDAPIViewSet(
     DestroyModelMixin,
     AppGenericViewSet,
 ):
-
     @action(
         methods=["GET"],
         url_path="meta",
         detail=False,
     )
     def get_meta_for_create(self, *args, **kwargs):
-
         return self.send_response(data=self.get_serializer().get_meta_for_create())
 
     @action(
@@ -111,11 +107,10 @@ class AppCUDAPIViewSet(
         )
 
 
-
-
 # import logging
 
 # logger = logging.getLogger(__name__)
+
 
 def get_upload_api_view(meta_model, meta_fields=None):
     if not meta_fields:
@@ -153,7 +148,9 @@ def get_upload_api_view(meta_model, meta_fields=None):
             allowed_content_types = ["image/jpeg", "image/png", "application/pdf"]
             if uploaded_file.content_type not in allowed_content_types:
                 return self.send_error_response(
-                    data={"detail": f"Invalid file type. Allowed types are {', '.join(allowed_content_types)}."}
+                    data={
+                        "detail": f"Invalid file type. Allowed types are {', '.join(allowed_content_types)}."
+                    }
                 )
 
             # Further check for WhatsApp file-specific issues if needed

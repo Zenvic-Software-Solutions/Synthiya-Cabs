@@ -6,7 +6,7 @@ from uuid import UUID
 
 class CustomViewSet(ViewSet):
     """
-    A dynamic ViewSet for handling GET, POST, PATCH, DELETE operations 
+    A dynamic ViewSet for handling GET, POST, PATCH, DELETE operations
     with additional metadata for table and dropdowns.
     """
 
