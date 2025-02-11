@@ -92,9 +92,6 @@ class Customer(BaseModel):
     customer_id = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
-    phone_number = models.CharField(
-        max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
-    )
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )

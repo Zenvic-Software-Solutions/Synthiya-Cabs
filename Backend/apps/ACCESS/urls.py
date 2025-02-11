@@ -14,6 +14,7 @@ from apps.ACCESS.views import (
     ChangePhoneNumberAPIView,
     StaffCUDAPIView,
     DriverCUDPAPIView,
+    CustomerCreateAPIView,
     DriverUpdateAPIView,
 )
 
@@ -42,7 +43,8 @@ urlpatterns = [
     path("staff/details/", StaffDetailView.as_view(), name="staff"),
     path("driver/details/", DriverDetailView.as_view(), name="driver"),
     path("staff/cud/", StaffCUDAPIView.as_view(), name="driver"),
-    path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver"),
-    path("driver/update/", DriverUpdateAPIView.as_view(), name="driver"),
+    path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver-create"),
+    path("driver/update/", DriverUpdateAPIView.as_view(), name="driver-update"),
+    path("customer/create/", CustomerCreateAPIView.as_view(), name="customer"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + router.urls

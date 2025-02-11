@@ -16,4 +16,5 @@ from .staff_list import (
     StaffCUDAPIView,
     DriverCUDPAPIView,
     DriverUpdateAPIView,
+    CustomerCreateAPIView,
 )

@@ -1,6 +1,6 @@
 from HELPERS.choices import ROLE
 from apps.BASE.views import AppListAPIViewSet, AppCUDAPIViewSet, AppAPIView
-from apps.ACCESS.models import Staff, User, Driver
+from apps.ACCESS.models import Staff, User, Driver,Customer
 from apps.ACCESS.serializers import (
     StaffReadSerializer,
     DriverReadSerializer,
@@ -208,3 +208,26 @@ class UserListAPIView(AppListAPIViewSet):
             "filter_data": {"role": self.serialize_choices(ROLE["options"])},
         }
         return data
+
+
+
+class CustomerCreateAPIView(AppAPIView):
+    def post(self, request, *args, **kwargs):
+        identity = request.data.get("identity")
+        customer_id = request.data.get("customer_id")
+        phone_number = request.data.get("phone_number")
+
+        if not phone_number:
+            return self.send_error_response({"error": "Phone number is required"})
+
+        # Get or create user
+        user, created = User.objects.get_or_create(phone_number=phone_number, defaults={"password": "admin@123"})
+
+        # Check if a customer already exists for the user
+        if Customer.objects.filter(user=user).exists():
+            return self.send_error_response({"error": "Customer already exists"})
+
+        # Create customer
+        Customer.objects.create(identity=identity, customer_id=customer_id, user=user)
+
+        return self.send_response({"message": "Customer created successfully"})
