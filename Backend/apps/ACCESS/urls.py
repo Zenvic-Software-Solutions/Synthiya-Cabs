@@ -14,6 +14,7 @@ from apps.ACCESS.views import (
     ChangePhoneNumberAPIView,
     StaffCUDAPIView,
     DriverCUDPAPIView,
+    DriverUpdateAPIView,
 )
 
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -42,5 +43,6 @@ urlpatterns = [
     path("driver/details/", DriverDetailView.as_view(), name="driver"),
     path("staff/cud/", StaffCUDAPIView.as_view(), name="driver"),
     path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver"),
+    path("driver/update/", DriverUpdateAPIView.as_view(), name="driver"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + router.urls

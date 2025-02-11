@@ -20,6 +20,8 @@ from .workshop import (
     WorkshopCUDViewSet,
     MaintenanceListViewSet,
     MaintenanceCUDViewSet,
+    MaintenanceDetailAPIView,
+    WorkshopDetailAPIView,
 )
 from .booking import BookingCUDAPIView, BookingListAPIView, BankDetailViewSet
 from .trip import TripListAPIView, TripCUDAPIView, TripDetailViewSet
