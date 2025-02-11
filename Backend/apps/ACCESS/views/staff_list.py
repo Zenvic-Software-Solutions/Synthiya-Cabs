@@ -121,8 +121,40 @@ class DriverCUDPAPIView(AppAPIView):
             date_of_joining=date_of_joining,
             user=user,
         )
-        return self.send_response({"message": "Driver Created Successfully"})
+        return self.send_response({"message":"Driver Created Successfully"})
+    
 
+class DriverUpdateAPIView(AppAPIView):
+    def put(self,request,*args,**kwargs):
+        identity = request.data.get("identity")
+        driver_id = request.data.get("driver_id")
+        email = request.data.get("email")
+        address = request.data.get("address")
+        license_no =request.data.get("license_no")
+        phone_number = request.data.get("phone_number")
+        password = request.data.get("password")
+        dob = request.data.get("dob")
+        date_of_joining = request.data.get("date_of_joining")
+
+        user = User.objects.get(phone_number=phone_number)
+
+        if Driver.objects.filter(user = user).exists():
+            return self.send_error_response({"error":"Phone Number already exists"})
+        Driver.objects.create(identity = identity,
+                              driver_id = driver_id,
+                              email=email,
+                              address = address,license_no=license_no,phone_number=phone_number,password=password,
+                              dob=dob,date_of_joining=date_of_joining)
+        return self.send_response({"message":"Driver Updated Successfully"})
+        
+
+
+
+
+        
+        
+
+    
 
 class DriverListAPIView(AppListAPIViewSet):
     search_fields = [

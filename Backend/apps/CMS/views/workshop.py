@@ -1,12 +1,15 @@
 from apps.CMS.models import Workshop, Maintenance
-from apps.BASE.views import AppListAPIViewSet, AppCUDAPIViewSet
+from apps.BASE.views import AppListAPIViewSet, AppCUDAPIViewSet,AbstractLookUpFieldMixin, AppAPIView
 from apps.CMS.serializers import (
     WorkshopReadSerializer,
     WorkshopWriteSerializer,
     MaintenanceReadSerializer,
     MaintenanceWriteSerializer,
+    WorkshopDetailSerializer,
+    MaintenanceDetailSerializer,
+    
 )
-
+from rest_framework.generics import RetrieveAPIView
 
 class WorkshopListViewSet(AppListAPIViewSet):
     search_fields = ["identity", "phone", "address", "owner_name"]
@@ -36,6 +39,11 @@ class WorkshopListViewSet(AppListAPIViewSet):
 class WorkshopCUDViewSet(AppCUDAPIViewSet):
     queryset = Workshop.objects.all()
     serializer_class = WorkshopWriteSerializer
+
+
+class WorkshopDetailAPIView(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset= Workshop.objects.all()
+    serializer_class = WorkshopDetailSerializer
 
 
 class MaintenanceListViewSet(AppListAPIViewSet):
@@ -69,3 +77,8 @@ class MaintenanceListViewSet(AppListAPIViewSet):
 class MaintenanceCUDViewSet(AppCUDAPIViewSet):
     queryset = Maintenance.objects.all()
     serializer_class = MaintenanceWriteSerializer
+
+
+class MaintenanceDetailAPIView(AbstractLookUpFieldMixin, AppAPIView,RetrieveAPIView):
+    queryset = Maintenance.objects.all()
+    serializer_class = MaintenanceDetailSerializer
