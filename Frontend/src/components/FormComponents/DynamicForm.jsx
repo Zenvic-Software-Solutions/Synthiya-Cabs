@@ -4,7 +4,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDataContext } from "@context/DataContext";
 import { useAppContext } from "@context/AppContext";
 import { Loader } from "@components";
-import {} from "@api/urls";
 
 export function SubmitButton() {
   const { uuid } = useParams();
@@ -50,6 +49,30 @@ export function TextField({ name, fieldData }) {
         value={values[name] || ""}
         onChange={(e) => setFieldValue(name, e.target.value)}
         defaultValue={fieldData["defaultValue"]}
+      />
+      <ErrorMessage name={name} component="div" className="text-danger mt-1" />
+    </div>
+  );
+}
+
+export function TextAreaField({ name, fieldData }) {
+  const { values, setFieldValue } = useFormikContext();
+
+  return (
+    <div className="mb-3">
+      <label className="form-label" htmlFor={name}>
+        {fieldData.label || name}
+      </label>
+      <Field
+        as="textarea"
+        name={name}
+        id={name}
+        className="form-control"
+        placeholder={fieldData.placeholder}
+        value={values[name] || ""}
+        onChange={(e) => setFieldValue(name, e.target.value)}
+        defaultValue={fieldData["defaultValue"]}
+        rows={fieldData.rows || 3} // Default to 3 rows if not specified
       />
       <ErrorMessage name={name} component="div" className="text-danger mt-1" />
     </div>
@@ -276,6 +299,7 @@ export function BooleanSelectField({ name, fieldData }) {
 
 const FieldNames = {
   text: TextField,
+  textarea: TextAreaField,
   number: NumberField,
   select: SelectField,
   file: ImageField,
