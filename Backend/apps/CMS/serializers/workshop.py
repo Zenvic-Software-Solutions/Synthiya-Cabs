@@ -2,6 +2,7 @@ from apps.BASE.serializers import ReadSerializer, WriteSerializer, read_serializ
 from apps.CMS.models import Workshop, Maintenance, Vehicle
 from apps.ACCESS.models import Driver, User
 
+
 class WorkshopReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
         model = Workshop
@@ -17,6 +18,7 @@ class WorkshopReadSerializer(ReadSerializer):
             "balance",
         ]
 
+
 class WorkshopWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = Workshop
@@ -31,10 +33,39 @@ class WorkshopWriteSerializer(WriteSerializer):
         ]
 
 
+class WorkshopDetailSerializer(ReadSerializer):
+    class Meta(ReadSerializer.Meta):
+        model = Workshop
+        fields = [
+            "id",
+            "uuid",
+            "identity",
+            "owner_name",
+            "phone",
+            "address",
+            "description",
+            "specialist",
+            "balance",
+        ]
+
+
 class MaintenanceReadSerializer(ReadSerializer):
-    workshop_details = read_serializer(meta_model=Workshop, meta_fields=["id", "uuid", "identity"])(source="workshop")
-    vehicle_details = read_serializer(meta_model=Vehicle, meta_fields=["id", "uuid", "identity"])(source="vehicle")
-    driver_details = read_serializer(meta_model=Driver, meta_fields=["id", "uuid", "identity"], init_fields_config={"user_details":read_serializer(meta_model=User, meta_fields=["id", "uuid", "phone_number"])(source="user")})(source="driver")
+    workshop_details = read_serializer(
+        meta_model=Workshop, meta_fields=["id", "uuid", "identity"]
+    )(source="workshop")
+    vehicle_details = read_serializer(
+        meta_model=Vehicle, meta_fields=["id", "uuid", "identity"]
+    )(source="vehicle")
+    driver_details = read_serializer(
+        meta_model=Driver,
+        meta_fields=["id", "uuid", "identity"],
+        init_fields_config={
+            "user_details": read_serializer(
+                meta_model=User, meta_fields=["id", "uuid", "phone_number"]
+            )(source="user")
+        },
+    )(source="driver")
+
     class Meta(ReadSerializer.Meta):
         model = Maintenance
         fields = [
@@ -50,6 +81,7 @@ class MaintenanceReadSerializer(ReadSerializer):
             "start_date",
             "end_date",
         ]
+
 
 class MaintenanceWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):

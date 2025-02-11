@@ -1,9 +1,10 @@
 from apps.CMS.models import Bank, BankBalance
 from apps.BASE.serializers import ReadSerializer, WriteSerializer
 
+
 class BankReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
-        model=Bank
+        model = Bank
         fields = [
             "id",
             "uuid",
@@ -17,8 +18,22 @@ class BankReadSerializer(ReadSerializer):
 
 class BankWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
-        model=Bank
+        model = Bank
         fields = [
+            "identity",
+            "branch",
+            "account_no",
+            "account_holder_name",
+            "ifsc_code",
+        ]
+
+
+class BankDetailSerializer(ReadSerializer):
+    class Meta(ReadSerializer.Meta):
+        model = Bank
+        fields = [
+            "id",
+            "uuid",
             "identity",
             "branch",
             "account_no",
@@ -30,7 +45,7 @@ class BankWriteSerializer(WriteSerializer):
 class BankBalanceReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
         model = BankBalance
-        fields =[
+        fields = [
             "id",
             "uuid",
             "bank",
@@ -38,10 +53,11 @@ class BankBalanceReadSerializer(ReadSerializer):
             "created_at",
         ]
 
+
 class BankBalanceWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = BankBalance
-        fields =[
+        fields = [
             "bank",
             "balance",
         ]
