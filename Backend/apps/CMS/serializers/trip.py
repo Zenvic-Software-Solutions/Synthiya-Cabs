@@ -38,3 +38,26 @@ class TripWriteSerializer(WriteSerializer):
             "end_km",
             "description",
         ]
+
+
+class TripDetailSerializer(ReadSerializer):
+    customer_details = read_serializer(
+        Customer, meta_fields=["id", "uuid", "identity"]
+    )(source="customer")
+    vehicle_details = read_serializer(
+        Vehicle, meta_fields=["id", "uuid", "identity", "vehicle_type", "vehicle_no"]
+    )(source="vehicle")
+
+    class Meta(ReadSerializer.Meta):
+        model = Trip
+        fields = [
+            "id",
+            "uuid",
+            "customer_details",
+            "vehicle_details",
+            "start_date",
+            "end_date",
+            "start_km",
+            "end_km",
+            "description",
+        ]

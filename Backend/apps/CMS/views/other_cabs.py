@@ -1,12 +1,19 @@
 from apps.CMS.serializers import (
     OtherCabListSerializer,
     OtherCabWriteSerializer,
+    OtherCabDetailSerializer,
     OtherDriverReadserializer,
     OtherDriverWriteSerializer,
     OtherVehicleReadserializer,
     OtherVehicleWriteSerializer,
 )
-from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
+from apps.BASE.views import (
+    AppCUDAPIViewSet,
+    AppListAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
+from rest_framework.generics import RetrieveAPIView
 from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 from HELPERS import VEHICLE_TYPE
 
@@ -38,6 +45,11 @@ class OtherCabsListViewSet(AppListAPIViewSet):
 class OtherCabsCUDViewSet(AppCUDAPIViewSet):
     queryset = OtherCab.objects.all()
     serializer_class = OtherCabWriteSerializer
+
+
+class OTherCabDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset = OtherCab.objects.all()
+    serializer_class = OtherCabDetailSerializer
 
 
 class OtherDriverListViewSet(AppListAPIViewSet):

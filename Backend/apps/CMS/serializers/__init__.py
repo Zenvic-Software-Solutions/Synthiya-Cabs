@@ -33,4 +33,4 @@ from .booking import (
     BookingRDetailSerializer,
 )
 from .betta import BettaReadSerializer, BettaWriteSerializer
-from .trip import TripReadSerializer, TripWriteSerializer
+from .trip import TripReadSerializer, TripWriteSerializer, TripDetailSerializer

@@ -1,6 +1,7 @@
 from .other_cabs import (
     OtherCabsListViewSet,
     OtherCabsCUDViewSet,
+    OTherCabDetailViewSet,
     OtherDriverListViewSet,
     OtherDriverCUDViewSet,
     OtherVehicleListViewSet,
@@ -12,7 +13,7 @@ from .bank import (
     BankCUDViewSet,
     BankBalanceListViewSet,
     BankBalanceCUDViewSet,
-    BankDetailSerializer,
+    BankDetailViewSet,
 )
 from .workshop import (
     WorkshopListViewSet,
@@ -20,5 +21,5 @@ from .workshop import (
     MaintenanceListViewSet,
     MaintenanceCUDViewSet,
 )
-from .booking import BookingCUDAPIView, BookingListAPIView
-from .trip import TripListAPIView, TripCUDAPIView
+from .booking import BookingCUDAPIView, BookingListAPIView, BankDetailViewSet
+from .trip import TripListAPIView, TripCUDAPIView, TripDetailViewSet
