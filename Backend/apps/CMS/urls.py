@@ -12,6 +12,7 @@ from HELPERS import (
 from apps.CMS.views import (
     OtherCabsListViewSet,
     OtherCabsCUDViewSet,
+    OTherCabDetailViewSet,
     OtherDriverListViewSet,
     OtherDriverCUDViewSet,
     OtherVehicleListViewSet,
@@ -20,16 +21,20 @@ from apps.CMS.views import (
     VehicleCUDViewSet,
     BankListViewSet,
     BankCUDViewSet,
+    BankDetailViewSet,
     BankBalanceListViewSet,
     BankBalanceCUDViewSet,
     WorkshopListViewSet,
     WorkshopCUDViewSet,
+    WorkshopDetailAPIView,
     MaintenanceListViewSet,
     MaintenanceCUDViewSet,
+    MaintenanceDetailAPIView,
     BookingListAPIView,
     BookingCUDAPIView,
     TripListAPIView,
     TripCUDAPIView,
+    TripDetailViewSet,
 )
 
 app_name = "cms"
@@ -111,4 +116,22 @@ urlpatterns = [
     path(
         "deleted/status/change/", ArchieveStatusChange.as_view(), name="delete-status"
     ),
+    # Detail Views
+    path(
+        "othercab/detail/<uuid>/",
+        OTherCabDetailViewSet.as_view(),
+        name="othercab-detail-view",
+    ),
+    path("bank/detail/<uuid>/", BankDetailViewSet.as_view(), name="bank-details"),
+    path(
+        "workshop/detail/<uuid>/",
+        WorkshopDetailAPIView.as_view(),
+        name="workshop-details",
+    ),
+    path(
+        "maintenance/detail/<uuid>/",
+        MaintenanceDetailAPIView.as_view(),
+        name="maintenance-details",
+    ),
+    path("Trip/detail/<uuid>/", TripDetailViewSet.as_view(), name="trip-details"),
 ] + router.urls
