@@ -1,4 +1,9 @@
-from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
+from apps.BASE.views import (
+    AppCUDAPIViewSet,
+    AppListAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
 from apps.CMS.models import Trip, Vehicle
 from apps.CMS.serializers import (
     TripReadSerializer,
@@ -6,6 +11,7 @@ from apps.CMS.serializers import (
     TripDetailSerializer,
 )
 from apps.ACCESS.models import Customer
+from rest_framework.generics import RetrieveAPIView
 
 
 class TripListAPIView(AppListAPIViewSet):
@@ -44,6 +50,6 @@ class TripCUDAPIView(AppCUDAPIViewSet):
     serializer_class = TripWriteSerializer
 
 
-class TripDetailViewSet(TripDetailSerializer):
+class TripDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
     queryset = Trip.objects.all()
     serializer_class = TripDetailSerializer
