@@ -47,17 +47,15 @@ class BookingListAPIView(AppListAPIViewSet):
     column_details = {
         "customer_details.identity": "Customer Name",
         "vehicle_details.identity": "Vehicle Name",
-        "cab_details.identity": "Cab Name",
-        "driver_details.identity": "Driver Name",
-        "otherdriver_details.identity": "Other Driver Name",
+        "cab_details.identity": "OtherCab Name",
+        # "driver_details.identity": "Driver Name",
+        # "otherdriver_details.identity": "Other Driver Name",
         "start_date": "Starting Date",
-        "end_date": "Ending Date",
+        # "end_date": "Ending Date",
         "start_place": "Starting Place",
-        "end_place": "Ending Place",
+        # "end_place": "Ending Place",
         "no_of_days": "No of Days",
-        "rent_amount": "Rent Amount",
-        "advance": "Advance",
-        "sponsor_details.identity": "Sponsor Name",
+        # "sponsor_details.identity": "Sponsor Name",
     }
 
     filter_details = {

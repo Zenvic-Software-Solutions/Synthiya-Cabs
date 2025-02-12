@@ -38,8 +38,6 @@ class BookingReadSerializer(ReadSerializer):
             "start_place",
             "end_place",
             "no_of_days",
-            "rent_amount",
-            "advance",
             "sponsor_details",
         ]
 
@@ -58,8 +56,6 @@ class BookingWriteSerializer(WriteSerializer):
             "start_place",
             "end_place",
             "no_of_days",
-            "rent_amount",
-            "advance",
             "sponsor",
         ]
 
@@ -99,7 +95,5 @@ class BookingRDetailSerializer(ReadSerializer):
             "start_place",
             "end_place",
             "no_of_days",
-            "rent_amount",
-            "advance",
             "sponsor_details",
         ]
