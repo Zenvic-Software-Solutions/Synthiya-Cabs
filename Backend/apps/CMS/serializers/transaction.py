@@ -39,17 +39,17 @@ class SubLedgerListSerializer(ReadSerializer):
 
 
 class TransactionListSerializer(ReadSerializer):
-    category = read_serializer(
+    category_details = read_serializer(
         meta_model=Category, meta_fields=["id", "uuid", "category", "account_type"]
     )(source="category")
-    account_type_name = read_serializer(
-        meta_model=Category, meta_fields=["id", "uuid", "category", "account_type"]
-    )(source="category")
+    # account_type_name = read_serializer(
+    #     meta_model=Category, meta_fields=["id", "uuid", "category", "account_type"]
+    # )(source="category")
     sub_ledger_name = read_serializer(
-        meta_model=Ledger,
+        meta_model=SubLedger,
         meta_fields=["id", "uuid", "sub_ledger"],
         init_fields_config={
-            "ledger_name": read_serializer(
+            "ledger_name_details": read_serializer(
                 meta_model=Ledger, meta_fields=["id", "uuid", "name"]
             )(source="ledger_name")
         },
@@ -60,8 +60,8 @@ class TransactionListSerializer(ReadSerializer):
         fields = [
             "id",
             "uuid",
-            "category",
-            "sub_ledger",
+            "category_details",
+            "sub_ledger_name",
             "description",
             "amount",
         ]

@@ -1,7 +1,7 @@
 from .other_cabs import (
     OtherCabsListViewSet,
     OtherCabsCUDViewSet,
-    OTherCabDetailViewSet,
+    OtherCabDetailViewSet,
     OtherDriverListViewSet,
     OtherDriverCUDViewSet,
     OtherVehicleListViewSet,

@@ -47,7 +47,7 @@ class OtherCabsCUDViewSet(AppCUDAPIViewSet):
     serializer_class = OtherCabWriteSerializer
 
 
-class OTherCabDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+class OtherCabDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
     queryset = OtherCab.objects.all()
     serializer_class = OtherCabDetailSerializer
 

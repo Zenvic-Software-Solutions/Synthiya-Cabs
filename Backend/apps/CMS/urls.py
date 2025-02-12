@@ -12,7 +12,7 @@ from HELPERS import (
 from apps.CMS.views import (
     OtherCabsListViewSet,
     OtherCabsCUDViewSet,
-    OTherCabDetailViewSet,
+    OtherCabDetailViewSet,
     OtherDriverListViewSet,
     OtherDriverCUDViewSet,
     OtherVehicleListViewSet,
@@ -119,7 +119,7 @@ urlpatterns = [
     # Detail Views
     path(
         "othercab/detail/<uuid>/",
-        OTherCabDetailViewSet.as_view(),
+        OtherCabDetailViewSet.as_view(),
         name="othercab-detail-view",
     ),
     path("bank/detail/<uuid>/", BankDetailViewSet.as_view(), name="bank-details"),
