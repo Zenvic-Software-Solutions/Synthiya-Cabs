@@ -112,13 +112,15 @@ class StaffRetrieveAPIView(AppAPIView):
             return self.send_error_response({"error": "Staff not found"})
 
         data = {
-            "identity": staff.identity,
-            "staff_id": staff.staff_id,
-            "email": staff.email,
-            "address": staff.address,
-            "dob": staff.dob,
-            "date_of_joining": staff.date_of_joining,
-            "user_phone_number": staff.user.phone_number,
+            "initial": {
+                "identity": staff.identity,
+                "staff_id": staff.staff_id,
+                "email": staff.email,
+                "address": staff.address,
+                "dob": staff.dob,
+                "date_of_joining": staff.date_of_joining,
+                "user_phone_number": staff.user.phone_number,
+            }
         }
 
         return self.send_response(data)
