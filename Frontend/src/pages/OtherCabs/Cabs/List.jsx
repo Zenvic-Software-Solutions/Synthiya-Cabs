@@ -2,13 +2,13 @@ import React from "react";
 import { DynamicTable } from "@components";
 import { otherCabsTableMeta, otherCabsTableData } from "@api/urls";
 
-export default function CategoryList() {
+export default function index() {
   return (
     <DynamicTable
       tableMetaApi={otherCabsTableMeta}
       tableDataApi={otherCabsTableData}
       actionLink={{
-        viewLink: "#",
+        viewLink: "/othercabs/view",
         editLink: "/othercabs/form",
         deleteLink: "#",
       }}

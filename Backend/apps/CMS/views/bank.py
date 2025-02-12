@@ -1,67 +1,79 @@
 from apps.CMS.models import Bank, BankBalance
-from apps.BASE.views import AppListAPIViewSet, AppCUDAPIViewSet
-from apps.CMS.serializers import BankReadSerializer, BankWriteSerializer, BankBalanceReadSerializer, BankBalanceWriteSerializer
+from apps.BASE.views import (
+    AppListAPIViewSet,
+    AppCUDAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
+from apps.CMS.serializers import (
+    BankReadSerializer,
+    BankWriteSerializer,
+    BankDetailSerializer,
+    BankBalanceReadSerializer,
+    BankBalanceWriteSerializer,
+)
+from rest_framework.generics import RetrieveAPIView
+
 
 class BankListViewSet(AppListAPIViewSet):
-    search_fields=["identity"]
-    filterset_fields=[]
+    search_fields = ["identity", "branch", "account_no"]
+    filterset_fields = []
 
     queryset = Bank.objects.all()
     serializer_class = BankReadSerializer
 
     column_details = {
-        "identity":"Bank Name",
-        "branch":"Branch Name",
-        "account_no":"Account No",
-        "account_holder_name":"Account Holder Name",
-        "ifsc_code":"IFSC Code",
+        "identity": "Bank Name",
+        "branch": "Branch Name",
+        "account_no": "Account No",
+        "account_holder_name": "Account Holder Name",
+        "ifsc_code": "IFSC Code",
     }
     filter_details = {}
 
     def get_table_meta(self):
-
         data = {
-            "columns":self.get_table_columns_details(),  
-            "filters":self.get_table_filter_details(),
-            "filter_data":{}  
+            "columns": self.get_table_columns_details(),
+            "filters": self.get_table_filter_details(),
+            "filter_data": {},
         }
         return data
 
 
 class BankCUDViewSet(AppCUDAPIViewSet):
-
     queryset = Bank.objects.all()
     serializer_class = BankWriteSerializer
 
 
+class BankDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset = Bank.objects.all()
+    serializer_class = BankDetailSerializer
+
+
 class BankBalanceListViewSet(AppListAPIViewSet):
-    search_fields=["identity"]
-    filterset_fields={
-        "created_at_gte":["exact"],
-        "created_at_lte":["exact"],
+    search_fields = ["identity"]
+    filterset_fields = {
+        "created_at_gte": ["exact"],
+        "created_at_lte": ["exact"],
     }
 
     queryset = BankBalance.objects.all()
     serializer_class = BankBalanceReadSerializer
     column_details = {
-        "bank":"bank Name",
-        "created_at":"Date",
-        "balance":"Balance",
+        "bank": "bank Name",
+        "created_at": "Date",
+        "balance": "Balance",
     }
-    filter_details = {
-        "date" : "Date"
-    }
+    filter_details = {"date": "Date"}
 
     def get_table_meta(self):
-
         data = {
-            "columns":self.get_table_columns_details(),  
-            "filters":self.get_table_filter_details(),
-            "filter_data":{
-                "date":True
-            }  
+            "columns": self.get_table_columns_details(),
+            "filters": self.get_table_filter_details(),
+            "filter_data": {"date": True},
         }
         return data
+
 
 class BankBalanceCUDViewSet(AppCUDAPIViewSet):
     queryset = BankBalance.objects.all()

@@ -1,32 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
 import {
-  getOtherCabsDriverCud,
-  postOtherCabsDriverCud,
-  patchOtherCabsDriverCud,
+  otherCabsDriverTableMeta,
+  getDriverCud,
+  postDriverCud,
+  patchDriverCud,
 } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
   identity: Yup.string().trim().required("Name is required"),
-
-  driver_id: Yup.string().trim().required("Driver ID is required"),
-
+  other_cab_name: Yup.string().trim().required("Cab Name is required"),
   phone_number: Yup.string()
     .trim()
     .matches(/^[0-9]{10}$/, "Phone Number must be a 10-digit number")
     .required("Phone Number is required"),
-
-  dob: Yup.date()
-    .typeError("Invalid Birth Date format")
-    .required("Birth Date is required"),
-
-  date_of_joining: Yup.date()
-    .typeError("Invalid Joining Date format")
-    .required("Joining Date is required"),
 });
 
-export default function index() {
+export default function Index() {
+  const [formFieldMeta, setFormFieldMeta] = useState();
+
+  useEffect(() => {
+    const fetchTableMeta = async () => {
+      const response = await otherCabsDriverTableMeta();
+      setFormFieldMeta(response);
+    };
+    fetchTableMeta();
+  }, []);
+
+  if (!formFieldMeta) return;
+
   const FormFields = {
     identity: {
       type: "text",
@@ -34,11 +37,11 @@ export default function index() {
       label: "Name",
       placeholder: "Enter Name",
     },
-    driver_id: {
-      type: "text",
+    other_cab_name: {
+      type: "select",
+      label: "Cab Name",
       defaultValue: "",
-      label: "Driver ID",
-      placeholder: "Enter Driver ID",
+      dropdownOptions: formFieldMeta.filter_data.other_cab_name || [],
     },
     phone_number: {
       type: "text",
@@ -46,39 +49,28 @@ export default function index() {
       label: "Phone Number",
       placeholder: "Enter Phone Number",
     },
-    dob: {
-      type: "date",
-      defaultValue: "",
-      label: "Birth Date",
-      placeholder: "Select Birth Date",
-    },
-    date_of_joining: {
-      type: "date",
-      defaultValue: "",
-      label: "Joining Date",
-      placeholder: "Select Joining Date",
-    },
   };
+
   return (
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/driver/list"
+      redirectUrl="/othercabs-driver/list"
       apiFunction={{
-        getForm: getOtherCabsDriverCud,
-        postForm: postOtherCabsDriverCud,
-        patchForm: patchOtherCabsDriverCud,
+        getForm: getDriverCud,
+        postForm: postDriverCud,
+        patchForm: patchDriverCud,
       }}
       breadcrumbData={{
-        title: "Driver Form",
-        sidebarActiveId: 4,
+        title: "OtherCabs Driver list",
+        sidebarActiveId: 5,
         list: [
           {
-            label: "Driver list",
-            path: "/driver/list",
+            label: "OtherCabs Driver list",
+            path: "/othercabs-driver/list",
           },
           {
-            label: "Driver Form",
+            label: "OtherCabs Driver Form",
           },
         ],
       }}

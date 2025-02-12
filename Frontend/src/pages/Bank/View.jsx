@@ -1,5 +1,6 @@
 import React from "react";
+import { bankTableMeta } from "@api/urls";
 
 export default function View() {
-  return <div>Vehicle View page</div>;
+  return <div>Bank View page</div>;
 }

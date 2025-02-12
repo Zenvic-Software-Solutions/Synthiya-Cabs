@@ -34,9 +34,9 @@ const Sidebar = () => {
           path: "/othercabs/list",
         },
         { id: 6, label: "Customer", icon: "ti ti-user-check", path: "#" },
-        { id: 7, label: "Vehicle", icon: "ti ti-truck", path: "/vechile/list" },
-        { id: 8, label: "Bank", icon: "ti ti-credit-card", path: "#" },
-        { id: 9, label: "Workshop", icon: "ti ti-tools", path: "#" },
+        { id: 7, label: "Vehicle", icon: "ti ti-truck", path: "/vehicle/list" },
+        { id: 8, label: "Bank", icon: "ti ti-credit-card", path: "/bank/list" },
+        { id: 9, label: "Workshop", icon: "ti ti-tools", path: "/workshop/list" },
         { id: 10, label: "Ledger", icon: "ti ti-book", path: "#" },
       ],
     },
@@ -156,12 +156,13 @@ const Sidebar = () => {
       <div className="menu-inner py-1 ps ps--active-y">
         {MenuList.map((menuItem) => {
           const isSubMenuActive = menuItem.subItems?.some(
-            (subItem) => subItem.id === breadcrumbs.sidebarActiveId
+            (subItem) => subItem.id === (breadcrumbs.sidebarActiveId || 1)
           );
 
           const isOpen = dropOpen[menuItem.id] || isSubMenuActive;
           const isActive =
-            menuItem.id === breadcrumbs.sidebarActiveId || isSubMenuActive;
+            menuItem.id === (breadcrumbs.sidebarActiveId || 1) ||
+            isSubMenuActive;
 
           if (menuItem.subItems) {
             return (
@@ -183,7 +184,7 @@ const Sidebar = () => {
                       key={subItem.id}
                       to={subItem.path}
                       className={`menu-item ${
-                        subItem.id === breadcrumbs.sidebarActiveId
+                        subItem.id === (breadcrumbs.sidebarActiveId || 1)
                           ? "active"
                           : ""
                       }`}

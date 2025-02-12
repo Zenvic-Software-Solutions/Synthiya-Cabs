@@ -13,6 +13,10 @@ const EndPoints = {
   staffListURL: "/access/staff/list/",
   staffCudURL: "/access/staff/cud/",
 
+  // Workshop API
+  workshopListURL: "/cms/workshop/list/",
+  workshopCudURL: "/cms/workshop/cud/",
+
   // Vehicle API
   vehicleListURL: "/access/user/list/",
   vehicleCudURL: "/access/user/cud/",
@@ -27,7 +31,7 @@ const EndPoints = {
 
   // OtherCabes Vehicle API
   otherCabsVehicleListURL: "/cms/otherdriver/list/",
-  otherCabsVehicleCudURL: "/cms/othervechile/cud/",
+  otherCabsVehicleCudURL: "/cms/othervehicle/cud/",
 
   // OtherCabes Driver API
   otherCabsDriverListURL: "/cms/otherdriver/list/",

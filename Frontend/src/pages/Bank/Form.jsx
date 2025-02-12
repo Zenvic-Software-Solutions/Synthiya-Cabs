@@ -1,82 +1,80 @@
 import React from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import {} from "@api/urls";
+import { getBankCUD, postBankCUD, patchBankCUD} from "@api/urls";
 
 const validationSchema = Yup.object().shape({
-  vehicle_name: Yup.string().trim().required("Vehicle Name is required"),
+  identity: Yup.string().trim().required("Bank Name is required"),
 
-  vehicle_type: Yup.string().trim().required("Vehicle Type is required"),
+  branch: Yup.string().trim().required("Bank Type is required"),
 
-  vehicle_no: Yup.string()
+  account_no: Yup.string()
     .trim()
-    .matches(/^[A-Za-z0-9\s-]+$/, "Invalid Vehicle Number format")
-    .required("Vehicle Number is required"),
+    .matches(/^[A-Za-z0-9\s-]+$/, "Invalid Bank Number format")
+    .required("Bank Number is required"),
 
-  is_ac_available: Yup.boolean().required("AC Availability is required"),
+  account_holder_name: Yup.boolean().required("Account Holder is required"),
 
-  last_km: Yup.number()
-    .typeError("Last KM must be a number")
-    .positive("Last KM must be a positive number")
-    .required("Last KM is required"),
+  ifsc_code: Yup.number()
+    .typeError("IFSC Number must be a number")
+    // .positive("IFSC Number be a positive number")
+    .required("IFSC Number is required"),
 });
 
 export default function index() {
   const FormFields = {
-    vehicle_name: {
+    identity: {
       type: "text",
       defaultValue: "",
-      label: "Vehicle Name",
-      placeholder: "Enter Vehicle Name",
+      label: "Bank Name",
+      placeholder: "Enter Bank Name",
     },
-    vehicle_type: {
+    branch: {
       type: "text",
       defaultValue: "",
-      label: "Vehicle Type",
-      placeholder: "Enter Vehicle Type",
+      label: "Bank Name",
+      placeholder: "Enter Branch Name",
     },
-    vehicle_no: {
+    account_no: {
       type: "text",
       defaultValue: "",
-      label: "Vehicle Number",
-      placeholder: "Enter Vehicle Number",
+      label: "Bank Number",
+      placeholder: "Enter Bank Number",
     },
-    is_ac_available: {
-      type: "boolean",
-      label: "AC Availability",
+    account_holder_name: {
+      type: "text",
+      label: "Account Holder Name",
       defaultValue: "",
-      dropdownOptions: [
-        { id: true, identity: "Yes" },
-        { id: false, identity: "No" },
-      ],
+      placeholder:"Enter Account Holder Name"
+
     },
-    last_km: {
+    ifsc_code: {
       type: "text",
       defaultValue: "",
-      label: "Last KM",
-      placeholder: "Enter Last KM",
+      label: "IFSC Code",
+      placeholder: "",
     },
   };
   return (
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/vechile/list"
+      redirectUrl="/bank/list"
       apiFunction={{
-        getForm: "",
-        postForm: "",
-        patchForm: "",
+        getForm: getBankCUD,
+        postForm: postBankCUD,
+        patchForm: patchBankCUD,
       }}
       breadcrumbData={{
-        title: "Vehicle Form",
+        title: "Bank Form",
         sidebarActiveId: 7,
         list: [
           {
-            label: "Vehicle list",
-            path: "/vechile/list",
+            label: "Bank list",
+            path: "/bank/list",
           },
           {
-            label: "Vehicle Form",
+            label: "Bank Form",
           },
         ],
       }}

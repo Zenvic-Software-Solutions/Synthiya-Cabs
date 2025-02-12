@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import {} from "@api/urls";
+import {
+  getOtherCabsVehicleCud,
+  postOtherCabsVehicleCud,
+  patchOtherCabsVehicleCud,
+  otherCabsVehicleTableMeta,
+} from "@api/urls";
+import { useParams } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
-  vehicle_name: Yup.string().trim().required("Vehicle Name is required"),
+  identity: Yup.string().trim().required("Vehicle Name is required"),
 
   vehicle_type: Yup.string().trim().required("Vehicle Type is required"),
+
+  other_cab_name: Yup.string().trim().required("Cab service Name is required"),
 
   vehicle_no: Yup.string()
     .trim()
@@ -22,18 +30,38 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function index() {
+  const { uuid } = useParams();
+
+  const [formFieldMeta, setFormFieldMeta] = useState();
+
+  useEffect(() => {
+    const fetchTableMeta = async () => {
+      const response = await otherCabsVehicleTableMeta();
+      setFormFieldMeta(response);
+    };
+    fetchTableMeta();
+  }, []);
+
+  if (!formFieldMeta) return;
+
   const FormFields = {
-    vehicle_name: {
+    identity: {
       type: "text",
       defaultValue: "",
       label: "Vehicle Name",
       placeholder: "Enter Vehicle Name",
     },
     vehicle_type: {
-      type: "text",
+      type: "select",
       defaultValue: "",
       label: "Vehicle Type",
-      placeholder: "Enter Vehicle Type",
+      dropdownOptions: formFieldMeta.filter_data.vehicle_type || [],
+    },
+    other_cab_name: {
+      type: "select",
+      defaultValue: "",
+      label: "Cab Service Name",
+      dropdownOptions: formFieldMeta.filter_data.other_cab_name || [],
     },
     vehicle_no: {
       type: "text",
@@ -61,22 +89,22 @@ export default function index() {
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/vehicle/list"
+      redirectUrl="/othercabs-vehicle/list"
       apiFunction={{
-        getForm: "",
-        postForm: "",
-        patchForm: "",
+        getForm: getOtherCabsVehicleCud,
+        postForm: postOtherCabsVehicleCud,
+        patchForm: patchOtherCabsVehicleCud,
       }}
       breadcrumbData={{
-        title: "Vehicle Form",
+        title: "OtherCabs Vehicle Form",
         sidebarActiveId: 7,
         list: [
           {
-            label: "Vehicle list",
-            path: "/vehicle/list",
+            label: "OtherCabs Vehicle list",
+            path: "/othercabs-vehicle/list",
           },
           {
-            label: "Vehicle Form",
+            label: "OtherCabs Vehicle Form",
           },
         ],
       }}

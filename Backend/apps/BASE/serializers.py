@@ -56,6 +56,7 @@ class AppModelSerializer(AppSerializer, ModelSerializer):
 
 backend_url = settings.BACKEND_URL
 
+
 class WriteSerializer(AppModelSerializer):
     def create(self, validated_data):
         instance = super().create(validated_data=validated_data)
@@ -64,7 +65,6 @@ class WriteSerializer(AppModelSerializer):
             user = self.get_user()
             instance.created_by = user if user and user.is_authenticated else None
             instance.save()
-
 
         return instance
 
@@ -99,7 +99,10 @@ class WriteSerializer(AppModelSerializer):
     def serialize_choices(self, choices: list):
         from apps.BASE.helpers import get_display_name_for_slug
 
-        return [{"id": _, "uuid": _, "identity": get_display_name_for_slug(_)} for _ in choices]
+        return [
+            {"id": _, "uuid": _, "identity": get_display_name_for_slug(_)}
+            for _ in choices
+        ]
 
     def serialize_for_meta(self, queryset, fields=None):
         if not fields:
@@ -150,7 +153,7 @@ class WriteSerializer(AppModelSerializer):
                 ):
                     urls.append(
                         {
-                            field_name: backend_url+related_instance.file.url,
+                            field_name: backend_url + related_instance.file.url,
                             "id": related_instance.id,
                         }
                     )

@@ -16,8 +16,8 @@ DEFAULT_BLANK_NULLABLE_FIELD_CONFIG = {
     "blank": True,
 }
 
-class BaseModel(models.Model):
 
+class BaseModel(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -48,23 +48,19 @@ class BaseModel(models.Model):
 
     @classmethod
     def get_model_fields(cls):
-
         return cls._meta.fields
 
     @classmethod
     def get_all_model_fields(cls):
-
         return cls._meta.get_fields()
 
     @classmethod
     def get_model_field_names(cls, exclude=[]):
-        
         exclude = ["id", "created_by", "created", "modified", *exclude]
         return [_.name for _ in cls.get_model_fields() if _.name not in exclude]
 
     @classmethod
     def get_model_field(cls, field_name, fallback=None):
-        
         with suppress(FieldDoesNotExist):
             return cls._meta.get_field(field_name)
 
@@ -72,13 +68,11 @@ class BaseModel(models.Model):
 
 
 class FileOnlyModel(BaseModel):
-    
     class Meta(BaseModel.Meta):
         abstract = True
 
 
 class BaseIdentityModel(BaseModel):
-
     class Meta(BaseModel.Meta):
         abstract = True
 

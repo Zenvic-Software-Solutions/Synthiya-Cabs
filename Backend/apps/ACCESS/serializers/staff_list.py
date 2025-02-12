@@ -1,9 +1,12 @@
-from apps.BASE.serializers import ReadSerializer, read_serializer,WriteSerializer
-from apps.ACCESS.models import Staff,User,Driver
+from apps.BASE.serializers import ReadSerializer, read_serializer, WriteSerializer
+from apps.ACCESS.models import Staff, User, Driver
 
 
 class StaffReadSerializer(ReadSerializer):
-    user_details = read_serializer(User,meta_fields=["id","uuid","phone_number"])(source="user")
+    user_details = read_serializer(User, meta_fields=["id", "uuid", "phone_number"])(
+        source="user"
+    )
+
     class Meta(ReadSerializer.Meta):
         model = Staff
         fields = [
@@ -15,8 +18,10 @@ class StaffReadSerializer(ReadSerializer):
             "address",
             "dob",
             "date_of_joining",
-            "user_details"
+            "user_details",
         ]
+
+
 class StaffWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = Staff
@@ -27,12 +32,15 @@ class StaffWriteSerializer(WriteSerializer):
             "address",
             "dob",
             "date_of_joining",
-            "user"
+            "user",
         ]
+
         def get_meta(self):
-            user_uuid=self.instance.user.uuid
+            user_uuid = self.instance.user.uuid
             if not user_uuid:
-                raise ValueError("User UUID is required in the context to fetch the user.")
+                raise ValueError(
+                    "User UUID is required in the context to fetch the user."
+                )
 
             user = User.objects.filter(uuid=user_uuid)
 
@@ -45,7 +53,10 @@ class StaffWriteSerializer(WriteSerializer):
 
 
 class DriverReadSerializer(ReadSerializer):
-    user_details = read_serializer(User,meta_fields=["id","uuid","phone_number"])(source="user")
+    user_details = read_serializer(User, meta_fields=["id", "uuid", "phone_number"])(
+        source="user"
+    )
+
     class Meta(ReadSerializer.Meta):
         model = Driver
         fields = [
@@ -58,18 +69,16 @@ class DriverReadSerializer(ReadSerializer):
             "dob",
             "license_no",
             "date_of_joining",
-            "user_details"
+            "user_details",
         ]
 
 
 class UserReadSerializer(ReadSerializer):
     class Meta(ReadSerializer.Meta):
         model = User
-        fields =[
+        fields = [
             "id",
             "uuid",
             "phone_number",
             "role",
         ]
-
-

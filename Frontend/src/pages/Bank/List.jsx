@@ -5,25 +5,25 @@ import { bankTableMeta, bankTableData } from "@api/urls";
 export default function CategoryList() {
   return (
     <DynamicTable
-      tableMetaApi={vehicleTableMeta}
-      tableDataApi={vehicleTableData}
+      tableMetaApi={bankTableMeta}
+      tableDataApi={bankTableData}
       actionLink={{
-        viewLink: "#",
-        editLink: "/vechile/form",
+        viewLink: "/bank/view",
+        editLink: "/bank/form",
         deleteLink: "#",
       }}
       breadcrumbData={{
-        title: "Vehicle list",
-        sidebarActiveId: 7,
+        title: "Bank list",
+        sidebarActiveId: 8,
         list: [
           {
-            label: "Vehicle list",
+            label: "Bank list",
           },
         ],
         reportLink: "#",
         addButtonData: {
-          name: "Add Vehicle",
-          link: "/vechile/form",
+          name: "Add Bank",
+          link: "/bank/form",
         },
       }}
     />
