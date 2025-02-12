@@ -58,11 +58,7 @@ class CustomerCreateAPIView(AppAPIView):
 
 
 class CustomerUpdateAPIView(AppAPIView):
-    def put(self, request, *args, **kwargs):
-        uuid = request.data.get("uuid")
-        if not uuid:
-            return self.send_error_response({"error": "UUID is required for update"})
-
+    def put(self, request, uuid, *args, **kwargs):
         identity = request.data.get("identity")
         customer_id = request.data.get("customer_id")
         phone_number = request.data.get("phone_number")
@@ -90,52 +86,21 @@ class CustomerUpdateAPIView(AppAPIView):
 
 class CustomerRetrieveAPIView(AppAPIView):
     def get(self, request, uuid, *args, **kwargs):
-        phone_number = request.GET.get("hone_number")
-        password = request.GET.get("password")
         try:
             customer = Customer.objects.get(uuid=uuid)
         except Customer.DoesNotExist:
             return self.send_error_response({"error": "Customer not found"})
 
-        try:
-            user = User.objects.get(phone_number=phone_number, password=password)
-        except User.DoesNotExist:
-            return self.send_error_response({"error": "User not found"})
-
         data = {
-            "identity": customer.identity,
-            "customer_id": customer.customer_id,
-            "user_phone_number": user.phone_number,
-            "user_password": user.password,
+            "initial": {
+                "identity": customer.identity,
+                "customer_id": customer.customer_id,
+                "user_phone_number": customer.user.phone_number,
+                "user_password": customer.user.password,
+            }
         }
 
         return self.send_response(data)
-
-
-class CustomerListAPIView(AppListAPIViewSet):
-    search_fields = ["user__phone_number", "staff_id", "identity", "email"]
-    filterset_fields = {"dob": ["gte", "lte"], "date_of_joining": ["gte", "lte"]}
-    queryset = Staff.objects.all()
-
-    serializer_class = CustomerReadSerializer
-
-    column_details = {
-        "identity": "Name",
-        "staff_id": "Staff ID",
-        "user_details.phone_number": "Phone Number",
-        "dob": "Birth Date",
-        "date_of_joining": "Joining Date",
-    }
-
-    filter_details = {"dob": "Birth", "date_of_joining": "Joining Date"}
-
-    def get_table_meta(self):
-        data = {
-            "columns": self.column_details,
-            "filters": self.filter_details,
-            "filter_data": {},
-        }
-        return data
 
 
 class CustomerListAPIView(AppListAPIViewSet):
