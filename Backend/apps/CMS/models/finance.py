@@ -4,10 +4,10 @@ from apps.BASE.models import (
     BaseModel,
 )
 from django.db import models
-from apps.CMS.models import vehicle
+from apps.CMS.models import Vehicle
 
 class Finance(BaseModel):
-    vehicle = models.ForeignKey(vehicle, on_delete=models.CASCADE, related_name="finances")
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="finances")
     finance_name = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH)
     finance_address = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     contact_number = models.CharField(max_length=15)
