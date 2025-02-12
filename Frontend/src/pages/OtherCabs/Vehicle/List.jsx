@@ -25,7 +25,7 @@ export default function index() {
             label: "OtherCabs View",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add OtherCabs Vehicle",
           link: "/othercabs-vehicle/form",

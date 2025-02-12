@@ -8,7 +8,7 @@ export default function index() {
       tableMetaApi={staffTableMeta}
       tableDataApi={staffTableData}
       actionLink={{
-        viewLink: "#",
+        viewLink: "/staff/view",
         editLink: "/staff/form",
         deleteLink: "#",
       }}
@@ -20,7 +20,7 @@ export default function index() {
             label: "Staff list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Staff",
           link: "/staff/form",

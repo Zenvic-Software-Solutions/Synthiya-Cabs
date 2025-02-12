@@ -26,9 +26,10 @@ export const getDashboardData = () =>
 // Staff API
 export const staffTableMeta = () => makeGetRequest(EndPoints.staffListURL + "table-meta/");
 export const staffTableData = (data) => makeGetRequest(EndPoints.staffListURL, data);
-export const getStaffCud = (uuid) => makeGetRequest(EndPoints.staffCudURL + uuid + "/meta/");
+export const getStaffCud = (uuid) => makeGetRequest(EndPoints.staffDetailURL + uuid + "/");
 export const postStaffCud = (data) => makePostRequest(EndPoints.staffCudURL, data);
-export const patchStaffCud = (uuid, data) => makePatchRequest(EndPoints.staffCudURL + uuid + "/", data);
+export const patchStaffCud = (uuid, data) => makePutRequest(EndPoints.staffUpdateURL + uuid + "/", data);
+export const staffDetail = (uuid) => makeGetRequest(EndPoints.staffDetailURL + uuid + "/");
 
 // Workshop API
 export const workshopTableMeta = () => makeGetRequest(EndPoints.workshopListURL + "table-meta/");
@@ -36,6 +37,7 @@ export const workshopTableData = (data) => makeGetRequest(EndPoints.workshopList
 export const getWorkshopCud = (uuid) => makeGetRequest(EndPoints.workshopCudURL + uuid + "/meta/");
 export const postWorkshopCud = (data) => makePostRequest(EndPoints.workshopCudURL, data);
 export const patchWorkshopCud = (uuid, data) => makePatchRequest(EndPoints.workshopCudURL + uuid + "/", data);
+export const workshopDetail = (uuid) => makeGetRequest(EndPoints.workshopDetailURL + uuid + "/");
 
 // Vehicle API
 export const vehicleTableMeta = () => makeGetRequest(EndPoints.vehicleListURL + "table-meta/");
@@ -47,9 +49,10 @@ export const patchVehicleCud = (uuid, data) => makePatchRequest(EndPoints.vehicl
 // Driver API
 export const driverTableMeta = () => makeGetRequest(EndPoints.driverListURL + "table-meta/");
 export const driverTableData = (data) => makeGetRequest(EndPoints.driverListURL, data);
-export const getDriverCud = (uuid) => makeGetRequest(EndPoints.driverCudURL + uuid + "/meta/");
+export const getDriverCud = (uuid) => makeGetRequest(EndPoints.driverDetailURL + uuid + "/");
 export const postDriverCud = (data) => makePostRequest(EndPoints.driverCudURL, data);
-export const patchDriverCud = (uuid, data) => makePatchRequest(EndPoints.driverCudURL + uuid + "/", data);
+export const patchDriverCud = (uuid, data) => makePutRequest(EndPoints.driverUpdateURL + uuid + "/", data);
+export const driverDetail = (uuid) => makeGetRequest(EndPoints.driverDetailURL + uuid + "/");
 
 // OtherCabs API
 export const otherCabsTableMeta = () => makeGetRequest(EndPoints.otherCabsListURL + "table-meta/");
@@ -78,3 +81,11 @@ export const bankTableData = (data) => makeGetRequest(EndPoints.bankListURL, dat
 export const getBankCUD = (uuid) => makeGetRequest(EndPoints.bankCudURL + uuid + "/meta/");
 export const postBankCUD = (data) => makePostRequest(EndPoints.bankCudURL, data);
 export const patchBankCUD = (uuid, data) => makePatchRequest(EndPoints.bankCudURL + uuid + "/", data);
+export const bankDetail = (uuid) => makeGetRequest(EndPoints.bankDetailURL + uuid + "/");
+
+// Staff API
+export const bookingTableMeta = () => makeGetRequest(EndPoints.bookingListURL + "table-meta/");
+export const bookingTableData = (data) => makeGetRequest(EndPoints.bookingListURL, data);
+export const getBookingCud = (uuid) => makeGetRequest(EndPoints.bookingCudURL + uuid + "/meta/");
+export const postBookingCud = (data) => makePostRequest(EndPoints.bookingCudURL, data);
+export const patchBookingCud = (uuid, data) => makePatchRequest(EndPoints.bookingCudURL + uuid + "/", data);

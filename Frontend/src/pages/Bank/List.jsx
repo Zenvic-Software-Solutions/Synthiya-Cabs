@@ -20,7 +20,7 @@ export default function CategoryList() {
             label: "Bank list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Bank",
           link: "/bank/form",

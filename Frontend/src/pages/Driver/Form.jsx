@@ -10,11 +10,11 @@ const validationSchema = Yup.object().shape({
     .trim()
     .email("Invalid email format")
     .required("Email is required"),
-  phone_number: Yup.string()
+  user_phone_number: Yup.string()
     .trim()
     .matches(/^[0-9]{10}$/, "Phone Number must be a 10-digit number")
     .required("Phone Number is required"),
-  password: Yup.string().trim().required("Password is required"),
+  password: Yup.string().trim().min("Password minimun 4 lettters required"),
   address: Yup.string().trim().required("Address is required"),
   license_no: Yup.string().trim().required("License Number is required"),
   dob: Yup.date()
@@ -45,7 +45,7 @@ export default function Index() {
       label: "Email",
       placeholder: "Enter Email",
     },
-    phone_number: {
+    user_phone_number: {
       type: "text",
       defaultValue: "",
       label: "Phone Number",

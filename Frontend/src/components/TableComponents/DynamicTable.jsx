@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DataTable, Pagination, Filters } from "@components";
+import { DataTable, Pagination, Filters, Loader } from "@components";
 import { useDataContext } from "@context/DataContext";
 import { useAppContext } from "@context/AppContext";
 
@@ -43,7 +43,7 @@ export default function index({
   }, [selectedFilters, trigger]);
 
   if (!(tableData && tableMeta) && !isStaticTable) {
-    return;
+    return <Loader />;
   }
 
   return (

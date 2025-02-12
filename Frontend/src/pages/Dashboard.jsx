@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getDashboardData } from "@api/urls";
 import { Link } from "react-router-dom";
-import { Loader } from "@components";
+import { Loader, FinanceChart, TripChart } from "@components";
 import { useAppContext } from "@context/AppContext";
 
 const Dashboard = () => {
@@ -103,9 +103,7 @@ const Dashboard = () => {
                           {dashboardData.under_maintenance || 0}
                         </h4>
                       </div>
-                      <small className="mb-0">
-                        Vehicles currently under maintenance
-                      </small>
+                      <small className="mb-0">Vehicles under maintenance</small>
                     </div>
                     <div className="avatar">
                       <Link to="/maintenance">
@@ -145,6 +143,12 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="col-sm-6 col-xl-6">
+              <FinanceChart />
+            </div>
+            <div className="col-sm-6 col-xl-6">
+              <TripChart />
             </div>
           </div>
         </>

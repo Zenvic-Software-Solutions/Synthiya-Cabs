@@ -4,19 +4,27 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDataContext } from "@context/DataContext";
 import { useAppContext } from "@context/AppContext";
 import { Loader } from "@components";
-import {} from "@api/urls";
 
-export function SubmitButton() {
+export function SubmitButton({ redirectUrl }) {
   const { uuid } = useParams();
   const { isSubmitting } = useFormikContext();
+  const navigate = useNavigate();
 
   const buttonLabel = uuid ? "Update" : "Submit";
   const loadingLabel = uuid ? "Updating..." : "Submitting...";
 
   return (
-    <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
-      {isSubmitting ? loadingLabel : buttonLabel}
-    </button>
+    <>
+      <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? loadingLabel : buttonLabel}
+      </button>
+      <button
+        className="btn btn-secondary ms-5"
+        onClick={() => navigate(redirectUrl)}
+      >
+        Cancel
+      </button>
+    </>
   );
 }
 
@@ -50,6 +58,30 @@ export function TextField({ name, fieldData }) {
         value={values[name] || ""}
         onChange={(e) => setFieldValue(name, e.target.value)}
         defaultValue={fieldData["defaultValue"]}
+      />
+      <ErrorMessage name={name} component="div" className="text-danger mt-1" />
+    </div>
+  );
+}
+
+export function TextAreaField({ name, fieldData }) {
+  const { values, setFieldValue } = useFormikContext();
+
+  return (
+    <div className="mb-3">
+      <label className="form-label" htmlFor={name}>
+        {fieldData.label || name}
+      </label>
+      <Field
+        as="textarea"
+        name={name}
+        id={name}
+        className="form-control"
+        placeholder={fieldData.placeholder}
+        value={values[name] || ""}
+        onChange={(e) => setFieldValue(name, e.target.value)}
+        defaultValue={fieldData["defaultValue"]}
+        rows={fieldData.rows || 3} // Default to 3 rows if not specified
       />
       <ErrorMessage name={name} component="div" className="text-danger mt-1" />
     </div>
@@ -276,6 +308,7 @@ export function BooleanSelectField({ name, fieldData }) {
 
 const FieldNames = {
   text: TextField,
+  textarea: TextAreaField,
   number: NumberField,
   select: SelectField,
   file: ImageField,
@@ -284,7 +317,7 @@ const FieldNames = {
   password: PasswordField,
 };
 
-function FormElements({ formFields }) {
+function FormElements({ formFields, redirectUrl }) {
   return (
     <div className="card mb-6" style={{ padding: "20px 40px" }}>
       <div className="card-body">
@@ -306,7 +339,7 @@ function FormElements({ formFields }) {
         <div className="row">
           <div className="col-12">
             <StatusAlert />
-            <SubmitButton />
+            <SubmitButton redirectUrl={redirectUrl} />
           </div>
         </div>
       </div>
@@ -427,18 +460,16 @@ export default function Index({
           setPreviews(mappedData || []);
         }
         setFormData(response.initial || formData);
-        setDynamicFormMeta(response);
       } else if (isUserForm) {
         const response = await apiFunction.getForm();
         setFormData(response || formData);
-        setDynamicFormMeta(response);
       }
       setIsLoading(false);
     };
     fetchFormData();
   }, [formUUID, isAuthForm, isUserForm]);
 
-  // if (isLoading) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <Formik
@@ -447,7 +478,11 @@ export default function Index({
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form>{children || <FormElements formFields={formFields} />}</Form>
+      <Form>
+        {children || (
+          <FormElements formFields={formFields} redirectUrl={redirectUrl} />
+        )}
+      </Form>
     </Formik>
   );
 }

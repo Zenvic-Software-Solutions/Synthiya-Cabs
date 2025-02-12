@@ -1,4 +1,4 @@
-import { Header, Sidebar, Breadcrumb } from "@components/index.js";
+import { Header, Sidebar, Breadcrumb, Loader } from "@components";
 import { Outlet, Navigate } from "react-router-dom";
 
 const MainLayout = () => {
@@ -25,6 +25,7 @@ const MainLayout = () => {
                 </div>
               </div>
             </div>
+
             <div className="content-backdrop fade" />
           </div>
         </div>

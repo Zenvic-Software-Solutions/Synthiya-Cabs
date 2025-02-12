@@ -8,7 +8,7 @@ export default function WorkshopList() {
       tableMetaApi={workshopTableMeta}
       tableDataApi={workshopTableData}
       actionLink={{
-        viewLink: "#",
+        viewLink: "/workshop/view",
         editLink: "/workshop/form",
         deleteLink: "#",
       }}
@@ -20,7 +20,7 @@ export default function WorkshopList() {
             label: "Workshop list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Workshop",
           link: "/workshop/form",

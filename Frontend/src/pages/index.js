@@ -44,5 +44,10 @@ export { default as OtherCabsVehicleList } from "./OtherCabs/Vehicle/List";
 export { default as OtherCabsVehicleForm } from "./OtherCabs/Vehicle/Form";
 export { default as OtherCabsVehicleView } from "./OtherCabs/Vehicle/View";
 
+// Booking Pages
+export { default as BookingList } from "./Booking/List";
+export { default as BookingForm } from "./Booking/Form";
+export { default as BookingView } from "./Booking/View";
+
 // Report Pages
 export { default as Report } from "./Report";

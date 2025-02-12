@@ -8,7 +8,7 @@ export default function index() {
       tableMetaApi={driverTableMeta}
       tableDataApi={driverTableData}
       actionLink={{
-        viewLink: "#",
+        viewLink: "/driver/view",
         editLink: "/driver/form",
         deleteLink: "#",
       }}
@@ -20,7 +20,7 @@ export default function index() {
             label: "Driver list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Driver",
           link: "/driver/form",

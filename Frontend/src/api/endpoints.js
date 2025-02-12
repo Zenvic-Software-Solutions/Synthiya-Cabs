@@ -12,18 +12,23 @@ const EndPoints = {
   // Staff API
   staffListURL: "/access/staff/list/",
   staffCudURL: "/access/staff/cud/",
+  staffUpdateURL: "/access/staff/update/",
+  staffDetailURL: "/access/staff/retrieve/",
 
   // Workshop API
   workshopListURL: "/cms/workshop/list/",
   workshopCudURL: "/cms/workshop/cud/",
+  workshopDetailURL: "/cms/workshop/detail/",
 
   // Vehicle API
-  vehicleListURL: "/access/user/list/",
-  vehicleCudURL: "/access/user/cud/",
+  vehicleListURL: "/cms/vehicle/list/",
+  vehicleCudURL: "/cms/vehicle/cud/",
 
   // Driver API
   driverListURL: "/access/driver/list/",
   driverCudURL: "/access/driver/cud/",
+  driverUpdateURL: "/access/driver/update/",
+  driverDetailURL: "/access/driver/retrieve/",
 
   // OtherCabes Cabs API
   otherCabsListURL: "/cms/othercab/list/",
@@ -38,8 +43,13 @@ const EndPoints = {
   otherCabsDriverCudURL: "/cms/otherdriver/cud/",
 
   //BankList API
-  bankListURL:"/cms/bank/list/",
-  bankCudURL:"/cms/bank/cud/",
+  bankListURL: "/cms/bank/list/",
+  bankCudURL: "/cms/bank/cud/",
+  bankDetailURL: "/cms/bank/detail/",
+
+  // Booking API
+  bookingListURL: "/cms/booking/list/",
+  bookingCudURL: "/cms/booking/cud/",
 };
 
 export default EndPoints;
