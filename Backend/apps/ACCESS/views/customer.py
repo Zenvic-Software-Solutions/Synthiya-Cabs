@@ -6,6 +6,7 @@ from apps.ACCESS.serializers import (
     DriverReadSerializer,
     UserReadSerializer,
     StaffWriteSerializer,
+    CustomerReadSerializer,
 )
 
 
@@ -109,3 +110,50 @@ class CustomerRetrieveAPIView(AppAPIView):
         }
 
         return self.send_response(data)
+
+
+class CustomerListAPIView(AppListAPIViewSet):
+    search_fields = ["user__phone_number", "staff_id", "identity", "email"]
+    filterset_fields = {"dob": ["gte", "lte"], "date_of_joining": ["gte", "lte"]}
+    queryset = Staff.objects.all()
+
+    serializer_class = CustomerReadSerializer
+
+    column_details = {
+        "identity": "Name",
+        "staff_id": "Staff ID",
+        "user_details.phone_number": "Phone Number",
+        "dob": "Birth Date",
+        "date_of_joining": "Joining Date",
+    }
+
+    filter_details = {"dob": "Birth", "date_of_joining": "Joining Date"}
+
+    def get_table_meta(self):
+        data = {
+            "columns": self.column_details,
+            "filters": self.filter_details,
+            "filter_data": {},
+        }
+        return data
+
+
+class CustomerListAPIView(AppListAPIViewSet):
+    search_fields = ["user__phone_number", "customer_id", "identity"]
+    queryset = Customer.objects.all()
+
+    serializer_class = CustomerReadSerializer
+
+    column_details = {
+        "identity": "Name",
+        "customer_id": "Customer ID",
+        "user_details.phone_number": "Phone Number",
+    }
+
+    def get_table_meta(self):
+        data = {
+            "columns": self.column_details,
+            "filters": self.filter_details,
+            "filter_data": {},
+        }
+        return data

@@ -21,6 +21,7 @@ from apps.ACCESS.views import (
     StaffRetrieveAPIView,
     CustomerUpdateAPIView,
     CustomerRetrieveAPIView,
+    CustomerListAPIView,
 )
 
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -34,7 +35,7 @@ API_URL_PREFIX = "api/"
 router = SimpleRouter()
 router.register("user/list", UserListAPIView)
 router.register("staff/list", StaffListAPIView)
-# router.register("staff/cud",StaffCUDAPIView)
+router.register("customer/list", CustomerListAPIView)
 router.register("driver/list", DriverListAPIView)
 
 urlpatterns = [

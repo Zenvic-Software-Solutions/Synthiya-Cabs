@@ -20,6 +20,7 @@ from .customer import (
     CustomerCreateAPIView,
     CustomerUpdateAPIView,
     CustomerRetrieveAPIView,
+    CustomerListAPIView,
 )
 
 from .driver import (

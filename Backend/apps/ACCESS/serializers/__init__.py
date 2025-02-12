@@ -14,3 +14,5 @@ from .staff import (
     StaffWriteSerializer,
     StaffReadSerializer,
 )
+
+from .customer import CustomerReadSerializer
