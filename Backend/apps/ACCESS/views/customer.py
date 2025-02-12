@@ -85,3 +85,27 @@ class CustomerUpdateAPIView(AppAPIView):
         customer.save()
 
         return self.send_response({"message": "Customer updated successfully"})
+
+
+class CustomerRetrieveAPIView(AppAPIView):
+    def get(self, request, uuid, *args, **kwargs):
+        phone_number = request.GET.get("hone_number")
+        password = request.GET.get("password")
+        try:
+            customer = Customer.objects.get(uuid=uuid)
+        except Customer.DoesNotExist:
+            return self.send_error_response({"error": "Customer not found"})
+
+        try:
+            user = User.objects.get(phone_number=phone_number, password=password)
+        except User.DoesNotExist:
+            return self.send_error_response({"error": "User not found"})
+
+        data = {
+            "identity": customer.identity,
+            "customer_id": customer.customer_id,
+            "user_phone_number": user.phone_number,
+            "user_password": user.password,
+        }
+
+        return self.send_response(data)

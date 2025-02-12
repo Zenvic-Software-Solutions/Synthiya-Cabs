@@ -102,12 +102,10 @@ class DriverRetrieveAPIView(AppAPIView):
             "email": driver.email,
             "address": driver.address,
             "license_no": driver.license_no,
-            "phone_number": user.phone_number,
-            "password": user.password,
             "dob": driver.dob,
             "date_of_joining": driver.date_of_joining,
             "user_phone_number": user.phone_number,
-            "user_password": user.password,  # ⚠️ Warning: Never expose raw passwords
+            "user_password": user.password,
         }
 
         return self.send_response(data)

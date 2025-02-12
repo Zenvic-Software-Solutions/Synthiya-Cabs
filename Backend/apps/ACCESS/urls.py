@@ -17,6 +17,10 @@ from apps.ACCESS.views import (
     CustomerCreateAPIView,
     DriverUpdateAPIView,
     DriverRetrieveAPIView,
+    StaffUpdateAPIView,
+    StaffRetrieveAPIView,
+    CustomerUpdateAPIView,
+    CustomerRetrieveAPIView,
 )
 
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -47,7 +51,23 @@ urlpatterns = [
     path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver-create"),
     path("driver/update/<uuid>/", DriverUpdateAPIView.as_view(), name="driver-update"),
     path(
-        "driver/retrieve/<uuid>/", DriverRetrieveAPIView.as_view(), name="driver-update"
+        "driver/retrieve/<uuid>/",
+        DriverRetrieveAPIView.as_view(),
+        name="driver-retrieve",
+    ),
+    path("staff/update/<uuid>/", StaffUpdateAPIView.as_view(), name="staff-update"),
+    path(
+        "staff/retrieve/<uuid>/", StaffRetrieveAPIView.as_view(), name="staff-retrieve"
+    ),
+    path(
+        "customer/update/<uuid>/",
+        CustomerUpdateAPIView.as_view(),
+        name="customer-update",
+    ),
+    path(
+        "customer/retrieve/<uuid>/",
+        CustomerRetrieveAPIView.as_view(),
+        name="customer-retrieve",
     ),
     path("customer/create/", CustomerCreateAPIView.as_view(), name="customer"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),

@@ -69,4 +69,68 @@ class StaffCUDAPIView(AppAPIView):
 
 class StaffUpdateAPIView(AppAPIView):
     def put(self, request, *args, **kwargs):
-        pass
+        uuid = request.data.get("uuid")
+        if not uuid:
+            return self.send_error_response({"error": "UUID is required for update"})
+
+        identity = request.data.get("identity")
+        staff_id = request.data.get("staff_id")
+        email = request.data.get("email")
+        phone_number = request.data.get("phone_number")
+        password = request.data.get("password")
+        address = request.data.get("address")
+        dob = request.data.get("dob")
+        date_of_joining = request.data.get("date_of_joining")
+
+        try:
+            staff = Staff.objects.get(uuid=uuid)
+        except Staff.DoesNotExist:
+            return self.send_error_response({"error": "Staff not found"})
+
+        user = staff.user
+        staff.identity = identity if identity else staff.identity
+        staff.staff_id = staff_id if staff_id else staff.staff_id
+        staff.email = email if email else staff.email
+        staff.address = address if address else staff.address
+        staff.dob = dob if dob else staff.dob
+        staff.date_of_joining = (
+            date_of_joining if date_of_joining else staff.date_of_joining
+        )
+
+        if phone_number:
+            user.phone_number = phone_number
+        if password:
+            user.set_password(password)
+
+        user.save()
+        staff.save()
+
+        return self.send_response({"message": "Staff updated successfully"})
+
+
+class StaffRetrieveAPIView(AppAPIView):
+    def get(self, request, uuid, *args, **kwargs):
+        phone_number = request.GET.get("hone_number")
+        password = request.GET.get("password")
+        try:
+            staff = Staff.objects.get(uuid=uuid)
+        except Staff.DoesNotExist:
+            return self.send_error_response({"error": "Staff not found"})
+
+        try:
+            user = User.objects.get(phone_number=phone_number, password=password)
+        except User.DoesNotExist:
+            return self.send_error_response({"error": "User not found"})
+
+        data = {
+            "identity": staff.identity,
+            "staff_id": staff.staff_id,
+            "email": staff.email,
+            "address": staff.address,
+            "dob": staff.dob,
+            "date_of_joining": staff.date_of_joining,
+            "user_phone_number": user.phone_number,
+            "user_password": user.password,
+        }
+
+        return self.send_response(data)

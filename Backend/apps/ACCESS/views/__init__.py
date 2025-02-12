@@ -12,11 +12,14 @@ from .user import (
 from .staff import (
     StaffListAPIView,
     StaffCUDAPIView,
+    StaffRetrieveAPIView,
+    StaffUpdateAPIView,
 )
 from .customer import (
     UserListAPIView,
     CustomerCreateAPIView,
     CustomerUpdateAPIView,
+    CustomerRetrieveAPIView,
 )
 
 from .driver import (
