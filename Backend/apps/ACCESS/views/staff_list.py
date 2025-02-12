@@ -1,6 +1,6 @@
 from HELPERS.choices import ROLE
 from apps.BASE.views import AppListAPIViewSet, AppCUDAPIViewSet, AppAPIView
-from apps.ACCESS.models import Staff, User, Driver,Customer
+from apps.ACCESS.models import Staff, User, Driver, Customer
 from apps.ACCESS.serializers import (
     StaffReadSerializer,
     DriverReadSerializer,
@@ -121,40 +121,62 @@ class DriverCUDPAPIView(AppAPIView):
             date_of_joining=date_of_joining,
             user=user,
         )
-        return self.send_response({"message":"Driver Created Successfully"})
-    
+        return self.send_response({"message": "Driver Created Successfully"})
+
 
 class DriverUpdateAPIView(AppAPIView):
-    def put(self,request,*args,**kwargs):
+    def put(self, request, *args, **kwargs):
         identity = request.data.get("identity")
         driver_id = request.data.get("driver_id")
         email = request.data.get("email")
         address = request.data.get("address")
-        license_no =request.data.get("license_no")
+        license_no = request.data.get("license_no")
         phone_number = request.data.get("phone_number")
-        password = request.data.get("password")
         dob = request.data.get("dob")
         date_of_joining = request.data.get("date_of_joining")
 
-        user = User.objects.get(phone_number=phone_number)
+        try:
+            # Get the user by phone number
+            user = User.objects.get(phone_number=phone_number)
+        except User.DoesNotExist:
+            return self.send_error_response({"error": "User not found"})
 
-        if Driver.objects.filter(user = user).exists():
-            return self.send_error_response({"error":"Phone Number already exists"})
-        Driver.objects.create(identity = identity,
-                              driver_id = driver_id,
-                              email=email,
-                              address = address,license_no=license_no,phone_number=phone_number,password=password,
-                              dob=dob,date_of_joining=date_of_joining)
-        return self.send_response({"message":"Driver Updated Successfully"})
-        
+        try:
+            driver = Driver.objects.get(user=user)
+        except Driver.DoesNotExist:
+            return self.send_error_response({"error": "Driver not found"})
+
+        driver.identity = identity
+        driver.driver_id = driver_id
+        driver.email = email
+        driver.address = address
+        driver.license_no = license_no
+        driver.dob = dob
+        driver.date_of_joining = date_of_joining
+        driver.save()
+
+        return self.send_response({"message": "Driver Updated Successfully"})
 
 
+class DriverRetrieveAPIView(AppAPIView):
+    def get(self, request, uuid, *args, **kwargs):
+        try:
+            driver = Driver.objects.get(uuid=uuid)
+        except Driver.DoesNotExist:
+            return self.send_error_response({"error": "Driver not found"})
 
+        data = {
+            "identity": driver.identity,
+            "driver_id": driver.driver_id,
+            "email": driver.email,
+            "address": driver.address,
+            "license_no": driver.license_no,
+            # "phone_number": driver.phone_number,
+            "dob": driver.dob,
+            "date_of_joining": driver.date_of_joining,
+        }
+        return self.send_response(data)
 
-        
-        
-
-    
 
 class DriverListAPIView(AppListAPIViewSet):
     search_fields = [
@@ -210,7 +232,6 @@ class UserListAPIView(AppListAPIViewSet):
         return data
 
 
-
 class CustomerCreateAPIView(AppAPIView):
     def post(self, request, *args, **kwargs):
         identity = request.data.get("identity")
@@ -221,7 +242,9 @@ class CustomerCreateAPIView(AppAPIView):
             return self.send_error_response({"error": "Phone number is required"})
 
         # Get or create user
-        user, created = User.objects.get_or_create(phone_number=phone_number, defaults={"password": "admin@123"})
+        user, created = User.objects.get_or_create(
+            phone_number=phone_number, defaults={"password": "admin@123"}
+        )
 
         # Check if a customer already exists for the user
         if Customer.objects.filter(user=user).exists():
