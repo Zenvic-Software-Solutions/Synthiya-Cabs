@@ -45,10 +45,12 @@ class Maintenance(BaseModel):
     )
 
     description = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
-    start_date = models.DateField()
+    start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
-    start_km = models.DecimalField(max_digits=10, decimal_places=2)
+    start_km = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
     end_km = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     status = AppSingleChoiceField(MAINTENANCE_STATUS_CHOICES)
