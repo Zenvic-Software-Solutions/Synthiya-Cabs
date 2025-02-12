@@ -7,6 +7,7 @@ from django.db import models
 from apps.CMS.models import Vehicle, OtherCab, OtherDriver
 from apps.ACCESS.models import Customer, Driver
 from HELPERS.choices import RENT_TYPE_CHOICES
+from apps.BASE.model_fields import AppSingleChoiceField
 
 
 class Booking(BaseModel):
@@ -26,7 +27,7 @@ class Booking(BaseModel):
     driver = models.ForeignKey(
         Driver, on_delete=models.CASCADE, related_name="bookings", null=True, blank=True
     )
-    otherDriver = models.ForeignKey(
+    otherdriver = models.ForeignKey(
         OtherDriver,
         on_delete=models.CASCADE,
         related_name="bookings",
@@ -51,3 +52,39 @@ class Booking(BaseModel):
 
     def __str__(self):
         return f"Booking {self.customer} ({self.start_date} to {self.end_date})"
+
+
+from HELPERS.choices import PAYMENT_TYPE_CHOICES
+
+
+class Payment(BaseModel):
+    booking = models.ForeignKey(
+        Booking, on_delete=models.CASCADE, related_name="payments"
+    )
+    driver_betta = models.ForeignKey(
+        "CMS.Betta",
+        on_delete=models.CASCADE,
+        related_name="payments",
+        null=True,
+        blank=True,
+    )
+
+    halting_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    hills_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    permit = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    commission = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    total_amount = models.DecimalField(max_digits=15, decimal_places=2)
+    gst = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    deduction = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    advance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    paid_amount = models.DecimalField(max_digits=15, decimal_places=2)
+    balance = models.DecimalField(max_digits=15, decimal_places=2)
+
+    other_details = models.TextField(**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
+    is_sponsor = models.BooleanField(default=False)
+
+    payment_type = AppSingleChoiceField(PAYMENT_TYPE_CHOICES)
+
+    def __str__(self):
+        return f"Payment for Booking {self.booking.id} - {self.payment_type}"

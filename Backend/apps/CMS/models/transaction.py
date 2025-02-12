@@ -20,7 +20,7 @@ class Ledger(BaseModel):
     name = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH, unique=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
 
 class SubLedger(BaseModel):

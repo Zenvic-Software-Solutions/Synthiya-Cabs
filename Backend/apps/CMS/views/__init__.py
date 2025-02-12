@@ -23,5 +23,5 @@ from .workshop import (
     MaintenanceDetailAPIView,
     WorkshopDetailAPIView,
 )
-from .booking import BookingCUDAPIView, BookingListAPIView, BankDetailViewSet
+from .booking import BookingCUDAPIView, BookingListAPIView, BookingDetailViewSet
 from .trip import TripListAPIView, TripCUDAPIView, TripDetailViewSet

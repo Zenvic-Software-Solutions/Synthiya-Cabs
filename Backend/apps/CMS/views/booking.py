@@ -16,29 +16,29 @@ from rest_framework.generics import RetrieveAPIView
 
 class BookingListAPIView(AppListAPIViewSet):
     search_fields = [
-        "customer__identity",
-        "vechicle__identity",
-        "cab__identity",
-        "driver__identity",
-        "otherdriver__identity",
-        "sponsor__identity",
-        "start_date",
-        "end_date",
-        "start_place",
-        "end_place",
-        "no_of_days",
+        # "customer__identity",
+        # "vechicle__identity",
+        # "cab__identity",
+        # "driver__identity",
+        # "otherdriver__identity",
+        # "sponsor__identity",
+        # "start_date",
+        # "end_date",
+        # "start_place",
+        # "end_place",
+        # "no_of_days",
     ]
     filterset_fields = {
-        "start_date": ["gte", "lte"],
-        "end_start": ["gte", "lte"],
-        "start_place": ["exact"],
-        "end_place": ["exact"],
-        "rent_amount": ["gte", "lte"],
-        "vechicle__identity": ["exact"],
-        "cab__identity": ["exact"],
-        "driver__identity": ["exact"],
-        "otherdriver__identity": ["exact"],
-        "sponsor__identity": ["exact"],
+        # "start_date": ["gte", "lte"],
+        # "end_start": ["gte", "lte"],
+        # "start_place": ["exact"],
+        # "end_place": ["exact"],
+        # "rent_amount": ["gte", "lte"],
+        # "vechicle__identity": ["exact"],
+        # "cab__identity": ["exact"],
+        # "driver__identity": ["exact"],
+        # "otherdriver__identity": ["exact"],
+        # "sponsor__identity": ["exact"],
     }
 
     queryset = Booking.objects.all()
@@ -78,7 +78,7 @@ class BookingListAPIView(AppListAPIViewSet):
             "columns": self.column_details,
             "filters": self.filter_details,
             "filter_data": {
-                "customer": self.serialize_for_filter(Customer.objecys.all()),
+                "customer": self.serialize_for_filter(Customer.objects.all()),
                 "vehicle": self.serialize_for_filter(Vehicle.objects.all()),
                 "cab": self.serialize_for_filter(OtherCab.objects.all()),
                 "driver": self.serialize_for_filter(Driver.objects.all()),
@@ -86,6 +86,7 @@ class BookingListAPIView(AppListAPIViewSet):
                 "otherdriver": self.serialize_for_filter(OtherDriver.objects.all()),
             },
         }
+        return data
 
 
 class BookingCUDAPIView(AppCUDAPIViewSet):
@@ -93,6 +94,6 @@ class BookingCUDAPIView(AppCUDAPIViewSet):
     serializer_class = BookingWriteSerializer
 
 
-class BankDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+class BookingDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingRDetailSerializer

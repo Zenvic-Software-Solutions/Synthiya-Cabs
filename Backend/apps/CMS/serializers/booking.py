@@ -54,7 +54,7 @@ class BookingWriteSerializer(WriteSerializer):
             "driver",
             "otherdriver",
             "start_date",
-            "end_start",
+            "end_date",
             "start_place",
             "end_place",
             "no_of_days",
