@@ -40,3 +40,32 @@ class TripListAPIView(AppListAPIViewSet):
             },
         }
         return data
+    
+class TripListAPIView(AppListAPIViewSet):
+    search_fields = []
+    filterset_fields = {"start_date": ["gte", "lte"], "end_date": ["gte", "lte"]}
+    queryset = FinanceHistory.objects.all()
+    serializer_class = FinanceHistoryReadSerializer
+    column_details = {
+    
+        "finance_name": "Finanace Name",
+        "due_amount": "Due Amount",
+        "due_date": "Due Date",
+        
+    }
+
+    filter_details = {
+        "start_date": "Start Date",
+        "end_date": "End Date",
+        
+    }
+
+    def get_table_meta(self):
+        data = {
+            "columns": self.column_details,
+            "filters": self.filter_details,
+            "filter_data": {
+                "finance": self.serialize_for_filter(FinanceHistory.objects.all()),
+            },
+        }
+        return data
