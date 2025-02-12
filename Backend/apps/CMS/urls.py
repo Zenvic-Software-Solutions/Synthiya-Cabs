@@ -86,7 +86,7 @@ router.register(r"trip/cud", TripCUDAPIView, basename="trip-cud")
 
 urlpatterns = [
     path(
-        "otherdriver/list/<uuid>",
+        "otherdriver/list/<uuid>/",
         OtherDriverListViewSet.as_view({"get": "list"}),
         name="otherdriver-list",
     ),
