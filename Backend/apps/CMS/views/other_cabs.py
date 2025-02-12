@@ -92,7 +92,12 @@ class OtherDriverCUDViewSet(AppCUDAPIViewSet):
 class OtherVehicleListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
     filterset_fields = []
-    queryset = OtherVehicle.objects.all().order_by("-created_by")
+
+    def get_queryset(self):
+        uuid = self.kwargs.get("uuid")
+        queryset = OtherVehicle.objects.filter(uuid=uuid).order_by("-created_by")
+        return queryset
+
     serializer_class = OtherVehicleReadserializer
     column_details = {
         "identity": "Vehicle Name",
