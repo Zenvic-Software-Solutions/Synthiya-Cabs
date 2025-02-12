@@ -18,7 +18,7 @@ class Booking(BaseModel):
     vehicle = models.ForeignKey(
         Vehicle, on_delete=models.CASCADE, related_name="vehicle_bookings"
     )
-    cab = models.ForeignKey(
+    othercab = models.ForeignKey(
         OtherCab,
         on_delete=models.CASCADE,
         related_name="cab_bookings",
@@ -70,13 +70,7 @@ class Payment(BaseModel):
     booking = models.ForeignKey(
         Booking, on_delete=models.CASCADE, related_name="payments"
     )
-    driver_betta = models.ForeignKey(
-        "CMS.Betta",
-        on_delete=models.CASCADE,
-        related_name="betta_payments",
-        null=True,
-        blank=True,
-    )
+    driver_betta = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     halting_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     hills_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

@@ -19,6 +19,7 @@ from apps.CMS.views import (
     OtherVehicleCUDViewSet,
     VehicleListViewSet,
     VehicleCUDViewSet,
+    VechileDetailViewSet,
     BankListViewSet,
     BankCUDViewSet,
     BankDetailViewSet,
@@ -121,6 +122,9 @@ urlpatterns = [
         "othercab/detail/<uuid>/",
         OtherCabDetailViewSet.as_view(),
         name="othercab-detail-view",
+    ),
+    path(
+        "vehicle/detail/<uuid>/", VechileDetailViewSet.as_view(), name="vehicle-details"
     ),
     path("bank/detail/<uuid>/", BankDetailViewSet.as_view(), name="bank-details"),
     path(

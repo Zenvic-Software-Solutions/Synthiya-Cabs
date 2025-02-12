@@ -7,7 +7,7 @@ from .other_cabs import (
     OtherVehicleListViewSet,
     OtherVehicleCUDViewSet,
 )
-from .vehicle import VehicleListViewSet, VehicleCUDViewSet
+from .vehicle import VehicleListViewSet, VehicleCUDViewSet, VechileDetailViewSet
 from .bank import (
     BankListViewSet,
     BankCUDViewSet,

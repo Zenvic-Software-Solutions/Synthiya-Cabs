@@ -14,7 +14,7 @@ class BookingReadSerializer(ReadSerializer):
         source="vehicle"
     )
     cab_details = read_serializer(OtherCab, meta_fields=["id", "uuid", "identity"])(
-        source="cab"
+        source="othercab"
     )
     driver_details = read_serializer(Driver, meta_fields=["id", "uuid", "identity"])(
         source="driver"
@@ -48,7 +48,7 @@ class BookingWriteSerializer(WriteSerializer):
         fields = [
             "customer",
             "vehicle",
-            "cab",
+            "othercab",
             "driver",
             "otherdriver",
             "start_date",
@@ -71,7 +71,7 @@ class BookingRDetailSerializer(ReadSerializer):
         source="vehicle"
     )
     cab_details = read_serializer(OtherCab, meta_fields=["id", "uuid", "identity"])(
-        source="cab"
+        source="othercab"
     )
     driver_details = read_serializer(Driver, meta_fields=["id", "uuid", "identity"])(
         source="driver"
