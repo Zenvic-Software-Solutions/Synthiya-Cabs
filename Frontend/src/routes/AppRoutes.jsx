@@ -88,6 +88,14 @@ const AppRoutes = createBrowserRouter([
           { path: "view/:uuid?", element: <Pages.BookingView /> },
         ],
       },
+      {
+        path: "customer",
+        children: [
+          {path: "list", element: <Pages.CustomerList />},
+          {path: "form/:uuid?", element: <Pages.CustomerForm/>},
+          {path: "view/:uuid?", element: <Pages.CustomerView/>},
+        ]
+      },
       { path: "report", element: <Pages.Report /> },
     ],
   },

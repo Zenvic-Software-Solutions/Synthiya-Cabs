@@ -89,3 +89,11 @@ export const bookingTableData = (data) => makeGetRequest(EndPoints.bookingListUR
 export const getBookingCud = (uuid) => makeGetRequest(EndPoints.bookingCudURL + uuid + "/meta/");
 export const postBookingCud = (data) => makePostRequest(EndPoints.bookingCudURL, data);
 export const patchBookingCud = (uuid, data) => makePatchRequest(EndPoints.bookingCudURL + uuid + "/", data);
+
+// Staff API
+export const customerTableMeta = () => makeGetRequest(EndPoints.customerListURL + "table-meta/");
+export const customerTableData = (data) => makeGetRequest(EndPoints.customerListURL, data);
+export const getCustomerCud = (uuid) => makeGetRequest(EndPoints.customerDetailURL + uuid + "/");
+export const postCustomerCud = (data) => makePostRequest(EndPoints.customerCudURL, data);
+export const patchCustomerCud = (uuid, data) => makePutRequest(EndPoints.customerUpdateURL + uuid + "/", data);
+export const customerDetail = (uuid) => makeGetRequest(EndPoints.customerDetailURL + uuid + "/");

@@ -50,6 +50,12 @@ const EndPoints = {
   // Booking API
   bookingListURL: "/cms/booking/list/",
   bookingCudURL: "/cms/booking/cud/",
+
+    // Customer API
+    customerListURL: "/access/customer/list/",
+    customerCudURL: "/access/customer/create/",
+    customerUpdateURL: "/access/customer/update/",
+    customerDetailURL: "/access/customer/retrieve/",
 };
 
 export default EndPoints;
