@@ -68,11 +68,7 @@ class StaffCUDAPIView(AppAPIView):
 
 
 class StaffUpdateAPIView(AppAPIView):
-    def put(self, request, *args, **kwargs):
-        uuid = request.data.get("uuid")
-        if not uuid:
-            return self.send_error_response({"error": "UUID is required for update"})
-
+    def put(self, request, uuid, *args, **kwargs):
         identity = request.data.get("identity")
         staff_id = request.data.get("staff_id")
         email = request.data.get("email")
@@ -110,17 +106,10 @@ class StaffUpdateAPIView(AppAPIView):
 
 class StaffRetrieveAPIView(AppAPIView):
     def get(self, request, uuid, *args, **kwargs):
-        phone_number = request.GET.get("hone_number")
-        password = request.GET.get("password")
         try:
             staff = Staff.objects.get(uuid=uuid)
         except Staff.DoesNotExist:
             return self.send_error_response({"error": "Staff not found"})
-
-        try:
-            user = User.objects.get(phone_number=phone_number, password=password)
-        except User.DoesNotExist:
-            return self.send_error_response({"error": "User not found"})
 
         data = {
             "identity": staff.identity,
@@ -129,8 +118,7 @@ class StaffRetrieveAPIView(AppAPIView):
             "address": staff.address,
             "dob": staff.dob,
             "date_of_joining": staff.date_of_joining,
-            "user_phone_number": user.phone_number,
-            "user_password": user.password,
+            "user_phone_number": staff.user.phone_number,
         }
 
         return self.send_response(data)

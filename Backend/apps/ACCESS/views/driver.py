@@ -37,11 +37,7 @@ class DriverCUDPAPIView(AppAPIView):
 
 
 class DriverUpdateAPIView(AppAPIView):
-    def put(self, request, *args, **kwargs):
-        uuid = request.data.get("uuid")
-        if not uuid:
-            return self.send_error_response({"error": "UUID is required for update"})
-
+    def put(self, request, uuid, *args, **kwargs):
         identity = request.data.get("identity")
         driver_id = request.data.get("driver_id")
         email = request.data.get("email")
@@ -84,17 +80,10 @@ class DriverUpdateAPIView(AppAPIView):
 
 class DriverRetrieveAPIView(AppAPIView):
     def get(self, request, uuid, *args, **kwargs):
-        phone_number = request.GET.get("hone_number")
-        password = request.GET.get("password")
         try:
             driver = Driver.objects.get(uuid=uuid)
         except Driver.DoesNotExist:
             return self.send_error_response({"error": "Driver not found"})
-
-        try:
-            user = User.objects.get(phone_number=phone_number, password=password)
-        except User.DoesNotExist:
-            return self.send_error_response({"error": "User not found"})
 
         data = {
             "identity": driver.identity,
@@ -104,8 +93,7 @@ class DriverRetrieveAPIView(AppAPIView):
             "license_no": driver.license_no,
             "dob": driver.dob,
             "date_of_joining": driver.date_of_joining,
-            "user_phone_number": user.phone_number,
-            "user_password": user.password,
+            "user_phone_number": driver.user.phone_number,
         }
 
         return self.send_response(data)
