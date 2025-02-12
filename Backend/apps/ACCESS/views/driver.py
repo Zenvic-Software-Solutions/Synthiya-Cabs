@@ -86,14 +86,16 @@ class DriverRetrieveAPIView(AppAPIView):
             return self.send_error_response({"error": "Driver not found"})
 
         data = {
-            "identity": driver.identity,
-            "driver_id": driver.driver_id,
-            "email": driver.email,
-            "address": driver.address,
-            "license_no": driver.license_no,
-            "dob": driver.dob,
-            "date_of_joining": driver.date_of_joining,
-            "user_phone_number": driver.user.phone_number,
+            "initial": {
+                "identity": driver.identity,
+                "driver_id": driver.driver_id,
+                "email": driver.email,
+                "address": driver.address,
+                "license_no": driver.license_no,
+                "dob": driver.dob,
+                "date_of_joining": driver.date_of_joining,
+                "user_phone_number": driver.user.phone_number,
+            }
         }
 
         return self.send_response(data)
