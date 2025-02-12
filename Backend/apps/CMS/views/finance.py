@@ -12,7 +12,7 @@ from apps.CMS.serializers import (
 )
 from rest_framework.generics import RetrieveAPIView
 
-class TripListAPIView(AppListAPIViewSet):
+class FinanaceListAPIView(AppListAPIViewSet):
     search_fields = ["vehicle","finance_name","contact_number","total_amount","initiated_date"]
     filterset_fields = {"start_date": ["gte", "lte"], "end_date": ["gte", "lte"], "vehicle":["exact"]}
     queryset = Finance.objects.all()
@@ -41,7 +41,7 @@ class TripListAPIView(AppListAPIViewSet):
         }
         return data
     
-class TripListAPIView(AppListAPIViewSet):
+class FinanaceHistoryListAPIView(AppListAPIViewSet):
     search_fields = []
     filterset_fields = {"start_date": ["gte", "lte"], "end_date": ["gte", "lte"]}
     queryset = FinanceHistory.objects.all()
