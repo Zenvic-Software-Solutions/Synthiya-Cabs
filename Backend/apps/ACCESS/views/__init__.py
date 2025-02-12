@@ -9,13 +9,19 @@ from .user import (
     UserDetailView,
     DriverDetailView,
 )
-from .staff_list import (
+from .staff import (
     StaffListAPIView,
-    DriverListAPIView,
-    UserListAPIView,
     StaffCUDAPIView,
+)
+from .customer import (
+    UserListAPIView,
+    CustomerCreateAPIView,
+    CustomerUpdateAPIView,
+)
+
+from .driver import (
+    DriverListAPIView,
     DriverCUDPAPIView,
     DriverUpdateAPIView,
     DriverRetrieveAPIView,
-    CustomerCreateAPIView,
 )

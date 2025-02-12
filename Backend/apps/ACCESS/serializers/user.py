@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from apps.BASE.serializers import ReadSerializer
 from apps.ACCESS.models import User, Staff, Driver
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
@@ -99,4 +100,15 @@ class DriverSerializer(serializers.ModelSerializer):
             "dob",
             "date_of_joining",
             "user",
+        ]
+
+
+class UserReadSerializer(ReadSerializer):
+    class Meta(ReadSerializer.Meta):
+        model = User
+        fields = [
+            "id",
+            "uuid",
+            "phone_number",
+            "role",
         ]
