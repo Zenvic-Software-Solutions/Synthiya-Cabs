@@ -12,10 +12,13 @@ const EndPoints = {
   // Staff API
   staffListURL: "/access/staff/list/",
   staffCudURL: "/access/staff/cud/",
+  staffUpdateURL: "/access/staff/update/",
+  staffDetailURL: "/access/staff/retrieve/",
 
   // Workshop API
   workshopListURL: "/cms/workshop/list/",
   workshopCudURL: "/cms/workshop/cud/",
+  workshopDetailURL: "/cms/workshop/detail/",
 
   // Vehicle API
   vehicleListURL: "/cms/vehicle/list/",
@@ -24,6 +27,8 @@ const EndPoints = {
   // Driver API
   driverListURL: "/access/driver/list/",
   driverCudURL: "/access/driver/cud/",
+  driverUpdateURL: "/access/driver/update/",
+  driverDetailURL: "/access/driver/retrieve/",
 
   // OtherCabes Cabs API
   otherCabsListURL: "/cms/othercab/list/",
@@ -40,6 +45,7 @@ const EndPoints = {
   //BankList API
   bankListURL: "/cms/bank/list/",
   bankCudURL: "/cms/bank/cud/",
+  bankDetailURL: "/cms/bank/detail/",
 
   // Booking API
   bookingListURL: "/cms/booking/list/",

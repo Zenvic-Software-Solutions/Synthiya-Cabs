@@ -103,9 +103,7 @@ const Dashboard = () => {
                           {dashboardData.under_maintenance || 0}
                         </h4>
                       </div>
-                      <small className="mb-0">
-                        Vehicles currently under maintenance
-                      </small>
+                      <small className="mb-0">Vehicles under maintenance</small>
                     </div>
                     <div className="avatar">
                       <Link to="/maintenance">

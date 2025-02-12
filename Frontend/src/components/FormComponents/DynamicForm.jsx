@@ -460,18 +460,16 @@ export default function Index({
           setPreviews(mappedData || []);
         }
         setFormData(response.initial || formData);
-        setDynamicFormMeta(response);
       } else if (isUserForm) {
         const response = await apiFunction.getForm();
         setFormData(response || formData);
-        setDynamicFormMeta(response);
       }
       setIsLoading(false);
     };
     fetchFormData();
   }, [formUUID, isAuthForm, isUserForm]);
 
-  // if (isLoading) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <Formik
