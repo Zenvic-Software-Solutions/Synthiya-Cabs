@@ -59,8 +59,8 @@ class OtherDriverListViewSet(AppListAPIViewSet):
     serializer_class = OtherDriverReadserializer
 
     def get_queryset(self):
-        # uuid =
-        queryset = OtherDriver.objects.filter().order_by("-created_by")
+        uuid = self.kwargs.get("uuid")
+        queryset = OtherDriver.objects.filter(uuid=uuid).order_by("-created_by")
         return queryset
 
     column_details = {
