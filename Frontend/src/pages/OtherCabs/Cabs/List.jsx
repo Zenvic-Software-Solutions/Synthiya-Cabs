@@ -20,7 +20,7 @@ export default function index() {
             label: "Other-Cabs list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Other-Cabs",
           link: "/othercabs/form",

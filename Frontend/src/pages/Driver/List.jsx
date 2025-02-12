@@ -20,7 +20,7 @@ export default function index() {
             label: "Driver list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Driver",
           link: "/driver/form",

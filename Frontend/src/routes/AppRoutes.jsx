@@ -62,7 +62,9 @@ const AppRoutes = createBrowserRouter([
           { path: "list", element: <Pages.WorkshopList /> },
           { path: "form/:uuid?", element: <Pages.WorkshopForm /> },
           { path: "view/:uuid?", element: <Pages.WorkshopView /> },
-        ]},{
+        ],
+      },
+      {
         path: "othercabs-driver",
         children: [
           { path: "list", element: <Pages.OtherCabsDriverList /> },
@@ -76,6 +78,14 @@ const AppRoutes = createBrowserRouter([
           { path: "list", element: <Pages.OtherCabsVehicleList /> },
           { path: "form/:uuid?", element: <Pages.OtherCabsVehicleForm /> },
           { path: "view/:uuid?", element: <Pages.OtherCabsVehicleView /> },
+        ],
+      },
+      {
+        path: "booking",
+        children: [
+          { path: "list", element: <Pages.BookingList /> },
+          { path: "form/:uuid?", element: <Pages.BookingForm /> },
+          { path: "view/:uuid?", element: <Pages.BookingView /> },
         ],
       },
       { path: "report", element: <Pages.Report /> },

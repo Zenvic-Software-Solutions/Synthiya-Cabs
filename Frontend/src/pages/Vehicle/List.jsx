@@ -20,7 +20,7 @@ export default function index() {
             label: "Vehicle list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Vehicle",
           link: "/vehicle/form",

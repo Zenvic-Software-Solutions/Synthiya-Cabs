@@ -1,7 +1,7 @@
 import React from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
-import { getBankCUD, postBankCUD, patchBankCUD} from "@api/urls";
+import { getBankCUD, postBankCUD, patchBankCUD } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
   identity: Yup.string().trim().required("Bank Name is required"),
@@ -45,14 +45,13 @@ export default function index() {
       type: "text",
       label: "Account Holder Name",
       defaultValue: "",
-      placeholder:"Enter Account Holder Name"
-
+      placeholder: "Enter Account Holder Name",
     },
     ifsc_code: {
       type: "text",
       defaultValue: "",
       label: "IFSC Code",
-      placeholder: "",
+      placeholder: "Enter IFSC Code ",
     },
   };
   return (
@@ -67,7 +66,7 @@ export default function index() {
       }}
       breadcrumbData={{
         title: "Bank Form",
-        sidebarActiveId: 7,
+        sidebarActiveId: 8,
         list: [
           {
             label: "Bank list",

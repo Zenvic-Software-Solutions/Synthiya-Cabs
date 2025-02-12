@@ -20,7 +20,7 @@ export default function WorkshopList() {
             label: "Workshop list",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add Workshop",
           link: "/workshop/form",

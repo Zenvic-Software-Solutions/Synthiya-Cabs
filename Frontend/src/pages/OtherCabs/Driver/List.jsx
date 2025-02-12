@@ -22,7 +22,7 @@ export default function index() {
             label: "OtherCabs View",
           },
         ],
-        reportLink: "#",
+
         addButtonData: {
           name: "Add OtherCabs Driver",
           link: "/othercabs-driver/form",

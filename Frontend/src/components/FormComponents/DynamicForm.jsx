@@ -5,17 +5,26 @@ import { useDataContext } from "@context/DataContext";
 import { useAppContext } from "@context/AppContext";
 import { Loader } from "@components";
 
-export function SubmitButton() {
+export function SubmitButton({ redirectUrl }) {
   const { uuid } = useParams();
   const { isSubmitting } = useFormikContext();
+  const navigate = useNavigate();
 
   const buttonLabel = uuid ? "Update" : "Submit";
   const loadingLabel = uuid ? "Updating..." : "Submitting...";
 
   return (
-    <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
-      {isSubmitting ? loadingLabel : buttonLabel}
-    </button>
+    <>
+      <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? loadingLabel : buttonLabel}
+      </button>
+      <button
+        className="btn btn-secondary ms-5"
+        onClick={() => navigate(redirectUrl)}
+      >
+        Cancel
+      </button>
+    </>
   );
 }
 
@@ -308,7 +317,7 @@ const FieldNames = {
   password: PasswordField,
 };
 
-function FormElements({ formFields }) {
+function FormElements({ formFields, redirectUrl }) {
   return (
     <div className="card mb-6" style={{ padding: "20px 40px" }}>
       <div className="card-body">
@@ -330,7 +339,7 @@ function FormElements({ formFields }) {
         <div className="row">
           <div className="col-12">
             <StatusAlert />
-            <SubmitButton />
+            <SubmitButton redirectUrl={redirectUrl} />
           </div>
         </div>
       </div>
@@ -471,7 +480,11 @@ export default function Index({
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form>{children || <FormElements formFields={formFields} />}</Form>
+      <Form>
+        {children || (
+          <FormElements formFields={formFields} redirectUrl={redirectUrl} />
+        )}
+      </Form>
     </Formik>
   );
 }
