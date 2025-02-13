@@ -23,6 +23,22 @@ class FinanceReadSerializer(ReadSerializer):
             "initiated_date",
         ]
 
+
+class FinanceWriteSerializer(WriteSerializer):
+    class Meta(WriteSerializer.Meta):
+        model=Finance
+        fields=[
+            "vehicle",
+            "finance_name",
+            "finance_address",
+            "contact_number",
+            "total_amount",
+            "total_no_due",
+            "due_date",
+            "due_amount",
+            "initiated_date",
+        ]
+
 class FinanceHistoryReadSerializer(ReadSerializer):
     finance_details = read_serializer(Finance, meta_fields=["id", "uuid", "finance_name", "total_amount"])(
         source="finance"
@@ -37,4 +53,15 @@ class FinanceHistoryReadSerializer(ReadSerializer):
             "due_month",
             "paid_date",
             "amount",
+        ]
+
+
+class FinanceHistoryWriteSerializer(WriteSerializer):
+    class Meta(WriteSerializer.Meta):
+        model = FinanceHistory
+        fields =[
+            "finance",
+            "due_month",
+            "paid_date",
+            "amount"
         ]

@@ -60,7 +60,8 @@ class OtherDriverListViewSet(AppListAPIViewSet):
 
     def get_queryset(self):
         uuid = self.kwargs.get("uuid")
-        queryset = OtherDriver.objects.filter(uuid=uuid).order_by("-created_by")
+        other_cab_name = OtherCab.objects.get(uuid=uuid)
+        queryset = OtherDriver.objects.filter(other_cab_name=other_cab_name).order_by("-created_by")
         return queryset
 
     column_details = {
@@ -95,7 +96,8 @@ class OtherVehicleListViewSet(AppListAPIViewSet):
 
     def get_queryset(self):
         uuid = self.kwargs.get("uuid")
-        queryset = OtherVehicle.objects.filter(uuid=uuid).order_by("-created_by")
+        other_cab_name = OtherCab.objects.get(uuid=uuid)
+        queryset = OtherVehicle.objects.filter(other_cab_name=other_cab_name).order_by("-created_by")
         return queryset
 
     serializer_class = OtherVehicleReadserializer

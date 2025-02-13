@@ -41,6 +41,10 @@ from apps.CMS.views import (
     BettaListAPIView,
     BettaCUDAPIView,
     BettaDetailAPIView,
+    FinanceHistoryCUDAPIView,
+    FinanaceHistoryListAPIView,
+    FinanaceListAPIView,
+    FinanceCUDAPIView,
 )
 
 app_name = "cms"
@@ -77,6 +81,14 @@ router.register(
     r"bankbalance/list", BankBalanceListViewSet, basename="bank-balance-list"
 )
 router.register(r"bankbalance/cud", BankBalanceCUDViewSet, basename="bank-balance-cud")
+
+# Finance
+router.register(r"finance/list", FinanaceListAPIView, basename="finance-list")
+router.register(r"finance/cud", FinanceCUDAPIView, basename="finance-cud")
+router.register(
+    r"financehistory/list", FinanaceHistoryListAPIView, basename="finance-history-list"
+)
+router.register(r"financehistory/cud", FinanceHistoryCUDAPIView, basename="finance-history-cud")
 
 # Workshop
 router.register(r"workshop/list", WorkshopListViewSet, basename="workshops-list")

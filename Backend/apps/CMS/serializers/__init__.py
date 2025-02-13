@@ -41,4 +41,4 @@ from .transaction import (
     CategoryListSerializer,
 )
 from .trip import TripReadSerializer, TripWriteSerializer, TripDetailSerializer
-from .finance import FinanceReadSerializer,FinanceHistoryReadSerializer
+from .finance import FinanceReadSerializer,FinanceHistoryReadSerializer,FinanceHistoryWriteSerializer,FinanceWriteSerializer
