@@ -10,7 +10,6 @@ export default function index() {
       tableMetaApi={() => otherCabsDriverTableMeta(uuid)}
       tableDataApi={(extra) => otherCabsDriverTableData(uuid, extra)}
       actionLink={{
-        viewLink: "#",
         editLink: "/othercabs-driver/form",
         deleteLink: "#",
       }}

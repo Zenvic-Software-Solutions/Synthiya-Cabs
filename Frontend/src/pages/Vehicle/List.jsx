@@ -8,7 +8,7 @@ export default function index() {
       tableMetaApi={vehicleTableMeta}
       tableDataApi={vehicleTableData}
       actionLink={{
-        viewLink: "#",
+        viewLink: "/vehicle/view",
         editLink: "/vehicle/form",
         deleteLink: "#",
       }}

@@ -45,6 +45,7 @@ export const vehicleTableData = (data) => makeGetRequest(EndPoints.vehicleListUR
 export const getVehicleCud = (uuid) => makeGetRequest(EndPoints.vehicleCudURL + uuid + "/meta/");
 export const postVehicleCud = (data) => makePostRequest(EndPoints.vehicleCudURL, data);
 export const patchVehicleCud = (uuid, data) => makePatchRequest(EndPoints.vehicleCudURL + uuid + "/", data);
+export const vehicleDetail = (uuid) => makeGetRequest(EndPoints.vehicleDetail + uuid + "/");
 
 // Driver API
 export const driverTableMeta = () => makeGetRequest(EndPoints.driverListURL + "table-meta/");
@@ -60,6 +61,7 @@ export const otherCabsTableData = (data) => makeGetRequest(EndPoints.otherCabsLi
 export const getOtherCabsCud = (uuid) => makeGetRequest(EndPoints.otherCabsCudURL + uuid + "/meta/");
 export const postOtherCabsCud = (data) => makePostRequest(EndPoints.otherCabsCudURL, data);
 export const patchOtherCabsCud = (uuid, data) => makePatchRequest(EndPoints.otherCabsCudURL + uuid + "/", data);
+export const otherCabsDetail = (uuid) => makeGetRequest(EndPoints.othercabsDetail + uuid + "/");
 
 // OtherCabs Vehicle API
 export const otherCabsVehicleTableMeta = (uuid) => makeGetRequest(EndPoints.otherCabsVehicleListURL + uuid + "/" + "table-meta/");

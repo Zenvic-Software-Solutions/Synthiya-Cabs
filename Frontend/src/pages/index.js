@@ -37,12 +37,10 @@ export { default as OtherCabsView } from "./OtherCabs/Cabs/View";
 // OtherCabs Driver Pages
 export { default as OtherCabsDriverList } from "./OtherCabs/Driver/List";
 export { default as OtherCabsDriverForm } from "./OtherCabs/Driver/Form";
-export { default as OtherCabsDriverView } from "./OtherCabs/Driver/View";
 
 // OtherCabs Vehicle Pages
 export { default as OtherCabsVehicleList } from "./OtherCabs/Vehicle/List";
 export { default as OtherCabsVehicleForm } from "./OtherCabs/Vehicle/Form";
-export { default as OtherCabsVehicleView } from "./OtherCabs/Vehicle/View";
 
 // Booking Pages
 export { default as BookingList } from "./Booking/List";

@@ -1,15 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
 import Stepper from "bs-stepper";
 import { useAppContext } from "@context/AppContext";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(3, "Username must be at least 3 characters")
+    .max(15, "Username must be at most 15 characters")
+    .required("Username is required"),
+});
 
 export default function Form() {
   const stepperRef = useRef(null);
   const [stepperInstance, setStepperInstance] = useState(null);
   const { setBreadcrumbs } = useAppContext();
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    username: "",
+  });
+
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    try {
+      await validationSchema.validateAt(name, { [name]: value });
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+    } catch (error) {
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error.message }));
+    }
+  };
 
   useEffect(() => {
     setBreadcrumbs({
-      title: "Booking View",
+      title: "Booking From",
       sidebarActiveId: 11,
       list: [
         {
@@ -17,7 +41,7 @@ export default function Form() {
           path: "/booking/list",
         },
         {
-          label: "Booking View",
+          label: "Booking From",
         },
       ],
     });
@@ -42,7 +66,7 @@ export default function Form() {
   };
 
   const handleSubmitForm = () => {
-    console.log("Form submitted");
+    console.log("Form submitted", formData);
   };
 
   return (
@@ -57,7 +81,7 @@ export default function Form() {
             className="bs-stepper-header"
             style={{ borderBottom: "1px dotted" }}
           >
-            <div className="step" data-target="#account-details">
+            <div className="step" data-target="#customer-details">
               <button
                 type="button"
                 className="step-trigger"
@@ -65,9 +89,9 @@ export default function Form() {
               >
                 <span className="bs-stepper-circle">1</span>
                 <span className="bs-stepper-label">
-                  <span className="bs-stepper-title">Account Details</span>
+                  <span className="bs-stepper-title">Customer Details</span>
                   <span className="bs-stepper-subtitle">
-                    Setup Account Details
+                    Add Customer Details
                   </span>
                 </span>
               </button>
@@ -75,7 +99,7 @@ export default function Form() {
             <div className="line">
               <i className="ti ti-chevron-right" />
             </div>
-            <div className="step" data-target="#personal-info">
+            <div className="step" data-target="#booking-details">
               <button
                 type="button"
                 className="step-trigger"
@@ -83,15 +107,17 @@ export default function Form() {
               >
                 <span className="bs-stepper-circle">2</span>
                 <span className="bs-stepper-label">
-                  <span className="bs-stepper-title">Personal Info</span>
-                  <span className="bs-stepper-subtitle">Add personal info</span>
+                  <span className="bs-stepper-title">Booking Details</span>
+                  <span className="bs-stepper-subtitle">
+                    Add Booking Details
+                  </span>
                 </span>
               </button>
             </div>
             <div className="line">
               <i className="ti ti-chevron-right" />
             </div>
-            <div className="step" data-target="#social-links">
+            <div className="step" data-target="#payment-details">
               <button
                 type="button"
                 className="step-trigger"
@@ -99,8 +125,10 @@ export default function Form() {
               >
                 <span className="bs-stepper-circle">3</span>
                 <span className="bs-stepper-label">
-                  <span className="bs-stepper-title">Social Links</span>
-                  <span className="bs-stepper-subtitle">Add social links</span>
+                  <span className="bs-stepper-title">Payment Details</span>
+                  <span className="bs-stepper-subtitle">
+                    Add Payment Details
+                  </span>
                 </span>
               </button>
             </div>
@@ -116,13 +144,13 @@ export default function Form() {
                 <span className="bs-stepper-circle">4</span>
                 <span className="bs-stepper-label">
                   <span className="bs-stepper-title">Preview</span>
-                  <span className="bs-stepper-subtitle">Sample invoice </span>
+                  <span className="bs-stepper-subtitle">Sample invoice</span>
                 </span>
               </button>
             </div>
           </div>
           <div className="bs-stepper-content">
-            <div id="account-details" className="content">
+            <div id="customer-details" className="content">
               <div className="row g-6">
                 <div className="col-sm-6">
                   <label className="form-label" htmlFor="username">
@@ -130,10 +158,15 @@ export default function Form() {
                   </label>
                   <input
                     type="text"
-                    id="username"
+                    name="username"
                     className="form-control"
                     placeholder="johndoe"
+                    value={formData.username}
+                    onChange={handleChange}
                   />
+                  {errors.username && (
+                    <div className="text-danger">{errors.username}</div>
+                  )}
                 </div>
 
                 <div className="col-12 d-flex justify-content-end">
@@ -150,7 +183,7 @@ export default function Form() {
               </div>
             </div>
 
-            <div id="personal-info" className="content">
+            <div id="booking-details" className="content">
               <div className="row g-6">
                 <div className="col-sm-6">
                   <label className="form-label" htmlFor="first-name">
@@ -187,7 +220,7 @@ export default function Form() {
               </div>
             </div>
 
-            <div id="social-links" className="content">
+            <div id="payment-details" className="content">
               <div className="row g-6">
                 <div className="col-sm-6">
                   <label className="form-label" htmlFor="first-name">
