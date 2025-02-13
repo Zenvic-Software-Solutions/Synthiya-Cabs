@@ -162,9 +162,7 @@ class BookingView(AppAPIView):
 
             payment = Payment.objects.create(
                 booking=booking,
-                driver_betta=Betta.objects.filter(
-                    id=request.data.get("driver_betta")
-                ).first(),
+                driver_betta=request.data.get("driver_betta"),
                 # driver_betta=1000.00,
                 halting_charge=float(request.data.get("halting_charge", 0.00)),
                 hills_charge=float(request.data.get("hills_charge", 0.00)),
