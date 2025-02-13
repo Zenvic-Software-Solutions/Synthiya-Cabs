@@ -20,8 +20,7 @@ class BettaListAPIView(AppListAPIViewSet):
 
     column_details = {
         "driver_details.identity": "Driver Name",
-        "booking_details.start_place": "Start Place",
-        "booking_details.end_place": "End Place",
+        "booking_details.booking_id": "Booking ID",
         "status": "Status",
         "paid_date": "Paid Date",
         "amount": "Amount",
