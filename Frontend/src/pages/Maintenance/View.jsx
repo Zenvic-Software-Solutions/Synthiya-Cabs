@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "@context/AppContext";
 import { useParams } from "react-router-dom";
-import { customerDetail } from "@api/urls";
+import { maintenanceDetail } from "@api/urls";
 import { Loader } from "@components";
 
 export default function View() {
@@ -11,15 +11,15 @@ export default function View() {
 
   useEffect(() => {
     setBreadcrumbs({
-      title: "Customer View",
-      sidebarActiveId: 6,
+      title: "Maintenance View",
+      sidebarActiveId: 12,
       list: [
         {
-          label: "Customer List",
-          path: "/customer/list",
+          label: "Maintenance List",
+          path: "/maintenance/list",
         },
         {
-          label: "Customer View",
+          label: "Maintenance View",
         },
       ],
     });
@@ -27,16 +27,19 @@ export default function View() {
 
   useEffect(() => {
     const FatchData = async () => {
-      const response = await customerDetail(uuid);
+      const response = await maintenanceDetail(uuid);
 
       const mapedData = {
-        "Customer Name": response.initial?.identity,
-        "Customer ID": response.initial?.customer_id,
-        // Email: response.initial?.email,
-        // Address: response.initial?.address,
-        // "Date of Birth": response.initial?.dob,
-        "Phone Number": response.initial?.user_phone_number,
-        //"Date of Joining": response.initial?.date_of_joining,
+        "Workshop Identity": response.workshop_details?.identity,
+        "Vehicle Identity": response.vehicle_details?.identity,
+        "Driver Name": response.driver_details?.identity,
+        "Driver Phone Number": response.driver_details?.user_details?.phone_number,
+        "Status": response.status,
+        "Description": response.description,
+        "Start KM": response.start_km,
+        "End KM": response.end_km,
+        "Start Date": response.start_date,
+        "End Date": response.end_date,
       };
       setViewDetail(mapedData);
     };
@@ -49,7 +52,7 @@ export default function View() {
     <div className="col-md-12 col-lg-8">
       <div className="card shadow-sm border-0 rounded">
         <div className="card-header bg-light py-3">
-          <h5 className="mb-0 text-dark fw-bold">Customer Details</h5>
+          <h5 className="mb-0 text-dark fw-bold">Maintenance Details</h5>
         </div>
         <div className="card-body p-4">
           <table className="table table-bordered">

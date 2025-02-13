@@ -94,6 +94,22 @@ const AppRoutes = createBrowserRouter([
           {path: "view/:uuid?", element: <Pages.CustomerView/>},
         ]
       },
+      {
+        path: "maintenance",
+        children: [
+          {path: "list", element: <Pages.MaintenanceList />},
+          {path: "form/:uuid?", element: <Pages.MaintenanceForm/>},
+          {path: "view/:uuid?", element: <Pages.MaintenanceView/>},
+        ]
+      },
+      {
+        path: "betta",
+        children: [
+          {path: "list", element: <Pages.BettaList />},
+          {path: "form/:uuid?", element: <Pages.BettaForm/>},
+          {path: "view/:uuid?", element: <Pages.BettaView/>},
+        ]
+      },
       { path: "report", element: <Pages.Report /> },
     ],
   },

@@ -55,13 +55,13 @@ const Sidebar = () => {
       id: 12,
       label: "Maintenance",
       icon: "ti ti-settings",
-      path: "#",
+      path: "/maintenance/list",
     },
     {
       id: 13,
       label: "Betta",
       icon: "ti ti-map",
-      path: "#",
+      path: "/betta/list",
     },
     {
       id: 14,
