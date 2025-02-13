@@ -8,7 +8,7 @@ class BettaReadSerializer(ReadSerializer):
         source="driver"
     )
     booking_details = read_serializer(
-        Booking, meta_fields=["id", "uuid", "start_place", "end_place"]
+        Booking, meta_fields=["id", "uuid", "booking_id"]
     )(source="booking")
 
     class Meta(ReadSerializer.Meta):

@@ -111,7 +111,7 @@ urlpatterns = [
         name="othervehicles-list",
     ),
     path(
-        "betta/list/<uuid>/",
+        "betta/detail/<uuid>/",
         BettaDetailAPIView.as_view(),
         name="betta-list",
     ),

@@ -13,7 +13,7 @@ from apps.CMS.serializers import BettaReadSerializer, BettaWriteSerializer
 
 
 class BettaListAPIView(AppListAPIViewSet):
-    search_fields = ["driver__identity", "status"]
+    search_fields = ["driver__identity", "status","booking__booking_id"]
     filterset_fields = {"amount": ["gte", "lte"], "paid_date": ["gte", "lte"]}
     queryset = Betta.objects.all()
     serializer_class = BettaReadSerializer
@@ -33,9 +33,9 @@ class BettaListAPIView(AppListAPIViewSet):
             "columns": self.column_details,
             "filters": self.filter_details,
             "filter_data": {
-                self.serialize_for_filter(Driver.objects.all()),
-                self.serialize_for_filter(Booking.objects.all()),
-                self.serialize_choices(BETTA_STATUS_CHOICES["options"]),
+                "driver":self.serialize_for_filter(Driver.objects.all()),
+                "booking":self.serialize_for_filter(Booking.objects.all(),fields=["id","uuid","booking_id"]),
+                "status": self.serialize_choices(BETTA_STATUS_CHOICES["options"]),
             },
         }
         return data

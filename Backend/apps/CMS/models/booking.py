@@ -12,6 +12,7 @@ from apps.BASE.model_fields import AppSingleChoiceField
 
 
 class Booking(BaseModel):
+    booking_id = models.CharField(max_length=MAX_CHAR_FIELD_LENGTH,**DEFAULT_BLANK_NULLABLE_FIELD_CONFIG)
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="customer_bookings"
     )
@@ -72,6 +73,19 @@ class Booking(BaseModel):
 
     def __str__(self):
         return f"Booking {self.customer} ({self.start_date} to {self.end_date})"
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.booking_id:
+            last_booking = Booking.objects.all().order_by("id").last()
+            if last_booking:
+                last_booking_id = last_booking.booking_id
+                booking_number = int(last_booking_id.split("BK")[-1]) + 1
+                self.booking_id = f"BK{booking_number:04d}"
+            else:
+                self.booking_id = "BK0001"
+
+        super(Booking, self).save(*args, **kwargs)
 
 
 class Payment(BaseModel):

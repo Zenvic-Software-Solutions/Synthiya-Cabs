@@ -28,6 +28,7 @@ class BookingReadSerializer(ReadSerializer):
         fields = [
             "id",
             "uuid",
+            "booking_id",
             "customer_details",
             "vehicle_details",
             "cab_details",
@@ -87,6 +88,7 @@ class BookingRDetailSerializer(ReadSerializer):
         fields = [
             "id",
             "uuid",
+            "booking_id",
             "customer_details",
             "vehicle_details",
             "cab_details",

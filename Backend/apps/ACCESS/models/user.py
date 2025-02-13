@@ -86,6 +86,7 @@ class Driver(BaseModel):
 
 
 class Customer(BaseModel):
+    
     identity = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
@@ -95,3 +96,16 @@ class Customer(BaseModel):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
     )
+
+    
+    def save(self, *args, **kwargs):
+        if not self.invoice_id:
+            last_invoice = Customer.objects.all().order_by("id").last()
+            if last_invoice:
+                last_invoice_id = last_invoice.invoice_id
+                invoice_number = int(last_invoice_id.split("INV")[-1]) + 1
+                self.invoice_id = f"INV{invoice_number:04d}"
+            else:
+                self.invoice_id = "INV0001"
+
+        super(Customer, self).save(*args, **kwargs)

@@ -54,6 +54,7 @@ class BookingListAPIView(AppListAPIViewSet):
     serializer_class = BookingReadSerializer
 
     column_details = {
+        "booking_id":"Booking ID",
         "customer_details.identity": "Customer Name",
         "vehicle_details.identity": "Vehicle Name",
         "cab_details.identity": "OtherCab Name",
