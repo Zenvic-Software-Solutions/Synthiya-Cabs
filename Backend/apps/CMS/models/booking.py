@@ -78,7 +78,9 @@ class Payment(BaseModel):
     booking = models.ForeignKey(
         Booking, on_delete=models.CASCADE, related_name="payments"
     )
-    driver_betta = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    driver_betta = models.ForeignKey(
+        "CMS.Betta", on_delete=models.CASCADE, **DEFAULT_BLANK_NULLABLE_FIELD_CONFIG
+    )
 
     halting_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     hills_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

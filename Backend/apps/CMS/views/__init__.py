@@ -30,3 +30,4 @@ from .booking import (
     BookingView,
 )
 from .trip import TripListAPIView, TripCUDAPIView, TripDetailViewSet
+from .betta import BettaCUDAPIView, BettaDetailAPIView, BettaListAPIView

@@ -121,6 +121,10 @@ class BookingView(AppAPIView):
                     {"error": "End date must be after start date."}
                 )
 
+            start_place = request.data.get("start_place")
+            end_place = request.data.get("end_place")
+            rent_type = request.data.get("rent_type")
+
             # Extract Optional Data
             driver = Driver.objects.filter(uuid=request.data.get("driver")).first()
             sponsor = Customer.objects.filter(uuid=request.data.get("sponsor")).first()
@@ -129,11 +133,11 @@ class BookingView(AppAPIView):
             ).first()
             other_driver = OtherDriver.objects.get_or_create(
                 identity=request.data.get("otherdriver_identity"),
-                phone_number=request.data.get("phone_number"),
+                phone_number=request.data.get("otherdriver_phone_number"),
             )[0]
             other_vehicle = OtherVehicle.objects.get_or_create(
                 identity=request.data.get("othervechile_identity"),
-                phone_number=request.data.get("othervechile_phone_number"),
+                vehicle_no=request.data.get("othervechile_vehicle_no"),
             )[0]
 
             # Create Booking
@@ -142,16 +146,15 @@ class BookingView(AppAPIView):
                 vehicle=vehicle,
                 othercab=other_cab,
                 driver=driver,
-                othervechile=other_vehicle,
+                othervehicle=other_vehicle,
                 otherdriver=other_driver,
                 start_date=start_date,
                 end_date=end_date,
-                start_place=request.data.get("start_place"),
-                end_place=request.data.get("end_place"),
-                rent_type=request.data.get("rent_type"),
+                start_place=start_date,
+                end_place=end_date,
+                rent_type=rent_type,
                 sponsor=sponsor,
             )
-
             # Create Payment
             total_amount = float(request.data.get("total_amount", 0.00))
             paid_amount = float(request.data.get("paid_amount", 0.00))
@@ -159,9 +162,8 @@ class BookingView(AppAPIView):
 
             payment = Payment.objects.create(
                 booking=booking,
-                driver_betta=Betta.objects.filter(
-                    id=request.data.get("driver_betta")
-                ).first(),
+                driver_betta=request.data.get("driver_betta"),
+                # driver_betta=1000.00,
                 halting_charge=float(request.data.get("halting_charge", 0.00)),
                 hills_charge=float(request.data.get("hills_charge", 0.00)),
                 permit=float(request.data.get("permit", 0.00)),

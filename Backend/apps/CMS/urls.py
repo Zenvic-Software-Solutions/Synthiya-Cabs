@@ -38,6 +38,9 @@ from apps.CMS.views import (
     TripListAPIView,
     TripCUDAPIView,
     TripDetailViewSet,
+    BettaListAPIView,
+    BettaCUDAPIView,
+    BettaDetailAPIView,
 )
 
 app_name = "cms"
@@ -69,7 +72,7 @@ router.register(r"booking/cud", BookingCUDAPIView, basename="booking-cud")
 
 # Bank
 router.register(r"bank/list", BankListViewSet, basename="banks-list")
-router.register(r"bank/cud", BankCUDViewSet, basename="banks-list")
+router.register(r"bank/cud", BankCUDViewSet, basename="banks-cud")
 router.register(
     r"bankbalance/list", BankBalanceListViewSet, basename="bank-balance-list"
 )
@@ -87,6 +90,10 @@ router.register(r"maintenance/cud", MaintenanceCUDViewSet, basename="maintenance
 router.register(r"trip/list", TripListAPIView, basename="trip-list")
 router.register(r"trip/cud", TripCUDAPIView, basename="trip-cud")
 
+# Betta
+router.register(r"betta/list", BettaListAPIView, basename="betta-list")
+router.register(r"betta/cud", BettaCUDAPIView, basename="betta-cud")
+
 urlpatterns = [
     path(
         "otherdriver/list/<uuid>/",
@@ -102,6 +109,11 @@ urlpatterns = [
         "othervehicle/list/<uuid>/",
         OtherVehicleListViewSet.as_view({"get": "list"}),
         name="othervehicles-list",
+    ),
+    path(
+        "betta/list/<uuid>/",
+        BettaDetailAPIView.as_view(),
+        name="betta-list",
     ),
     path(
         "othervehicle/list/<uuid>/table-meta/",
@@ -140,5 +152,5 @@ urlpatterns = [
         name="maintenance-details",
     ),
     path("Trip/detail/<uuid>/", TripDetailViewSet.as_view(), name="trip-details"),
-    path("Booking/create/", BookingView.as_view(), name="booking-create"),
+    path("booking/create/", BookingView.as_view(), name="booking-create"),
 ] + router.urls
