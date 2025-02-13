@@ -156,14 +156,17 @@ class BookingView(AppAPIView):
                 sponsor=sponsor,
             )
             # Create Payment
+            deiver_betta = float(request.data.get("driver_betta", 0.00))
             total_amount = float(request.data.get("total_amount", 0.00))
             paid_amount = float(request.data.get("paid_amount", 0.00))
             deduction = float(request.data.get("deduction", 0.00))
+            driver_betta_details = Betta.objects.get_or_create(
+                driver=driver, booking=booking, amount=deiver_betta, status="pending"
+            )
 
             payment = Payment.objects.create(
                 booking=booking,
-                driver_betta=request.data.get("driver_betta"),
-                # driver_betta=1000.00,
+                driver_betta=driver_betta_details,
                 halting_charge=float(request.data.get("halting_charge", 0.00)),
                 hills_charge=float(request.data.get("hills_charge", 0.00)),
                 permit=float(request.data.get("permit", 0.00)),
