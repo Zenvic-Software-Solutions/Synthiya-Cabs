@@ -49,3 +49,8 @@ export { default as BookingView } from "./Booking/View";
 
 // Report Pages
 export { default as Report } from "./Report";
+
+// customer Pages
+export { default as CustomerList } from "./Customer/List";
+export { default as CustomerForm } from "./Customer/Form";
+export { default as CustomerView } from "./Customer/View";
