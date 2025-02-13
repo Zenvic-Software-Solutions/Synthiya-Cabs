@@ -72,8 +72,8 @@ class MaintenanceReadSerializer(ReadSerializer):
             "id",
             "uuid",
             "workshop_details",
-            "vehicle",
-            "driver",
+            "vehicle_details",
+            "driver_details",
             "status",
             "description",
             "start_date",
@@ -88,6 +88,40 @@ class MaintenanceWriteSerializer(WriteSerializer):
         model = Maintenance
         fields = [
             "workshop",
+            "vehicle",
+            "driver",
+            "status",
+            "description",
+            "start_date",
+            "end_km",
+            "start_date",
+            "end_date",
+        ]
+
+
+class MaintenanceDetailSerializer(ReadSerializer):
+    workshop_details = read_serializer(
+        meta_model=Workshop, meta_fields=["id", "uuid", "identity"]
+    )(source="workshop")
+    vehicle_details = read_serializer(
+        meta_model=Vehicle, meta_fields=["id", "uuid", "identity"]
+    )(source="vehicle")
+    driver_details = read_serializer(
+        meta_model=Driver,
+        meta_fields=["id", "uuid", "identity"],
+        init_fields_config={
+            "user_details": read_serializer(
+                meta_model=User, meta_fields=["id", "uuid", "phone_number"]
+            )(source="user")
+        },
+    )(source="driver")
+
+    class Meta(ReadSerializer.Meta):
+        model = Maintenance
+        fields = [
+            "id",
+            "uuid",
+            "workshop_details",
             "vehicle",
             "driver",
             "status",

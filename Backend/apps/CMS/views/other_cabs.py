@@ -1,12 +1,19 @@
 from apps.CMS.serializers import (
     OtherCabListSerializer,
     OtherCabWriteSerializer,
+    OtherCabDetailSerializer,
     OtherDriverReadserializer,
     OtherDriverWriteSerializer,
     OtherVehicleReadserializer,
     OtherVehicleWriteSerializer,
 )
-from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
+from apps.BASE.views import (
+    AppCUDAPIViewSet,
+    AppListAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
+from rest_framework.generics import RetrieveAPIView
 from apps.CMS.models import OtherCab, OtherDriver, OtherVehicle
 from HELPERS import VEHICLE_TYPE
 
@@ -40,6 +47,11 @@ class OtherCabsCUDViewSet(AppCUDAPIViewSet):
     serializer_class = OtherCabWriteSerializer
 
 
+class OtherCabDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset = OtherCab.objects.all()
+    serializer_class = OtherCabDetailSerializer
+
+
 class OtherDriverListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
     filterset_fields = []
@@ -47,8 +59,8 @@ class OtherDriverListViewSet(AppListAPIViewSet):
     serializer_class = OtherDriverReadserializer
 
     def get_queryset(self):
-        # uuid =
-        queryset = OtherDriver.objects.filter().order_by("-created_by")
+        uuid = self.kwargs.get("uuid")
+        queryset = OtherDriver.objects.filter(uuid=uuid).order_by("-created_by")
         return queryset
 
     column_details = {
@@ -80,7 +92,12 @@ class OtherDriverCUDViewSet(AppCUDAPIViewSet):
 class OtherVehicleListViewSet(AppListAPIViewSet):
     search_fields = ["identity"]
     filterset_fields = []
-    queryset = OtherVehicle.objects.all().order_by("-created_by")
+
+    def get_queryset(self):
+        uuid = self.kwargs.get("uuid")
+        queryset = OtherVehicle.objects.filter(uuid=uuid).order_by("-created_by")
+        return queryset
+
     serializer_class = OtherVehicleReadserializer
     column_details = {
         "identity": "Vehicle Name",

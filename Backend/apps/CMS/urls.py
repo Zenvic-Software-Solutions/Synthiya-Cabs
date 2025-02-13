@@ -2,7 +2,6 @@ from rest_framework.routers import SimpleRouter
 from django.urls import path
 from apps.BASE.views.generic import get_upload_api_view
 
-
 # Bulk-Upload-Files
 from HELPERS import (
     BulkFileUploadView,
@@ -13,24 +12,32 @@ from HELPERS import (
 from apps.CMS.views import (
     OtherCabsListViewSet,
     OtherCabsCUDViewSet,
+    OtherCabDetailViewSet,
     OtherDriverListViewSet,
     OtherDriverCUDViewSet,
     OtherVehicleListViewSet,
     OtherVehicleCUDViewSet,
     VehicleListViewSet,
     VehicleCUDViewSet,
+    VechileDetailViewSet,
     BankListViewSet,
     BankCUDViewSet,
+    BankDetailViewSet,
     BankBalanceListViewSet,
     BankBalanceCUDViewSet,
     WorkshopListViewSet,
     WorkshopCUDViewSet,
+    WorkshopDetailAPIView,
     MaintenanceListViewSet,
     MaintenanceCUDViewSet,
+    MaintenanceDetailAPIView,
     BookingListAPIView,
     BookingCUDAPIView,
+    BookingDetailViewSet,
+    BookingView,
     TripListAPIView,
     TripCUDAPIView,
+    TripDetailViewSet,
 )
 
 app_name = "cms"
@@ -82,7 +89,7 @@ router.register(r"trip/cud", TripCUDAPIView, basename="trip-cud")
 
 urlpatterns = [
     path(
-        "otherdriver/list/<uuid>",
+        "otherdriver/list/<uuid>/",
         OtherDriverListViewSet.as_view({"get": "list"}),
         name="otherdriver-list",
     ),
@@ -112,4 +119,26 @@ urlpatterns = [
     path(
         "deleted/status/change/", ArchieveStatusChange.as_view(), name="delete-status"
     ),
+    # Detail Views
+    path(
+        "othercab/detail/<uuid>/",
+        OtherCabDetailViewSet.as_view(),
+        name="othercab-detail-view",
+    ),
+    path(
+        "vehicle/detail/<uuid>/", VechileDetailViewSet.as_view(), name="vehicle-details"
+    ),
+    path("bank/detail/<uuid>/", BankDetailViewSet.as_view(), name="bank-details"),
+    path(
+        "workshop/detail/<uuid>/",
+        WorkshopDetailAPIView.as_view(),
+        name="workshop-details",
+    ),
+    path(
+        "maintenance/detail/<uuid>/",
+        MaintenanceDetailAPIView.as_view(),
+        name="maintenance-details",
+    ),
+    path("Trip/detail/<uuid>/", TripDetailViewSet.as_view(), name="trip-details"),
+    path("Booking/create/", BookingView.as_view(), name="booking-create"),
 ] + router.urls

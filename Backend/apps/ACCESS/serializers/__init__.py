@@ -4,11 +4,15 @@ from .user import (
     LoginSerializer,
     StaffSerializer,
     DriverSerializer,
+    UserReadSerializer,
 )
 
-from .staff_list import (
-    StaffReadSerializer,
+from .driver import (
     DriverReadSerializer,
-    UserReadSerializer,
-    StaffWriteSerializer,
 )
+from .staff import (
+    StaffWriteSerializer,
+    StaffReadSerializer,
+)
+
+from .customer import CustomerReadSerializer

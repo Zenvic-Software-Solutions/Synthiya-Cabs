@@ -1,7 +1,17 @@
-from apps.CMS.serializers import VehicleReadSerializer, VehicleWriteSerializer
-from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
+from apps.CMS.serializers import (
+    VehicleReadSerializer,
+    VehicleWriteSerializer,
+    VehicleDetailSerializer,
+)
+from apps.BASE.views import (
+    AppCUDAPIViewSet,
+    AppListAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
 from apps.CMS.models import Vehicle
 from HELPERS import VEHICLE_TYPE
+from rest_framework.generics import RetrieveAPIView
 
 
 class VehicleListViewSet(AppListAPIViewSet):
@@ -34,3 +44,8 @@ class VehicleListViewSet(AppListAPIViewSet):
 class VehicleCUDViewSet(AppCUDAPIViewSet):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleWriteSerializer
+
+
+class VechileDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleDetailSerializer

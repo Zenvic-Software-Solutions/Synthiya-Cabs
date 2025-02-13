@@ -12,4 +12,21 @@ MAINTENANCE_STATUS_CHOICES = {
 PAYMENT_TYPE_CHOICES = {"options": ["Bank", "Cash", "GPay", "PhonePe"]}
 
 
+BETTA_STATUS_CHOICES = {
+    "options":[
+        "pending",
+        "paid",
+        "GPay",
+        "PhonePe"
+    ]
+}
+
+CATEGORY_CHOICES = {
+    "options":[
+        "Income",
+        "Expense"
+    ]
+}
+
+
 BETTA_STATUS_CHOICES = {"options": ["pending", "paid", "GPay", "PhonePe"]}

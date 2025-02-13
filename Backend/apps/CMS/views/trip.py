@@ -1,7 +1,17 @@
-from apps.BASE.views import AppCUDAPIViewSet, AppListAPIViewSet
+from apps.BASE.views import (
+    AppCUDAPIViewSet,
+    AppListAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
 from apps.CMS.models import Trip, Vehicle
-from apps.CMS.serializers import TripReadSerializer, TripWriteSerializer
+from apps.CMS.serializers import (
+    TripReadSerializer,
+    TripWriteSerializer,
+    TripDetailSerializer,
+)
 from apps.ACCESS.models import Customer
+from rest_framework.generics import RetrieveAPIView
 
 
 class TripListAPIView(AppListAPIViewSet):
@@ -33,8 +43,14 @@ class TripListAPIView(AppListAPIViewSet):
                 "vehicle": self.serialize_for_filter(Vehicle.objects.all()),
             },
         }
+        return data
 
 
 class TripCUDAPIView(AppCUDAPIViewSet):
     queryset = Trip.objects.all()
     serializer_class = TripWriteSerializer
+
+
+class TripDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset = Trip.objects.all()
+    serializer_class = TripDetailSerializer

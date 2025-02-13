@@ -14,6 +14,14 @@ from apps.ACCESS.views import (
     ChangePhoneNumberAPIView,
     StaffCUDAPIView,
     DriverCUDPAPIView,
+    CustomerCreateAPIView,
+    DriverUpdateAPIView,
+    DriverRetrieveAPIView,
+    StaffUpdateAPIView,
+    StaffRetrieveAPIView,
+    CustomerUpdateAPIView,
+    CustomerRetrieveAPIView,
+    CustomerListAPIView,
 )
 
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -27,7 +35,7 @@ API_URL_PREFIX = "api/"
 router = SimpleRouter()
 router.register("user/list", UserListAPIView)
 router.register("staff/list", StaffListAPIView)
-# router.register("staff/cud",StaffCUDAPIView)
+router.register("customer/list", CustomerListAPIView)
 router.register("driver/list", DriverListAPIView)
 
 urlpatterns = [
@@ -41,6 +49,27 @@ urlpatterns = [
     path("staff/details/", StaffDetailView.as_view(), name="staff"),
     path("driver/details/", DriverDetailView.as_view(), name="driver"),
     path("staff/cud/", StaffCUDAPIView.as_view(), name="driver"),
-    path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver"),
+    path("driver/cud/", DriverCUDPAPIView.as_view(), name="driver-create"),
+    path("driver/update/<uuid>/", DriverUpdateAPIView.as_view(), name="driver-update"),
+    path(
+        "driver/retrieve/<uuid>/",
+        DriverRetrieveAPIView.as_view(),
+        name="driver-retrieve",
+    ),
+    path("staff/update/<uuid>/", StaffUpdateAPIView.as_view(), name="staff-update"),
+    path(
+        "staff/retrieve/<uuid>/", StaffRetrieveAPIView.as_view(), name="staff-retrieve"
+    ),
+    path(
+        "customer/update/<uuid>/",
+        CustomerUpdateAPIView.as_view(),
+        name="customer-update",
+    ),
+    path(
+        "customer/retrieve/<uuid>/",
+        CustomerRetrieveAPIView.as_view(),
+        name="customer-retrieve",
+    ),
+    path("customer/create/", CustomerCreateAPIView.as_view(), name="customer"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + router.urls

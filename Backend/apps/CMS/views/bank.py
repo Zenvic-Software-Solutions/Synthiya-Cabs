@@ -1,15 +1,22 @@
 from apps.CMS.models import Bank, BankBalance
-from apps.BASE.views import AppListAPIViewSet, AppCUDAPIViewSet
+from apps.BASE.views import (
+    AppListAPIViewSet,
+    AppCUDAPIViewSet,
+    AbstractLookUpFieldMixin,
+    AppAPIView,
+)
 from apps.CMS.serializers import (
     BankReadSerializer,
     BankWriteSerializer,
+    BankDetailSerializer,
     BankBalanceReadSerializer,
     BankBalanceWriteSerializer,
 )
+from rest_framework.generics import RetrieveAPIView
 
 
 class BankListViewSet(AppListAPIViewSet):
-    search_fields = ["identity"]
+    search_fields = ["identity", "branch", "account_no"]
     filterset_fields = []
 
     queryset = Bank.objects.all()
@@ -36,6 +43,11 @@ class BankListViewSet(AppListAPIViewSet):
 class BankCUDViewSet(AppCUDAPIViewSet):
     queryset = Bank.objects.all()
     serializer_class = BankWriteSerializer
+
+
+class BankDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+    queryset = Bank.objects.all()
+    serializer_class = BankDetailSerializer
 
 
 class BankBalanceListViewSet(AppListAPIViewSet):
