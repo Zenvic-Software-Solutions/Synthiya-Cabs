@@ -26,6 +26,8 @@ from apps.ACCESS.views import (
 
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter, SimpleRouter
+from apps.ACCESS.views.system import system_status_view
+
 
 
 app_name = "access"
@@ -72,4 +74,6 @@ urlpatterns = [
     ),
     path("customer/create/", CustomerCreateAPIView.as_view(), name="customer"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+
+    path('system-status/', system_status_view, name='system_status'),
 ] + router.urls
