@@ -7,3 +7,4 @@ from .booking import Booking, Payment
 from .betta import Betta
 from .trip import Trip
 from .transaction import Transaction, Ledger, SubLedger, Category
+from .finance import Finance, FinanceHistory

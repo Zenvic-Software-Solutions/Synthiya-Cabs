@@ -5,7 +5,7 @@ from apps.BASE.models import (
     MAX_CHAR_FIELD_LENGTH,
     BaseModel,
 )
-from apps.CMS.models import Vehicle, OtherCab, OtherDriver
+from apps.CMS.models import Vehicle, OtherCab, OtherDriver, OtherVehicle
 from apps.ACCESS.models import Customer, Driver
 from HELPERS.choices import RENT_TYPE_CHOICES, PAYMENT_TYPE_CHOICES
 from apps.BASE.model_fields import AppSingleChoiceField
@@ -18,13 +18,7 @@ class Booking(BaseModel):
     vehicle = models.ForeignKey(
         Vehicle, on_delete=models.CASCADE, related_name="vehicle_bookings"
     )
-    othercab = models.ForeignKey(
-        OtherCab,
-        on_delete=models.CASCADE,
-        related_name="cab_bookings",
-        null=True,
-        blank=True,
-    )
+
     driver = models.ForeignKey(
         Driver,
         on_delete=models.CASCADE,
@@ -32,10 +26,24 @@ class Booking(BaseModel):
         null=True,
         blank=True,
     )
+    othercab = models.ForeignKey(
+        OtherCab,
+        on_delete=models.CASCADE,
+        related_name="other_cab_bookings",
+        null=True,
+        blank=True,
+    )
     otherdriver = models.ForeignKey(
         OtherDriver,
         on_delete=models.CASCADE,
         related_name="other_driver_bookings",
+        null=True,
+        blank=True,
+    )
+    othervehicle = models.ForeignKey(
+        OtherVehicle,
+        on_delete=models.CASCADE,
+        related_name="other_vechile_bookings",
         null=True,
         blank=True,
     )

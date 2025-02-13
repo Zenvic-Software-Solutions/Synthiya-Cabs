@@ -43,6 +43,7 @@ class TripListAPIView(AppListAPIViewSet):
                 "vehicle": self.serialize_for_filter(Vehicle.objects.all()),
             },
         }
+        return data
 
 
 class TripCUDAPIView(AppCUDAPIViewSet):

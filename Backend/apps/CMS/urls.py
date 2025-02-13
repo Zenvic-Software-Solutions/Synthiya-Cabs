@@ -33,6 +33,8 @@ from apps.CMS.views import (
     MaintenanceDetailAPIView,
     BookingListAPIView,
     BookingCUDAPIView,
+    BookingDetailViewSet,
+    BookingView,
     TripListAPIView,
     TripCUDAPIView,
     TripDetailViewSet,
@@ -138,4 +140,5 @@ urlpatterns = [
         name="maintenance-details",
     ),
     path("Trip/detail/<uuid>/", TripDetailViewSet.as_view(), name="trip-details"),
+    path("Booking/create/", BookingView.as_view(), name="booking-create"),
 ] + router.urls
