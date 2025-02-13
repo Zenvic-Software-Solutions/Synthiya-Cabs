@@ -9,6 +9,7 @@ from .user import (
 
 from .driver import (
     DriverReadSerializer,
+    DriverBookingReadSerializer,
 )
 from .staff import (
     StaffWriteSerializer,

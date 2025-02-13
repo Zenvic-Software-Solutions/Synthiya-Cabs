@@ -54,7 +54,7 @@ class BookingListAPIView(AppListAPIViewSet):
     serializer_class = BookingReadSerializer
 
     column_details = {
-        "booking_id":"Booking ID",
+        "booking_id": "Booking ID",
         "customer_details.identity": "Customer Name",
         "vehicle_details.identity": "Vehicle Name",
         "cab_details.identity": "OtherCab Name",
@@ -151,8 +151,8 @@ class BookingView(AppAPIView):
                 otherdriver=other_driver,
                 start_date=start_date,
                 end_date=end_date,
-                start_place=start_date,
-                end_place=end_date,
+                start_place=start_place,
+                end_place=end_place,
                 rent_type=rent_type,
                 sponsor=sponsor,
             )

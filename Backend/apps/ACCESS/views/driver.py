@@ -1,5 +1,6 @@
 from apps.ACCESS.models import Driver, User
-from apps.ACCESS.serializers import DriverReadSerializer
+from apps.CMS.models import Booking
+from apps.ACCESS.serializers import DriverReadSerializer, DriverBookingReadSerializer
 from apps.BASE.base import AppAPIView
 from apps.BASE.views import AppListAPIViewSet
 
@@ -130,3 +131,17 @@ class DriverListAPIView(AppListAPIViewSet):
             "filter_data": {},
         }
         return data
+
+
+class DriverTripApiView(AppListAPIViewSet):
+    search_fields = [
+        "identity",
+    ]
+    filterset_fields = {"": ["exact"]}
+    column_details = {}
+    filter_details = {}
+    serializer_class = DriverBookingReadSerializer
+
+    def get_queryset(self):
+        queryset = Booking.objects.all()
+        return queryset
