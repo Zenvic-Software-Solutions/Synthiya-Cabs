@@ -23,6 +23,11 @@ from .workshop import (
     MaintenanceDetailAPIView,
     WorkshopDetailAPIView,
 )
-from .booking import BookingCUDAPIView, BookingListAPIView, BookingDetailViewSet
+from .booking import (
+    BookingCUDAPIView,
+    BookingListAPIView,
+    BookingDetailViewSet,
+    BookingView,
+)
 from .trip import TripListAPIView, TripCUDAPIView, TripDetailViewSet
 from .betta import BettaCUDAPIView, BettaDetailAPIView, BettaListAPIView
