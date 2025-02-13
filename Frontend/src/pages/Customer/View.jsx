@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "@context/AppContext";
 import { useParams } from "react-router-dom";
-import { vehicleDetail } from "@api/urls";
+import { customerDetail } from "@api/urls";
 import { Loader } from "@components";
 
 export default function View() {
@@ -11,15 +11,15 @@ export default function View() {
 
   useEffect(() => {
     setBreadcrumbs({
-      title: "Vehicle View",
-      sidebarActiveId: 7,
+      title: "Customer View",
+      sidebarActiveId: 3,
       list: [
         {
-          label: "Vehicle List",
-          path: "/vehicle/list",
+          label: "Customer List",
+          path: "/customer/list",
         },
         {
-          label: "Vehicle View",
+          label: "Customer View",
         },
       ],
     });
@@ -27,14 +27,16 @@ export default function View() {
 
   useEffect(() => {
     const FatchData = async () => {
-      const response = await vehicleDetail(uuid);
+      const response = await customerDetail(uuid);
 
       const mapedData = {
-        "Vehicle Name": response.identity,
-        "Vehicle Number": response.vehicle_no,
-        "Vehicle Type": response.vehicle_type,
-        "AC Available": response.is_ac_available ? "Yes" : "No",
-        "Last KM": response.last_km,
+        "Customer Name": response.initial?.identity,
+        "Customer ID": response.initial?.customer_id,
+        // Email: response.initial?.email,
+        // Address: response.initial?.address,
+        // "Date of Birth": response.initial?.dob,
+        "Phone Number": response.initial?.user_phone_number,
+        //"Date of Joining": response.initial?.date_of_joining,
       };
       setViewDetail(mapedData);
     };
@@ -47,7 +49,7 @@ export default function View() {
     <div className="col-md-12 col-lg-8">
       <div className="card shadow-sm border-0 rounded">
         <div className="card-header bg-light py-3">
-          <h5 className="mb-0 text-dark fw-bold">Vehicle Details</h5>
+          <h5 className="mb-0 text-dark fw-bold">Customer Details</h5>
         </div>
         <div className="card-body p-4">
           <table className="table table-bordered">

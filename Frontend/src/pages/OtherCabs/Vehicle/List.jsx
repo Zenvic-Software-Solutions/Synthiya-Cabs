@@ -13,7 +13,6 @@ export default function index() {
       tableMetaApi={() => otherCabsVehicleTableMeta(uuid)}
       tableDataApi={(extra) => otherCabsVehicleTableData(uuid, extra)}
       actionLink={{
-        viewLink: "#",
         editLink: "/othercabs-vehicle/form",
         deleteLink: "#",
       }}
