@@ -72,7 +72,7 @@ router.register(r"booking/cud", BookingCUDAPIView, basename="booking-cud")
 
 # Bank
 router.register(r"bank/list", BankListViewSet, basename="banks-list")
-router.register(r"bank/cud", BankCUDViewSet, basename="banks-list")
+router.register(r"bank/cud", BankCUDViewSet, basename="banks-cud")
 router.register(
     r"bankbalance/list", BankBalanceListViewSet, basename="bank-balance-list"
 )
@@ -152,5 +152,5 @@ urlpatterns = [
         name="maintenance-details",
     ),
     path("Trip/detail/<uuid>/", TripDetailViewSet.as_view(), name="trip-details"),
-    path("Booking/create/", BookingView.as_view(), name="booking-create"),
+    path("booking/create/", BookingView.as_view(), name="booking-create"),
 ] + router.urls

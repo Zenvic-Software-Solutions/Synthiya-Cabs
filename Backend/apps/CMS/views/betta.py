@@ -38,7 +38,7 @@ class BettaListAPIView(AppListAPIViewSet):
                 self.serialize_choices(BETTA_STATUS_CHOICES["options"]),
             },
         }
-        return self.send_response(data)
+        return data
 
 
 class BettaCUDAPIView(AppCUDAPIViewSet):

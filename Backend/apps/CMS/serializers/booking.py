@@ -55,7 +55,6 @@ class BookingWriteSerializer(WriteSerializer):
             "end_date",
             "start_place",
             "end_place",
-            "no_of_days",
             "sponsor",
         ]
 
