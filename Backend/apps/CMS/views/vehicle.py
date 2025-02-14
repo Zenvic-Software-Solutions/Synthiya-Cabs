@@ -58,10 +58,9 @@ class VehicleDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView
 class VehicleMaintenanceAPIView(AppListAPIViewSet):
     search_fields = []
     filterset_fields = []
-
     serializer_class = VehicleMaintenanceReadSerializer
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         uuid = self.kwargs.get("uuid")
 
         vehicle = get_object_or_404(Vehicle, uuid=uuid)
@@ -109,7 +108,7 @@ class VehicleTripAPIView(AppListAPIViewSet):
 
     serializer_class = VehicleTripReadSerializer
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         uuid = self.kwargs.get("uuid")
         vehicle = get_object_or_404(Vehicle, uuid=uuid)
         return Trip.objects.filter(vehicle=vehicle)

@@ -141,17 +141,17 @@ urlpatterns = [
     ),
     path(
         "vehicle/finance/<uuid>/",
-        VehicleFinanceAPIView.as_view({"get", "list"}),
+        VehicleFinanceAPIView.as_view({"get": "list"}),
         name="finance-vehicle-list",
     ),
     path(
         "vehicle/maintenance/<uuid>/",
-        VehicleMaintenanceAPIView.as_view({"get", "list"}),
+        VehicleMaintenanceAPIView.as_view({"get": "list"}),
         name="vehicle-maintenance-list",
     ),
     path(
         "vehicle/trip/<uuid>/",
-        VehicleTripAPIView.as_view({"get", "list"}),
+        VehicleTripAPIView.as_view({"get": "list"}),
         name="vehicle-trip-list",
     ),
     path(
