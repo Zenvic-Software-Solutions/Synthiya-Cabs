@@ -68,3 +68,8 @@ export { default as BettaView } from "./Betta/View";
 //finance Pages
 export {default as FinanceList} from "./Finance/List";
 export {default as FinanceForm} from "./Finance/Form";
+export { default as FinanceView } from "./Finance/View";
+
+//Finance history
+export {default as FinanceHistoryList} from "./Finance/FinanceHistory/List"
+export {default as FinanceHistoryForm} from "./Finance/FinanceHistory/Form"

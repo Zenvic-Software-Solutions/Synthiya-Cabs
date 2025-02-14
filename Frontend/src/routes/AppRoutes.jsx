@@ -115,8 +115,15 @@ const AppRoutes = createBrowserRouter([
         children: [
           {path: "list", element: <Pages.FinanceList />},
           {path: "form/:uuid?", element: <Pages.FinanceForm/>},
-          // {path: "view/:uuid?", element: <Pages.BettaView/>},
+          {path: "view/:uuid?", element: <Pages.FinanceView/>},
         ]
+      },
+      {
+        path: "financehistory",
+        children: [
+          {path: "list", element: <Pages.FinanceHistoryList />},
+          {path: "form/:uuid?", element: <Pages.FinanceHistoryForm/>},
+        ]  
       },
       { path: "report", element: <Pages.Report /> },
     ],
