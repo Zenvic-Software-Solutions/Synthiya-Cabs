@@ -39,7 +39,7 @@ const EndPoints = {
   othercabsDetail: "/cms/othercab/detail/",
 
   // OtherCabes Vehicle API
-  otherCabsVehicleListURL: "/cms/otherdriver/list/",
+  otherCabsVehicleListURL: "/cms/othervehicle/list/",
   otherCabsVehicleCudURL: "/cms/othervehicle/cud/",
 
   // OtherCabes Driver API
@@ -55,25 +55,25 @@ const EndPoints = {
   bookingListURL: "/cms/booking/list/",
   bookingCudURL: "/cms/booking/cud/",
 
-    // Customer API
-    customerListURL: "/access/customer/list/",
-    customerCudURL: "/access/customer/create/",
-    customerUpdateURL: "/access/customer/update/",
-    customerDetailURL: "/access/customer/retrieve/",
+  // Customer API
+  customerListURL: "/access/customer/list/",
+  customerCudURL: "/access/customer/create/",
+  customerUpdateURL: "/access/customer/update/",
+  customerDetailURL: "/access/customer/retrieve/",
 
   //Maintenance API
   MaintenanceListURL: "/cms/maintenance/list/",
   maintenanceCudURL: "/cms/maintenance/cud/",
   maintenanceDetailURL: "/cms/maintenance/detail/",
 
-    //Betta API
-    bettaListURL: "/cms/betta/list/",
-    bettaCudURL: "/cms/betta/cud/",
-    bettaDetailURL: "/cms/betta/detail/",
+  //Betta API
+  bettaListURL: "/cms/betta/list/",
+  bettaCudURL: "/cms/betta/cud/",
+  bettaDetailURL: "/cms/betta/detail/",
 
-    //finance API
-    financeListURL: "cms/finance/list/",
-    financeCudURL: "cms/finance/cud/",
+  //finance API
+  financeListURL: "cms/finance/list/",
+  financeCudURL: "cms/finance/cud/",
 };
 
 export default EndPoints;

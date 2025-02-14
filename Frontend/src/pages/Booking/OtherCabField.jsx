@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CreatableSelect from "react-select/creatable";
 
-export default function CustomerField({
+export default function OtherCabField({
   fieldName,
   label,
   formData,
@@ -21,10 +21,13 @@ export default function CustomerField({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getApi();
+        const response = await getApi(formData.othercab);
         const mappedData = response?.results?.map((item) => ({
           value: item.uuid,
-          label: item.user_details?.phone_number || "Unknown",
+          label:
+            fieldName[1] == "othervechile_identity"
+              ? item.other_cab_name_details?.phone_number
+              : "Unkown",
           name: item.identity || "",
         }));
 
@@ -36,8 +39,8 @@ export default function CustomerField({
       }
     };
 
-    fetchData();
-  }, []);
+    if (formData?.othercab) fetchData();
+  }, [formData?.othercab]);
 
   const handlePhoneChange = (selectedOption) => {
     setIsNewCustomer(false);
@@ -62,7 +65,7 @@ export default function CustomerField({
   };
 
   const handleCreateNewCustomer = async () => {
-    const response = await postApi({
+    const response = await postApi(formData?.othercab, {
       identity: newCustomer.identity,
       phone_number: newCustomer.phone_number,
     });

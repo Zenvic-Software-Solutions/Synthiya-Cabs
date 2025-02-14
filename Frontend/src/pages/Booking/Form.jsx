@@ -3,6 +3,19 @@ import Stepper from "bs-stepper";
 import { useAppContext } from "@context/AppContext";
 import * as Yup from "yup";
 import CustomerField from "./CustomerField";
+import CustomSelect from "./CustomSelect";
+import OtherCabField from "./OtherCabField";
+import {
+  vehicleTableData,
+  driverTableData,
+  otherCabsTableData,
+  customerTableData,
+  postCustomerCud,
+  otherCabsDriverTableData,
+  postOtherCabsDriverCud,
+  otherCabsVehicleTableData,
+  postOtherCabsVehicleCud,
+} from "@api/urls";
 
 const validationSchema = Yup.object().shape({
   // username: Yup.string()
@@ -174,25 +187,30 @@ export default function Form() {
           <div className="bs-stepper-content">
             <div id="customer-details" className="content">
               <h5>Customer Details</h5>
-              <CustomerField
-                fieldName={["customer_phone_number", "customer_name"]}
-                label={["Customer Phone number", "Customer Name"]}
-                formData={formData}
-                setFormData={setFormData}
-                errors={errors}
-                handleChange={handleChange}
-              />
+              <div className="row g-6" style={{ marginBottom: "40px" }}>
+                <CustomerField
+                  fieldName={["customer_phone_number", "customer_name"]}
+                  label={["Customer Phone number", "Customer Name"]}
+                  formData={formData}
+                  setFormData={setFormData}
+                  errors={errors}
+                  handleChange={handleChange}
+                  getApi={customerTableData}
+                  postApi={postCustomerCud}
+                />
 
-              <h5>Sponser Details</h5>
-              <CustomerField
-                fieldName={["sponser_phone_number", "sponser_name"]}
-                label={["Sponser Phone number", "Sponser Name"]}
-                formData={formData}
-                setFormData={setFormData}
-                errors={errors}
-                handleChange={handleChange}
-              />
-
+                <h5>Sponser Details</h5>
+                <CustomerField
+                  fieldName={["sponser_phone_number", "sponser_name"]}
+                  label={["Sponser Phone number", "Sponser Name"]}
+                  formData={formData}
+                  setFormData={setFormData}
+                  errors={errors}
+                  handleChange={handleChange}
+                  getApi={customerTableData}
+                  postApi={postCustomerCud}
+                />
+              </div>
               <div className="col-12 d-flex justify-content-end">
                 <button
                   className="btn btn-primary btn-next waves-effect waves-light"
@@ -329,39 +347,27 @@ export default function Form() {
                       >
                         <div className="row g-6">
                           <div className="col-sm-4">
-                            <label className="form-label" htmlFor="vehicle">
-                              Vehicle
-                            </label>
-                            <input
-                              type="text"
-                              name="vehicle"
-                              className="form-control"
-                              placeholder="Enter vehicle ID"
-                              value={formData.vehicle}
-                              onChange={handleChange}
+                            <CustomSelect
+                              fieldName={"vehicle"}
+                              label={" Vehicle"}
+                              formData={formData}
+                              errors={errors}
+                              handleChange={handleChange}
+                              apiFunction={vehicleTableData}
+                              optionKeys={["uuid", "identity", "vehicle_no"]}
                             />
-                            {errors.vehicle && (
-                              <div className="text-danger">
-                                {errors.vehicle}
-                              </div>
-                            )}
                           </div>
 
                           <div className="col-sm-4">
-                            <label className="form-label" htmlFor="driver">
-                              Driver
-                            </label>
-                            <input
-                              type="text"
-                              name="driver"
-                              className="form-control"
-                              placeholder="Enter driver ID"
-                              value={formData.driver}
-                              onChange={handleChange}
+                            <CustomSelect
+                              fieldName={"driver"}
+                              label={" Driver"}
+                              formData={formData}
+                              errors={errors}
+                              handleChange={handleChange}
+                              apiFunction={driverTableData}
+                              optionKeys={["uuid", "identity", "driver_id"]}
                             />
-                            {errors.driver && (
-                              <div className="text-danger">{errors.driver}</div>
-                            )}
                           </div>
                         </div>
                       </div>
@@ -373,111 +379,48 @@ export default function Form() {
                       >
                         <div className="row g-6">
                           <div className="col-sm-4">
-                            <label className="form-label" htmlFor="othercab">
-                              Other Cab
-                            </label>
-                            <input
-                              type="text"
-                              name="othercab"
-                              className="form-control"
-                              placeholder="Enter other cab ID"
-                              value={formData.othercab}
-                              onChange={handleChange}
+                            <CustomSelect
+                              fieldName={"othercab"}
+                              label={"Othercab Name"}
+                              formData={formData}
+                              errors={errors}
+                              handleChange={handleChange}
+                              apiFunction={otherCabsTableData}
+                              optionKeys={["uuid", "identity"]}
                             />
-                            {errors.othercab && (
-                              <div className="text-danger">
-                                {errors.othercab}
-                              </div>
-                            )}
                           </div>
-
-                          <div className="col-sm-4">
-                            <label
-                              className="form-label"
-                              htmlFor="otherdriver_identity"
-                            >
-                              Other Driver Identity
-                            </label>
-                            <input
-                              type="text"
-                              name="otherdriver_identity"
-                              className="form-control"
-                              placeholder="Enter other driver identity"
-                              value={formData.otherdriver_identity}
-                              onChange={handleChange}
-                            />
-                            {errors.otherdriver_identity && (
-                              <div className="text-danger">
-                                {errors.otherdriver_identity}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="col-sm-4">
-                            <label
-                              className="form-label"
-                              htmlFor="otherdriver_phone_number"
-                            >
-                              Other Driver Phone Number
-                            </label>
-                            <input
-                              type="tel"
-                              name="otherdriver_phone_number"
-                              className="form-control"
-                              placeholder="Enter phone number"
-                              value={formData.otherdriver_phone_number}
-                              onChange={handleChange}
-                            />
-                            {errors.otherdriver_phone_number && (
-                              <div className="text-danger">
-                                {errors.otherdriver_phone_number}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="col-sm-4">
-                            <label
-                              className="form-label"
-                              htmlFor="othervechile_identity"
-                            >
-                              Other Vehicle Identity
-                            </label>
-                            <input
-                              type="text"
-                              name="othervechile_identity"
-                              className="form-control"
-                              placeholder="Enter other vehicle identity"
-                              value={formData.othervechile_identity}
-                              onChange={handleChange}
-                            />
-                            {errors.othervechile_identity && (
-                              <div className="text-danger">
-                                {errors.othervechile_identity}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="col-sm-4">
-                            <label
-                              className="form-label"
-                              htmlFor="othervechile_vehicle_no"
-                            >
-                              Other Vehicle Number
-                            </label>
-                            <input
-                              type="text"
-                              name="othervechile_vehicle_no"
-                              className="form-control"
-                              placeholder="Enter vehicle number"
-                              value={formData.othervechile_vehicle_no}
-                              onChange={handleChange}
-                            />
-                            {errors.othervechile_vehicle_no && (
-                              <div className="text-danger">
-                                {errors.othervechile_vehicle_no}
-                              </div>
-                            )}
-                          </div>
+                          <OtherCabField
+                            fieldName={[
+                              "otherdriver_phone_number",
+                              "otherdriver_identity",
+                            ]}
+                            label={[
+                              "OtherCab Driver Phone number",
+                              "OtherCab Driver Name",
+                            ]}
+                            formData={formData}
+                            setFormData={setFormData}
+                            errors={errors}
+                            handleChange={handleChange}
+                            getApi={otherCabsDriverTableData}
+                            postApi={postOtherCabsDriverCud}
+                          />
+                          <OtherCabField
+                            fieldName={[
+                              "othervechile_identity",
+                              "othervechile_vehicle_no",
+                            ]}
+                            label={[
+                              "OtherCab Vehicle Name",
+                              "OtherCab Vehicle Number",
+                            ]}
+                            formData={formData}
+                            setFormData={setFormData}
+                            errors={errors}
+                            handleChange={handleChange}
+                            getApi={otherCabsVehicleTableData}
+                            postApi={postOtherCabsVehicleCud}
+                          />
                         </div>
                       </div>
                     </div>

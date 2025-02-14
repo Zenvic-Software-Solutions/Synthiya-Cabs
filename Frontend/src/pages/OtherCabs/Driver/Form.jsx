@@ -3,9 +3,9 @@ import { DynamicForm } from "@components";
 import * as Yup from "yup";
 import {
   otherCabsDriverTableMeta,
-  getDriverCud,
-  postDriverCud,
-  patchDriverCud,
+  getOtherCabsDriverCud,
+  postOtherCabsDriverCud,
+  patchOtherCabsDriverCud,
 } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
@@ -57,9 +57,9 @@ export default function Index() {
       validationSchema={validationSchema}
       redirectUrl="/othercabs-driver/list"
       apiFunction={{
-        getForm: getDriverCud,
-        postForm: postDriverCud,
-        patchForm: patchDriverCud,
+        getForm: getOtherCabsDriverCud,
+        postForm: postOtherCabsDriverCud,
+        patchForm: patchOtherCabsDriverCud,
       }}
       breadcrumbData={{
         title: "OtherCabs Driver list",
