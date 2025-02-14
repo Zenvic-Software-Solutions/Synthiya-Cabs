@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import Stepper from "bs-stepper";
 import { useAppContext } from "@context/AppContext";
 import * as Yup from "yup";
-import CustomerField from "./CustomerField";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()
@@ -164,35 +163,86 @@ export default function Form() {
           <div className="bs-stepper-content">
             <div id="customer-details" className="content">
               <h5>Customer Details</h5>
-              <CustomerField
-                fieldName={["customer_phone_number", "customer_name"]}
-                label={["Customer Phone number", "Customer Name"]}
-                formData={formData}
-                setFormData={setFormData}
-                errors={errors}
-                handleChange={handleChange}
-              />
-
+              <div className="row g-6" style={{ marginBottom: "40px" }}>
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="username">
+                    Customer Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    className="form-control"
+                    placeholder="johndoe"
+                    value={formData.phone_number}
+                    onChange={handleChange}
+                  />
+                  {errors.phone_number && (
+                    <div className="text-danger">{errors.phone_number}</div>
+                  )}
+                </div>
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="username">
+                    Customer Name
+                  </label>
+                  <input
+                    type="text"
+                    name="identity"
+                    className="form-control"
+                    placeholder="Enter Customer Name"
+                    value={formData.identity}
+                    onChange={handleChange}
+                  />
+                  {errors.identity && (
+                    <div className="text-danger">{errors.identity}</div>
+                  )}
+                </div>
+              </div>
               <h5>Sponser Details</h5>
-              <CustomerField
-                fieldName={["sponser_phone_number", "sponser_name"]}
-                label={["Sponser Phone number", "Sponser Name"]}
-                formData={formData}
-                setFormData={setFormData}
-                errors={errors}
-                handleChange={handleChange}
-              />
+              <div className="row g-6">
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="sponsor">
+                    Sponsor Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    name="sponsor"
+                    className="form-control"
+                    placeholder="Enter Sponsor"
+                    value={formData.sponsor}
+                    onChange={handleChange}
+                  />
+                  {errors.sponsor && (
+                    <div className="text-danger">{errors.sponsor}</div>
+                  )}
+                </div>
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="sponsor">
+                    Sponsor Name
+                  </label>
+                  <input
+                    type="text"
+                    name="sponsor"
+                    className="form-control"
+                    placeholder="Enter Sponsor"
+                    value={formData.sponsor}
+                    onChange={handleChange}
+                  />
+                  {errors.sponsor && (
+                    <div className="text-danger">{errors.sponsor}</div>
+                  )}
+                </div>
 
-              <div className="col-12 d-flex justify-content-end">
-                <button
-                  className="btn btn-primary btn-next waves-effect waves-light"
-                  onClick={handleNextButton}
-                >
-                  <span className="align-middle d-sm-inline-block d-none me-sm-2">
-                    Next
-                  </span>
-                  <i className="ti ti-arrow-right ti-xs" />
-                </button>
+                <div className="col-12 d-flex justify-content-end">
+                  <button
+                    className="btn btn-primary btn-next waves-effect waves-light"
+                    onClick={handleNextButton}
+                  >
+                    <span className="align-middle d-sm-inline-block d-none me-sm-2">
+                      Next
+                    </span>
+                    <i className="ti ti-arrow-right ti-xs" />
+                  </button>
+                </div>
               </div>
             </div>
 
