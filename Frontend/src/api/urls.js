@@ -115,3 +115,10 @@ export const postbettaCud = (data) => makePostRequest(EndPoints.bettaCudURL, dat
 export const patchbettaCud = (uuid, data) => makePatchRequest(EndPoints.bettaCudURL + uuid + "/", data);
 export const getbettaCud = (uuid) => makeGetRequest(EndPoints.bettaCudURL + uuid + "/meta/");
 export const bettaDetail = (uuid) => makeGetRequest(EndPoints.bettaDetailURL + uuid + "/");
+
+//finance API
+export const financeTableMeta = () => makeGetRequest(EndPoints.financeListURL+ "table-meta/");
+export const financeTableData = (data) => makeGetRequest(EndPoints.financeListURL, data);
+export const postfinanceCud = (data) => makePostRequest(EndPoints.financeCudURL, data);
+export const patchfinanceCud = (uuid, data) => makePatchRequest(EndPoints.financeCudURL + uuid + "/", data);
+export const getfinanceCud = (uuid) => makeGetRequest(EndPoints.financeCudURL + uuid + "/meta/");

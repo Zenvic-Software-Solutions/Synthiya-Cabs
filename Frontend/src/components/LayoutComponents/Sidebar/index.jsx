@@ -43,6 +43,7 @@ const Sidebar = () => {
           path: "/workshop/list",
         },
         { id: 10, label: "Ledger", icon: "ti ti-book", path: "#" },
+        { id: 19, label: "Finance", icon: "ti ti-book", path: "/finance/list" },
       ],
     },
     {
