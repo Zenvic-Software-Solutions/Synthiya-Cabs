@@ -1,4 +1,5 @@
 from apps.ACCESS.models import Driver, User
+from apps.CMS.models import Booking, Vehicle
 from apps.BASE.serializers import ReadSerializer, read_serializer
 
 
@@ -20,4 +21,23 @@ class DriverReadSerializer(ReadSerializer):
             "license_no",
             "date_of_joining",
             "user_details",
+        ]
+
+
+class DriverBookingReadSerializer(ReadSerializer):
+    vehicle_details = read_serializer(
+        meta_model=Vehicle, meta_fields=["id", "uuid", "identity"]
+    )(source="vehicle")
+
+    class Meta(ReadSerializer.Meta):
+        model = Booking
+        fields = [
+            "id",
+            "uuid",
+            # "",
+            "vehicle_details",
+            "start_date",
+            "end_date",
+            "start_place",
+            "end_place",
         ]
