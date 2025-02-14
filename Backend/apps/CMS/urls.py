@@ -19,7 +19,7 @@ from apps.CMS.views import (
     OtherVehicleCUDViewSet,
     VehicleListViewSet,
     VehicleCUDViewSet,
-    VechileDetailViewSet,
+    VehicleDetailViewSet,
     BankListViewSet,
     BankCUDViewSet,
     BankDetailViewSet,
@@ -93,7 +93,9 @@ router.register(r"finance/cud", FinanceCUDAPIView, basename="finance-cud")
 router.register(
     r"financehistory/list", FinanaceHistoryListAPIView, basename="finance-history-list"
 )
-router.register(r"financehistory/cud", FinanceHistoryCUDAPIView, basename="finance-history-cud")
+router.register(
+    r"financehistory/cud", FinanceHistoryCUDAPIView, basename="finance-history-cud"
+)
 
 # Workshop
 router.register(r"workshop/list", WorkshopListViewSet, basename="workshops-list")
@@ -139,17 +141,17 @@ urlpatterns = [
     ),
     path(
         "vehicle/finance/<uuid>/",
-        VehicleFinanceAPIView.as_view({'get','list'}),
+        VehicleFinanceAPIView.as_view({"get", "list"}),
         name="finance-vehicle-list",
     ),
     path(
         "vehicle/maintenance/<uuid>/",
-        VehicleMaintenanceAPIView.as_view({'get','list'}),
+        VehicleMaintenanceAPIView.as_view({"get", "list"}),
         name="vehicle-maintenance-list",
     ),
     path(
         "vehicle/trip/<uuid>/",
-        VehicleTripAPIView.as_view({'get','list'}),
+        VehicleTripAPIView.as_view({"get", "list"}),
         name="vehicle-trip-list",
     ),
     path(
@@ -180,7 +182,7 @@ urlpatterns = [
         name="othercab-detail-view",
     ),
     path(
-        "vehicle/detail/<uuid>/", VechileDetailViewSet.as_view(), name="vehicle-details"
+        "vehicle/detail/<uuid>/", VehicleDetailViewSet.as_view(), name="vehicle-details"
     ),
     path("bank/detail/<uuid>/", BankDetailViewSet.as_view(), name="bank-details"),
     path(

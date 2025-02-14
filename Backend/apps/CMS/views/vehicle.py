@@ -4,7 +4,7 @@ from apps.CMS.serializers import (
     VehicleDetailSerializer,
     VehicleMaintenanceReadSerializer,
     VehicleFinanceReadSerializer,
-    VehicleTripReadSerializer
+    VehicleTripReadSerializer,
 )
 from apps.BASE.views import (
     AppCUDAPIViewSet,
@@ -12,9 +12,10 @@ from apps.BASE.views import (
     AbstractLookUpFieldMixin,
     AppAPIView,
 )
-from apps.CMS.models import Vehicle,Maintenance,Trip,Finance
+from apps.CMS.models import Vehicle, Maintenance, Trip, Finance
 from HELPERS import VEHICLE_TYPE
 from rest_framework.generics import RetrieveAPIView
+from django.shortcuts import get_object_or_404
 
 
 class VehicleListViewSet(AppListAPIViewSet):
@@ -49,38 +50,79 @@ class VehicleCUDViewSet(AppCUDAPIViewSet):
     serializer_class = VehicleWriteSerializer
 
 
-class VechileDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
+class VehicleDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleDetailSerializer
 
 
-
 class VehicleMaintenanceAPIView(AppListAPIViewSet):
+    search_fields = []
+    filterset_fields = []
+
+    serializer_class = VehicleMaintenanceReadSerializer
+
     def get_queryset(self):
         uuid = self.kwargs.get("uuid")
-        vehicle = Vehicle.objects.get(uuid=uuid)
-        queryset= Maintenance.objects.filter(vehicle=vehicle)
-        return queryset
-    serializer_class = VehicleMaintenanceReadSerializer
+
+        vehicle = get_object_or_404(Vehicle, uuid=uuid)
+        return Maintenance.objects.filter(vehicle=vehicle)
+
+    column_details = {}
+    filter_details = {}
+
+    def get_table_meta(self):
+        return {
+            "columns": self.get_table_columns_details(),
+            "filters": self.get_table_filter_details(),
+            "filter_data": {},
+        }
 
 
 class VehicleFinanceAPIView(AppListAPIViewSet):
-    
-    serializer_class =VehicleFinanceReadSerializer
+    search_fields = []
+    filterset_fields = []
+
+    serializer_class = VehicleFinanceReadSerializer
+
     def get_queryset(self, *args, **kwargs):
-        breakpoint()
-        uuid= self.kwargs.get("uuid")
-        vehicle=Vehicle.objects.get(uuid=uuid)
-        queryset= Finance.objects.filter(vehicle=vehicle)
-        return queryset
-    
+        uuid = self.kwargs.get("uuid")
+        vehicle = get_object_or_404(Vehicle, uuid=uuid)
+        return Finance.objects.filter(vehicle=vehicle)
+
+    column_details = {}
+    filter_details = {}
+
+    def get_table_meta(self):
+        data = {
+            "columns": self.get_table_columns_details(),
+            "filters": self.get_table_filter_details(),
+            "filter_data": {
+                "vehicle_type": self.serialize_choices(VEHICLE_TYPE["options"]),
+            },
+        }
+        return data
+
 
 class VehicleTripAPIView(AppListAPIViewSet):
-    def get_queryset(self):
-        uuid = self.kwargs.get("uuid")
-        vehicle = Vehicle.objects.get(uuid=uuid)
-        queryset= Trip.objects.filter(vehicle=vehicle)
-        return queryset
+    search_fields = []
+    filterset_fields = []
+
     serializer_class = VehicleTripReadSerializer
 
+    def get_queryset(self):
+        uuid = self.kwargs.get("uuid")
+        vehicle = get_object_or_404(Vehicle, uuid=uuid)
+        return Trip.objects.filter(vehicle=vehicle)
 
+    column_details = {}
+    filter_details = {}
+
+    def get_table_meta(self):
+        data = {
+            "columns": self.get_table_columns_details(),
+            "filters": self.get_table_filter_details(),
+            "filter_data": {
+                "vehicle_type": self.serialize_choices(VEHICLE_TYPE["options"]),
+            },
+        }
+        return data

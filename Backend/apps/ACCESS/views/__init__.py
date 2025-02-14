@@ -21,6 +21,7 @@ from .customer import (
     CustomerUpdateAPIView,
     CustomerRetrieveAPIView,
     CustomerListAPIView,
+    CustomerTripApiView,
 )
 
 from .driver import (

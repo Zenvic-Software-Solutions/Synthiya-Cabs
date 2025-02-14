@@ -8,11 +8,12 @@ from .other_cabs import (
     OtherVehicleCUDViewSet,
 )
 from .vehicle import (
-    VehicleListViewSet, 
+    VehicleListViewSet,
     VehicleCUDViewSet,
-    VechileDetailViewSet,
+    VehicleDetailViewSet,
     VehicleMaintenanceAPIView,
-    VehicleTripAPIView,VehicleFinanceAPIView
+    VehicleTripAPIView,
+    VehicleFinanceAPIView,
 )
 from .bank import (
     BankListViewSet,
@@ -28,7 +29,6 @@ from .workshop import (
     MaintenanceCUDViewSet,
     MaintenanceDetailAPIView,
     WorkshopDetailAPIView,
-    
 )
 from .booking import (
     BookingCUDAPIView,

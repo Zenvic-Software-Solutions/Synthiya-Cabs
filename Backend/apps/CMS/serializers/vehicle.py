@@ -1,5 +1,5 @@
-from apps.BASE.serializers import ReadSerializer, WriteSerializer,read_serializer
-from apps.CMS.models import Vehicle,Maintenance,Trip,Finance
+from apps.BASE.serializers import ReadSerializer, WriteSerializer, read_serializer
+from apps.CMS.models import Vehicle, Maintenance, Trip, Finance
 
 
 class VehicleReadSerializer(ReadSerializer):
@@ -42,18 +42,12 @@ class VehicleDetailSerializer(ReadSerializer):
         ]
 
 
-
 class VehicleMaintenanceReadSerializer(ReadSerializer):
-    vehicle_details = read_serializer(
-        meta_model=Vehicle, meta_fields=["id", "uuid", "identity"]
-    )(source="vehicle")
-
     class Meta(ReadSerializer.Meta):
         model = Maintenance
         fields = [
             "id",
             "uuid",
-            "vehicle_details",
             "status",
             "description",
             "start_km",
@@ -64,7 +58,6 @@ class VehicleMaintenanceReadSerializer(ReadSerializer):
 
 
 class VehicleTripReadSerializer(ReadSerializer):
-    
     vehicle_details = read_serializer(
         Vehicle, meta_fields=["id", "uuid", "identity", "vehicle_type", "vehicle_no"]
     )(source="vehicle")
@@ -84,9 +77,9 @@ class VehicleTripReadSerializer(ReadSerializer):
 
 
 class VehicleFinanceReadSerializer(ReadSerializer):
-    vehicle_details = read_serializer(Vehicle, meta_fields=["id", "uuid", "vehicle_no", "identity"])(
-        source="vehicle"
-    )
+    vehicle_details = read_serializer(
+        Vehicle, meta_fields=["id", "uuid", "vehicle_no", "identity"]
+    )(source="vehicle")
 
     class Meta(ReadSerializer.Meta):
         model = Finance
