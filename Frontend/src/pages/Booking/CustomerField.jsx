@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CreatableSelect from "react-select/creatable";
+import { customerTableData, postCustomerCud } from "@api/urls";
 
 export default function CustomerField({
   fieldName,
@@ -8,28 +9,64 @@ export default function CustomerField({
   setFormData,
   errors,
   handleChange,
-  apiFunction,
 }) {
-  const phoneOptions = [
-    { value: "9876543210", label: "9876543210" },
-    { value: "8765432109", label: "8765432109" },
-    { value: "7654321098", label: "7654321098" },
-  ];
-  const [dropdownOptions, setDropdownOptions] = useState();
+  const [dropdownOptions, setDropdownOptions] = useState([]);
+  const [newCustomer, setNewCustomer] = useState({
+    phone_number: "",
+    identity: "",
+  });
+  const [isNewCustomer, setIsNewCustomer] = useState(false);
 
   useEffect(() => {
-    const FatchData = async () => {
-      const response = await apiFunction();
-      setDropdownOptions(response);
+    const fetchData = async () => {
+      try {
+        const response = await customerTableData();
+        const mappedData = response?.results?.map((item) => ({
+          value: item.uuid,
+          label: item.user_details?.phone_number || "Unknown",
+          name: item.identity || "",
+        }));
+
+        console.log("API Response:", mappedData);
+        setDropdownOptions(Array.isArray(mappedData) ? mappedData : []);
+      } catch (error) {
+        console.error("Error fetching customer data:", error);
+        setDropdownOptions([]);
+      }
     };
-    FatchData();
+
+    fetchData();
   }, []);
 
   const handlePhoneChange = (selectedOption) => {
+    setIsNewCustomer(false);
     setFormData({
       ...formData,
       [fieldName[0]]: selectedOption ? selectedOption.value : "",
+      [fieldName[1]]: selectedOption ? selectedOption.name : "",
     });
+  };
+
+  const handleCreateOption = (inputValue) => {
+    setIsNewCustomer(true);
+    const newOption = { value: inputValue, label: inputValue };
+    setNewCustomer({ phone_number: inputValue, identity: "" });
+
+    setDropdownOptions((prevOptions) => [...prevOptions, newOption]);
+    setFormData({
+      ...formData,
+      [fieldName[0]]: inputValue,
+      [fieldName[1]]: "",
+    });
+  };
+
+  const handleCreateNewCustomer = async () => {
+    const response = await postCustomerCud({
+      identity: newCustomer.identity,
+      phone_number: newCustomer.phone_number,
+    });
+
+    setIsNewCustomer(false);
   };
 
   return (
@@ -40,11 +77,14 @@ export default function CustomerField({
         </label>
         <CreatableSelect
           isClearable
-          options={phoneOptions}
+          options={dropdownOptions}
           onChange={handlePhoneChange}
-          value={phoneOptions.find(
-            (option) => option.value === formData[fieldName[0]]
-          )}
+          onCreateOption={handleCreateOption}
+          value={
+            dropdownOptions.find(
+              (option) => option.value === formData[fieldName[0]]
+            ) || ""
+          }
           classNamePrefix="react-select"
         />
         {errors[fieldName[0]] && (
@@ -62,12 +102,23 @@ export default function CustomerField({
           className="form-control"
           placeholder={`Enter ${label[1]}`}
           value={formData[fieldName[1]] || ""}
-          onChange={handleChange}
+          onChange={(e) => {
+            setNewCustomer((prev) => ({ ...prev, identity: e.target.value }));
+            handleChange(e);
+          }}
         />
         {errors[fieldName[1]] && (
           <div className="text-danger">{errors[fieldName[1]]}</div>
         )}
       </div>
+
+      {isNewCustomer && (
+        <div className="col-sm-4 d-flex align-items-end">
+          <button className="btn btn-primary" onClick={handleCreateNewCustomer}>
+            Save New Customer
+          </button>
+        </div>
+      )}
     </div>
   );
 }

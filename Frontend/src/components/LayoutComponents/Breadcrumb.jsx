@@ -47,7 +47,7 @@ export default function Index() {
               to={breadcrumbs?.addButtonData?.link}
               className="btn btn-primary waves-effect waves-light"
             >
-              <i class="ti ti-plus ti-md"></i>
+              <i className="ti ti-plus ti-md"></i>
               {breadcrumbs?.addButtonData?.name}
             </Link>
           )}

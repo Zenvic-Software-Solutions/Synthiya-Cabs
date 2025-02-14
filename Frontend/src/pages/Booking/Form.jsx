@@ -5,10 +5,10 @@ import * as Yup from "yup";
 import CustomerField from "./CustomerField";
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(3, "Username must be at least 3 characters")
-    .max(15, "Username must be at most 15 characters")
-    .required("Username is required"),
+  // username: Yup.string()
+  //   .min(3, "Username must be at least 3 characters")
+  //   .max(15, "Username must be at most 15 characters")
+  //   .required("Username is required"),
 });
 
 export default function Form() {
@@ -21,12 +21,20 @@ export default function Form() {
   });
   const [activeTab, setActiveTab] = useState("ourCab");
 
-  const handleChange = async (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = async (eventOrName, value) => {
+    let name, newValue;
+
+    if (eventOrName && eventOrName.target) {
+      ({ name, value: newValue } = eventOrName.target);
+    } else {
+      name = eventOrName;
+      newValue = value;
+    }
+
+    setFormData((prevData) => ({ ...prevData, [name]: newValue }));
 
     try {
-      await validationSchema.validateAt(name, { [name]: value });
+      await validationSchema.validateAt(name, { [name]: newValue });
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     } catch (error) {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: error.message }));
@@ -79,6 +87,8 @@ export default function Form() {
       setActiveTab(tabName);
     }
   };
+
+  useEffect(() => console.log(formData), [formData]);
 
   return (
     <div className="card mb-6" style={{ padding: "20px 40px" }}>

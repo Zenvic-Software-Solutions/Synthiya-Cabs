@@ -135,7 +135,7 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
 
   return (
     <DataTable
-      data={tableData.results}
+      data={tableData}
       columns={columns}
       className="display"
       options={{
