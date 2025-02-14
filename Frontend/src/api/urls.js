@@ -92,10 +92,26 @@ export const getBookingCud = (uuid) => makeGetRequest(EndPoints.bookingCudURL + 
 export const postBookingCud = (data) => makePostRequest(EndPoints.bookingCudURL, data);
 export const patchBookingCud = (uuid, data) => makePatchRequest(EndPoints.bookingCudURL + uuid + "/", data);
 
-// Staff API
+// customer API
 export const customerTableMeta = () => makeGetRequest(EndPoints.customerListURL + "table-meta/");
 export const customerTableData = (data) => makeGetRequest(EndPoints.customerListURL, data);
 export const getCustomerCud = (uuid) => makeGetRequest(EndPoints.customerDetailURL + uuid + "/");
 export const postCustomerCud = (data) => makePostRequest(EndPoints.customerCudURL, data);
 export const patchCustomerCud = (uuid, data) => makePutRequest(EndPoints.customerUpdateURL + uuid + "/", data);
 export const customerDetail = (uuid) => makeGetRequest(EndPoints.customerDetailURL + uuid + "/");
+
+//Maintenance API
+export const maintenanceTableMeta = () => makeGetRequest(EndPoints.MaintenanceListURL+ "table-meta/");
+export const maintenanceTableData = (data) => makeGetRequest(EndPoints.MaintenanceListURL, data);
+export const postMaintenanceCud = (data) => makePostRequest(EndPoints.maintenanceCudURL, data);
+export const patchMaintenanceCud = (uuid, data) => makePatchRequest(EndPoints.maintenanceCudURL + uuid + "/", data);
+export const getMaintenanceCud = (uuid) => makeGetRequest(EndPoints.maintenanceCudURL + uuid + "/meta/");
+export const maintenanceDetail = (uuid) => makeGetRequest(EndPoints.maintenanceDetailURL + uuid + "/");
+
+//Betta API
+export const bettaTableMeta = () => makeGetRequest(EndPoints.bettaListURL+ "table-meta/");
+export const bettaTableData = (data) => makeGetRequest(EndPoints.bettaListURL, data);
+export const postbettaCud = (data) => makePostRequest(EndPoints.bettaCudURL, data);
+export const patchbettaCud = (uuid, data) => makePatchRequest(EndPoints.bettaCudURL + uuid + "/", data);
+export const getbettaCud = (uuid) => makeGetRequest(EndPoints.bettaCudURL + uuid + "/meta/");
+export const bettaDetail = (uuid) => makeGetRequest(EndPoints.bettaDetailURL + uuid + "/");

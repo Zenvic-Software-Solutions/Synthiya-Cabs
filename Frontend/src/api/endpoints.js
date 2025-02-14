@@ -1,3 +1,5 @@
+import { MaintenanceList } from "../pages";
+
 const EndPoints = {
   // Auth API
   loginURL: "/access/login/",
@@ -58,6 +60,16 @@ const EndPoints = {
     customerCudURL: "/access/customer/create/",
     customerUpdateURL: "/access/customer/update/",
     customerDetailURL: "/access/customer/retrieve/",
+
+  //Maintenance API
+  MaintenanceListURL: "/cms/maintenance/list/",
+  maintenanceCudURL: "/cms/maintenance/cud/",
+  maintenanceDetailURL: "/cms/maintenance/detail/",
+
+    //Betta API
+    bettaListURL: "/cms/betta/list/",
+    bettaCudURL: "/cms/betta/cud/",
+    bettaDetailURL: "/cms/betta/detail/",
 };
 
 export default EndPoints;
