@@ -38,7 +38,6 @@ class UserListAPIView(AppListAPIViewSet):
 class CustomerCreateAPIView(AppAPIView):
     def post(self, request, *args, **kwargs):
         identity = request.data.get("identity")
-        customer_id = request.data.get("customer_id")
         phone_number = request.data.get("phone_number")
 
         if not phone_number:
@@ -54,7 +53,7 @@ class CustomerCreateAPIView(AppAPIView):
             return self.send_error_response({"error": "Customer already exists"})
 
         # Create customer
-        Customer.objects.create(identity=identity, customer_id=customer_id, user=user)
+        Customer.objects.create(identity=identity,  user=user)
 
         return self.send_response({"message": "Customer created successfully"})
 
@@ -62,7 +61,6 @@ class CustomerCreateAPIView(AppAPIView):
 class CustomerUpdateAPIView(AppAPIView):
     def put(self, request, uuid, *args, **kwargs):
         identity = request.data.get("identity")
-        customer_id = request.data.get("customer_id")
         phone_number = request.data.get("phone_number")
 
         try:
@@ -74,7 +72,6 @@ class CustomerUpdateAPIView(AppAPIView):
 
         # Update customer details (only if new values are provided)
         customer.identity = identity if identity else customer.identity
-        customer.customer_id = customer_id if customer_id else customer.customer_id
 
         # Update user details (if phone number is provided)
         if phone_number:
@@ -126,7 +123,7 @@ class CustomerListAPIView(AppListAPIViewSet):
         return data
 
 
-class CustomerTripApiView(AppListAPIViewSet):
+class CustomerTripAPIView(AppListAPIViewSet):
     search_fields = [
         "identity",
     ]

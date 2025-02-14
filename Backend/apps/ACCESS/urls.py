@@ -22,6 +22,7 @@ from apps.ACCESS.views import (
     CustomerUpdateAPIView,
     CustomerRetrieveAPIView,
     CustomerListAPIView,
+    CustomerTripAPIView,
 )
 
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -66,6 +67,11 @@ urlpatterns = [
         "customer/update/<uuid>/",
         CustomerUpdateAPIView.as_view(),
         name="customer-update",
+    ),
+    path(
+        "customer/trip/<uuid>/",
+        CustomerTripAPIView.as_view({'get','list'}),
+        name="customer-trip",
     ),
     path(
         "customer/retrieve/<uuid>/",
