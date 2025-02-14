@@ -70,6 +70,10 @@ const EndPoints = {
     bettaListURL: "/cms/betta/list/",
     bettaCudURL: "/cms/betta/cud/",
     bettaDetailURL: "/cms/betta/detail/",
+
+    //finance API
+    financeListURL: "cms/finance/list/",
+    financeCudURL: "cms/finance/cud/",
 };
 
 export default EndPoints;

@@ -64,3 +64,7 @@ export { default as MaintenanceView } from "./Maintenance/View";
 export {default as BettaList} from "./Betta/List";
 export { default as BettaForm } from "./Betta/Form";
 export { default as BettaView } from "./Betta/View";
+
+//finance Pages
+export {default as FinanceList} from "./Finance/List";
+export {default as FinanceForm} from "./Finance/Form";
