@@ -130,13 +130,13 @@ class CustomerTripApiView(AppListAPIViewSet):
     search_fields = [
         "identity",
     ]
-    filterset_fields = {"": ["exact"]}
+    filterset_fields = []
     column_details = {}
     filter_details = {}
     serializer_class = CustomerBookingReadSerializer
 
     def get_queryset(self, *args, **kwargs):
         uuid = self.kwargs.get("uuid")
-        Customer = Customer.objects.get(uuid=uuid)
-        queryset = Booking.objects.filter(customer=Customer)
+        customer = Customer.objects.get(uuid=uuid)
+        queryset = Booking.objects.filter(customer=customer)
         return queryset

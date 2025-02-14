@@ -137,7 +137,7 @@ class DriverTripApiView(AppListAPIViewSet):
     search_fields = [
         "identity",
     ]
-    filterset_fields = {"": ["exact"]}
+    filterset_fields = []
     column_details = {}
     filter_details = {}
     serializer_class = DriverBookingReadSerializer
@@ -147,3 +147,11 @@ class DriverTripApiView(AppListAPIViewSet):
         driver = Driver.objects.get(uuid=uuid)
         queryset = Booking.objects.filter(driver=driver)
         return queryset
+
+    def get_table_meta(self):
+        data = {
+            "columns": self.column_details,
+            "filters": self.filter_details,
+            "filter_data": {},
+        }
+        return data

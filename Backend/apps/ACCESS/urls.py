@@ -17,17 +17,18 @@ from apps.ACCESS.views import (
     CustomerCreateAPIView,
     DriverUpdateAPIView,
     DriverRetrieveAPIView,
+    DriverTripApiView,
     StaffUpdateAPIView,
     StaffRetrieveAPIView,
     CustomerUpdateAPIView,
     CustomerRetrieveAPIView,
     CustomerListAPIView,
+    CustomerTripApiView,
 )
 
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter, SimpleRouter
 from apps.ACCESS.views.system import system_status_view
-
 
 
 app_name = "access"
@@ -58,6 +59,7 @@ urlpatterns = [
         DriverRetrieveAPIView.as_view(),
         name="driver-retrieve",
     ),
+    path("driver/trip/<uuid>/", DriverTripApiView.as_view({"get": "list"})),
     path("staff/update/<uuid>/", StaffUpdateAPIView.as_view(), name="staff-update"),
     path(
         "staff/retrieve/<uuid>/", StaffRetrieveAPIView.as_view(), name="staff-retrieve"
@@ -73,7 +75,11 @@ urlpatterns = [
         name="customer-retrieve",
     ),
     path("customer/create/", CustomerCreateAPIView.as_view(), name="customer"),
+    path(
+        "customer/trip/<uuid>/",
+        CustomerTripApiView.as_view({"get": "list"}),
+        name="customer-trip-history",
+    ),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-
-    path('system-status/', system_status_view, name='system_status'),
+    path("system-status/", system_status_view, name="system_status"),
 ] + router.urls
