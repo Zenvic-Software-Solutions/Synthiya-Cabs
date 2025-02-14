@@ -102,10 +102,3 @@ class MaintenanceDetailAPIView(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPI
 
 
 
-class VehicleMaintenanceAPIView(AppListAPIViewSet):
-    def get_queryset(self):
-        uuid = self.kwargs.get("uuid")
-        vehicle = Vehicle.objects.get(uuid=uuid)
-        queryset= Maintenance.objects.filter(vehicle=vehicle)
-        return queryset
-    serializer_class = MaintenanceReadSerializer

@@ -57,14 +57,7 @@ class FinanceDetailAPIView(AbstractLookUpFieldMixin,AppAPIView,RetrieveAPIView):
     queryset =Finance.objects.all()
     serializer_class = FinanceReadSerializer
 
-class VehicleFinanceAPIView(AppListAPIViewSet):
-    serializer_class =FinanceReadSerializer
-    def get_queryset(self):
-        uuid= self.kwargs.get("uuid")
-        vehicle=Vehicle.objects.get(uuid=uuid)
-        queryset= Finance.objects.filter(vehicle=vehicle)
-        return queryset
-    
+
     
     
 class FinanaceHistoryListAPIView(AppListAPIViewSet):

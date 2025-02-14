@@ -11,6 +11,9 @@ from .vehicle import (
     VehicleReadSerializer,
     VehicleWriteSerializer,
     VehicleDetailSerializer,
+    VehicleMaintenanceReadSerializer,
+    VehicleTripReadSerializer,
+    VehicleFinanceReadSerializer,
 )
 from .bank import (
     BankReadSerializer,

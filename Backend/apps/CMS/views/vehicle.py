@@ -2,6 +2,9 @@ from apps.CMS.serializers import (
     VehicleReadSerializer,
     VehicleWriteSerializer,
     VehicleDetailSerializer,
+    VehicleMaintenanceReadSerializer,
+    VehicleFinanceReadSerializer,
+    VehicleTripReadSerializer
 )
 from apps.BASE.views import (
     AppCUDAPIViewSet,
@@ -9,7 +12,7 @@ from apps.BASE.views import (
     AbstractLookUpFieldMixin,
     AppAPIView,
 )
-from apps.CMS.models import Vehicle
+from apps.CMS.models import Vehicle,Maintenance,Trip,Finance
 from HELPERS import VEHICLE_TYPE
 from rest_framework.generics import RetrieveAPIView
 
@@ -49,5 +52,35 @@ class VehicleCUDViewSet(AppCUDAPIViewSet):
 class VechileDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleDetailSerializer
+
+
+
+class VehicleMaintenanceAPIView(AppListAPIViewSet):
+    def get_queryset(self):
+        uuid = self.kwargs.get("uuid")
+        vehicle = Vehicle.objects.get(uuid=uuid)
+        queryset= Maintenance.objects.filter(vehicle=vehicle)
+        return queryset
+    serializer_class = VehicleMaintenanceReadSerializer
+
+
+class VehicleFinanceAPIView(AppListAPIViewSet):
+    
+    serializer_class =VehicleFinanceReadSerializer
+    def get_queryset(self, *args, **kwargs):
+        breakpoint()
+        uuid= self.kwargs.get("uuid")
+        vehicle=Vehicle.objects.get(uuid=uuid)
+        queryset= Finance.objects.filter(vehicle=vehicle)
+        return queryset
+    
+
+class VehicleTripAPIView(AppListAPIViewSet):
+    def get_queryset(self):
+        uuid = self.kwargs.get("uuid")
+        vehicle = Vehicle.objects.get(uuid=uuid)
+        queryset= Trip.objects.filter(vehicle=vehicle)
+        return queryset
+    serializer_class = VehicleTripReadSerializer
 
 
