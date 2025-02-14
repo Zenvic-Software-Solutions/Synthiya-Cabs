@@ -51,6 +51,21 @@ class FinanaceListAPIView(AppListAPIViewSet):
 class FinanceCUDAPIView(AppCUDAPIViewSet):
     queryset =Finance.objects.all()
     serializer_class =FinanceWriteSerializer
+
+
+class FinanceDetailAPIView(AbstractLookUpFieldMixin,AppAPIView,RetrieveAPIView):
+    queryset =Finance.objects.all()
+    serializer_class = FinanceReadSerializer
+
+class VehicleFinanceAPIView(AppListAPIViewSet):
+    serializer_class =FinanceReadSerializer
+    def get_queryset(self):
+        uuid= self.kwargs.get("uuid")
+        vehicle=Vehicle.objects.get(uuid=uuid)
+        queryset= Finance.objects.filter(vehicle=vehicle)
+        return queryset
+    
+    
     
 class FinanaceHistoryListAPIView(AppListAPIViewSet):
     search_fields = ["finance__finance_name",]
@@ -92,3 +107,8 @@ class FinanaceHistoryListAPIView(AppListAPIViewSet):
 class FinanceHistoryCUDAPIView(AppCUDAPIViewSet):
     queryset = FinanceHistory.objects.all()
     serializer_class = FinanceHistoryWriteSerializer
+
+
+class FinanceHistoryDetailAPIView(AbstractLookUpFieldMixin,AppAPIView,RetrieveAPIView):
+    queryset =FinanceHistory.objects.all()
+    serializer_class = FinanceHistoryReadSerializer

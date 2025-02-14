@@ -45,6 +45,11 @@ from apps.CMS.views import (
     FinanaceHistoryListAPIView,
     FinanaceListAPIView,
     FinanceCUDAPIView,
+    FinanceHistoryDetailAPIView,
+    FinanceDetailAPIView,
+    VehicleMaintenanceAPIView,
+    VehicleFinanceAPIView,
+    VehicleTripAPIView,
 )
 
 app_name = "cms"
@@ -126,6 +131,31 @@ urlpatterns = [
         "betta/detail/<uuid>/",
         BettaDetailAPIView.as_view(),
         name="betta-list",
+    ),
+    path(
+        "finance/detail/<uuid>/",
+        FinanceDetailAPIView.as_view(),
+        name="finance-list",
+    ),
+    path(
+        "vehicle/finance/<uuid>/",
+        VehicleFinanceAPIView.as_view({'get','list'}),
+        name="finance-vehicle-list",
+    ),
+    path(
+        "vehicle/maintenance/<uuid>/",
+        VehicleMaintenanceAPIView.as_view({'get','list'}),
+        name="vehicle-maintenance-list",
+    ),
+    path(
+        "vehicle/trip/<uuid>/",
+        VehicleTripAPIView.as_view({'get','list'}),
+        name="vehicle-trip-list",
+    ),
+    path(
+        "financehistory/detail/<uuid>/",
+        FinanceHistoryDetailAPIView.as_view(),
+        name="finance-history-list",
     ),
     path(
         "othervehicle/list/<uuid>/table-meta/",

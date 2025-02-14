@@ -22,6 +22,7 @@ from .workshop import (
     MaintenanceCUDViewSet,
     MaintenanceDetailAPIView,
     WorkshopDetailAPIView,
+    VehicleMaintenanceAPIView,
 )
 from .booking import (
     BookingCUDAPIView,
@@ -29,6 +30,14 @@ from .booking import (
     BookingDetailViewSet,
     BookingView,
 )
-from .trip import TripListAPIView, TripCUDAPIView, TripDetailViewSet
+from .trip import TripListAPIView, TripCUDAPIView, TripDetailViewSet,VehicleTripAPIView
 from .betta import BettaCUDAPIView, BettaDetailAPIView, BettaListAPIView
-from .finance import FinanaceListAPIView,FinanceCUDAPIView,FinanaceHistoryListAPIView,FinanceHistoryCUDAPIView
+from .finance import (
+    FinanaceListAPIView,
+    FinanceCUDAPIView,
+    FinanaceHistoryListAPIView,
+    FinanceHistoryCUDAPIView,
+    FinanceDetailAPIView,
+    FinanceHistoryDetailAPIView,
+    VehicleFinanceAPIView,
+)

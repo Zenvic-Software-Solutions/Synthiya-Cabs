@@ -49,3 +49,5 @@ class VehicleCUDViewSet(AppCUDAPIViewSet):
 class VechileDetailViewSet(AbstractLookUpFieldMixin, AppAPIView, RetrieveAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleDetailSerializer
+
+
