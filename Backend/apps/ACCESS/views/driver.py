@@ -2,7 +2,7 @@ from apps.ACCESS.models import Driver, User
 from apps.CMS.models import Booking
 from apps.ACCESS.serializers import DriverReadSerializer, DriverBookingReadSerializer
 from apps.BASE.base import AppAPIView
-from apps.BASE.views import AppListAPIViewSet
+from apps.BASE.views import AppListAPIViewSet, AbstractLookUpFieldMixin
 
 
 class DriverCUDPAPIView(AppAPIView):
@@ -142,6 +142,8 @@ class DriverTripApiView(AppListAPIViewSet):
     filter_details = {}
     serializer_class = DriverBookingReadSerializer
 
-    def get_queryset(self):
-        queryset = Booking.objects.all()
+    def get_queryset(self, *args, **kwargs):
+        uuid = self.kwargs.get("uuid")
+        driver = Driver.objects.get(uuid=uuid)
+        queryset = Booking.objects.filter(driver=driver)
         return queryset

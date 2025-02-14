@@ -28,4 +28,5 @@ from .driver import (
     DriverCUDPAPIView,
     DriverUpdateAPIView,
     DriverRetrieveAPIView,
+    DriverTripApiView,
 )

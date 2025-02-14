@@ -16,4 +16,4 @@ from .staff import (
     StaffReadSerializer,
 )
 
-from .customer import CustomerReadSerializer
+from .customer import CustomerReadSerializer, CustomerBookingReadSerializer

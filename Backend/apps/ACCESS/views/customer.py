@@ -1,12 +1,14 @@
 from HELPERS.choices import ROLE
 from apps.BASE.views import AppListAPIViewSet, AppCUDAPIViewSet, AppAPIView
 from apps.ACCESS.models import Staff, User, Driver, Customer
+from apps.CMS.models import Booking
 from apps.ACCESS.serializers import (
     StaffReadSerializer,
     DriverReadSerializer,
     UserReadSerializer,
     StaffWriteSerializer,
     CustomerReadSerializer,
+    CustomerBookingReadSerializer,
 )
 
 
@@ -122,3 +124,19 @@ class CustomerListAPIView(AppListAPIViewSet):
             "filter_data": {},
         }
         return data
+
+
+class CustomerTripApiView(AppListAPIViewSet):
+    search_fields = [
+        "identity",
+    ]
+    filterset_fields = {"": ["exact"]}
+    column_details = {}
+    filter_details = {}
+    serializer_class = CustomerBookingReadSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        uuid = self.kwargs.get("uuid")
+        Customer = Customer.objects.get(uuid=uuid)
+        queryset = Booking.objects.filter(customer=Customer)
+        return queryset
