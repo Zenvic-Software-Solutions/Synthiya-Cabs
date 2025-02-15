@@ -13,20 +13,7 @@ export default function index() {
         editLink: "/othercabs-driver/form",
         deleteLink: "#",
       }}
-      breadcrumbData={{
-        title: "OtherCabs View",
-        sidebarActiveId: 5,
-        list: [
-          {
-            label: "OtherCabs View",
-          },
-        ],
-
-        addButtonData: {
-          name: "Add OtherCabs Driver",
-          link: "/othercabs-driver/form",
-        },
-      }}
+      
     />
   );
 }

@@ -22,7 +22,9 @@ export default function index({
     previous: tableData?.previous,
   };
   useEffect(() => {
-    setBreadcrumbs(breadcrumbData);
+    if (breadcrumbData) {
+      setBreadcrumbs(breadcrumbData);
+    }
   }, [setBreadcrumbs]);
 
   useEffect(() => {

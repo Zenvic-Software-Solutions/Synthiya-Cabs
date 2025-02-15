@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
     .matches(/^[A-Za-z0-9\s-]+$/, "Invalid Bank Number format")
     .required("Bank Number is required"),
 
-  account_holder_name: Yup.boolean().required("Account Holder is required"),
+  account_holder_name: Yup.string().trim().required("Account Holder is required"),
 
   ifsc_code: Yup.number()
     .typeError("IFSC Number must be a number")
