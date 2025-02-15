@@ -26,6 +26,15 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
       case "Pending":
         statusClass = "bg-label-warning";
         break;
+      case "Completed":
+        statusClass = "bg-label-success";
+        break;
+      case "In Progress":
+        statusClass = "bg-label-info";
+        break;
+      case "Scheduled":
+        statusClass = "bg-label-warning";
+        break;
       default:
         statusClass = "bg-label-secondary";
         break;

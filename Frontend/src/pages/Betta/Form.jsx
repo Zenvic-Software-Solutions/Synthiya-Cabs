@@ -2,30 +2,35 @@ import React, { useEffect, useState } from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
 import {
-    getbettaCud,
-    bettaTableMeta,
-    postbettaCud,
-patchbettaCud,
+  getbettaCud,
+  bettaTableMeta,
+  postbettaCud,
+  patchbettaCud,
 } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
-    driver: Yup.number().required("Driver is required"),
-    booking: Yup.number().required("Booking is required"),
-    amount:  Yup.number()
+  driver: Yup.number().required("Driver is required"),
+  booking: Yup.string().required("Booking is required"),
+  amount: Yup.number()
     .typeError("Amount must be a number")
     .positive("Amount must be a positive number")
     .required("Amount is required"),
-    status: Yup.string().trim().required("Status is required"),
-    paid_date: Yup.date().required("Paid Date is required"),
-  });
-  
+  status: Yup.string().trim().required("Status is required"),
+  // paid_date: Yup.date(),
+});
 
 export default function Index() {
   const [formFieldMeta, setFormFieldMeta] = useState();
+  const [bookingMeta, setBookingMeta] = useState();
 
   useEffect(() => {
     const fetchTableMeta = async () => {
       const response = await bettaTableMeta();
+      const bookingList = response.filter_data?.booking.map((item) => ({
+        id: item.id,
+        identity: item.booking_id,
+      }));
+      setBookingMeta(bookingList);
       setFormFieldMeta(response);
     };
     fetchTableMeta();
@@ -44,7 +49,7 @@ export default function Index() {
       type: "select",
       defaultValue: 1,
       label: "Booking",
-      dropdownOptions: formFieldMeta.filter_data.booking || [],
+      dropdownOptions: bookingMeta || [],
     },
     amount: {
       type: "text",
@@ -60,11 +65,10 @@ export default function Index() {
     },
     paid_date: {
       type: "date",
-      defaultValue: "2025-10-10",
+      defaultValue: "",
       label: "Paid Date",
     },
   };
-  
 
   return (
     <DynamicForm

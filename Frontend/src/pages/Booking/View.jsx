@@ -69,22 +69,22 @@ export default function View() {
                     </svg>
                   </div>
                   <span className="app-brand-text fw-bold fs-4 ms-50">
-                    Vuexy
+                    Cab Booking
                   </span>
                 </div>
-                <p className="mb-2">Office 149, 450 South Brand Brooklyn</p>
+                <p className="mb-2">Booking Service</p>
                 <p className="mb-2">San Diego County, CA 91905, USA</p>
-                <p className="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
+                <p className="mb-0">+1 (123) 456 7891</p>
               </div>
               <div>
-                <h5 className="mb-6">Invoice #86423</h5>
+                <h5 className="mb-6">Invoice #CB86423</h5>
                 <div className="mb-1 text-heading">
-                  <span>Date Issues:</span>
-                  <span>April 25, 2021</span>
+                  <span>Date Booked:</span>
+                  <span>2025-02-14</span>
                 </div>
                 <div className="text-heading">
                   <span>Date Due:</span>
-                  <span>May 25, 2021</span>
+                  <span>2025-02-16</span>
                 </div>
               </div>
             </div>
@@ -92,39 +92,54 @@ export default function View() {
           <div className="card-body px-0">
             <div className="row">
               <div className="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-6 mb-sm-0 mb-6">
-                <h6>Invoice To:</h6>
-                <p className="mb-1">Thomas shelby</p>
-                <p className="mb-1">Shelby Company Limited</p>
-                <p className="mb-1">Small Heath, B10 0HF, UK</p>
-                <p className="mb-1">718-986-6062</p>
-                <p className="mb-0">peakyFBlinders@gmail.com</p>
+                <h6>Customer Details:</h6>
+                <p className="mb-1">Name: John Doe</p>
+                <p className="mb-1">Phone: 9876543210</p>
+                <p className="mb-1">Sponsor Name: Michael Smith</p>
+                <p className="mb-1">Sponsor Phone: 9123456789</p>
               </div>
               <div className="col-xl-6 col-md-12 col-sm-7 col-12">
-                <h6>Bill To:</h6>
+                <h6>Booking Details:</h6>
                 <table>
                   <tbody>
                     <tr>
-                      <td className="pe-4">Total Due:</td>
-                      <td className="fw-medium">$12,110.55</td>
+                      <td className="pe-4">Start Date:</td>
+                      <td className="fw-medium">2025-02-14</td>
                     </tr>
                     <tr>
-                      <td className="pe-4">Bank name:</td>
-                      <td>American Bank</td>
+                      <td className="pe-4">End Date:</td>
+                      <td>2025-02-16</td>
                     </tr>
                     <tr>
-                      <td className="pe-4">Country:</td>
-                      <td>United States</td>
+                      <td className="pe-4">Start Place:</td>
+                      <td>New York</td>
                     </tr>
                     <tr>
-                      <td className="pe-4">IBAN:</td>
-                      <td>ETD95476213874685</td>
+                      <td className="pe-4">End Place:</td>
+                      <td>Los Angeles</td>
                     </tr>
                     <tr>
-                      <td className="pe-4">SWIFT code:</td>
-                      <td>BR91905</td>
+                      <td className="pe-4">Rent Type:</td>
+                      <td>Daily</td>
+                    </tr>
+                    <tr>
+                      <td className="pe-4">Payment Type:</td>
+                      <td>Cash</td>
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </div>
+          <div className="card-body px-0">
+            <div className="row">
+              <div className="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-6 mb-sm-0 mb-6">
+                <h6>Cab Details:</h6>
+                <p className="mb-1">Our Cab: Toyota Innova</p>
+                <p className="mb-1">Driver: James Anderson</p>
+                <p className="mb-1">Other Cab: Uber XL</p>
+                <p className="mb-1">Other Driver: Mark Wilson</p>
+                <p className="mb-1">Other Vehicle Number: KA-05-6789</p>
               </div>
             </div>
           </div>
@@ -133,48 +148,66 @@ export default function View() {
               <thead>
                 <tr>
                   <th>Item</th>
-                  <th>Description</th>
+
                   <th>Cost</th>
-                  <th>Qty</th>
+
                   <th>Price</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className="text-nowrap text-heading">
-                    Vuexy Admin Template
+                    Cab Booking (Daily)
                   </td>
-                  <td className="text-nowrap">HTML Admin Template</td>
-                  <td>$32</td>
-                  <td>1</td>
-                  <td>$32.00</td>
+
+                  <td>$200</td>
+
+                  <td>$400.00</td>
                 </tr>
                 <tr>
                   <td className="text-nowrap text-heading">
-                    Frest Admin Template
+                    Other Cab Booking
                   </td>
-                  <td className="text-nowrap">Angular Admin Template</td>
-                  <td>$22</td>
-                  <td>1</td>
-                  <td>$22.00</td>
+
+                  <td>$150</td>
+
+                  <td>$150.00</td>
+                </tr>
+                <tr>
+                  <td className="text-nowrap text-heading">Driver Betta</td>
+
+                  <td>$500</td>
+
+                  <td>$500.00</td>
+                </tr>
+                <tr>
+                  <td className="text-nowrap text-heading">Halting Charge</td>
+
+                  <td>$200</td>
+
+                  <td>$200.00</td>
                 </tr>
                 <tr>
                   <td className="text-nowrap text-heading">
-                    Apex Admin Template
+                    Charge for hills route
                   </td>
-                  <td className="text-nowrap">HTML Admin Template</td>
-                  <td>$17</td>
-                  <td>2</td>
-                  <td>$34.00</td>
+                  <td>$50</td>
+
+                  <td>$50.00</td>
                 </tr>
                 <tr>
-                  <td className="text-nowrap text-heading">
-                    Robust Admin Template
-                  </td>
-                  <td className="text-nowrap">React Admin Template</td>
-                  <td>$66</td>
-                  <td>1</td>
-                  <td>$66.00</td>
+                  <td className="text-nowrap text-heading">Permit</td>
+
+                  <td>$30</td>
+
+                  <td>$30.00</td>
+                </tr>
+                <tr>
+                  <td className="text-nowrap text-heading">Commission</td>
+
+                  <td>$100</td>
+
+                  <td>$100.00</td>
                 </tr>
               </tbody>
             </table>
@@ -185,22 +218,31 @@ export default function View() {
                 <tr>
                   <td className="align-top pe-6 ps-0 py-6">
                     <p className="mb-1">
-                      <span className="me-2 h6">Salesperson:</span>
-                      <span>Alfie Solomons</span>
+                      <span className="me-2 h6">Total Due:</span>
+                      <span>$2500</span>
                     </p>
-                    <span>Thanks for your business</span>
+                    <span>Thanks for your booking!</span>
                   </td>
-                  <td className="px-0 py-6 w-px-100">
+                  <td
+                    className="px-0 py-6 w-px-100"
+                    style={{ width: "110px !important" }}
+                  >
                     <p className="mb-2">Subtotal:</p>
-                    <p className="mb-2">Discount:</p>
-                    <p className="mb-2 border-bottom pb-2">Tax:</p>
-                    <p className="mb-0 pt-2">Total:</p>
+                    <p className="mb-2">GST (18%):</p>
+                    <p className="mb-2">Payment Type:</p>
+                    <p className="mb-2">Deduction:</p>
+                    <p className="mb-2">Advance:</p>
+                    <p className="mb-2">Paid Amount:</p>
+                    <p className="mb-2 border-bottom pb-2">Total:</p>
                   </td>
                   <td className="text-end px-0 py-6 w-px-100 fw-medium text-heading">
-                    <p className="fw-medium mb-2">$1800</p>
-                    <p className="fw-medium mb-2">$28</p>
-                    <p className="fw-medium mb-2 border-bottom pb-2">21%</p>
-                    <p className="fw-medium mb-0 pt-2">$1690</p>
+                    <p className="fw-medium mb-2">$2500</p>
+                    <p className="fw-medium mb-2">$450</p>
+                    <p className="fw-medium mb-0 pt-2">$3000</p>
+                    <p className="fw-medium mb-2">$450</p>
+                    <p className="fw-medium mb-2">$450</p>
+                    <p className="fw-medium mb-2">$450</p>
+                    <p className="fw-medium mb-2">$450</p>
                   </td>
                 </tr>
               </tbody>
@@ -210,11 +252,8 @@ export default function View() {
           <div className="card-body p-0">
             <div className="row">
               <div className="col-12">
-                <span className="fw-medium text-heading">Note:</span>
-                <span>
-                  It was a pleasure working with you and your team. We hope you
-                  will keep us in mind for future freelance projects. Thank You!
-                </span>
+                <p className="fw-medium text-heading">Note:</p>
+                <p>Paid in full</p>
               </div>
             </div>
           </div>

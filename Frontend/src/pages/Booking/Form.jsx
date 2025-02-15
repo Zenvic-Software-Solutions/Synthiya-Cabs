@@ -955,8 +955,8 @@ export default function Form() {
                     <div className="card-body p-0">
                       <div className="row">
                         <div className="col-12">
-                          <span className="fw-medium text-heading">Note:</span>
-                          <span>Paid in full</span>
+                          <p className="fw-medium text-heading">Note:</p>
+                          <p>Paid in full</p>
                         </div>
                       </div>
                     </div>

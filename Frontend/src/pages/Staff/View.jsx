@@ -47,25 +47,27 @@ export default function View() {
 
   return (
     <div className="col-md-12 col-lg-8">
-      <div className="card shadow-sm border-0 rounded">
-        <div className="card-header bg-light py-3">
+      <div className="card shadow-sm border-0 rounded p-5">
+        <div
+          className="card-header bg-light py-3"
+          style={{ borderRadius: "10px" }}
+        >
           <h5 className="mb-0 text-dark fw-bold">Staff Details</h5>
         </div>
-        <div className="card-body p-4">
-          <table className="table table-bordered">
-            <tbody>
-              {Object.entries(viewDetail).map(([key, value], index) => (
-                <tr key={index}>
-                  <th className="text-secondary text-uppercase w-50">
-                    {key.replace(/_/g, " ")}
-                  </th>
-                  <td className="text-dark">
-                    {value || <span className="text-muted">N/A</span>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="card-body">
+          <div className="table-responsive-sm">
+            <table className="table table-centered table-borderless mb-0">
+              <tbody>
+                {Object.entries(viewDetail).map(([key, value], index) => (
+                  <tr key={index}>
+                    <th>{key.replace(/_/g, " ")}</th>
+                    <th>:</th>
+                    <td> {value || <span className="text-muted">N/A</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

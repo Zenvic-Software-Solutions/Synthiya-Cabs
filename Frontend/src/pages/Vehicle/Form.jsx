@@ -9,21 +9,14 @@ import {
 } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
-  workshop: Yup.number().required("Workshop is required"),
-  vehicle: Yup.number().required("Vehicle is required"),
-  driver: Yup.number().required("Driver is required"),
-  status: Yup.string().trim().required("Status is required"),
-  description: Yup.string().trim().required("Description is required"),
-  start_date: Yup.date().required("Start Date is required"),
-  start_km: Yup.number()
-    .typeError("Start KM must be a number")
-    .positive("Start KM must be a positive number")
-    .required("Start KM is required"),
-  end_km: Yup.number()
-    .typeError("End KM must be a number")
-    .positive("End KM must be a positive number")
-    .required("End KM is required"),
-  end_date: Yup.date().required("End Date is required"),
+  identity: Yup.string().trim().required("Vehicle Name is required"),
+  vehicle_type: Yup.string().trim().required("Vehicle Type is required"),
+  vehicle_no: Yup.string().trim().required("Vehicle No is required"),
+  is_ac_available: Yup.boolean().required("AC Availability is required"),
+  last_km: Yup.number()
+    .typeError("Last KM must be a number")
+    .positive("Last KM must be a positive number")
+    .required("Last KM is required"),
 });
 
 export default function Index() {
@@ -40,57 +33,38 @@ export default function Index() {
   if (!formFieldMeta) return;
 
   const FormFields = {
-    workshop: {
+    identity: {
+      type: "text",
+      defaultValue: "",
+      label: "Vehicle Name",
+      placeholder: "Enter Vehicle Name",
+    },
+    vehicle_type: {
       type: "select",
-      defaultValue: 1,
-      label: "Workshop",
-      dropdownOptions: formFieldMeta.filter_data.workshop || [],
+      defaultValue: "",
+      label: "Vehicle Type",
+      dropdownOptions: formFieldMeta.filter_data?.vehicle_type || [],
     },
-    vehicle: {
-      type: "select",
-      defaultValue: 1,
-      label: "Vehicle",
-      dropdownOptions: formFieldMeta.filter_data.vehicle || [],
-    },
-    driver: {
-      type: "select",
-      defaultValue: 1,
-      label: "Driver",
-      dropdownOptions: formFieldMeta.filter_data.driver || [],
-    },
-    status: {
+    vehicle_no: {
       type: "text",
-      defaultValue: "Scheduled",
-      label: "Status",
-      placeholder: "Enter Status",
+      defaultValue: "",
+      label: "Vehicle No",
+      placeholder: "Enter Vehicle No",
     },
-    description: {
-      type: "text",
-      defaultValue: "fj",
-      label: "Description",
-      placeholder: "Enter Description",
+    is_ac_available: {
+      type: "boolean",
+      defaultValue: "",
+      label: "AC Available",
+      dropdownOptions: [
+        { id: true, identity: "Yes" },
+        { id: false, identity: "No" },
+      ],
     },
-    start_date: {
-      type: "date",
-      defaultValue: "2025-01-02",
-      label: "Start Date",
-    },
-    start_km: {
-      type: "text",
-      defaultValue: "3",
-      label: "Start KM",
-      placeholder: "Enter Start KM",
-    },
-    end_km: {
-      type: "text",
-      defaultValue: "11.2",
-      label: "End KM",
-      placeholder: "Enter End KM",
-    },
-    end_date: {
-      type: "date",
-      defaultValue: "2025-01-10",
-      label: "End Date",
+    last_km: {
+      type: "number",
+      defaultValue: "",
+      label: "Last KM",
+      placeholder: "Enter Last KM",
     },
   };
 

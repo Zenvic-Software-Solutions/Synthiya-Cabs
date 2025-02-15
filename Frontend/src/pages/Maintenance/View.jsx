@@ -33,9 +33,10 @@ export default function View() {
         "Workshop Identity": response.workshop_details?.identity,
         "Vehicle Identity": response.vehicle_details?.identity,
         "Driver Name": response.driver_details?.identity,
-        "Driver Phone Number": response.driver_details?.user_details?.phone_number,
-        "Status": response.status,
-        "Description": response.description,
+        "Driver Phone Number":
+          response.driver_details?.user_details?.phone_number,
+        Status: response.status,
+        Description: response.description,
         "Start KM": response.start_km,
         "End KM": response.end_km,
         "Start Date": response.start_date,
@@ -50,25 +51,27 @@ export default function View() {
 
   return (
     <div className="col-md-12 col-lg-8">
-      <div className="card shadow-sm border-0 rounded">
-        <div className="card-header bg-light py-3">
+      <div className="card shadow-sm border-0 rounded p-5">
+        <div
+          className="card-header bg-light py-3"
+          style={{ borderRadius: "10px" }}
+        >
           <h5 className="mb-0 text-dark fw-bold">Maintenance Details</h5>
         </div>
-        <div className="card-body p-4">
-          <table className="table table-bordered">
-            <tbody>
-              {Object.entries(viewDetail).map(([key, value], index) => (
-                <tr key={index}>
-                  <th className="text-secondary text-uppercase w-50">
-                    {key.replace(/_/g, " ")}
-                  </th>
-                  <td className="text-dark">
-                    {value || <span className="text-muted">N/A</span>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="card-body">
+          <div className="table-responsive-sm">
+            <table className="table table-centered table-borderless mb-0">
+              <tbody>
+                {Object.entries(viewDetail).map(([key, value], index) => (
+                  <tr key={index}>
+                    <th>{key.replace(/_/g, " ")}</th>
+                    <th>:</th>
+                    <td> {value || <span className="text-muted">N/A</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
