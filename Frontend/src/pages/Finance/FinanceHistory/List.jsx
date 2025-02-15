@@ -2,7 +2,7 @@ import React from "react";
 import { DynamicTable } from "@components";
 import { financehistoryTableMeta, financehistoryTableData } from "@api/urls";
 
-export default function index() {
+export default function index({uuid}) {
   return (
     <DynamicTable
       tableMetaApi={financehistoryTableMeta}

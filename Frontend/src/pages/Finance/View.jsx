@@ -10,6 +10,7 @@ export default function View() {
   const [viewDetail, setViewDetail] = useState();
   const { uuid } = useParams();
 
+  
   useEffect(() => {
     setBreadcrumbs({
       title: "Finance View",
@@ -31,6 +32,9 @@ export default function View() {
   }, [setBreadcrumbs]);
 
   useEffect(() => {
+    if (uuid) {
+      localStorage.setItem("finance_uuid", uuid); // Save to localStorage
+    }
     const fetchData = async () => {
       const response = await financeDetail(uuid);
 
@@ -49,6 +53,9 @@ export default function View() {
       setViewDetail(mappedData);
     };
     fetchData();
+    return () => {
+      localStorage.removeItem("finance_uuid");
+    };
   }, [uuid]);
 
   if (!viewDetail) return <Loader />;
@@ -78,12 +85,13 @@ export default function View() {
         </div>
       </div>
     </div>
-    <div className="col-xl-12 col-xxl-8 mt-4">
+    <div className="col-xl-12 col-xxl-12 mt-4">
     <div className="card shadow-sm border-0 rounded">
     <div className="card-header bg-light py-3">
           <h5 className="mb-0 text-dark fw-bold">Finance History</h5>
         </div>
        <FinanceHistoryList />
+       
       </div>
       </div>
     </>

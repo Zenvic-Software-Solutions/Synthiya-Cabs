@@ -23,6 +23,7 @@ const validationSchema = Yup.object().shape({
 
 export default function Index() {
   const [formFieldMeta, setFormFieldMeta] = useState();
+  const [uuid, setUuid] = useState(localStorage.getItem("finance_uuid"));
 
   useEffect(() => {
     const fetchTableMeta = async () => {
@@ -76,8 +77,12 @@ export default function Index() {
         sidebarActiveId: 19,
         list: [
           {
-            label: "Finance list",
-            path: "/finance/list",
+            label: "Finance List",
+            path: `/finance/list`,
+          },
+          {
+            label: "Finance View",
+            path: `/finance/view/${uuid}`,
           },
           {
             label: "Finance Form",

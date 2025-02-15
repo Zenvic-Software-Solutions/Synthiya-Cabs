@@ -45,7 +45,7 @@ export default function FinanceChart() {
   });
 
   return (
-    <div className="card">
+    <div>
       <div className="card-header d-flex justify-content-between">
         <div>
           <h5 className="card-title mb-0">Finance</h5>
