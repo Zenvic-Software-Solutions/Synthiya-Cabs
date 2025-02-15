@@ -973,12 +973,24 @@ export default function Form() {
                       Previous
                     </span>
                   </button>
-                  <button
-                    className="btn btn-success btn-submit waves-effect waves-light"
-                    onClick={handleSubmitForm}
+                  <div
+                    className="d-flex justify-content-between"
+                    style={{ width: "220px" }}
                   >
-                    Submit
-                  </button>
+                    <button
+                      className="btn btn-info btn-submit waves-effect waves-light"
+                      onClick={handleSubmitForm}
+                    >
+                      Booking
+                    </button>
+                    <button
+                      className="btn btn-success btn-submit waves-effect waves-light"
+                      onClick={handleSubmitForm}
+                      style={{ width: "100px" }}
+                    >
+                      Order
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
