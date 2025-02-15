@@ -102,13 +102,9 @@ export default function Report() {
             }}
           >
             <h5 className="card-title mb-0">{item.title}</h5>
-            <img
-              src="../../assets/img/default/PngItem.png"
-              alt=""
-              width={100}
-            />
+            <img src="/assets/img/default/PngItem.png" alt="" width={100} />
             <button
-              onClick={() => window.open(item.link, "_blank")}
+              // onClick={() => window.open(item.link, "_blank")}
               className="btn btn-primary waves-effect waves-light mt-5"
             >
               Download

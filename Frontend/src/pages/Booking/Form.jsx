@@ -47,7 +47,9 @@ export default function Form() {
     setFormData((prevData) => ({ ...prevData, [name]: newValue }));
 
     try {
-      await validationSchema.validateAt(name, { [name]: newValue });
+      if (validationSchema.fields[name]) {
+        await validationSchema.validateAt(name, { [name]: newValue });
+      }
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     } catch (error) {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: error.message }));
@@ -93,15 +95,8 @@ export default function Form() {
   };
 
   const handleTabChange = (tabName) => {
-    const confirmChange = window.confirm(
-      "Warning: Changing the tab will clear the previous tab's data. Do you want to continue?"
-    );
-    if (confirmChange) {
-      setActiveTab(tabName);
-    }
+    setActiveTab(tabName);
   };
-
-  useEffect(() => console.log(formData), [formData]);
 
   return (
     <div className="card mb-6" style={{ padding: "20px 40px" }}>
@@ -257,7 +252,24 @@ export default function Form() {
                     <div className="text-danger">{errors.end_date}</div>
                   )}
                 </div>
-
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="rent_type">
+                    Rent Type
+                  </label>
+                  <select
+                    name="rent_type"
+                    className="form-control"
+                    value={formData.rent_type}
+                    onChange={handleChange}
+                  >
+                    <option value="daily">Daily</option>
+                    <option value="hourly">Hourly</option>
+                    <option value="weekly">Weekly</option>
+                  </select>
+                  {errors.rent_type && (
+                    <div className="text-danger">{errors.rent_type}</div>
+                  )}
+                </div>
                 <div className="col-sm-4">
                   <label className="form-label" htmlFor="start_place">
                     Start Place
@@ -292,24 +304,6 @@ export default function Form() {
                   )}
                 </div>
 
-                <div className="col-sm-4">
-                  <label className="form-label" htmlFor="rent_type">
-                    Rent Type
-                  </label>
-                  <select
-                    name="rent_type"
-                    className="form-control"
-                    value={formData.rent_type}
-                    onChange={handleChange}
-                  >
-                    <option value="daily">Daily</option>
-                    <option value="hourly">Hourly</option>
-                    <option value="weekly">Weekly</option>
-                  </select>
-                  {errors.rent_type && (
-                    <div className="text-danger">{errors.rent_type}</div>
-                  )}
-                </div>
                 <div className="col-12">
                   <div className="nav-align-top nav-tabs-shadow mb-6">
                     <ul className="nav nav-tabs" role="tablist">
@@ -404,6 +398,23 @@ export default function Form() {
                             handleChange={handleChange}
                             getApi={otherCabsDriverTableData}
                             postApi={postOtherCabsDriverCud}
+                            OptionsList={[
+                              {
+                                value: "8765432109",
+                                label: "8765432109",
+                                name: "Driver 1",
+                              },
+                              {
+                                value: "7654321098",
+                                label: "7654321098",
+                                name: "Driver 2",
+                              },
+                              {
+                                value: "6543210987",
+                                label: "6543210987",
+                                name: " Driver 3",
+                              },
+                            ]}
                           />
                           <OtherCabField
                             fieldName={[
@@ -420,6 +431,23 @@ export default function Form() {
                             handleChange={handleChange}
                             getApi={otherCabsVehicleTableData}
                             postApi={postOtherCabsVehicleCud}
+                            OptionsList={[
+                              {
+                                value: "Vehicle 1",
+                                name: "TN74AB0001",
+                                label: "Vehicle 1",
+                              },
+                              {
+                                value: "Vehicle 2",
+                                name: "TN74AB0001",
+                                label: "Vehicle 2",
+                              },
+                              {
+                                value: "Vehicle 3",
+                                name: "TN74AB0001",
+                                label: "Vehicle 3",
+                              },
+                            ]}
                           />
                         </div>
                       </div>
@@ -898,7 +926,10 @@ export default function Form() {
                               </p>
                               <span>Thanks for your booking!</span>
                             </td>
-                            <td className="px-0 py-6 w-px-100">
+                            <td
+                              className="px-0 py-6 w-px-100"
+                              style={{ width: "110px !important" }}
+                            >
                               <p className="mb-2">Subtotal:</p>
                               <p className="mb-2">GST (18%):</p>
                               <p className="mb-2">Payment Type:</p>

@@ -10,37 +10,38 @@ export default function OtherCabField({
   handleChange,
   getApi,
   postApi,
+  OptionsList,
 }) {
-  const [dropdownOptions, setDropdownOptions] = useState([]);
+  const [dropdownOptions, setDropdownOptions] = useState(OptionsList);
   const [newCustomer, setNewCustomer] = useState({
     phone_number: "",
     identity: "",
   });
   const [isNewCustomer, setIsNewCustomer] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getApi(formData.othercab);
-        const mappedData = response?.results?.map((item) => ({
-          value: item.uuid,
-          label:
-            fieldName[1] == "othervechile_identity"
-              ? item.other_cab_name_details?.phone_number
-              : "Unkown",
-          name: item.identity || "",
-        }));
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await getApi(formData.othercab);
+  //       const mappedData = response?.results?.map((item) => ({
+  //         value: item.uuid,
+  //         label:
+  //           fieldName[1] == "othervechile_identity"
+  //             ? item.other_cab_name_details?.phone_number
+  //             : "Unkown",
+  //         name: item.identity || "",
+  //       }));
 
-        console.log("API Response:", mappedData);
-        setDropdownOptions(Array.isArray(mappedData) ? mappedData : []);
-      } catch (error) {
-        console.error("Error fetching customer data:", error);
-        setDropdownOptions([]);
-      }
-    };
+  //       console.log("API Response:", mappedData);
+  //       setDropdownOptions(Array.isArray(mappedData) ? mappedData : []);
+  //     } catch (error) {
+  //       console.error("Error fetching customer data:", error);
+  //       setDropdownOptions([]);
+  //     }
+  //   };
 
-    if (formData?.othercab) fetchData();
-  }, [formData?.othercab]);
+  //   if (formData?.othercab) fetchData();
+  // }, [formData?.othercab]);
 
   const handlePhoneChange = (selectedOption) => {
     setIsNewCustomer(false);
@@ -64,14 +65,14 @@ export default function OtherCabField({
     });
   };
 
-  const handleCreateNewCustomer = async () => {
-    const response = await postApi(formData?.othercab, {
-      identity: newCustomer.identity,
-      phone_number: newCustomer.phone_number,
-    });
+  // const handleCreateNewCustomer = async () => {
+  //   const response = await postApi(formData?.othercab, {
+  //     identity: newCustomer.identity,
+  //     phone_number: newCustomer.phone_number,
+  //   });
 
-    setIsNewCustomer(false);
-  };
+  //   setIsNewCustomer(false);
+  // };
 
   return (
     <>
@@ -90,6 +91,17 @@ export default function OtherCabField({
             ) || ""
           }
           classNamePrefix="react-select"
+          menuPortalTarget={document.body}
+          styles={{
+            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+            menu: (base) => ({ ...base, zIndex: 9999 }),
+            option: (base, state) => ({
+              ...base,
+              backgroundColor: state.isFocused ? "#f0f0f0" : "white",
+              color: state.isSelected ? "#000" : "#333",
+              zIndex: 9999,
+            }),
+          }}
         />
         {errors[fieldName[0]] && (
           <div className="text-danger">{errors[fieldName[0]]}</div>

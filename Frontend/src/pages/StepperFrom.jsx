@@ -69,13 +69,13 @@ function Index({ formData, action, uuid, formMeta, jobFormMeta }) {
     try {
       if (resumeFile) {
         const resumeResponse = await resumeUpload({ file: resumeFile });
-        console.log("Response :", resumeResponse);
+        // console.log("Response :", resumeResponse);
 
         values.resume = resumeResponse.data?.id;
         values.resumeURL = resumeResponse.data?.file;
       }
 
-      console.log("Form values:", values);
+      // console.log("Form values:", values);
 
       if (uuid) {
         await updateCandidateDetails(uuid, values);

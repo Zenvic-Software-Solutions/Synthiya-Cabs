@@ -127,7 +127,7 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
     document.querySelectorAll(".delete-btn").forEach((btn) => {
       const uuid = btn.getAttribute("data-uuid");
       btn.addEventListener("click", () => {
-        console.log("uuid tble", uuid);
+        // console.log("uuid tble", uuid);
         // setTransfer(uuid);
       });
     });

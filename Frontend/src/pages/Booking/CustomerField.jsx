@@ -28,7 +28,7 @@ export default function CustomerField({
           name: item.identity || "",
         }));
 
-        console.log("API Response:", mappedData);
+        // console.log("API Response:", mappedData);
         setDropdownOptions(Array.isArray(mappedData) ? mappedData : []);
       } catch (error) {
         console.error("Error fetching customer data:", error);
@@ -87,6 +87,17 @@ export default function CustomerField({
             ) || ""
           }
           classNamePrefix="react-select"
+          menuPortalTarget={document.body}
+          styles={{
+            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+            menu: (base) => ({ ...base, zIndex: 9999 }),
+            option: (base, state) => ({
+              ...base,
+              backgroundColor: state.isFocused ? "#f0f0f0" : "white",
+              color: state.isSelected ? "#000" : "#333",
+              zIndex: 9999,
+            }),
+          }}
         />
         {errors[fieldName[0]] && (
           <div className="text-danger">{errors[fieldName[0]]}</div>

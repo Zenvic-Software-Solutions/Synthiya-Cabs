@@ -37,8 +37,7 @@ export default function Login() {
           err.response?.data?.data?.detail || "Login failed. Please try again.",
       });
       setSubmitting(false);
-      console.log(err);
-
+      // console.log(err);
     }
   };
 
