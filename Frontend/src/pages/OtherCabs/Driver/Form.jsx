@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
 
 export default function Index() {
   const [formFieldMeta, setFormFieldMeta] = useState();
-
+  const [uuid, setUuid] = useState(localStorage.getItem("othercabs_uuid"));
   useEffect(() => {
     const fetchTableMeta = async () => {
       const response = await otherCabsDriverTableMeta();
@@ -55,7 +55,7 @@ export default function Index() {
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/othercabs-driver/list"
+      redirectUrl={`/othercabs/view/${uuid}`}
       apiFunction={{
         getForm: getOtherCabsDriverCud,
         postForm: postOtherCabsDriverCud,
@@ -66,8 +66,12 @@ export default function Index() {
         sidebarActiveId: 5,
         list: [
           {
-            label: "OtherCabs Driver list",
-            path: "/othercabs-driver/list",
+            label: "Othercabs List",
+            path: "/othercabs/list",
+          },
+          {
+            label: "Othercabs View",
+            path: `/othercabs/view/${uuid}`,
           },
           {
             label: "OtherCabs Driver Form",

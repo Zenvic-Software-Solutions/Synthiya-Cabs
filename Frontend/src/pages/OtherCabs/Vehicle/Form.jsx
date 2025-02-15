@@ -7,7 +7,6 @@ import {
   patchOtherCabsVehicleCud,
   otherCabsVehicleTableMeta,
 } from "@api/urls";
-import { useParams } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   identity: Yup.string().trim().required("Vehicle Name is required"),
@@ -23,17 +22,17 @@ const validationSchema = Yup.object().shape({
 
   is_ac_available: Yup.boolean().required("AC Availability is required"),
 
-  last_km: Yup.number()
-    .typeError("Last KM must be a number")
-    .positive("Last KM must be a positive number")
-    .required("Last KM is required"),
+  // last_km: Yup.number()
+  //   .typeError("Last KM must be a number")
+  //   .positive("Last KM must be a positive number")
+  //   .required("Last KM is required"),
 });
 
 export default function index() {
-  const { uuid } = useParams();
+ 
 
   const [formFieldMeta, setFormFieldMeta] = useState();
-
+const [uuid, setUuid] = useState(localStorage.getItem("othercabs_uuid"));
   useEffect(() => {
     const fetchTableMeta = async () => {
       const response = await otherCabsVehicleTableMeta();
@@ -78,18 +77,18 @@ export default function index() {
         { id: false, identity: "No" },
       ],
     },
-    last_km: {
-      type: "text",
-      defaultValue: "",
-      label: "Last KM",
-      placeholder: "Enter Last KM",
-    },
+    // last_km: {
+    //   type: "text",
+    //   defaultValue: "",
+    //   label: "Last KM",
+    //   placeholder: "Enter Last KM",
+    // },
   };
   return (
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/othercabs-vehicle/list"
+      redirectUrl={`/othercabs/view/${uuid}`}
       apiFunction={{
         getForm: getOtherCabsVehicleCud,
         postForm: postOtherCabsVehicleCud,
@@ -97,11 +96,15 @@ export default function index() {
       }}
       breadcrumbData={{
         title: "OtherCabs Vehicle Form",
-        sidebarActiveId: 7,
+        sidebarActiveId: 5,
         list: [
           {
-            label: "OtherCabs Vehicle list",
-            path: "/othercabs-vehicle/list",
+            label: "Othercabs List",
+            path: "/othercabs/list",
+          },
+          {
+            label: "Othercabs View",
+            path: `/othercabs/view/${uuid}`,
           },
           {
             label: "OtherCabs Vehicle Form",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "@context/AppContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { otherCabsDetail } from "@api/urls";
 import { Loader } from "@components";
 import { OtherCabsDriverList, OtherCabsVehicleList } from "@pages";
@@ -9,7 +9,8 @@ export default function View() {
   const { setBreadcrumbs } = useAppContext();
   const [viewDetail, setViewDetail] = useState();
   const { uuid } = useParams();
-
+  const navigate=useNavigate();
+  const navigate1=useNavigate();
   useEffect(() => {
     setBreadcrumbs({
       title: "Othercabs View",
@@ -27,6 +28,9 @@ export default function View() {
   }, [setBreadcrumbs]);
 
   useEffect(() => {
+    if (uuid) {
+      localStorage.setItem("othercabs_uuid", uuid); // Save to localStorage
+    }
     const FatchData = async () => {
       const response = await otherCabsDetail(uuid);
 
@@ -40,8 +44,16 @@ export default function View() {
       setViewDetail(mapedData);
     };
     FatchData();
+    return () => {
+      localStorage.removeItem("othercabs_uuid");
+    };
   }, []);
-
+  const handleNavigate = () => {
+    navigate("/othercabs-driver/form");
+  };
+  const handleNavigate1 = () => {
+    navigate1("/othercabs-vehicle/form");
+  };
   if (!viewDetail) return <Loader />;
 
   return (
@@ -69,10 +81,26 @@ export default function View() {
           </div>
         </div>
       </div>
-      <div className="col-xl-12 col-xxl-8 mt-4">
+      <div className="col-xl-12 col-xxl-12 mt-4">
+      <div className="col-xl-12 col-xxl-12 mt-4 d-flex justify-content-end">
+        <button
+          className="btn btn-primary waves-effect"
+          onClick={handleNavigate}
+        >
+        Add Other Cab Driver
+        </button>
+      </div><br></br>
         <OtherCabsDriverList />
       </div>
-      <div className="col-xl-12 col-xxl-8 mt-4">
+      <div className="col-xl-12 col-xxl-12 mt-4">
+      <div className="col-xl-12 col-xxl-12 mt-4 d-flex justify-content-end">
+        <button
+          className="btn btn-primary waves-effect"
+          onClick={handleNavigate1}
+        >
+        Add Other Vehicle
+        </button>
+      </div><br></br>
         <OtherCabsVehicleList />
       </div>
     </>
