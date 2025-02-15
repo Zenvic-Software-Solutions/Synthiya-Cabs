@@ -22,3 +22,5 @@ export { default as FinanceChart } from "./Charts/FinanceChart";
 export { default as TripChart } from "./Charts/TripChart";
 
 export { default as ExcelButtons } from "./ExcelButtons";
+
+export {default as Accordion} from "./Accordion/index";

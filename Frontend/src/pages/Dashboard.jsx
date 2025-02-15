@@ -3,6 +3,7 @@ import { getDashboardData } from "@api/urls";
 import { Link } from "react-router-dom";
 import { Loader, FinanceChart, TripChart } from "@components";
 import { useAppContext } from "@context/AppContext";
+import { Accordion } from "../components";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -144,12 +145,15 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-6 col-xl-6">
+            <div className="col-sm-6 col-xl-12">
+              <Accordion />
+            </div>
+            {/* <div className="col-sm-6 col-xl-6">
               <FinanceChart />
-            </div>
-            <div className="col-sm-6 col-xl-6">
+            </div> */}
+            {/* <div className="col-sm-6 col-xl-6">
               <TripChart />
-            </div>
+            </div> */}
           </div>
         </>
       )}
