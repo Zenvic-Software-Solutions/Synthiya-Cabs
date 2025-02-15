@@ -50,9 +50,9 @@ export default function index({
     <div className="card">
       <div className="card-header border-bottom">
         <h5 className="card-title mb-0">Filters</h5>
-        {!isStaticTable && (
+        {!isStaticTable?.filters && (
           <Filters
-            filterMetaData={tableMeta}
+            filterMetaData={isStaticTable ? staticTableData : tableMeta}
             setSelectedFilters={setSelectedFilters}
           />
         )}
@@ -63,12 +63,14 @@ export default function index({
             tableMeta={
               isStaticTable ? staticTableData.columns : tableMeta.columns
             }
-            tableData={isStaticTable ? staticTableData : tableData}
+            tableData={
+              isStaticTable ? staticTableData.results : tableData.results
+            }
             actionLink={actionLink}
           />
           <div className="row">
             <div className="col-sm-12 col-md-12">
-              {!isStaticTable && (
+              {!isStaticTable?.pagination && (
                 <Pagination
                   paginationData={paginationData}
                   dataFunction={setTableData}

@@ -54,3 +54,22 @@ export { default as Report } from "./Report";
 export { default as CustomerList } from "./Customer/List";
 export { default as CustomerForm } from "./Customer/Form";
 export { default as CustomerView } from "./Customer/View";
+
+// Maintenance Pages
+export {default as MaintenanceList} from "./Maintenance/List";
+export { default as MaintenanceForm } from "./Maintenance/Form";
+export { default as MaintenanceView } from "./Maintenance/View";
+
+// betta Pages
+export {default as BettaList} from "./Betta/List";
+export { default as BettaForm } from "./Betta/Form";
+export { default as BettaView } from "./Betta/View";
+
+//finance Pages
+export {default as FinanceList} from "./Finance/List";
+export {default as FinanceForm} from "./Finance/Form";
+export { default as FinanceView } from "./Finance/View";
+
+//Finance history
+export {default as FinanceHistoryList} from "./Finance/FinanceHistory/List"
+export {default as FinanceHistoryForm} from "./Finance/FinanceHistory/Form"

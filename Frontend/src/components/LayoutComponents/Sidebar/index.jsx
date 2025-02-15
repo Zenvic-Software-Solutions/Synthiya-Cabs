@@ -43,6 +43,7 @@ const Sidebar = () => {
           path: "/workshop/list",
         },
         { id: 10, label: "Ledger", icon: "ti ti-book", path: "#" },
+        { id: 19, label: "Finance", icon: "ti ti-book", path: "/finance/list" },
       ],
     },
     {
@@ -55,13 +56,13 @@ const Sidebar = () => {
       id: 12,
       label: "Maintenance",
       icon: "ti ti-settings",
-      path: "#",
+      path: "/maintenance/list",
     },
     {
       id: 13,
       label: "Betta",
       icon: "ti ti-map",
-      path: "#",
+      path: "/betta/list",
     },
     {
       id: 14,

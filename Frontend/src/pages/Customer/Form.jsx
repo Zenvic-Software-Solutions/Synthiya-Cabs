@@ -39,7 +39,7 @@ export default function Index() {
       }}
       breadcrumbData={{
         title: "Customer Form",
-        sidebarActiveId: 3,
+        sidebarActiveId: 6,
         list: [
           {
             label: "Customer list",

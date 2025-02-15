@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { DynamicForm } from "@components";
 import * as Yup from "yup";
 import {
-  vehicleTableMeta,
-  getVehicleCud,
-  postVehicleCud,
-  patchVehicleCud,
+    getMaintenanceCud,
+maintenanceTableMeta,
+postMaintenanceCud,
+patchMaintenanceCud,
 } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
@@ -31,7 +31,7 @@ export default function Index() {
 
   useEffect(() => {
     const fetchTableMeta = async () => {
-      const response = await vehicleTableMeta();
+      const response = await maintenanceTableMeta();
       setFormFieldMeta(response);
     };
     fetchTableMeta();
@@ -48,7 +48,7 @@ export default function Index() {
     },
     vehicle: {
       type: "select",
-      defaultValue: 1,
+      defaultValue: 12,
       label: "Vehicle",
       dropdownOptions: formFieldMeta.filter_data.vehicle || [],
     },
@@ -59,10 +59,10 @@ export default function Index() {
       dropdownOptions: formFieldMeta.filter_data.driver || [],
     },
     status: {
-      type: "text",
+      type: "select",
       defaultValue: "Scheduled",
       label: "Status",
-      placeholder: "Enter Status",
+      dropdownOptions: formFieldMeta.filter_data.status || [],
     },
     description: {
       type: "text",
@@ -98,22 +98,22 @@ export default function Index() {
     <DynamicForm
       formFields={FormFields}
       validationSchema={validationSchema}
-      redirectUrl="/vehicle/list"
+      redirectUrl="/maintenance/list"
       apiFunction={{
-        getForm: getVehicleCud,
-        postForm: postVehicleCud,
-        patchForm: patchVehicleCud,
+        getForm: getMaintenanceCud,
+        postForm: postMaintenanceCud,
+        patchForm: patchMaintenanceCud,
       }}
       breadcrumbData={{
-        title: "Vehicle Form",
-        sidebarActiveId: 7,
+        title: "Maintenance Form",
+        sidebarActiveId: 12,
         list: [
           {
-            label: "Vehicle list",
-            path: "/vehicle/list",
+            label: "Maintenance list",
+            path: "/maintenance/list",
           },
           {
-            label: "Vehicle Form",
+            label: "Maintenance Form",
           },
         ],
       }}

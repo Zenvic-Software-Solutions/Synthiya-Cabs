@@ -2,26 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import Stepper from "bs-stepper";
 import { useAppContext } from "@context/AppContext";
 import * as Yup from "yup";
-import CustomerField from "./CustomerField";
-import CustomSelect from "./CustomSelect";
-import OtherCabField from "./OtherCabField";
-import {
-  vehicleTableData,
-  driverTableData,
-  otherCabsTableData,
-  customerTableData,
-  postCustomerCud,
-  otherCabsDriverTableData,
-  postOtherCabsDriverCud,
-  otherCabsVehicleTableData,
-  postOtherCabsVehicleCud,
-} from "@api/urls";
 
 const validationSchema = Yup.object().shape({
-  // username: Yup.string()
-  //   .min(3, "Username must be at least 3 characters")
-  //   .max(15, "Username must be at most 15 characters")
-  //   .required("Username is required"),
+  username: Yup.string()
+    .min(3, "Username must be at least 3 characters")
+    .max(15, "Username must be at most 15 characters")
+    .required("Username is required"),
 });
 
 export default function Form() {
@@ -34,20 +20,12 @@ export default function Form() {
   });
   const [activeTab, setActiveTab] = useState("ourCab");
 
-  const handleChange = async (eventOrName, value) => {
-    let name, newValue;
-
-    if (eventOrName && eventOrName.target) {
-      ({ name, value: newValue } = eventOrName.target);
-    } else {
-      name = eventOrName;
-      newValue = value;
-    }
-
-    setFormData((prevData) => ({ ...prevData, [name]: newValue }));
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
     try {
-      await validationSchema.validateAt(name, { [name]: newValue });
+      await validationSchema.validateAt(name, { [name]: value });
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     } catch (error) {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: error.message }));
@@ -100,8 +78,6 @@ export default function Form() {
       setActiveTab(tabName);
     }
   };
-
-  useEffect(() => console.log(formData), [formData]);
 
   return (
     <div className="card mb-6" style={{ padding: "20px 40px" }}>
@@ -188,39 +164,85 @@ export default function Form() {
             <div id="customer-details" className="content">
               <h5>Customer Details</h5>
               <div className="row g-6" style={{ marginBottom: "40px" }}>
-                <CustomerField
-                  fieldName={["customer_phone_number", "customer_name"]}
-                  label={["Customer Phone number", "Customer Name"]}
-                  formData={formData}
-                  setFormData={setFormData}
-                  errors={errors}
-                  handleChange={handleChange}
-                  getApi={customerTableData}
-                  postApi={postCustomerCud}
-                />
-
-                <h5>Sponser Details</h5>
-                <CustomerField
-                  fieldName={["sponser_phone_number", "sponser_name"]}
-                  label={["Sponser Phone number", "Sponser Name"]}
-                  formData={formData}
-                  setFormData={setFormData}
-                  errors={errors}
-                  handleChange={handleChange}
-                  getApi={customerTableData}
-                  postApi={postCustomerCud}
-                />
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="username">
+                    Customer Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    className="form-control"
+                    placeholder="johndoe"
+                    value={formData.phone_number}
+                    onChange={handleChange}
+                  />
+                  {errors.phone_number && (
+                    <div className="text-danger">{errors.phone_number}</div>
+                  )}
+                </div>
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="username">
+                    Customer Name
+                  </label>
+                  <input
+                    type="text"
+                    name="identity"
+                    className="form-control"
+                    placeholder="Enter Customer Name"
+                    value={formData.identity}
+                    onChange={handleChange}
+                  />
+                  {errors.identity && (
+                    <div className="text-danger">{errors.identity}</div>
+                  )}
+                </div>
               </div>
-              <div className="col-12 d-flex justify-content-end">
-                <button
-                  className="btn btn-primary btn-next waves-effect waves-light"
-                  onClick={handleNextButton}
-                >
-                  <span className="align-middle d-sm-inline-block d-none me-sm-2">
-                    Next
-                  </span>
-                  <i className="ti ti-arrow-right ti-xs" />
-                </button>
+              <h5>Sponser Details</h5>
+              <div className="row g-6">
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="sponsor">
+                    Sponsor Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    name="sponsor"
+                    className="form-control"
+                    placeholder="Enter Sponsor"
+                    value={formData.sponsor}
+                    onChange={handleChange}
+                  />
+                  {errors.sponsor && (
+                    <div className="text-danger">{errors.sponsor}</div>
+                  )}
+                </div>
+                <div className="col-sm-4">
+                  <label className="form-label" htmlFor="sponsor">
+                    Sponsor Name
+                  </label>
+                  <input
+                    type="text"
+                    name="sponsor"
+                    className="form-control"
+                    placeholder="Enter Sponsor"
+                    value={formData.sponsor}
+                    onChange={handleChange}
+                  />
+                  {errors.sponsor && (
+                    <div className="text-danger">{errors.sponsor}</div>
+                  )}
+                </div>
+
+                <div className="col-12 d-flex justify-content-end">
+                  <button
+                    className="btn btn-primary btn-next waves-effect waves-light"
+                    onClick={handleNextButton}
+                  >
+                    <span className="align-middle d-sm-inline-block d-none me-sm-2">
+                      Next
+                    </span>
+                    <i className="ti ti-arrow-right ti-xs" />
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -347,27 +369,39 @@ export default function Form() {
                       >
                         <div className="row g-6">
                           <div className="col-sm-4">
-                            <CustomSelect
-                              fieldName={"vehicle"}
-                              label={" Vehicle"}
-                              formData={formData}
-                              errors={errors}
-                              handleChange={handleChange}
-                              apiFunction={vehicleTableData}
-                              optionKeys={["uuid", "identity", "vehicle_no"]}
+                            <label className="form-label" htmlFor="vehicle">
+                              Vehicle
+                            </label>
+                            <input
+                              type="text"
+                              name="vehicle"
+                              className="form-control"
+                              placeholder="Enter vehicle ID"
+                              value={formData.vehicle}
+                              onChange={handleChange}
                             />
+                            {errors.vehicle && (
+                              <div className="text-danger">
+                                {errors.vehicle}
+                              </div>
+                            )}
                           </div>
 
                           <div className="col-sm-4">
-                            <CustomSelect
-                              fieldName={"driver"}
-                              label={" Driver"}
-                              formData={formData}
-                              errors={errors}
-                              handleChange={handleChange}
-                              apiFunction={driverTableData}
-                              optionKeys={["uuid", "identity", "driver_id"]}
+                            <label className="form-label" htmlFor="driver">
+                              Driver
+                            </label>
+                            <input
+                              type="text"
+                              name="driver"
+                              className="form-control"
+                              placeholder="Enter driver ID"
+                              value={formData.driver}
+                              onChange={handleChange}
                             />
+                            {errors.driver && (
+                              <div className="text-danger">{errors.driver}</div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -379,48 +413,111 @@ export default function Form() {
                       >
                         <div className="row g-6">
                           <div className="col-sm-4">
-                            <CustomSelect
-                              fieldName={"othercab"}
-                              label={"Othercab Name"}
-                              formData={formData}
-                              errors={errors}
-                              handleChange={handleChange}
-                              apiFunction={otherCabsTableData}
-                              optionKeys={["uuid", "identity"]}
+                            <label className="form-label" htmlFor="othercab">
+                              Other Cab
+                            </label>
+                            <input
+                              type="text"
+                              name="othercab"
+                              className="form-control"
+                              placeholder="Enter other cab ID"
+                              value={formData.othercab}
+                              onChange={handleChange}
                             />
+                            {errors.othercab && (
+                              <div className="text-danger">
+                                {errors.othercab}
+                              </div>
+                            )}
                           </div>
-                          <OtherCabField
-                            fieldName={[
-                              "otherdriver_phone_number",
-                              "otherdriver_identity",
-                            ]}
-                            label={[
-                              "OtherCab Driver Phone number",
-                              "OtherCab Driver Name",
-                            ]}
-                            formData={formData}
-                            setFormData={setFormData}
-                            errors={errors}
-                            handleChange={handleChange}
-                            getApi={otherCabsDriverTableData}
-                            postApi={postOtherCabsDriverCud}
-                          />
-                          <OtherCabField
-                            fieldName={[
-                              "othervechile_identity",
-                              "othervechile_vehicle_no",
-                            ]}
-                            label={[
-                              "OtherCab Vehicle Name",
-                              "OtherCab Vehicle Number",
-                            ]}
-                            formData={formData}
-                            setFormData={setFormData}
-                            errors={errors}
-                            handleChange={handleChange}
-                            getApi={otherCabsVehicleTableData}
-                            postApi={postOtherCabsVehicleCud}
-                          />
+
+                          <div className="col-sm-4">
+                            <label
+                              className="form-label"
+                              htmlFor="otherdriver_identity"
+                            >
+                              Other Driver Identity
+                            </label>
+                            <input
+                              type="text"
+                              name="otherdriver_identity"
+                              className="form-control"
+                              placeholder="Enter other driver identity"
+                              value={formData.otherdriver_identity}
+                              onChange={handleChange}
+                            />
+                            {errors.otherdriver_identity && (
+                              <div className="text-danger">
+                                {errors.otherdriver_identity}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="col-sm-4">
+                            <label
+                              className="form-label"
+                              htmlFor="otherdriver_phone_number"
+                            >
+                              Other Driver Phone Number
+                            </label>
+                            <input
+                              type="tel"
+                              name="otherdriver_phone_number"
+                              className="form-control"
+                              placeholder="Enter phone number"
+                              value={formData.otherdriver_phone_number}
+                              onChange={handleChange}
+                            />
+                            {errors.otherdriver_phone_number && (
+                              <div className="text-danger">
+                                {errors.otherdriver_phone_number}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="col-sm-4">
+                            <label
+                              className="form-label"
+                              htmlFor="othervechile_identity"
+                            >
+                              Other Vehicle Identity
+                            </label>
+                            <input
+                              type="text"
+                              name="othervechile_identity"
+                              className="form-control"
+                              placeholder="Enter other vehicle identity"
+                              value={formData.othervechile_identity}
+                              onChange={handleChange}
+                            />
+                            {errors.othervechile_identity && (
+                              <div className="text-danger">
+                                {errors.othervechile_identity}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="col-sm-4">
+                            <label
+                              className="form-label"
+                              htmlFor="othervechile_vehicle_no"
+                            >
+                              Other Vehicle Number
+                            </label>
+                            <input
+                              type="text"
+                              name="othervechile_vehicle_no"
+                              className="form-control"
+                              placeholder="Enter vehicle number"
+                              value={formData.othervechile_vehicle_no}
+                              onChange={handleChange}
+                            />
+                            {errors.othervechile_vehicle_no && (
+                              <div className="text-danger">
+                                {errors.othervechile_vehicle_no}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -734,24 +831,28 @@ export default function Form() {
                               </svg>
                             </div>
                             <span className="app-brand-text fw-bold fs-4 ms-50">
-                              Cab Booking
+                              Vuexy
                             </span>
                           </div>
-                          <p className="mb-2">Booking Service</p>
+                          <p className="mb-2">
+                            Office 149, 450 South Brand Brooklyn
+                          </p>
                           <p className="mb-2">
                             San Diego County, CA 91905, USA
                           </p>
-                          <p className="mb-0">+1 (123) 456 7891</p>
+                          <p className="mb-0">
+                            +1 (123) 456 7891, +44 (876) 543 2198
+                          </p>
                         </div>
                         <div>
-                          <h5 className="mb-6">Invoice #CB86423</h5>
+                          <h5 className="mb-6">Invoice #86423</h5>
                           <div className="mb-1 text-heading">
-                            <span>Date Booked:</span>
-                            <span>2025-02-14</span>
+                            <span>Date Issues:</span>
+                            <span>April 25, 2021</span>
                           </div>
                           <div className="text-heading">
                             <span>Date Due:</span>
-                            <span>2025-02-16</span>
+                            <span>May 25, 2021</span>
                           </div>
                         </div>
                       </div>
@@ -759,56 +860,39 @@ export default function Form() {
                     <div className="card-body px-0">
                       <div className="row">
                         <div className="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-6 mb-sm-0 mb-6">
-                          <h6>Customer Details:</h6>
-                          <p className="mb-1">Name: John Doe</p>
-                          <p className="mb-1">Phone: 9876543210</p>
-                          <p className="mb-1">Sponsor Name: Michael Smith</p>
-                          <p className="mb-1">Sponsor Phone: 9123456789</p>
+                          <h6>Invoice To:</h6>
+                          <p className="mb-1">Thomas shelby</p>
+                          <p className="mb-1">Shelby Company Limited</p>
+                          <p className="mb-1">Small Heath, B10 0HF, UK</p>
+                          <p className="mb-1">718-986-6062</p>
+                          <p className="mb-0">peakyFBlinders@gmail.com</p>
                         </div>
                         <div className="col-xl-6 col-md-12 col-sm-7 col-12">
-                          <h6>Booking Details:</h6>
+                          <h6>Bill To:</h6>
                           <table>
                             <tbody>
                               <tr>
-                                <td className="pe-4">Start Date:</td>
-                                <td className="fw-medium">2025-02-14</td>
+                                <td className="pe-4">Total Due:</td>
+                                <td className="fw-medium">$12,110.55</td>
                               </tr>
                               <tr>
-                                <td className="pe-4">End Date:</td>
-                                <td>2025-02-16</td>
+                                <td className="pe-4">Bank name:</td>
+                                <td>American Bank</td>
                               </tr>
                               <tr>
-                                <td className="pe-4">Start Place:</td>
-                                <td>New York</td>
+                                <td className="pe-4">Country:</td>
+                                <td>United States</td>
                               </tr>
                               <tr>
-                                <td className="pe-4">End Place:</td>
-                                <td>Los Angeles</td>
+                                <td className="pe-4">IBAN:</td>
+                                <td>ETD95476213874685</td>
                               </tr>
                               <tr>
-                                <td className="pe-4">Rent Type:</td>
-                                <td>Daily</td>
-                              </tr>
-                              <tr>
-                                <td className="pe-4">Payment Type:</td>
-                                <td>Cash</td>
+                                <td className="pe-4">SWIFT code:</td>
+                                <td>BR91905</td>
                               </tr>
                             </tbody>
                           </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-body px-0">
-                      <div className="row">
-                        <div className="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-6 mb-sm-0 mb-6">
-                          <h6>Cab Details:</h6>
-                          <p className="mb-1">Our Cab: Toyota Innova</p>
-                          <p className="mb-1">Driver: James Anderson</p>
-                          <p className="mb-1">Other Cab: Uber XL</p>
-                          <p className="mb-1">Other Driver: Mark Wilson</p>
-                          <p className="mb-1">
-                            Other Vehicle Number: KA-05-6789
-                          </p>
                         </div>
                       </div>
                     </div>
@@ -817,72 +901,52 @@ export default function Form() {
                         <thead>
                           <tr>
                             <th>Item</th>
-
+                            <th>Description</th>
                             <th>Cost</th>
-
+                            <th>Qty</th>
                             <th>Price</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td className="text-nowrap text-heading">
-                              Cab Booking (Daily)
+                              Vuexy Admin Template
                             </td>
-
-                            <td>$200</td>
-
-                            <td>$400.00</td>
+                            <td className="text-nowrap">HTML Admin Template</td>
+                            <td>$32</td>
+                            <td>1</td>
+                            <td>$32.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
-                              Other Cab Booking
+                              Frest Admin Template
                             </td>
-
-                            <td>$150</td>
-
-                            <td>$150.00</td>
+                            <td className="text-nowrap">
+                              Angular Admin Template
+                            </td>
+                            <td>$22</td>
+                            <td>1</td>
+                            <td>$22.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
-                              Driver Betta
+                              Apex Admin Template
                             </td>
-
-                            <td>$500</td>
-
-                            <td>$500.00</td>
+                            <td className="text-nowrap">HTML Admin Template</td>
+                            <td>$17</td>
+                            <td>2</td>
+                            <td>$34.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
-                              Halting Charge
+                              Robust Admin Template
                             </td>
-
-                            <td>$200</td>
-
-                            <td>$200.00</td>
-                          </tr>
-                          <tr>
-                            <td className="text-nowrap text-heading">
-                              Charge for hills route
+                            <td className="text-nowrap">
+                              React Admin Template
                             </td>
-                            <td>$50</td>
-
-                            <td>$50.00</td>
-                          </tr>
-                          <tr>
-                            <td className="text-nowrap text-heading">Permit</td>
-
-                            <td>$30</td>
-
-                            <td>$30.00</td>
-                          </tr>
-                          <tr>
-                            <td className="text-nowrap text-heading">
-                              Commission
-                            </td>
-
-                            <td>$100</td>
-
-                            <td>$100.00</td>
+                            <td>$66</td>
+                            <td>1</td>
+                            <td>$66.00</td>
                           </tr>
                         </tbody>
                       </table>
@@ -893,28 +957,24 @@ export default function Form() {
                           <tr>
                             <td className="align-top pe-6 ps-0 py-6">
                               <p className="mb-1">
-                                <span className="me-2 h6">Total Due:</span>
-                                <span>$2500</span>
+                                <span className="me-2 h6">Salesperson:</span>
+                                <span>Alfie Solomons</span>
                               </p>
-                              <span>Thanks for your booking!</span>
+                              <span>Thanks for your business</span>
                             </td>
                             <td className="px-0 py-6 w-px-100">
                               <p className="mb-2">Subtotal:</p>
-                              <p className="mb-2">GST (18%):</p>
-                              <p className="mb-2">Payment Type:</p>
-                              <p className="mb-2">Deduction:</p>
-                              <p className="mb-2">Advance:</p>
-                              <p className="mb-2">Paid Amount:</p>
-                              <p className="mb-2 border-bottom pb-2">Total:</p>
+                              <p className="mb-2">Discount:</p>
+                              <p className="mb-2 border-bottom pb-2">Tax:</p>
+                              <p className="mb-0 pt-2">Total:</p>
                             </td>
                             <td className="text-end px-0 py-6 w-px-100 fw-medium text-heading">
-                              <p className="fw-medium mb-2">$2500</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-0 pt-2">$3000</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-2">$450</p>
+                              <p className="fw-medium mb-2">$1800</p>
+                              <p className="fw-medium mb-2">$28</p>
+                              <p className="fw-medium mb-2 border-bottom pb-2">
+                                21%
+                              </p>
+                              <p className="fw-medium mb-0 pt-2">$1690</p>
                             </td>
                           </tr>
                         </tbody>
@@ -925,7 +985,11 @@ export default function Form() {
                       <div className="row">
                         <div className="col-12">
                           <span className="fw-medium text-heading">Note:</span>
-                          <span>Paid in full</span>
+                          <span>
+                            It was a pleasure working with you and your team. We
+                            hope you will keep us in mind for future freelance
+                            projects. Thank You!
+                          </span>
                         </div>
                       </div>
                     </div>
