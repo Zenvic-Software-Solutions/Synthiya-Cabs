@@ -1,11 +1,12 @@
 from apps.CMS.models import Vehicle
-from apps.CMS.models import FinanceHistory,Finance
+from apps.CMS.models import FinanceHistory, Finance
 from apps.BASE.serializers import ReadSerializer, WriteSerializer, read_serializer
 
+
 class FinanceReadSerializer(ReadSerializer):
-    vehicle_details = read_serializer(Vehicle, meta_fields=["id", "uuid", "vehicle_no", "identity"])(
-        source="vehicle"
-    )
+    vehicle_details = read_serializer(
+        Vehicle, meta_fields=["id", "uuid", "vehicle_no", "identity"]
+    )(source="vehicle")
 
     class Meta(ReadSerializer.Meta):
         model = Finance
@@ -13,7 +14,7 @@ class FinanceReadSerializer(ReadSerializer):
             "id",
             "uuid",
             "vehicle_details",
-            "finance_name",
+            "identity",
             "finance_address",
             "contact_number",
             "total_amount",
@@ -26,10 +27,10 @@ class FinanceReadSerializer(ReadSerializer):
 
 class FinanceWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
-        model=Finance
-        fields=[
+        model = Finance
+        fields = [
             "vehicle",
-            "finance_name",
+            "identity",
             "finance_address",
             "contact_number",
             "total_amount",
@@ -39,10 +40,11 @@ class FinanceWriteSerializer(WriteSerializer):
             "initiated_date",
         ]
 
+
 class FinanceHistoryReadSerializer(ReadSerializer):
-    finance_details = read_serializer(Finance, meta_fields=["id", "uuid", "finance_name", "total_amount"])(
-        source="finance"
-    )
+    finance_details = read_serializer(
+        Finance, meta_fields=["id", "uuid", "identity", "total_amount"]
+    )(source="finance")
 
     class Meta(ReadSerializer.Meta):
         model = FinanceHistory
@@ -59,9 +61,4 @@ class FinanceHistoryReadSerializer(ReadSerializer):
 class FinanceHistoryWriteSerializer(WriteSerializer):
     class Meta(WriteSerializer.Meta):
         model = FinanceHistory
-        fields =[
-            "finance",
-            "due_month",
-            "paid_date",
-            "amount"
-        ]
+        fields = ["finance", "due_month", "paid_date", "amount"]

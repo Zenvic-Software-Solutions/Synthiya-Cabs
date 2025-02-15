@@ -87,7 +87,7 @@ class VehicleFinanceReadSerializer(ReadSerializer):
             "id",
             "uuid",
             "vehicle_details",
-            "finance_name",
+            "identity",
             "finance_address",
             "contact_number",
             "total_amount",

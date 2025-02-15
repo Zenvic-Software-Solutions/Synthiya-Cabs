@@ -14,8 +14,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "your-default-secret-key")
 DEBUG = os.getenv("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ["*"]
-
 # Custom User Model
 AUTH_USER_MODEL = "ACCESS.User"
 
@@ -60,10 +58,14 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
-
+# CSRF_TRUSTED_ORIGINS = [
+#     "*"
+# ]
 # CORS Configuration
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+ALLOWED_HOSTS = ["*"]
+
 
 ROOT_URLCONF = "config.urls"
 
