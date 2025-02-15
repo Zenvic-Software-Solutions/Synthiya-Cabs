@@ -34,6 +34,21 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
     return `<span class="badge ${statusClass} text-capitalized"> ${status} </span>`;
   };
 
+  const activeTag = (status) => {
+    let statusClass = "";
+    switch (status) {
+      case true:
+        statusClass = `<span class="badge bg-label-success text-capitalized"> Active </span>`;
+        break;
+
+      default:
+        statusClass = `<span class="badge bg-label-danger text-capitalized"> Inactive </span>`;
+        break;
+    }
+
+    return statusClass;
+  };
+
   const columns = Object.keys(tableMeta).map((field) => ({
     title: tableMeta[field],
     data: field,
@@ -41,6 +56,7 @@ function Index({ tableMeta, tableData, actionLink, actionButton }) {
       const value = getNestedValue(row, field);
       if (field === "status") return statusTag(value);
       if (field === "created_at") return formatDate(value);
+      if (field === "is_ac_available") return activeTag(value);
       return value;
     },
   }));
