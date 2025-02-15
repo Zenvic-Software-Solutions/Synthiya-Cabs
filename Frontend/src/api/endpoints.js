@@ -71,9 +71,15 @@ const EndPoints = {
   bettaCudURL: "/cms/betta/cud/",
   bettaDetailURL: "/cms/betta/detail/",
 
-  //finance API
-  financeListURL: "cms/finance/list/",
-  financeCudURL: "cms/finance/cud/",
+    //finance API
+    financeListURL: "cms/finance/list/",
+    financeCudURL: "cms/finance/cud/", 
+    financeDetailURL: "/cms/finance/detail/",
+
+        //financehistory API
+        financehistoryListURL: "cms/financehistory/list/",
+        financehistoryCudURL: "cms/financehistory/cud/", 
+
 };
 
 export default EndPoints;

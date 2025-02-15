@@ -122,3 +122,11 @@ export const financeTableData = (data) => makeGetRequest(EndPoints.financeListUR
 export const postfinanceCud = (data) => makePostRequest(EndPoints.financeCudURL, data);
 export const patchfinanceCud = (uuid, data) => makePatchRequest(EndPoints.financeCudURL + uuid + "/", data);
 export const getfinanceCud = (uuid) => makeGetRequest(EndPoints.financeCudURL + uuid + "/meta/");
+export const financeDetail = (uuid) => makeGetRequest(EndPoints.financeDetailURL + uuid + "/");
+
+//financehistory API
+export const financehistoryTableMeta = () => makeGetRequest(EndPoints.financehistoryListURL+ "table-meta/");
+export const financehistoryTableData = (data) => makeGetRequest(EndPoints.financehistoryListURL, data);
+export const postfinancehistoryCud = (data) => makePostRequest(EndPoints.financehistoryCudURL, data);
+export const patchfinancehistoryCud = (uuid, data) => makePatchRequest(EndPoints.financehistoryCudURL + uuid + "/", data);
+export const getfinancehistoryCud = (uuid) => makeGetRequest(EndPoints.financehistoryCudURL + uuid + "/meta/");
