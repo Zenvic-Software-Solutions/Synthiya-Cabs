@@ -873,7 +873,7 @@ export default function Form() {
                             <tbody>
                               <tr>
                                 <td className="pe-4">Total Due:</td>
-                                <td className="fw-medium">$12,110.55</td>
+                                <td className="fw-medium">₹12,110.55</td>
                               </tr>
                               <tr>
                                 <td className="pe-4">Bank name:</td>
@@ -913,9 +913,9 @@ export default function Form() {
                               Vuexy Admin Template
                             </td>
                             <td className="text-nowrap">HTML Admin Template</td>
-                            <td>$32</td>
+                            <td>₹32</td>
                             <td>1</td>
-                            <td>$32.00</td>
+                            <td>₹32.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
@@ -924,18 +924,18 @@ export default function Form() {
                             <td className="text-nowrap">
                               Angular Admin Template
                             </td>
-                            <td>$22</td>
+                            <td>₹22</td>
                             <td>1</td>
-                            <td>$22.00</td>
+                            <td>₹22.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
                               Apex Admin Template
                             </td>
                             <td className="text-nowrap">HTML Admin Template</td>
-                            <td>$17</td>
+                            <td>₹17</td>
                             <td>2</td>
-                            <td>$34.00</td>
+                            <td>₹34.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
@@ -944,9 +944,9 @@ export default function Form() {
                             <td className="text-nowrap">
                               React Admin Template
                             </td>
-                            <td>$66</td>
+                            <td>₹66</td>
                             <td>1</td>
-                            <td>$66.00</td>
+                            <td>₹66.00</td>
                           </tr>
                         </tbody>
                       </table>
@@ -969,12 +969,12 @@ export default function Form() {
                               <p className="mb-0 pt-2">Total:</p>
                             </td>
                             <td className="text-end px-0 py-6 w-px-100 fw-medium text-heading">
-                              <p className="fw-medium mb-2">$1800</p>
-                              <p className="fw-medium mb-2">$28</p>
+                              <p className="fw-medium mb-2">₹1800</p>
+                              <p className="fw-medium mb-2">₹28</p>
                               <p className="fw-medium mb-2 border-bottom pb-2">
                                 21%
                               </p>
-                              <p className="fw-medium mb-0 pt-2">$1690</p>
+                              <p className="fw-medium mb-0 pt-2">₹1690</p>
                             </td>
                           </tr>
                         </tbody>

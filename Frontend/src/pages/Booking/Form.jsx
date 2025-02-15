@@ -857,60 +857,60 @@ export default function Form() {
                               Cab Booking (Daily)
                             </td>
 
-                            <td>$200</td>
+                            <td>₹200</td>
 
-                            <td>$400.00</td>
+                            <td>₹400.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
                               Other Cab Booking
                             </td>
 
-                            <td>$150</td>
+                            <td>₹150</td>
 
-                            <td>$150.00</td>
+                            <td>₹150.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
                               Driver Betta
                             </td>
 
-                            <td>$500</td>
+                            <td>₹500</td>
 
-                            <td>$500.00</td>
+                            <td>₹500.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
                               Halting Charge
                             </td>
 
-                            <td>$200</td>
+                            <td>₹200</td>
 
-                            <td>$200.00</td>
+                            <td>₹200.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
                               Charge for hills route
                             </td>
-                            <td>$50</td>
+                            <td>₹50</td>
 
-                            <td>$50.00</td>
+                            <td>₹50.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">Permit</td>
 
-                            <td>$30</td>
+                            <td>₹30</td>
 
-                            <td>$30.00</td>
+                            <td>₹30.00</td>
                           </tr>
                           <tr>
                             <td className="text-nowrap text-heading">
                               Commission
                             </td>
 
-                            <td>$100</td>
+                            <td>₹100</td>
 
-                            <td>$100.00</td>
+                            <td>₹100.00</td>
                           </tr>
                         </tbody>
                       </table>
@@ -922,7 +922,7 @@ export default function Form() {
                             <td className="align-top pe-6 ps-0 py-6">
                               <p className="mb-1">
                                 <span className="me-2 h6">Total Due:</span>
-                                <span>$2500</span>
+                                <span>₹2500</span>
                               </p>
                               <span>Thanks for your booking!</span>
                             </td>
@@ -939,13 +939,13 @@ export default function Form() {
                               <p className="mb-2 border-bottom pb-2">Total:</p>
                             </td>
                             <td className="text-end px-0 py-6 w-px-100 fw-medium text-heading">
-                              <p className="fw-medium mb-2">$2500</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-0 pt-2">$3000</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-2">$450</p>
-                              <p className="fw-medium mb-2">$450</p>
+                              <p className="fw-medium mb-2">₹2500</p>
+                              <p className="fw-medium mb-2">₹450</p>
+                              <p className="fw-medium mb-0 pt-2">₹3000</p>
+                              <p className="fw-medium mb-2">₹450</p>
+                              <p className="fw-medium mb-2">₹450</p>
+                              <p className="fw-medium mb-2">₹450</p>
+                              <p className="fw-medium mb-2">₹450</p>
                             </td>
                           </tr>
                         </tbody>
