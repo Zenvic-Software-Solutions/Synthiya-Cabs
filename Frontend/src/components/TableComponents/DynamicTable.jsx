@@ -12,7 +12,7 @@ export default function index({
   breadcrumbData,
 }) {
   const { setBreadcrumbs } = useAppContext();
-  const { trigger = false } = useDataContext();
+  const { trigger } = useDataContext();
   const [tableMeta, setTableMeta] = useState();
   const [tableData, setTableData] = useState();
   const [selectedFilters, setSelectedFilters] = useState({});
