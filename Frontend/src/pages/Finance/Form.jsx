@@ -10,7 +10,7 @@ patchfinanceCud,
 
 const validationSchema = Yup.object().shape({
     vehicle: Yup.number().required("Vehicle is required"),
-    finance_name: Yup.string().trim().required("Finance Name is required"),
+    identity: Yup.string().trim().required("Finance Name is required"),
     finance_address: Yup.string().trim().required("Finance Address is required"),
     contact_number: Yup.string()
       .matches(/^[0-9]{10}$/, "Contact number must be a 10-digit number")
@@ -52,7 +52,7 @@ export default function Index() {
       label: "Vehicle",
       dropdownOptions: formFieldMeta.filter_data.vehicle || [],
     },
-    finance_name: {
+    identity: {
       type: "text",
       defaultValue: "abcde",
       label: "Finance Name",

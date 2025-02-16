@@ -5,7 +5,7 @@ import { getCustomerCud, postCustomerCud, patchCustomerCud } from "@api/urls";
 
 const validationSchema = Yup.object().shape({
   identity: Yup.string().trim().required("Name is required"),
-  user_phone_number: Yup.string()
+  phone_number: Yup.string()
     .trim()
     .matches(/^[0-9]{10}$/, "Phone Number must be a 10-digit number")
     .required("Phone Number is required"),
@@ -19,7 +19,7 @@ export default function Index() {
       label: "Name",
       placeholder: "Enter Name",
     },
-    user_phone_number: {
+    phone_number: {
       type: "text",
       defaultValue: "",
       label: "Phone Number",
